@@ -1,0 +1,36 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.0.1",
+	"FriendlyName": "Terrain Magic",
+	"Description": "Make UnrealEngine Landscape building great again",
+	"Category": "Environments",
+	"CreatedBy": "GDi4K",
+	"CreatedByURL": "https://gdi4k.com",
+	"DocsURL": "https://gdi4k.com/terrain-magic",
+	"SupportURL": "https://gdi4k.com/terrain-magic",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"EngineVersion": "4.26.0",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/",
+	"Modules": [
+		{
+			"Name": "TerrainMagic",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32",
+				"Mac"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "Landmass",
+			"Enabled": true
+		}
+	]
+}

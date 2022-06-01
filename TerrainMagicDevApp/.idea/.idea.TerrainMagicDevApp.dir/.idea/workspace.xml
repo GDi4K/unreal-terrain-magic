@@ -7,19 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Textures/demo-heightmap.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Textures/RT_Placeholder.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/FTerrainMagicRemap.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicHeightBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicHeightBrush.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_Landmass_UV_Pos.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_Landmass_UV_Pos.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicHeightBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicHeightBrush.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Textures/T_Black_Placeholder.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add the HeightMap brush">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,18 +24,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="TerrainMagicDevApp" type="Uproject" factoryName="rider.uproject">
       <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TerrainMagicDevApp.uproject" />
@@ -98,8 +87,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1653918199890</updated>
-      <workItem from="1653918224940" duration="1082000" />
+      <workItem from="1653918224940" duration="3743000" />
     </task>
+    <task id="LOCAL-00001" summary="Add the HeightMap brush">
+      <created>1653920259274</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1653920259274</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,5 +117,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Add the HeightMap brush" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add the HeightMap brush" />
   </component>
 </project>

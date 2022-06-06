@@ -34,6 +34,14 @@ void UTerrainMagicBrushComponent::TickComponent(float DeltaTime, ELevelTick Tick
 	// ...
 }
 
+void UTerrainMagicBrushComponent::Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
+                                             const FIntPoint InputRenderTargetSize)
+{
+	LandscapeTransform = InputLandscapeTransform;
+	LandscapeSize = InputLandscapeSize;
+	RenderTargetSize = InputRenderTargetSize;
+}
+
 void UTerrainMagicBrushComponent::SetScalarParam(const FName Parameter, const float Value)
 {
 	BrushMaterial->SetScalarParameterValue(Parameter, Value);

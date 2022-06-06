@@ -23,11 +23,23 @@ protected:
 public:
 	UPROPERTY(BlueprintReadWrite)
 	UMaterialInstanceDynamic* BrushMaterial;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	FTransform LandscapeTransform;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	FIntPoint LandscapeSize;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	FIntPoint RenderTargetSize;
 	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable)
+	void Initialize(FTransform InputLandscapeTransform, FIntPoint InputLandscapeSize, FIntPoint InputRenderTargetSize);
+	
 	UFUNCTION(BlueprintCallable)
 	void SetScalarParam(FName Parameter, float Value);
 

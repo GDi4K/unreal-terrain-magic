@@ -32,6 +32,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	FIntPoint RenderTargetSize;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UTextureRenderTarget2D* HeightRenderTarget;
 	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
@@ -50,11 +53,13 @@ public:
 	void SetTextureRenderParam(FName Parameter, UTexture* Value);
 
 	UFUNCTION(BlueprintCallable)
-	void InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap);
-
-	UFUNCTION(BlueprintCallable)
 	void SetScalarRenderParams(TMap<FName, float> Params);
 
 	UFUNCTION(BlueprintCallable)
 	void SetVectorRenderParams(TMap<FName, FVector> Params);
+	
+	void InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap);
+
+	UFUNCTION(BlueprintCallable)
+	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
 };

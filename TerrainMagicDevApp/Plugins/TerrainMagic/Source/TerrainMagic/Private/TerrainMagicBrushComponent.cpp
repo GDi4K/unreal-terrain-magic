@@ -3,6 +3,8 @@
 
 #include "TerrainMagicBrushComponent.h"
 
+#include "Commandlets/EditorCommandlets.h"
+#include "Kismet/KismetRenderingLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
 
 
@@ -59,15 +61,6 @@ void UTerrainMagicBrushComponent::SetTextureRenderParam(const FName Parameter, U
 	BrushMaterial->SetTextureParameterValue(Parameter, Value);
 }
 
-void UTerrainMagicBrushComponent::InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap)
-{
-	SetTextureRenderParam("HeightRT", InputHeightMap);
-	SetVectorRenderParam("LandscapeLocation", LandscapeTransform.GetLocation());
-	SetVectorRenderParam("LandscapeScale", LandscapeTransform.GetScale3D());
-	SetVectorRenderParam("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
-	SetVectorRenderParam("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
-}
-
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)
@@ -83,3 +76,28 @@ void UTerrainMagicBrushComponent::SetVectorRenderParams(TMap<FName, FVector> Par
 		SetVectorRenderParam(Item.Key, Item.Value);
 	}
 }
+
+void UTerrainMagicBrushComponent::InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap)
+{
+	SetTextureRenderParam("HeightRT", InputHeightMap);
+	SetVectorRenderParam("LandscapeLocation", LandscapeTransform.GetLocation());
+	SetVectorRenderParam("LandscapeScale", LandscapeTransform.GetScale3D());
+	SetVectorRenderParam("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
+	SetVectorRenderParam("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
+}
+
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRenderTarget2D* InputHeightMap)
+{
+	InitializeRenderParams(InputHeightMap);
+	
+	if (HeightRenderTarget == nullptr)
+	{
+		HeightRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
+	}
+
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
+
+	return HeightRenderTarget;
+}
+

@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Move some parameters to the C++ component.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicHeightBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicHeightBrush.uasset" afterDir="false" />
@@ -95,7 +95,7 @@
       <workItem from="1654070359006" duration="2525000" />
       <workItem from="1654142622725" duration="1852000" />
       <workItem from="1654439619937" duration="2811000" />
-      <workItem from="1654489122571" duration="1349000" />
+      <workItem from="1654489122571" duration="3893000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -132,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654145752292</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Move some parameters to the C++ component.">
+      <created>1654490785378</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1654490785378</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +165,7 @@
     <MESSAGE value="Add WeightBrush into the plugin" />
     <MESSAGE value="Add location mask." />
     <MESSAGE value="Add support for custom texture based weight maps" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add support for custom texture based weight maps" />
+    <MESSAGE value="Move some parameters to the C++ component." />
+    <option name="LAST_COMMIT_MESSAGE" value="Move some parameters to the C++ component." />
   </component>
 </project>

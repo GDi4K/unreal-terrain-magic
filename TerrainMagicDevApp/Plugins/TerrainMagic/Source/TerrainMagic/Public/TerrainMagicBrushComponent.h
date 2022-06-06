@@ -41,11 +41,20 @@ public:
 	void Initialize(FTransform InputLandscapeTransform, FIntPoint InputLandscapeSize, FIntPoint InputRenderTargetSize);
 	
 	UFUNCTION(BlueprintCallable)
-	void SetScalarParam(FName Parameter, float Value);
+	void SetScalarRenderParam(FName Parameter, float Value);
 
 	UFUNCTION(BlueprintCallable)
-	void SetVectorParam(FName Parameter, FVector Value);
+	void SetVectorRenderParam(FName Parameter, FVector Value);
 
 	UFUNCTION(BlueprintCallable)
-	void SetTextureParam(FName Parameter, UTexture* Value);
+	void SetTextureRenderParam(FName Parameter, UTexture* Value);
+
+	UFUNCTION(BlueprintCallable)
+	void InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap);
+
+	UFUNCTION(BlueprintCallable)
+	void SetScalarRenderParams(TMap<FName, float> Params);
+
+	UFUNCTION(BlueprintCallable)
+	void SetVectorRenderParams(TMap<FName, FVector> Params);
 };

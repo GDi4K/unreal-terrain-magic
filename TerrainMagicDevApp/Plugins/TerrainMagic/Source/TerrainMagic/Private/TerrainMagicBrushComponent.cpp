@@ -3,6 +3,8 @@
 
 #include "TerrainMagicBrushComponent.h"
 
+#include "Engine/TextureRenderTarget2D.h"
+
 
 // Sets default values for this component's properties
 UTerrainMagicBrushComponent::UTerrainMagicBrushComponent()
@@ -42,17 +44,42 @@ void UTerrainMagicBrushComponent::Initialize(const FTransform InputLandscapeTran
 	RenderTargetSize = InputRenderTargetSize;
 }
 
-void UTerrainMagicBrushComponent::SetScalarParam(const FName Parameter, const float Value)
+void UTerrainMagicBrushComponent::SetScalarRenderParam(const FName Parameter, const float Value)
 {
 	BrushMaterial->SetScalarParameterValue(Parameter, Value);
 }
 
-void UTerrainMagicBrushComponent::SetVectorParam(const FName Parameter, const FVector Value)
+void UTerrainMagicBrushComponent::SetVectorRenderParam(const FName Parameter, const FVector Value)
 {
 	BrushMaterial->SetVectorParameterValue(Parameter, Value);
 }
 
-void UTerrainMagicBrushComponent::SetTextureParam(const FName Parameter, UTexture* Value)
+void UTerrainMagicBrushComponent::SetTextureRenderParam(const FName Parameter, UTexture* Value)
 {
 	BrushMaterial->SetTextureParameterValue(Parameter, Value);
+}
+
+void UTerrainMagicBrushComponent::InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap)
+{
+	SetTextureRenderParam("HeightRT", InputHeightMap);
+	SetVectorRenderParam("LandscapeLocation", LandscapeTransform.GetLocation());
+	SetVectorRenderParam("LandscapeScale", LandscapeTransform.GetScale3D());
+	SetVectorRenderParam("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
+	SetVectorRenderParam("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
+}
+
+void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
+{
+	for (const auto Item : Params)
+	{
+		SetScalarRenderParam(Item.Key, Item.Value);
+	}
+}
+
+void UTerrainMagicBrushComponent::SetVectorRenderParams(TMap<FName, FVector> Params)
+{
+	for (const auto Item : Params)
+	{
+		SetVectorRenderParam(Item.Key, Item.Value);
+	}
 }

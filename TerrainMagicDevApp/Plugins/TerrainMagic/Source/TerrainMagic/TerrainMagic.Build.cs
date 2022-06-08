@@ -14,8 +14,7 @@ public class TerrainMagic : ModuleRules
 
 		PublicDependencyModuleNames.AddRange(new[]
 		{
-			"Core", "CoreUObject", "Engine",
-			"Landmass"
+			"Core", "CoreUObject", "Engine"
 		});
 	}
 }

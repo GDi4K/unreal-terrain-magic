@@ -26,11 +26,5 @@
 				"Mac"
 			]
 		}
-	],
-	"Plugins": [
-		{
-			"Name": "Landmass",
-			"Enabled": true
-		}
 	]
 }

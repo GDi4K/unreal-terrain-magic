@@ -35,6 +35,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UTextureRenderTarget2D* HeightRenderTarget;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UTextureRenderTarget2D* WeightRenderTarget;
 	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
@@ -57,9 +60,13 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetVectorRenderParams(TMap<FName, FVector> Params);
-	
+
+	UFUNCTION(BlueprintCallable)
 	void InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable)
 	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
+
+	UFUNCTION(BlueprintCallable)
+	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputHeightMap, UTextureRenderTarget2D* InputWeightMap);
 };

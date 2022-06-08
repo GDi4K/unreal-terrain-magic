@@ -101,3 +101,20 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 	return HeightRenderTarget;
 }
 
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputHeightMap,
+	UTextureRenderTarget2D* InputWeightMap)
+{
+	InitializeRenderParams(InputHeightMap);
+	SetTextureRenderParam("WeightRT", InputWeightMap);
+	
+	if (WeightRenderTarget == nullptr)
+	{
+		WeightRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_R8);
+	}
+
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, BrushMaterial);
+
+	return WeightRenderTarget;
+}
+

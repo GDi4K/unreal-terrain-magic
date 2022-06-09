@@ -9,12 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Textures/dusty_debris.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Textures/dusty_debris.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Textures/dusty_sediment.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Textures/dusty_sediment.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicWeightBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicWeightBrush.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +94,7 @@
       <workItem from="1654489122571" duration="6610000" />
       <workItem from="1654679119447" duration="2293000" />
       <workItem from="1654709959018" duration="746000" />
+      <workItem from="1654760793335" duration="880000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>

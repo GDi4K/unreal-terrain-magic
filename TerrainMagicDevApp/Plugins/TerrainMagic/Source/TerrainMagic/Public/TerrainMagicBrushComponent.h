@@ -3,6 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Materials/MaterialInstanceDynamic.h"
+#include "Engine/TextureRenderTarget2D.h"
+#include "Components/ActorComponent.h"
 
 #include "TerrainMagicBrushComponent.generated.h"
 
@@ -21,52 +24,52 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
 	UMaterialInstanceDynamic* BrushMaterial;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")
 	FTransform LandscapeTransform;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint LandscapeSize;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint RenderTargetSize;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
 	UTextureRenderTarget2D* HeightRenderTarget;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
 	UTextureRenderTarget2D* WeightRenderTarget;
 	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void Initialize(FTransform InputLandscapeTransform, FIntPoint InputLandscapeSize, FIntPoint InputRenderTargetSize);
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void SetScalarRenderParam(FName Parameter, float Value);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void SetVectorRenderParam(FName Parameter, FVector Value);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void SetTextureRenderParam(FName Parameter, UTexture* Value);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void SetScalarRenderParams(TMap<FName, float> Params);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void SetVectorRenderParams(TMap<FName, FVector> Params);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputHeightMap, UTextureRenderTarget2D* InputWeightMap);
 };

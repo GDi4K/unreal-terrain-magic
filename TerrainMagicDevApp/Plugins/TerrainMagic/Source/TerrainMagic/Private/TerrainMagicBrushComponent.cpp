@@ -3,7 +3,6 @@
 
 #include "TerrainMagicBrushComponent.h"
 
-#include "Commandlets/EditorCommandlets.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
 

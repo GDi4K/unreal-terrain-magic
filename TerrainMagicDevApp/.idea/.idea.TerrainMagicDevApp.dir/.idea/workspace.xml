@@ -7,8 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Refactor the map.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +96,7 @@
       <workItem from="1654489122571" duration="6610000" />
       <workItem from="1654679119447" duration="2293000" />
       <workItem from="1654709959018" duration="746000" />
-      <workItem from="1654760793335" duration="880000" />
+      <workItem from="1654760793335" duration="3203000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -152,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654495199321</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Refactor the map.">
+      <created>1654763121973</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1654763121973</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +190,7 @@
     <MESSAGE value="Move some parameters to the C++ component." />
     <MESSAGE value="Refactor render params code base" />
     <MESSAGE value="Refactor Codebase a bit more." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor Codebase a bit more." />
+    <MESSAGE value="Refactor the map." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor the map." />
   </component>
 </project>

@@ -1,4 +1,4 @@
-﻿// // Copyright (c) 2022 GDi4K Inc. All Rights Reserved.
+﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
 #pragma once
 #include "FTerrainMagicRemap.generated.h"

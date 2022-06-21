@@ -7,7 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Finished testing with the noise masks.">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../package.bat" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,6 +103,7 @@
       <workItem from="1655518481715" duration="46000" />
       <workItem from="1655526546944" duration="1221000" />
       <workItem from="1655700389349" duration="2739000" />
+      <workItem from="1655783307708" duration="3704000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -227,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655711873110</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Finished testing with the noise masks.">
+      <created>1655783931908</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1655783931908</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +277,7 @@
     <MESSAGE value="Update licensing info" />
     <MESSAGE value="Add Area Noise Mask" />
     <MESSAGE value="Introduce Edge Noise Mask" />
-    <option name="LAST_COMMIT_MESSAGE" value="Introduce Edge Noise Mask" />
+    <MESSAGE value="Finished testing with the noise masks." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished testing with the noise masks." />
   </component>
 </project>

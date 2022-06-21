@@ -7,12 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add Area Noise Mask">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicWeightBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicWeightBrush.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicWeightBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicWeightBrush.uasset" afterDir="false" />
-    </list>
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +99,7 @@
       <workItem from="1654924996561" duration="3272000" />
       <workItem from="1655518481715" duration="46000" />
       <workItem from="1655526546944" duration="1221000" />
-      <workItem from="1655700389349" duration="2110000" />
+      <workItem from="1655700389349" duration="2739000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -225,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655703301633</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Introduce Edge Noise Mask">
+      <created>1655711873110</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1655711873110</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +265,7 @@
     <MESSAGE value="Added documentation URLs." />
     <MESSAGE value="Update licensing info" />
     <MESSAGE value="Add Area Noise Mask" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Area Noise Mask" />
+    <MESSAGE value="Introduce Edge Noise Mask" />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce Edge Noise Mask" />
   </component>
 </project>

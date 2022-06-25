@@ -59,6 +59,18 @@ void UTerrainMagicBrushComponent::SetTextureRenderParam(const FName Parameter, U
 	BrushMaterial->SetTextureParameterValue(Parameter, Value);
 }
 
+ATerrainMagicManager* UTerrainMagicBrushComponent::EnsureManager()
+{
+	AActor* CurrentActor = UGameplayStatics::GetActorOfClass(GetWorld(), ATerrainMagicManager::StaticClass());
+	if (CurrentActor == nullptr)
+	{
+		AActor* SpawnedActor = GetWorld()->SpawnActor(ATerrainMagicManager::StaticClass());
+		return Cast<ATerrainMagicManager>(SpawnedActor);
+	}
+
+	return Cast<ATerrainMagicManager>(CurrentActor);
+}
+
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)

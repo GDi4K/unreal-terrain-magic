@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TerrainMagicManager.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Components/ActorComponent.h"
@@ -72,4 +73,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputHeightMap, UTextureRenderTarget2D* InputWeightMap);
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	ATerrainMagicManager* EnsureManager();
 };

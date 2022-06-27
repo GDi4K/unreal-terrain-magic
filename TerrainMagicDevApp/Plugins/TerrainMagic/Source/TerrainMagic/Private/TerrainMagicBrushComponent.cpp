@@ -4,6 +4,7 @@
 
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values for this component's properties
@@ -99,11 +100,9 @@ void UTerrainMagicBrushComponent::InitializeRenderParams(UTextureRenderTarget2D*
 UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRenderTarget2D* InputHeightMap)
 {
 	InitializeRenderParams(InputHeightMap);
-	
-	if (HeightRenderTarget == nullptr)
-	{
-		HeightRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
-	}
+	ATerrainMagicManager* Manager = EnsureManager();
+
+	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
@@ -116,11 +115,9 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRen
 {
 	InitializeRenderParams(InputHeightMap);
 	SetTextureRenderParam("WeightRT", InputWeightMap);
-	
-	if (WeightRenderTarget == nullptr)
-	{
-		WeightRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_R8);
-	}
+
+	ATerrainMagicManager* Manager = EnsureManager();
+	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, BrushMaterial);

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Kismet/GameplayStatics.h"
+#include "Engine/TextureRenderTarget2D.h"
 #include "TerrainMagicManager.generated.h"
 
 UCLASS()
@@ -23,4 +23,13 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
+	UTextureRenderTarget2D* HeightRenderTarget;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
+	UTextureRenderTarget2D* WeightRenderTarget;
+	
+	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);
+	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);
 };

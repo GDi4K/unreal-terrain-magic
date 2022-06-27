@@ -36,12 +36,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint RenderTargetSize;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
-	UTextureRenderTarget2D* HeightRenderTarget;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
-	UTextureRenderTarget2D* WeightRenderTarget;
 	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,

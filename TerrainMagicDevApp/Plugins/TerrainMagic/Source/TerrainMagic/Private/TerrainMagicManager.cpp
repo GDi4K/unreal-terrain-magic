@@ -3,6 +3,8 @@
 
 #include "TerrainMagicManager.h"
 
+#include "Kismet/KismetRenderingLibrary.h"
+
 
 // Sets default values
 ATerrainMagicManager::ATerrainMagicManager()
@@ -22,5 +24,25 @@ void ATerrainMagicManager::BeginPlay()
 void ATerrainMagicManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)
+{
+	if (HeightRenderTarget == nullptr)
+	{
+		HeightRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), Width, Height, RTF_RGBA8);
+	}
+
+	return HeightRenderTarget;
+}
+
+UTextureRenderTarget2D* ATerrainMagicManager::EnsureWeightRenderTarget(const int Width, const int Height)
+{
+	if (WeightRenderTarget == nullptr)
+	{
+		WeightRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), Width, Height, RTF_R8);
+	}
+
+	return WeightRenderTarget;
 }
 

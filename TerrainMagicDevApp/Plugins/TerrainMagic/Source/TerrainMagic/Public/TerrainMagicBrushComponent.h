@@ -66,8 +66,14 @@ public:
 	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputHeightMap, UTextureRenderTarget2D* InputWeightMap);
+	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputWeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	ATerrainMagicManager* EnsureManager();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	bool HasHeightMap();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	void CacheHeightMap(UTextureRenderTarget2D* InputHeightMap);
 };

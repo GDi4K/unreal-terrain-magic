@@ -26,6 +26,21 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+UTextureRenderTarget2D* ATerrainMagicManager::GetHeightMap()
+{
+	if (CachedHeightMap != nullptr)
+	{
+		return CachedHeightMap;
+	}
+	
+	return HeightRenderTarget;
+}
+
+void ATerrainMagicManager::CacheHeightMap(UTextureRenderTarget2D* HeightMap)
+{
+	CachedHeightMap = HeightMap;
+}
+
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)
 {
 	if (HeightRenderTarget == nullptr)
@@ -33,6 +48,7 @@ UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int
 		HeightRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), Width, Height, RTF_RGBA8);
 	}
 
+	CachedHeightMap = nullptr;
 	return HeightRenderTarget;
 }
 

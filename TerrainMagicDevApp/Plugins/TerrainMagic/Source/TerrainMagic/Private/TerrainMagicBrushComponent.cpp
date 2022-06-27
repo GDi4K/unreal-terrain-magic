@@ -72,6 +72,16 @@ ATerrainMagicManager* UTerrainMagicBrushComponent::EnsureManager()
 	return Cast<ATerrainMagicManager>(CurrentActor);
 }
 
+bool UTerrainMagicBrushComponent::HasHeightMap()
+{
+	return EnsureManager()->GetHeightMap() != nullptr;
+}
+
+void UTerrainMagicBrushComponent::CacheHeightMap(UTextureRenderTarget2D* InputHeightMap)
+{
+	EnsureManager()->CacheHeightMap(InputHeightMap);
+}
+
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)
@@ -110,13 +120,13 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 	return HeightRenderTarget;
 }
 
-UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputHeightMap,
-	UTextureRenderTarget2D* InputWeightMap)
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputWeightMap)
 {
-	InitializeRenderParams(InputHeightMap);
+	ATerrainMagicManager* Manager = EnsureManager();
+	
+	InitializeRenderParams(Manager->GetHeightMap());
 	SetTextureRenderParam("WeightRT", InputWeightMap);
 
-	ATerrainMagicManager* Manager = EnsureManager();
 	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);

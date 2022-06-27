@@ -25,10 +25,18 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
-	UTextureRenderTarget2D* HeightRenderTarget;
+	UTextureRenderTarget2D* HeightRenderTarget = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
-	UTextureRenderTarget2D* WeightRenderTarget;
+	UTextureRenderTarget2D* WeightRenderTarget = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
+	UTextureRenderTarget2D* CachedHeightMap = nullptr;
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	UTextureRenderTarget2D* GetHeightMap();
+	
+	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	
 	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);
 	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);

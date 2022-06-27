@@ -41,6 +41,12 @@ void ATerrainMagicManager::CacheHeightMap(UTextureRenderTarget2D* HeightMap)
 	CachedHeightMap = HeightMap;
 }
 
+void ATerrainMagicManager::ResetHeightMapCache()
+{
+	HeightRenderTarget = nullptr;
+	CachedHeightMap = nullptr;
+}
+
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)
 {
 	if (HeightRenderTarget == nullptr)

@@ -37,6 +37,7 @@ public:
 	UTextureRenderTarget2D* GetHeightMap();
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
+	void ResetHeightMapCache();
 	
 	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);
 	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);

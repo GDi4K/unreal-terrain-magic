@@ -76,4 +76,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void CacheHeightMap(UTextureRenderTarget2D* InputHeightMap);
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	void ResetHeightMapCache();
 };

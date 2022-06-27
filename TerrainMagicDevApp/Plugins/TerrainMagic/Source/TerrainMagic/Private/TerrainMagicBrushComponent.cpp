@@ -82,6 +82,11 @@ void UTerrainMagicBrushComponent::CacheHeightMap(UTextureRenderTarget2D* InputHe
 	EnsureManager()->CacheHeightMap(InputHeightMap);
 }
 
+void UTerrainMagicBrushComponent::ResetHeightMapCache()
+{
+	EnsureManager()->ResetHeightMapCache();
+}
+
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)

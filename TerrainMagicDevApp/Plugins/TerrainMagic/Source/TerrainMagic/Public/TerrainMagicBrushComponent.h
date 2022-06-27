@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TerrainMagicManager.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Components/ActorComponent.h"
@@ -35,12 +36,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint RenderTargetSize;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
-	UTextureRenderTarget2D* HeightRenderTarget;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
-	UTextureRenderTarget2D* WeightRenderTarget;
 	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
@@ -71,5 +66,17 @@ public:
 	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputHeightMap, UTextureRenderTarget2D* InputWeightMap);
+	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputWeightMap);
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	ATerrainMagicManager* EnsureManager();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	bool HasHeightMap();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	void CacheHeightMap(UTextureRenderTarget2D* InputHeightMap);
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	void ResetHeightMapCache();
 };

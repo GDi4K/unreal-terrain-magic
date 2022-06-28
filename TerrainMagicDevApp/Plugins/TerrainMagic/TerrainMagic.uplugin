@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.2.0",
+	"VersionName": "1.2.1",
 	"FriendlyName": "Terrain Magic",
 	"Description": "Supercharging Landscape Creation in Unreal Engine.",
 	"Category": "CodePlugins",

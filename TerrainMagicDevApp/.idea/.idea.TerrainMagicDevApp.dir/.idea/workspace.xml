@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" afterDir="false" />
-    </list>
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +112,7 @@
       <workItem from="1656302507845" duration="1865000" />
       <workItem from="1656328408720" duration="3112000" />
       <workItem from="1656340180227" duration="741000" />
-      <workItem from="1656391020455" duration="1012000" />
+      <workItem from="1656391020455" duration="1378000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>

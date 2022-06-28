@@ -15,7 +15,7 @@ Have a look at the intro:
 For non-commerical projects, you can also get it from here:
 
 * Close your existing Unreal Engine app.
-* Download the plugin from [a release](https://github.com/GDi4K/unreal-terrain-magic/releases) for your engine version.
+* Download the plugin from [a release](https://github.com/GDi4K/unreal-terrain-magic/releases/latest) for your engine version.
 * Create a directory inside your project called "Plugins" from the Windows File Browser
 * Extract the downloded plugin into that directory
 * Start your project, you will get a prompt asking to compile & proceed

@@ -34,5 +34,5 @@ Nothing is perfect & so does the Open Land. But we would like to fix issues, add
 Here are some links:
 
 * [Roadmap]()
-* [GitHub Issues]([https://github.com/GDi4K/unreal-open-land/issues](https://github.com/GDi4K/unreal-terrain-magic/issues))
+* [GitHub Issues](https://github.com/GDi4K/unreal-open-land/issues)
 * [GameDev4K Discord Server](https://discord.gg/DK9cMn9eFV)

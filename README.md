@@ -19,9 +19,9 @@ For non-commerical projects, you can also get it from here:
 * Create a directory inside your project called "Plugins" from the Windows File Browser
 * Extract the downloded plugin into that directory
 * Start your project, you will get a prompt asking to compile & proceed
-* In order to that, you need to setup following things:
-  * Setting up Visual Studio for Unreal Engine: https://bit.ly/3EJqAFS
-  * Install DotNet SDK 3.1: https://dotnet.microsoft.com/en-us/download/dotnet/3.1
+* In order to do that, you need to setup following things:
+  * Visual Studio for Unreal Engine: https://bit.ly/3EJqAFS
+  * DotNet SDK 3.1: https://dotnet.microsoft.com/en-us/download/dotnet/3.1
 
 ## Documentation
 

@@ -26,6 +26,7 @@ For non-commerical projects, you can also get it from here:
 ## Documentation
 
 * [Read the Official Guide](https://gamedev4k.notion.site/TerrainMagic-Documentation-25a548b9e1a24521acefa5218ce92ff9)
+* [Release Notes](https://github.com/GDi4K/unreal-terrain-magic/releases)
 
 ## Issues & Questions
 

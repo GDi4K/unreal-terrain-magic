@@ -2,6 +2,7 @@
 
 #include "TerrainMagicBrushComponent.h"
 
+#include "Engine/Canvas.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Kismet/GameplayStatics.h"
@@ -112,7 +113,7 @@ void UTerrainMagicBrushComponent::InitializeRenderParams(UTextureRenderTarget2D*
 	SetVectorRenderParam("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
 }
 
-UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRenderTarget2D* InputHeightMap)
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRenderTarget2D* InputHeightMap, UTexture* ClipTexture)
 {
 	InitializeRenderParams(InputHeightMap);
 	ATerrainMagicManager* Manager = EnsureManager();
@@ -120,8 +121,26 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
 
+	// UCanvas* Canvas;
+	// FVector2D Size;
+	// FDrawToRenderTargetContext Context;
+	
+	//UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
+
+
+	if (ClipTexture && ClipMaterial)
+	{
+		ClipMaterial->SetTextureParameterValue("HeightRT", InputHeightMap);
+		ClipMaterial->SetVectorParameterValue("LandscapeLocation", LandscapeTransform.GetLocation());
+		ClipMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
+		ClipMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
+		ClipMaterial->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
+		ClipMaterial->SetTextureParameterValue("Texture", ClipTexture);
+		
+		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
+	}
+	
 	return HeightRenderTarget;
 }
 

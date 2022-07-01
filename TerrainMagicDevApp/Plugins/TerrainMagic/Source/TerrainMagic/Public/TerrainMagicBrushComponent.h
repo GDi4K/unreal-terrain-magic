@@ -28,6 +28,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
 	UMaterialInstanceDynamic* BrushMaterial;
 
+	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
+	UMaterialInstanceDynamic* ClipMaterial;
+
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")
 	FTransform LandscapeTransform;
 
@@ -63,7 +66,7 @@ public:
 	void InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
+	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap, UTexture* ClipTexture = nullptr);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputWeightMap);

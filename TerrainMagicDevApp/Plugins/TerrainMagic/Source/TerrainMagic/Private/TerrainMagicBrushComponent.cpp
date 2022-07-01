@@ -2,6 +2,7 @@
 
 #include "TerrainMagicBrushComponent.h"
 
+#include "LandscapeClip.h"
 #include "Engine/Canvas.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
@@ -113,7 +114,7 @@ void UTerrainMagicBrushComponent::InitializeRenderParams(UTextureRenderTarget2D*
 	SetVectorRenderParam("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
 }
 
-UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRenderTarget2D* InputHeightMap, UTexture* ClipTexture)
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRenderTarget2D* InputHeightMap)
 {
 	InitializeRenderParams(InputHeightMap);
 	ATerrainMagicManager* Manager = EnsureManager();
@@ -122,22 +123,26 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
 
-	// UCanvas* Canvas;
-	// FVector2D Size;
-	// FDrawToRenderTargetContext Context;
 	
 	//UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
-
-
-	if (ClipTexture && ClipMaterial)
+	
+	TArray<AActor*> LandscapeClips;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), LandscapeClips);
+	for (AActor* LandscapeClip: LandscapeClips)
 	{
+		const ALandscapeClip* RealLandscapeClip = Cast<ALandscapeClip>(LandscapeClip);
+		check(RealLandscapeClip);
+
 		ClipMaterial->SetTextureParameterValue("HeightRT", InputHeightMap);
 		ClipMaterial->SetVectorParameterValue("LandscapeLocation", LandscapeTransform.GetLocation());
 		ClipMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
 		ClipMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
 		ClipMaterial->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
-		ClipMaterial->SetTextureParameterValue("Texture", ClipTexture);
-		
+
+		ClipMaterial->SetTextureParameterValue("Texture", RealLandscapeClip->HeightMap);
+		ClipMaterial->SetVectorParameterValue("TextureRoot", RealLandscapeClip->HeightMapRoot);
+		UE_LOG(LogTemp, Warning, TEXT("TextureRoot H: %s"), *RealLandscapeClip->HeightMapRoot.ToString())
+			
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
 	}
 	

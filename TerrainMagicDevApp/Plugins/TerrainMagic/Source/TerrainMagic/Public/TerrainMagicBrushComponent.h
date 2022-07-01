@@ -66,7 +66,7 @@ public:
 	void InitializeRenderParams(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap, UTexture* ClipTexture = nullptr);
+	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputWeightMap);

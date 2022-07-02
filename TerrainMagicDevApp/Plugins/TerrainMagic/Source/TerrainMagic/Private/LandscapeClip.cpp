@@ -26,6 +26,7 @@ void ALandscapeClip::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	HeightMapRoot = GetActorLocation();
+	HeightMapSizeInCM = HeightMapBaseSize * GetActorScale3D() * 100;
 }
 
 bool ALandscapeClip::ShouldTickIfViewportsOnly() const

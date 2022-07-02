@@ -27,12 +27,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USceneComponent* SceneComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture* HeightMap;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"))
+	FVector HeightMapBaseSize = {1000, 1000, 1000};
+	
 	FVector HeightMapRoot = {0, 0, 0};
-
-	UPROPERTY(EditAnywhere)
-	FVector2D HeightMapSize = {500, 500};
+	FVector HeightMapSizeInCM = HeightMapBaseSize * 100;
 };

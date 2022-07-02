@@ -141,7 +141,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 
 		ClipMaterial->SetTextureParameterValue("Texture", RealLandscapeClip->HeightMap);
 		ClipMaterial->SetVectorParameterValue("TextureRoot", RealLandscapeClip->HeightMapRoot);
-		UE_LOG(LogTemp, Warning, TEXT("TextureRoot H: %s"), *RealLandscapeClip->HeightMapRoot.ToString())
+		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", RealLandscapeClip->HeightMapSizeInCM);
 			
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
 	}

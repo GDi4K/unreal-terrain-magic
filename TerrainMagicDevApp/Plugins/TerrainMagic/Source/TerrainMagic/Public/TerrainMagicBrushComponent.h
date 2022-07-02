@@ -72,6 +72,12 @@ public:
 	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputWeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	UTextureRenderTarget2D* RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap);
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	bool HasInvalidatedLandscapeClips();
+	
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	ATerrainMagicManager* EnsureManager();
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")

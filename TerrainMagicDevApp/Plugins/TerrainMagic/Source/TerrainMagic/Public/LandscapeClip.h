@@ -24,14 +24,19 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ShouldTickIfViewportsOnly() const override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bNeedsInvalidation = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	class USceneComponent* SceneComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	UTexture* HeightMap;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"),  Category="01-General")
 	FVector HeightMapBaseSize = {1000, 1000, 1000};
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
+	void Invalidate();
 	
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector HeightMapSizeInCM = HeightMapBaseSize * 100;

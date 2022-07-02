@@ -35,8 +35,6 @@ void UTerrainMagicBrushComponent::TickComponent(float DeltaTime, ELevelTick Tick
                                                 FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
 }
 
 void UTerrainMagicBrushComponent::Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
@@ -122,9 +120,33 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
-
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
 	
-	//UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
+	return HeightRenderTarget;
+}
+
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputWeightMap)
+{
+	ATerrainMagicManager* Manager = EnsureManager();
+	
+	InitializeRenderParams(Manager->GetHeightMap());
+	SetTextureRenderParam("WeightRT", InputWeightMap);
+
+	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
+
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, BrushMaterial);
+
+	return WeightRenderTarget;
+}
+
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap)
+{
+	ATerrainMagicManager* Manager = EnsureManager();
+
+	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
+
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
 	
 	TArray<AActor*> LandscapeClips;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), LandscapeClips);
@@ -149,18 +171,23 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 	return HeightRenderTarget;
 }
 
-UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputWeightMap)
+bool UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
 {
-	ATerrainMagicManager* Manager = EnsureManager();
-	
-	InitializeRenderParams(Manager->GetHeightMap());
-	SetTextureRenderParam("WeightRT", InputWeightMap);
+	bool bNeedsInvalidation = false;
 
-	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
+	TArray<AActor*> LandscapeClips;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), LandscapeClips);
+	for (AActor* LandscapeClip: LandscapeClips)
+	{
+		ALandscapeClip* RealLandscapeClip = Cast<ALandscapeClip>(LandscapeClip);
+		check(RealLandscapeClip);
 
-	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, BrushMaterial);
+		if (RealLandscapeClip->bNeedsInvalidation)
+		{
+			bNeedsInvalidation = true;
+		}
+		RealLandscapeClip->bNeedsInvalidation = false;
+	}
 
-	return WeightRenderTarget;
+	return bNeedsInvalidation;
 }
-

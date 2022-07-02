@@ -36,3 +36,8 @@ bool ALandscapeClip::ShouldTickIfViewportsOnly() const
 	return false;
 }
 
+void ALandscapeClip::Invalidate()
+{
+	bNeedsInvalidation = true;
+}
+

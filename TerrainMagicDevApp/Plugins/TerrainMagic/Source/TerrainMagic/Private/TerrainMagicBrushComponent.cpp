@@ -169,10 +169,18 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 
 		ClipMaterial->SetTextureParameterValue("Texture", RealLandscapeClip->HeightMap);
 		ClipMaterial->SetVectorParameterValue("TextureRoot", RealLandscapeClip->HeightMapRoot);
-		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", RealLandscapeClip->HeightMapSizeInCM);
+		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", {RealLandscapeClip->HeightMapSizeInCM.X, RealLandscapeClip->HeightMapSizeInCM.Y, 0});
+
+		ClipMaterial->SetScalarParameterValue("HeightMultiplier", RealLandscapeClip->HeightMultiplier);
 		ClipMaterial->SetScalarParameterValue("SelectedBlendMode", RealLandscapeClip->BlendMode);
-		ClipMaterial->SetScalarParameterValue("HeightMapOutputMin", RealLandscapeClip->HeightMapOutputMin);
-		ClipMaterial->SetScalarParameterValue("HeightMapOutputMax", RealLandscapeClip->HeightMapOutputMax);
+		
+		ClipMaterial->SetScalarParameterValue("HeightMapInputMin", RealLandscapeClip->HeightMapRange.InputMin);
+		ClipMaterial->SetScalarParameterValue("HeightMapInputMax", RealLandscapeClip->HeightMapRange.InputMax);
+		ClipMaterial->SetScalarParameterValue("HeightMapOutputMin", RealLandscapeClip->HeightMapRange.OutputMin);
+		ClipMaterial->SetScalarParameterValue("HeightMapOutputMax", RealLandscapeClip->HeightMapRange.OutputMax);
+
+		ClipMaterial->SetScalarParameterValue("HeightSaturation", RealLandscapeClip->HeightSaturation);
+		
 			
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
 	}

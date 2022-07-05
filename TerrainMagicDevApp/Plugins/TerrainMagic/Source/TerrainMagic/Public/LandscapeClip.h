@@ -47,6 +47,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_ADD;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	float HeightMapOutputMin = -1.0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	float HeightMapOutputMax = 1.0;
+	
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
 	void Invalidate();
 	

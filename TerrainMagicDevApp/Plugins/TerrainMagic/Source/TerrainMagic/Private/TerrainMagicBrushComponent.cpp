@@ -171,6 +171,8 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		ClipMaterial->SetVectorParameterValue("TextureRoot", RealLandscapeClip->HeightMapRoot);
 		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", RealLandscapeClip->HeightMapSizeInCM);
 		ClipMaterial->SetScalarParameterValue("SelectedBlendMode", RealLandscapeClip->BlendMode);
+		ClipMaterial->SetScalarParameterValue("HeightMapOutputMin", RealLandscapeClip->HeightMapOutputMin);
+		ClipMaterial->SetScalarParameterValue("HeightMapOutputMax", RealLandscapeClip->HeightMapOutputMax);
 			
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
 	}

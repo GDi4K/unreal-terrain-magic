@@ -7,10 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Introduce HeightMap blend mode.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
     </list>
@@ -25,6 +24,9 @@
         <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -123,7 +125,7 @@
       <workItem from="1656647369047" duration="4592000" />
       <workItem from="1656740844702" duration="1289000" />
       <workItem from="1656770815446" duration="3601000" />
-      <workItem from="1657006228866" duration="1861000" />
+      <workItem from="1657006228866" duration="2563000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -307,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656774698787</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Introduce HeightMap blend mode.">
+      <created>1657010342703</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1657010342703</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +337,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Validate the height texture before use" />
     <MESSAGE value="Add WeightBrush into the plugin" />
     <MESSAGE value="Add location mask." />
     <MESSAGE value="Add support for custom texture based weight maps" />
@@ -353,6 +361,7 @@
     <MESSAGE value="Add support for changing clip root position." />
     <MESSAGE value="Add center based clip translation." />
     <MESSAGE value="Introduce TerrainMagicClipBrush&#10;&#10;This will take care of rendering LandscapeClips." />
-    <option name="LAST_COMMIT_MESSAGE" value="Introduce TerrainMagicClipBrush&#10;&#10;This will take care of rendering LandscapeClips." />
+    <MESSAGE value="Introduce HeightMap blend mode." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce HeightMap blend mode." />
   </component>
 </project>

@@ -150,6 +150,12 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	
 	TArray<AActor*> LandscapeClips;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), LandscapeClips);
+
+	if (LandscapeClips.Num() == 0)
+	{
+		return InputHeightMap;
+	}
+	
 	for (AActor* LandscapeClip: LandscapeClips)
 	{
 		const ALandscapeClip* RealLandscapeClip = Cast<ALandscapeClip>(LandscapeClip);
@@ -164,6 +170,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		ClipMaterial->SetTextureParameterValue("Texture", RealLandscapeClip->HeightMap);
 		ClipMaterial->SetVectorParameterValue("TextureRoot", RealLandscapeClip->HeightMapRoot);
 		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", RealLandscapeClip->HeightMapSizeInCM);
+		ClipMaterial->SetScalarParameterValue("SelectedBlendMode", RealLandscapeClip->BlendMode);
 			
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
 	}

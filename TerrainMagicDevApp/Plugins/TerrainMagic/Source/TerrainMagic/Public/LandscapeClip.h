@@ -6,6 +6,15 @@
 #include "GameFramework/Actor.h"
 #include "LandscapeClip.generated.h"
 
+UENUM(BlueprintType)
+enum ELandscapeClipBlendMode
+{
+	LCB_ADD = 0 UMETA(DisplayName="Add"),
+	LCB_AVERAGE = 1 UMETA(DisplayName="Average"),
+	LCB_MIN = 2 UMETA(DisplayName="Min"),
+	LCB_Max = 3 UMETA(DisplayName="Max"),
+};
+
 UCLASS()
 class TERRAINMAGIC_API ALandscapeClip : public AActor
 {
@@ -35,6 +44,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"),  Category="01-General")
 	FVector HeightMapBaseSize = {1000, 1000, 1000};
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_ADD;
+	
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
 	void Invalidate();
 	

@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add support for remap control.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add height scaling &amp; remapping.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" afterDir="false" />
@@ -28,6 +28,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -127,7 +128,7 @@
       <workItem from="1656647369047" duration="4592000" />
       <workItem from="1656740844702" duration="1289000" />
       <workItem from="1656770815446" duration="3601000" />
-      <workItem from="1657006228866" duration="4633000" />
+      <workItem from="1657006228866" duration="4939000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -325,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657010808249</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Add height scaling &amp; remapping.">
+      <created>1657013173278</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1657013173278</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,7 +354,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add location mask." />
     <MESSAGE value="Add support for custom texture based weight maps" />
     <MESSAGE value="Move some parameters to the C++ component." />
     <MESSAGE value="Refactor render params code base" />
@@ -371,6 +378,7 @@
     <MESSAGE value="Introduce TerrainMagicClipBrush&#10;&#10;This will take care of rendering LandscapeClips." />
     <MESSAGE value="Introduce HeightMap blend mode." />
     <MESSAGE value="Add support for remap control." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add support for remap control." />
+    <MESSAGE value="Add height scaling &amp; remapping." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add height scaling &amp; remapping." />
   </component>
 </project>

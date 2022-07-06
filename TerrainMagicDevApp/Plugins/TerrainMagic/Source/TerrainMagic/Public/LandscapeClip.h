@@ -23,6 +23,8 @@ class TERRAINMAGIC_API ALandscapeClip : public AActor
 {
 	GENERATED_BODY()
 
+	FVector PrevScale3D = {1, 1, 1};
+
 public:
 	// Sets default values for this actor's properties
 	ALandscapeClip();

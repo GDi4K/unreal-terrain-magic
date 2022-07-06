@@ -11,6 +11,11 @@ ALandscapeClip::ALandscapeClip()
 	PrimaryActorTick.bStartWithTickEnabled = true;
 	PrimaryActorTick.bCanEverTick = true;
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+
+	OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
+	OutlineComponent->SetLineThickness(500.0);
+	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
+	
 	SetRootComponent(SceneComponent);
 }
 
@@ -27,6 +32,12 @@ void ALandscapeClip::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	HeightMapRoot = GetActorLocation();
 	HeightMapSizeInCM = HeightMapBaseSize * FVector2D(GetActorScale3D()) * 100;
+
+	OutlineComponent->SetBoxExtent({
+		HeightMapSizeInCM.X/2,
+		HeightMapSizeInCM.Y/2,
+		static_cast<float>(HeightMultiplier/2.0)
+	});
 }
 
 bool ALandscapeClip::ShouldTickIfViewportsOnly() const
@@ -39,5 +50,11 @@ bool ALandscapeClip::ShouldTickIfViewportsOnly() const
 void ALandscapeClip::Invalidate()
 {
 	bNeedsInvalidation = true;
+}
+
+void ALandscapeClip::ToggleOutline()
+{
+	bShowOutline = !bShowOutline;
+	OutlineComponent->SetVisibility(bShowOutline);
 }
 

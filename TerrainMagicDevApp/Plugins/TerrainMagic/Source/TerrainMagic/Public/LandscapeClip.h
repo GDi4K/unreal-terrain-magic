@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "Types/FTerrainMagicRemap.h"
+#include "Types/OutlineComponent.h"
 #include "LandscapeClip.generated.h"
 
 UENUM(BlueprintType)
@@ -35,12 +37,16 @@ public:
 	virtual bool ShouldTickIfViewportsOnly() const override;
 
 	bool bNeedsInvalidation = false;
+	bool bShowOutline = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
-	class USceneComponent* SceneComponent;
+	USceneComponent* SceneComponent = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
+	UOutlineComponent* OutlineComponent = nullptr;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	UTexture* HeightMap;
+	UTexture* HeightMap = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"),  Category="01-General")
 	FVector2D HeightMapBaseSize = {1000, 1000};
@@ -59,6 +65,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
 	void Invalidate();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
+	void ToggleOutline();
 	
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector2D HeightMapSizeInCM = HeightMapBaseSize * 100;

@@ -144,13 +144,10 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 {
 	ATerrainMagicManager* Manager = EnsureManager();
 	
-
 	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
-
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
 	
-	TArray<AActor*> LandscapeClips;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), LandscapeClips);
+	TArray<ALandscapeClip*> LandscapeClips = Manager->GetAllLandscapeClips();
 
 	if (LandscapeClips.Num() == 0)
 	{
@@ -167,31 +164,28 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
 	
-	for (AActor* LandscapeClip: LandscapeClips)
+	for (ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
-		const ALandscapeClip* RealLandscapeClip = Cast<ALandscapeClip>(LandscapeClip);
-		check(RealLandscapeClip);
-
 		ClipMaterial->SetTextureParameterValue("HeightRT", BufferRenderTarget);
 		ClipMaterial->SetVectorParameterValue("LandscapeLocation", LandscapeTransform.GetLocation());
 		ClipMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
 		ClipMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
 		ClipMaterial->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
 
-		ClipMaterial->SetTextureParameterValue("Texture", RealLandscapeClip->HeightMap);
-		ClipMaterial->SetVectorParameterValue("TextureRoot", RealLandscapeClip->HeightMapRoot);
-		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", {RealLandscapeClip->HeightMapSizeInCM.X, RealLandscapeClip->HeightMapSizeInCM.Y, 0});
-		ClipMaterial->SetVectorParameterValue("TextureRotationInDegrees", RealLandscapeClip->GetActorRotation().Euler());
+		ClipMaterial->SetTextureParameterValue("Texture", LandscapeClip->HeightMap);
+		ClipMaterial->SetVectorParameterValue("TextureRoot", LandscapeClip->HeightMapRoot);
+		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", {LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0});
+		ClipMaterial->SetVectorParameterValue("TextureRotationInDegrees", LandscapeClip->GetActorRotation().Euler());
 		
-		ClipMaterial->SetScalarParameterValue("HeightMultiplier", RealLandscapeClip->HeightMultiplier);
-		ClipMaterial->SetScalarParameterValue("SelectedBlendMode", RealLandscapeClip->BlendMode);
+		ClipMaterial->SetScalarParameterValue("HeightMultiplier", LandscapeClip->HeightMultiplier);
+		ClipMaterial->SetScalarParameterValue("SelectedBlendMode", LandscapeClip->BlendMode);
 		
-		ClipMaterial->SetScalarParameterValue("HeightMapInputMin", RealLandscapeClip->HeightMapRange.InputMin);
-		ClipMaterial->SetScalarParameterValue("HeightMapInputMax", RealLandscapeClip->HeightMapRange.InputMax);
-		ClipMaterial->SetScalarParameterValue("HeightMapOutputMin", RealLandscapeClip->HeightMapRange.OutputMin);
-		ClipMaterial->SetScalarParameterValue("HeightMapOutputMax", RealLandscapeClip->HeightMapRange.OutputMax);
+		ClipMaterial->SetScalarParameterValue("HeightMapInputMin", LandscapeClip->HeightMapRange.InputMin);
+		ClipMaterial->SetScalarParameterValue("HeightMapInputMax", LandscapeClip->HeightMapRange.InputMax);
+		ClipMaterial->SetScalarParameterValue("HeightMapOutputMin", LandscapeClip->HeightMapRange.OutputMin);
+		ClipMaterial->SetScalarParameterValue("HeightMapOutputMax", LandscapeClip->HeightMapRange.OutputMax);
 
-		ClipMaterial->SetScalarParameterValue("HeightSaturation", RealLandscapeClip->HeightSaturation);
+		ClipMaterial->SetScalarParameterValue("HeightSaturation", LandscapeClip->HeightSaturation);
 
 		// Render the Clip
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
@@ -208,19 +202,15 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 bool UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
 {
 	bool bNeedsInvalidation = false;
+	const ATerrainMagicManager* Manager = EnsureManager();
 
-	TArray<AActor*> LandscapeClips;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), LandscapeClips);
-	for (AActor* LandscapeClip: LandscapeClips)
+	for (ALandscapeClip* LandscapeClip: Manager->GetAllLandscapeClips())
 	{
-		ALandscapeClip* RealLandscapeClip = Cast<ALandscapeClip>(LandscapeClip);
-		check(RealLandscapeClip);
-
-		if (RealLandscapeClip->bNeedsInvalidation)
+		if (LandscapeClip->bNeedsInvalidation)
 		{
 			bNeedsInvalidation = true;
 		}
-		RealLandscapeClip->bNeedsInvalidation = false;
+		LandscapeClip->bNeedsInvalidation = false;
 	}
 
 	return bNeedsInvalidation;

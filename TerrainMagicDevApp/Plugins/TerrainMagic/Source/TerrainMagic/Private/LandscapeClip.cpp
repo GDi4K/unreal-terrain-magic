@@ -58,12 +58,15 @@ void ALandscapeClip::Tick(float DeltaTime)
 	HeightMapSizeInCM = HeightMapBaseSize * FVector2D(GetActorScale3D()) * 100;
 
 	// Render Outline
-	OutlineComponent->SetBoxExtent({
-		HeightMapBaseSize.X/2 * 100,
-		HeightMapBaseSize.Y/2 * 100,
-		static_cast<float>(HeightMultiplier/2.0)
-	});
-
+	OutlineComponent->SetVisibility(bShowOutline);
+	if (bShowOutline)
+	{
+		OutlineComponent->SetBoxExtent({
+			HeightMapBaseSize.X/2 * 100,
+			HeightMapBaseSize.Y/2 * 100,
+			static_cast<float>(HeightMultiplier/2.0)
+		});
+	}
 }
 
 bool ALandscapeClip::ShouldTickIfViewportsOnly() const
@@ -81,6 +84,5 @@ void ALandscapeClip::Invalidate()
 void ALandscapeClip::ToggleOutline()
 {
 	bShowOutline = !bShowOutline;
-	OutlineComponent->SetVisibility(bShowOutline);
 }
 

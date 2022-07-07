@@ -143,6 +143,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRen
 UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap)
 {
 	ATerrainMagicManager* Manager = EnsureManager();
+	
 
 	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
@@ -155,13 +156,23 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	{
 		return InputHeightMap;
 	}
+
+	if (BufferRenderTarget == nullptr)
+	{
+		BufferRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
+	}
+
+	// Copy the Input HeightMap at the beginning
+	CopyRTMaterial->SetTextureParameterValue("RenderTarget", InputHeightMap);
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
 	
 	for (AActor* LandscapeClip: LandscapeClips)
 	{
 		const ALandscapeClip* RealLandscapeClip = Cast<ALandscapeClip>(LandscapeClip);
 		check(RealLandscapeClip);
 
-		ClipMaterial->SetTextureParameterValue("HeightRT", InputHeightMap);
+		ClipMaterial->SetTextureParameterValue("HeightRT", BufferRenderTarget);
 		ClipMaterial->SetVectorParameterValue("LandscapeLocation", LandscapeTransform.GetLocation());
 		ClipMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
 		ClipMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
@@ -181,9 +192,14 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		ClipMaterial->SetScalarParameterValue("HeightMapOutputMax", RealLandscapeClip->HeightMapRange.OutputMax);
 
 		ClipMaterial->SetScalarParameterValue("HeightSaturation", RealLandscapeClip->HeightSaturation);
-		
-			
+
+		// Render the Clip
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
+
+		// Copy the NewHeightMap to the Buffer
+		CopyRTMaterial->SetTextureParameterValue("RenderTarget", HeightRenderTarget);
+		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
+		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
 	}
 	
 	return HeightRenderTarget;

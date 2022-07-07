@@ -174,7 +174,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 
 		ClipMaterial->SetTextureParameterValue("Texture", LandscapeClip->HeightMap);
 		ClipMaterial->SetVectorParameterValue("TextureRoot", LandscapeClip->HeightMapRoot);
-		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", {LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0});
+		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0));
 		ClipMaterial->SetVectorParameterValue("TextureRotationInDegrees", LandscapeClip->GetActorRotation().Euler());
 		
 		ClipMaterial->SetScalarParameterValue("HeightMultiplier", LandscapeClip->HeightMultiplier);

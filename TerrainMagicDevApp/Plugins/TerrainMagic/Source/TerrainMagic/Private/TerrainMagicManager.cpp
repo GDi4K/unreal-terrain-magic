@@ -79,6 +79,19 @@ void ATerrainMagicManager::ResetHeightMapCache()
 	CachedHeightMap = nullptr;
 }
 
+void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
+{
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, Material);
+	HeightMapVersion += 1;
+}
+
+void ATerrainMagicManager::RenderWeightMap(UMaterialInterface* Material) const
+{
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, Material);
+}
+
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)
 {
 	if (HeightRenderTarget == nullptr)
@@ -98,5 +111,10 @@ UTextureRenderTarget2D* ATerrainMagicManager::EnsureWeightRenderTarget(const int
 	}
 
 	return WeightRenderTarget;
+}
+
+int ATerrainMagicManager::GetHeightMapVersion() const
+{
+	return HeightMapVersion;
 }
 

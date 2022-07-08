@@ -95,4 +95,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void ResetHeightMapCache();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	int GetHeightMapVersion();
 };

@@ -6,12 +6,15 @@
 #include "LandscapeClip.h"
 #include "GameFramework/Actor.h"
 #include "Engine/TextureRenderTarget2D.h"
+#include "Materials/MaterialInterface.h"
 #include "TerrainMagicManager.generated.h"
 
 UCLASS()
 class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 {
 	GENERATED_BODY()
+
+	int HeightMapVersion = 0;
 
 public:
 	// Sets default values for this actor's properties
@@ -47,7 +50,12 @@ public:
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	void ResetHeightMapCache();
+
+	void RenderHeightMap(UMaterialInterface* Material);
+	void RenderWeightMap(UMaterialInterface* Material) const;
 	
 	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);
 	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);
+
+	int GetHeightMapVersion() const;
 };

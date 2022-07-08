@@ -87,6 +87,11 @@ void UTerrainMagicBrushComponent::ResetHeightMapCache()
 	EnsureManager()->ResetHeightMapCache();
 }
 
+int UTerrainMagicBrushComponent::GetHeightMapVersion()
+{
+	return EnsureManager()->GetHeightMapVersion();
+}
+
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)
@@ -119,8 +124,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 
 	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
-	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
+	Manager->RenderHeightMap(BrushMaterial);
 	
 	return HeightRenderTarget;
 }
@@ -134,8 +138,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRen
 
 	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
-	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, BrushMaterial);
+	Manager->RenderWeightMap(BrushMaterial);
 
 	return WeightRenderTarget;
 }
@@ -188,7 +191,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		ClipMaterial->SetScalarParameterValue("HeightSaturation", LandscapeClip->HeightSaturation);
 
 		// Render the Clip
-		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, ClipMaterial);
+		Manager->RenderHeightMap(ClipMaterial);
 
 		// Copy the NewHeightMap to the Buffer
 		CopyRTMaterial->SetTextureParameterValue("RenderTarget", HeightRenderTarget);

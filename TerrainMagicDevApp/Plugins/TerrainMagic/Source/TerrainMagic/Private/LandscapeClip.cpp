@@ -1,5 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
+﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
 #include "LandscapeClip.h"
 
@@ -30,6 +29,17 @@ void ALandscapeClip::BeginPlay()
 void ALandscapeClip::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (GetWorld() == nullptr)
+	{
+		return;
+	}
+
+	
+	if (GetWorld()->WorldType != EWorldType::Editor)
+	{
+		return;
+	}
 	
 	// We only support Z axis based rotation only
 	FVector CurrentRotation = GetActorRotation().Euler();

@@ -27,7 +27,7 @@ enum ELandscapeClipFadeMode
 	LCF_BOX = 2 UMETA(DisplayName="Box"),
 };
 
-UCLASS()
+UCLASS(Abstract)
 class TERRAINMAGIC_API ALandscapeClip : public AActor
 {
 	GENERATED_BODY()
@@ -46,6 +46,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ShouldTickIfViewportsOnly() const override;
+	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
+	virtual UMaterial* GetSourceMaterial() const;
 
 	bool bNeedsInvalidation = false;
 	bool bShowOutline = true;
@@ -56,44 +58,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	UOutlineComponent* OutlineComponent = nullptr;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	UTexture* HeightMap = nullptr;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"),  Category="01-General")
 	FVector2D HeightMapBaseSize = {1000, 1000};
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_ADD;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General", meta=(ToolTip="A multiplier that will use with the following HeightMap range output values. This value doesn't scale with the clip actor's scaling factors."))
 	int HeightMultiplier = 32000;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	FTerrainMagicRemap HeightMapRange;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	float HeightSaturation = 1.0;
 	
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
 	void Invalidate();
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
 	void ToggleOutline();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
-	TEnumAsByte<ELandscapeClipFadeMode> FadeMode = LCF_NONE;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
-	float FadeMaskSpan = 1.0;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
-	float FadeSaturation = 1.0;
 	
 	UPROPERTY()
 	UMaterialInstanceDynamic* Material = nullptr;
 
 	void ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Array);
-	TArray<FTerrainMagicMaterialParam> GetMaterialParams();
+	
 
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector2D HeightMapSizeInCM = HeightMapBaseSize * 100;

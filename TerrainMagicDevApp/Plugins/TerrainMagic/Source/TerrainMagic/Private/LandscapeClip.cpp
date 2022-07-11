@@ -18,10 +18,6 @@ ALandscapeClip::ALandscapeClip()
 	OutlineComponent->SetLineThickness(1000.0);
 	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
 
-	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Generic.M_TM_LandscapeClip_Generic";
-	UMaterial* MaterialSource = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
-	Material = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), MaterialSource);
-
 	SetRootComponent(SceneComponent);
 }
 
@@ -29,7 +25,6 @@ ALandscapeClip::ALandscapeClip()
 void ALandscapeClip::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -105,6 +100,11 @@ void ALandscapeClip::ToggleOutline()
 
 void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Params)
 {
+	if (Material == nullptr)
+	{
+		Material = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), GetSourceMaterial());
+	}
+	
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)
 	{
@@ -120,7 +120,7 @@ void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Para
 		}
 	}
 	
-	// Set Internal Params
+	// Set ChildClass Params
 	for (FTerrainMagicMaterialParam Param: GetMaterialParams())
 	{
 		if (Param.Type == TMMP_SCALAR)
@@ -138,23 +138,11 @@ void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Para
 
 TArray<FTerrainMagicMaterialParam> ALandscapeClip::GetMaterialParams()
 {
-	TArray<FTerrainMagicMaterialParam> MaterialParams;
+	return {};
+}
 
-	MaterialParams.Push({"Texture", HeightMap});
-	 MaterialParams.Push({"HeightMultiplier", static_cast<float>(HeightMultiplier)});
-	 MaterialParams.Push({"SelectedBlendMode", static_cast<float>(BlendMode)});
-
-	 MaterialParams.Push({"HeightMapInputMin", HeightMapRange.InputMin});
-	 MaterialParams.Push({"HeightMapInputMax", HeightMapRange.InputMax});
-	 MaterialParams.Push({"HeightMapOutputMin", HeightMapRange.OutputMin});
-	 MaterialParams.Push({"HeightMapOutputMax", HeightMapRange.OutputMax});
-	
-	 MaterialParams.Push({"HeightSaturation", HeightSaturation});
-	
-	 MaterialParams.Push({"SelectedFadeMode", static_cast<float>(FadeMode)});
-	 MaterialParams.Push({"FadeSaturation", FadeSaturation});
-	 MaterialParams.Push({"FadeMaskSpan", FadeMaskSpan});
-	
-	return MaterialParams;
+UMaterial* ALandscapeClip::GetSourceMaterial() const
+{
+	return nullptr;
 }
 

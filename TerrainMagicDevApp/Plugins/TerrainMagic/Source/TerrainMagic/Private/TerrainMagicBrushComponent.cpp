@@ -182,9 +182,9 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		Params.Push({"LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0)});
 		Params.Push({"RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0)});
 
-		Params.Push({"TextureRoot", LandscapeClip->HeightMapRoot});
-		Params.Push({"TextureSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0)});
-		Params.Push({"TextureRotationInDegrees", LandscapeClip->GetActorRotation().Euler()});
+		Params.Push({"ClipRoot", LandscapeClip->HeightMapRoot});
+		Params.Push({"ClipSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0)});
+		Params.Push({"ClipRotationInDegrees", LandscapeClip->GetActorRotation().Euler()});
 
 		LandscapeClip->ApplyMaterialParams(Params);
 		

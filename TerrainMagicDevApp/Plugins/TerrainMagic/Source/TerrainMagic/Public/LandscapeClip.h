@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Types/FTerrainMagicRemap.h"
 #include "Types/OutlineComponent.h"
+#include "Types/TerrainMagicMaterialParam.h"
 #include "LandscapeClip.generated.h"
 
 UENUM(BlueprintType)
@@ -90,6 +91,9 @@ public:
 	
 	UPROPERTY()
 	UMaterialInstanceDynamic* Material = nullptr;
+
+	void ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Array);
+	TArray<FTerrainMagicMaterialParam> GetMaterialParams();
 
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector2D HeightMapSizeInCM = HeightMapBaseSize * 100;

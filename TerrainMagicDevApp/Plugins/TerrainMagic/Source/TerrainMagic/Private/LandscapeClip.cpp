@@ -103,3 +103,58 @@ void ALandscapeClip::ToggleOutline()
 	bShowOutline = !bShowOutline;
 }
 
+void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Params)
+{
+	// Set Input Params
+	for (FTerrainMagicMaterialParam Param: Params)
+	{
+		if (Param.Type == TMMP_SCALAR)
+		{
+			Material->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+		} else if (Param.Type == TMMP_VECTOR)
+		{
+			Material->SetVectorParameterValue(Param.Name, Param.VectorValue);
+		} else if (Param.Type == TMMP_TEXTURE)
+		{
+			Material->SetTextureParameterValue(Param.Name, Param.TextureValue);
+		}
+	}
+	
+	// Set Internal Params
+	for (FTerrainMagicMaterialParam Param: GetMaterialParams())
+	{
+		if (Param.Type == TMMP_SCALAR)
+		{
+			Material->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+		} else if (Param.Type == TMMP_VECTOR)
+		{
+			Material->SetVectorParameterValue(Param.Name, Param.VectorValue);
+		} else if (Param.Type == TMMP_TEXTURE)
+		{
+			Material->SetTextureParameterValue(Param.Name, Param.TextureValue);
+		}
+	}
+}
+
+TArray<FTerrainMagicMaterialParam> ALandscapeClip::GetMaterialParams()
+{
+	TArray<FTerrainMagicMaterialParam> MaterialParams;
+
+	MaterialParams.Push({"Texture", HeightMap});
+	 MaterialParams.Push({"HeightMultiplier", static_cast<float>(HeightMultiplier)});
+	 MaterialParams.Push({"SelectedBlendMode", static_cast<float>(BlendMode)});
+
+	 MaterialParams.Push({"HeightMapInputMin", HeightMapRange.InputMin});
+	 MaterialParams.Push({"HeightMapInputMax", HeightMapRange.InputMax});
+	 MaterialParams.Push({"HeightMapOutputMin", HeightMapRange.OutputMin});
+	 MaterialParams.Push({"HeightMapOutputMax", HeightMapRange.OutputMax});
+	
+	 MaterialParams.Push({"HeightSaturation", HeightSaturation});
+	
+	 MaterialParams.Push({"SelectedFadeMode", static_cast<float>(FadeMode)});
+	 MaterialParams.Push({"FadeSaturation", FadeSaturation});
+	 MaterialParams.Push({"FadeMaskSpan", FadeMaskSpan});
+	
+	return MaterialParams;
+}
+

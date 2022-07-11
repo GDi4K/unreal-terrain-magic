@@ -2,6 +2,9 @@
 
 #include "LandscapeClip.h"
 
+#include "Kismet/KismetMaterialLibrary.h"
+#include "Materials/Material.h"
+
 
 // Sets default values
 ALandscapeClip::ALandscapeClip()
@@ -14,7 +17,11 @@ ALandscapeClip::ALandscapeClip()
 	OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
 	OutlineComponent->SetLineThickness(1000.0);
 	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
-	
+
+	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Generic.M_TM_LandscapeClip_Generic";
+	UMaterial* MaterialSource = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
+	Material = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), MaterialSource);
+
 	SetRootComponent(SceneComponent);
 }
 

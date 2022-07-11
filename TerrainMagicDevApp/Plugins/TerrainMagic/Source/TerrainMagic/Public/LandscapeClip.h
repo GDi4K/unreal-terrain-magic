@@ -83,11 +83,14 @@ public:
 	TEnumAsByte<ELandscapeClipFadeMode> FadeMode = LCF_NONE;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
-	float FadeSaturation = 1.0;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
 	float FadeMaskSpan = 1.0;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
+	float FadeSaturation = 1.0;
+	
+	UPROPERTY()
+	UMaterialInstanceDynamic* Material = nullptr;
+
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector2D HeightMapSizeInCM = HeightMapBaseSize * 100;
 };

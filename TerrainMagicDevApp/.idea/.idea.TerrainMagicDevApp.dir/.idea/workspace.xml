@@ -7,8 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add support for fading the heightmap at the edge.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Refactor TerrainMagic material for resuability.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicClipBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicClipBrush.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Input.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Input.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Output.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Output.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +136,7 @@
       <workItem from="1657179884575" duration="3757000" />
       <workItem from="1657262827721" duration="976000" />
       <workItem from="1657433454080" duration="3758000" />
-      <workItem from="1657497117808" duration="2528000" />
+      <workItem from="1657497117808" duration="4473000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -375,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657498439039</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Refactor TerrainMagic material for resuability.">
+      <created>1657501786105</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1657501786105</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,7 +411,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Remove RVT from the TinyLand." />
     <MESSAGE value="Remove the default map &amp; added SunSky." />
     <MESSAGE value="Include the Example Map." />
     <MESSAGE value="Update marketing content" />
@@ -421,6 +435,7 @@
     <MESSAGE value="Update weight brushes automatically when invalidating a LandscapeClip." />
     <MESSAGE value="Experiment with fading options." />
     <MESSAGE value="Add support for fading the heightmap at the edge." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add support for fading the heightmap at the edge." />
+    <MESSAGE value="Refactor TerrainMagic material for resuability." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor TerrainMagic material for resuability." />
   </component>
 </project>

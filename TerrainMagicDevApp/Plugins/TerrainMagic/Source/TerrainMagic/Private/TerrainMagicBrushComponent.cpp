@@ -167,35 +167,35 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
 	
-	for (ALandscapeClip* LandscapeClip: LandscapeClips)
+	for (const ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
-		ClipMaterial->SetTextureParameterValue("HeightRT", BufferRenderTarget);
-		ClipMaterial->SetVectorParameterValue("LandscapeLocation", LandscapeTransform.GetLocation());
-		ClipMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
-		ClipMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
-		ClipMaterial->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
+		LandscapeClip->Material->SetTextureParameterValue("HeightRT", BufferRenderTarget);
+		LandscapeClip->Material->SetVectorParameterValue("LandscapeLocation", LandscapeTransform.GetLocation());
+		LandscapeClip->Material->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
+		LandscapeClip->Material->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
+		LandscapeClip->Material->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
 
-		ClipMaterial->SetTextureParameterValue("Texture", LandscapeClip->HeightMap);
-		ClipMaterial->SetVectorParameterValue("TextureRoot", LandscapeClip->HeightMapRoot);
-		ClipMaterial->SetVectorParameterValue("TextureSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0));
-		ClipMaterial->SetVectorParameterValue("TextureRotationInDegrees", LandscapeClip->GetActorRotation().Euler());
+		LandscapeClip->Material->SetTextureParameterValue("Texture", LandscapeClip->HeightMap);
+		LandscapeClip->Material->SetVectorParameterValue("TextureRoot", LandscapeClip->HeightMapRoot);
+		LandscapeClip->Material->SetVectorParameterValue("TextureSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0));
+		LandscapeClip->Material->SetVectorParameterValue("TextureRotationInDegrees", LandscapeClip->GetActorRotation().Euler());
 		
-		ClipMaterial->SetScalarParameterValue("HeightMultiplier", LandscapeClip->HeightMultiplier);
-		ClipMaterial->SetScalarParameterValue("SelectedBlendMode", LandscapeClip->BlendMode);
+		LandscapeClip->Material->SetScalarParameterValue("HeightMultiplier", LandscapeClip->HeightMultiplier);
+		LandscapeClip->Material->SetScalarParameterValue("SelectedBlendMode", LandscapeClip->BlendMode);
 		
-		ClipMaterial->SetScalarParameterValue("HeightMapInputMin", LandscapeClip->HeightMapRange.InputMin);
-		ClipMaterial->SetScalarParameterValue("HeightMapInputMax", LandscapeClip->HeightMapRange.InputMax);
-		ClipMaterial->SetScalarParameterValue("HeightMapOutputMin", LandscapeClip->HeightMapRange.OutputMin);
-		ClipMaterial->SetScalarParameterValue("HeightMapOutputMax", LandscapeClip->HeightMapRange.OutputMax);
+		LandscapeClip->Material->SetScalarParameterValue("HeightMapInputMin", LandscapeClip->HeightMapRange.InputMin);
+		LandscapeClip->Material->SetScalarParameterValue("HeightMapInputMax", LandscapeClip->HeightMapRange.InputMax);
+		LandscapeClip->Material->SetScalarParameterValue("HeightMapOutputMin", LandscapeClip->HeightMapRange.OutputMin);
+		LandscapeClip->Material->SetScalarParameterValue("HeightMapOutputMax", LandscapeClip->HeightMapRange.OutputMax);
 
-		ClipMaterial->SetScalarParameterValue("HeightSaturation", LandscapeClip->HeightSaturation);
+		LandscapeClip->Material->SetScalarParameterValue("HeightSaturation", LandscapeClip->HeightSaturation);
 
-		ClipMaterial->SetScalarParameterValue("SelectedFadeMode", LandscapeClip->FadeMode);
-		ClipMaterial->SetScalarParameterValue("FadeSaturation", LandscapeClip->FadeSaturation);
-		ClipMaterial->SetScalarParameterValue("FadeMaskSpan", LandscapeClip->FadeMaskSpan);
+		LandscapeClip->Material->SetScalarParameterValue("SelectedFadeMode", LandscapeClip->FadeMode);
+		LandscapeClip->Material->SetScalarParameterValue("FadeSaturation", LandscapeClip->FadeSaturation);
+		LandscapeClip->Material->SetScalarParameterValue("FadeMaskSpan", LandscapeClip->FadeMaskSpan);
 
 		// Render the Clip
-		Manager->RenderHeightMap(ClipMaterial);
+		Manager->RenderHeightMap(LandscapeClip->Material);
 
 		// Copy the NewHeightMap to the Buffer
 		CopyRTMaterial->SetTextureParameterValue("RenderTarget", HeightRenderTarget);

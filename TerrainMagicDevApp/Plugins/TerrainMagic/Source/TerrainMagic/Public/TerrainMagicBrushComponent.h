@@ -33,9 +33,6 @@ public:
 	UMaterialInstanceDynamic* BrushMaterial;
 
 	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
-	UMaterialInstanceDynamic* ClipMaterial;
-
-	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
 	UMaterialInstanceDynamic* CopyRTMaterial;
 	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")

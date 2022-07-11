@@ -190,6 +190,10 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 
 		ClipMaterial->SetScalarParameterValue("HeightSaturation", LandscapeClip->HeightSaturation);
 
+		ClipMaterial->SetScalarParameterValue("SelectedFadeMode", LandscapeClip->FadeMode);
+		ClipMaterial->SetScalarParameterValue("FadeSaturation", LandscapeClip->FadeSaturation);
+		ClipMaterial->SetScalarParameterValue("FadeMaskSpan", LandscapeClip->FadeMaskSpan);
+
 		// Render the Clip
 		Manager->RenderHeightMap(ClipMaterial);
 

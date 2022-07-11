@@ -7,10 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Experiment with fading options.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +128,8 @@
       <workItem from="1657174050073" duration="3096000" />
       <workItem from="1657179884575" duration="3757000" />
       <workItem from="1657262827721" duration="976000" />
-      <workItem from="1657433454080" duration="3138000" />
+      <workItem from="1657433454080" duration="3758000" />
+      <workItem from="1657497117808" duration="1285000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -359,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657263200691</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Experiment with fading options.">
+      <created>1657439098022</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1657439098022</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +390,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor the map." />
     <MESSAGE value="Added TinyLand &amp; the default map." />
     <MESSAGE value="Remove RVT from the TinyLand." />
     <MESSAGE value="Remove the default map &amp; added SunSky." />
@@ -405,6 +414,7 @@
     <MESSAGE value="Support rendering multiple Clips" />
     <MESSAGE value="Refactor logic on getting all actors.&#10;Now we use a method exposed by the Manager." />
     <MESSAGE value="Update weight brushes automatically when invalidating a LandscapeClip." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update weight brushes automatically when invalidating a LandscapeClip." />
+    <MESSAGE value="Experiment with fading options." />
+    <option name="LAST_COMMIT_MESSAGE" value="Experiment with fading options." />
   </component>
 </project>

@@ -18,6 +18,14 @@ enum ELandscapeClipBlendMode
 	LCB_Max = 3 UMETA(DisplayName="Max"),
 };
 
+UENUM(BlueprintType)
+enum ELandscapeClipFadeMode
+{
+	LCF_NONE = 0 UMETA(DisplayName="None"),
+	LCF_CIRCULAR = 1 UMETA(DisplayName="Circular"),
+	LCF_BOX = 2 UMETA(DisplayName="Box"),
+};
+
 UCLASS()
 class TERRAINMAGIC_API ALandscapeClip : public AActor
 {
@@ -70,6 +78,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
 	void ToggleOutline();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
+	TEnumAsByte<ELandscapeClipFadeMode> FadeMode = LCF_NONE;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
+	float FadeSaturation = 1.0;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Modifiers")
+	float FadeMaskSpan = 1.0;
 	
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector2D HeightMapSizeInCM = HeightMapBaseSize * 100;

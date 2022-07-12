@@ -16,6 +16,10 @@ class TERRAINMAGIC_API UTerrainMagicBrushComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+	// Here we use this buffer render target to save a copy of a render target
+	UPROPERTY()
+	UTextureRenderTarget2D* BufferRenderTarget = nullptr;
+
 public:
 	// Sets default values for this component's properties
 	UTerrainMagicBrushComponent();
@@ -28,6 +32,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
 	UMaterialInstanceDynamic* BrushMaterial;
 
+	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
+	UMaterialInstanceDynamic* CopyRTMaterial;
+	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="TerrainMagic")
 	FTransform LandscapeTransform;
 
@@ -69,6 +76,12 @@ public:
 	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputWeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	UTextureRenderTarget2D* RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap);
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	bool HasInvalidatedLandscapeClips();
+	
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	ATerrainMagicManager* EnsureManager();
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
@@ -79,4 +92,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void ResetHeightMapCache();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	int GetHeightMapVersion();
 };

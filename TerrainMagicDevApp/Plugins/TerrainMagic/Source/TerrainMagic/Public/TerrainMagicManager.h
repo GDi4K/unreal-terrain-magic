@@ -3,14 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LandscapeClip.h"
 #include "GameFramework/Actor.h"
 #include "Engine/TextureRenderTarget2D.h"
+#include "Materials/MaterialInterface.h"
 #include "TerrainMagicManager.generated.h"
 
 UCLASS()
 class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 {
 	GENERATED_BODY()
+
+	int HeightMapVersion = 0;
 
 public:
 	// Sets default values for this actor's properties
@@ -24,6 +28,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
 	UTextureRenderTarget2D* HeightRenderTarget = nullptr;
 
@@ -35,10 +41,21 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	UTextureRenderTarget2D* GetHeightMap();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
+	void ShowClipOutlines() const;
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
+	void HideClipOutlines() const;
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	void ResetHeightMapCache();
+
+	void RenderHeightMap(UMaterialInterface* Material);
+	void RenderWeightMap(UMaterialInterface* Material) const;
 	
 	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);
 	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);
+
+	int GetHeightMapVersion() const;
 };

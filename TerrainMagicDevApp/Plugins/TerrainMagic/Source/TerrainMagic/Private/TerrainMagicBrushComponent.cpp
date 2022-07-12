@@ -2,9 +2,13 @@
 
 #include "TerrainMagicBrushComponent.h"
 
+#include "LandscapeClip.h"
+#include "Engine/Canvas.h"
+#include "Materials/Material.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMaterialLibrary.h"
 
 
 // Sets default values for this component's properties
@@ -13,8 +17,10 @@ UTerrainMagicBrushComponent::UTerrainMagicBrushComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
+	
+	const FName CopyRTMaterialPath = "/TerrainMagic/Core/Materials/M_Copy_RT.M_Copy_RT";
+	UMaterial* MaterialSource = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *CopyRTMaterialPath.ToString()));
+	CopyRTMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), MaterialSource);
 }
 
 
@@ -33,8 +39,6 @@ void UTerrainMagicBrushComponent::TickComponent(float DeltaTime, ELevelTick Tick
                                                 FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
 }
 
 void UTerrainMagicBrushComponent::Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
@@ -87,6 +91,11 @@ void UTerrainMagicBrushComponent::ResetHeightMapCache()
 	EnsureManager()->ResetHeightMapCache();
 }
 
+int UTerrainMagicBrushComponent::GetHeightMapVersion()
+{
+	return EnsureManager()->GetHeightMapVersion();
+}
+
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)
@@ -119,9 +128,8 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 
 	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
-	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, BrushMaterial);
-
+	Manager->RenderHeightMap(BrushMaterial);
+	
 	return HeightRenderTarget;
 }
 
@@ -134,9 +142,77 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRen
 
 	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
-	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, BrushMaterial);
+	Manager->RenderWeightMap(BrushMaterial);
 
 	return WeightRenderTarget;
 }
 
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap)
+{
+	ATerrainMagicManager* Manager = EnsureManager();
+	
+	UTextureRenderTarget2D* HeightRenderTarget = Manager->EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
+	
+	TArray<ALandscapeClip*> LandscapeClips = Manager->GetAllLandscapeClips();
+
+	if (LandscapeClips.Num() == 0)
+	{
+		return InputHeightMap;
+	}
+
+	if (BufferRenderTarget == nullptr)
+	{
+		BufferRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
+	}
+
+	// Copy the Input HeightMap at the beginning
+	CopyRTMaterial->SetTextureParameterValue("RenderTarget", InputHeightMap);
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
+	
+	for (ALandscapeClip* LandscapeClip: LandscapeClips)
+	{
+		// Apply Params
+		TArray<FTerrainMagicMaterialParam> Params = {};
+		
+		Params.Push({"HeightRT", BufferRenderTarget});
+		Params.Push({"LandscapeLocation", LandscapeTransform.GetLocation()});
+		Params.Push({"LandscapeScale", LandscapeTransform.GetScale3D()});
+		Params.Push({"LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0)});
+		Params.Push({"RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0)});
+
+		Params.Push({"ClipRoot", LandscapeClip->HeightMapRoot});
+		Params.Push({"ClipSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0)});
+		Params.Push({"ClipRotationInDegrees", LandscapeClip->GetActorRotation().Euler()});
+
+		LandscapeClip->ApplyMaterialParams(Params);
+		
+		// Render the Clip
+		Manager->RenderHeightMap(LandscapeClip->Material);
+
+		// Copy the NewHeightMap to the Buffer
+		CopyRTMaterial->SetTextureParameterValue("RenderTarget", HeightRenderTarget);
+		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
+		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
+	}
+	
+	return HeightRenderTarget;
+}
+
+bool UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
+{
+	bool bNeedsInvalidation = false;
+	const ATerrainMagicManager* Manager = EnsureManager();
+
+	for (ALandscapeClip* LandscapeClip: Manager->GetAllLandscapeClips())
+	{
+		if (LandscapeClip->bNeedsInvalidation)
+		{
+			bNeedsInvalidation = true;
+		}
+		LandscapeClip->bNeedsInvalidation = false;
+	}
+
+	return bNeedsInvalidation;
+}

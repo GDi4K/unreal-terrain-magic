@@ -27,7 +27,7 @@ xcopy ToPackage\TerrainMagic ToPackage\TerrainMagic_UE5 /E/H
 cscript //NoLogo sed.vbs s/(4.27.0)/5.0.0/ < ToPackage\TerrainMagic\TerrainMagic.uplugin > ToPackage\TerrainMagic_UE5\TerrainMagic.uplugin
 
 @REM Identifying the version
-FOR /F "tokens=*" %%g IN ('git tag') do (SET VERSION=%%g)
+FOR /F "tokens=*" %%g IN ('git describe --tags') do (SET VERSION=%%g)
 
 @REM Making zip files
 cd ToPackage

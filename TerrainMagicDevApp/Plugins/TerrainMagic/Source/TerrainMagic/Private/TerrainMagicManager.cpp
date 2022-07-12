@@ -2,6 +2,7 @@
 
 #include "TerrainMagicManager.h"
 
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetRenderingLibrary.h"
 
 
@@ -25,6 +26,22 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+TArray<ALandscapeClip*> ATerrainMagicManager::GetAllLandscapeClips() const
+{
+	TArray<AActor*> Actors;
+	TArray<ALandscapeClip*> LandscapeClips;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), Actors);
+
+	for (AActor* ClipActor: Actors)
+	{
+		ALandscapeClip* LandscapeClip = Cast<ALandscapeClip>(ClipActor);
+		check(LandscapeClip)
+		LandscapeClips.Add(LandscapeClip);
+	}
+
+	return LandscapeClips;
+}
+
 UTextureRenderTarget2D* ATerrainMagicManager::GetHeightMap()
 {
 	if (CachedHeightMap != nullptr)
@@ -33,6 +50,22 @@ UTextureRenderTarget2D* ATerrainMagicManager::GetHeightMap()
 	}
 	
 	return HeightRenderTarget;
+}
+
+void ATerrainMagicManager::ShowClipOutlines() const
+{
+	for(ALandscapeClip* Clip: GetAllLandscapeClips())
+	{
+		Clip->bShowOutline = true;
+	}
+}
+
+void ATerrainMagicManager::HideClipOutlines() const
+{
+	for(ALandscapeClip* Clip: GetAllLandscapeClips())
+	{
+		Clip->bShowOutline = false;
+	}
 }
 
 void ATerrainMagicManager::CacheHeightMap(UTextureRenderTarget2D* HeightMap)
@@ -44,6 +77,19 @@ void ATerrainMagicManager::ResetHeightMapCache()
 {
 	HeightRenderTarget = nullptr;
 	CachedHeightMap = nullptr;
+}
+
+void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
+{
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, Material);
+	HeightMapVersion += 1;
+}
+
+void ATerrainMagicManager::RenderWeightMap(UMaterialInterface* Material) const
+{
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, Material);
 }
 
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)
@@ -65,5 +111,10 @@ UTextureRenderTarget2D* ATerrainMagicManager::EnsureWeightRenderTarget(const int
 	}
 
 	return WeightRenderTarget;
+}
+
+int ATerrainMagicManager::GetHeightMapVersion() const
+{
+	return HeightMapVersion;
 }
 

@@ -4,6 +4,7 @@
 
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/Material.h"
+#include "Materials/MaterialInstanceDynamic.h"
 
 
 // Sets default values

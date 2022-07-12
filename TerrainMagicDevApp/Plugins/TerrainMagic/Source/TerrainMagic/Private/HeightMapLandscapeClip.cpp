@@ -38,3 +38,13 @@ TArray<FTerrainMagicMaterialParam> AHeightMapLandscapeClip::GetMaterialParams()
 	return MaterialParams;
 }
 
+int AHeightMapLandscapeClip::GetHeightMultiplier() const
+{
+	return HeightMultiplier;
+}
+
+FVector2D AHeightMapLandscapeClip::GetClipBaseSize() const
+{
+	return HeightMapBaseSize;
+}
+

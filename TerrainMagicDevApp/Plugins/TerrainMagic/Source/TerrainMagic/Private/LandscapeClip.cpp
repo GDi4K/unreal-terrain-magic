@@ -67,16 +67,16 @@ void ALandscapeClip::Tick(float DeltaTime)
 
 	// Set HeightMapSize
 	HeightMapRoot = GetActorLocation();
-	HeightMapSizeInCM = HeightMapBaseSize * FVector2D(GetActorScale3D()) * 100;
+	HeightMapSizeInCM = GetClipBaseSize() * FVector2D(GetActorScale3D()) * 100;
 
 	// Render Outline
 	OutlineComponent->SetVisibility(bShowOutline);
 	if (bShowOutline)
 	{
 		OutlineComponent->SetBoxExtent({
-			HeightMapBaseSize.X/2 * 100,
-			HeightMapBaseSize.Y/2 * 100,
-			static_cast<float>(HeightMultiplier/2.0)
+			GetClipBaseSize().X/2 * 100,
+			GetClipBaseSize().Y/2 * 100,
+			static_cast<float>(GetHeightMultiplier()/2.0)
 		});
 	}
 }
@@ -88,12 +88,12 @@ bool ALandscapeClip::ShouldTickIfViewportsOnly() const
 	return false;
 }
 
-void ALandscapeClip::Invalidate()
+void ALandscapeClip::_Invalidate()
 {
 	bNeedsInvalidation = true;
 }
 
-void ALandscapeClip::ToggleOutline()
+void ALandscapeClip::_ToggleOutline()
 {
 	bShowOutline = !bShowOutline;
 }
@@ -144,5 +144,15 @@ TArray<FTerrainMagicMaterialParam> ALandscapeClip::GetMaterialParams()
 UMaterial* ALandscapeClip::GetSourceMaterial() const
 {
 	return nullptr;
+}
+
+int ALandscapeClip::GetHeightMultiplier() const
+{
+	return 0;
+}
+
+FVector2D ALandscapeClip::GetClipBaseSize() const
+{
+	return {};
 }
 

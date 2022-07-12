@@ -48,6 +48,10 @@ public:
 	virtual bool ShouldTickIfViewportsOnly() const override;
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
 	virtual UMaterial* GetSourceMaterial() const;
+	virtual int GetHeightMultiplier() const;
+	virtual FVector2D GetClipBaseSize() const;
+	void _Invalidate();
+	void _ToggleOutline();
 
 	bool bNeedsInvalidation = false;
 	bool bShowOutline = true;
@@ -58,17 +62,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	UOutlineComponent* OutlineComponent = nullptr;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"),  Category="01-General")
-	FVector2D HeightMapBaseSize = {1000, 1000};
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General", meta=(ToolTip="A multiplier that will use with the following HeightMap range output values. This value doesn't scale with the clip actor's scaling factors."))
-	int HeightMultiplier = 32000;
-	
-	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
-	void Invalidate();
-
-	UFUNCTION(BlueprintCallable, CallInEditor, Category="01-General")
-	void ToggleOutline();
 	
 	UPROPERTY()
 	UMaterialInstanceDynamic* Material = nullptr;
@@ -77,5 +70,5 @@ public:
 	
 
 	FVector HeightMapRoot = {0, 0, 0};
-	FVector2D HeightMapSizeInCM = HeightMapBaseSize * 100;
+	FVector2D HeightMapSizeInCM = {};
 };

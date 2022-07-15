@@ -57,11 +57,13 @@ public:
 	virtual UMaterial* GetSourceMaterial() const;
 	virtual int GetHeightMultiplier() const;
 	virtual FVector2D GetClipBaseSize() const;
+	virtual void SetClipBaseSize(FVector2D BaseSize);
 	virtual bool IsEnabled() const;
 	virtual void SetEnabled(bool bEnabled);
 	void _Invalidate();
 	void _ToggleOutline();
 	void _ToggleSolo();
+	void _MatchLandscapeSize();
 
 	bool bNeedsInvalidation = false;
 	bool bShowOutline = true;
@@ -73,7 +75,15 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	UOutlineComponent* OutlineComponent = nullptr;
-	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
+	FVector LandscapeLocation = {};
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
+	FVector LandscapeScale = {};
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
+	FVector LandscapeSize= {};
 	
 	UPROPERTY()
 	UMaterialInstanceDynamic* Material = nullptr;

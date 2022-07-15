@@ -48,6 +48,11 @@ FVector2D AHeightMapLandscapeClip::GetClipBaseSize() const
 	return HeightMapBaseSize;
 }
 
+void AHeightMapLandscapeClip::SetClipBaseSize(FVector2D BaseSize)
+{
+	HeightMapBaseSize = BaseSize;
+}
+
 bool AHeightMapLandscapeClip::IsEnabled() const
 {
 	return bEnabled;

@@ -24,6 +24,7 @@ public:
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams() override;
 	virtual int GetHeightMultiplier() const override;
 	virtual FVector2D GetClipBaseSize() const override;
+	virtual void SetClipBaseSize(FVector2D BaseSize) override;
 	virtual bool IsEnabled() const override;
 	virtual void SetEnabled(bool bEnabledInput) override;
 
@@ -35,6 +36,9 @@ public:
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void ToggleSolo() { _ToggleSolo(); }
+
+	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
+	void MatchLandscapeSize() { _MatchLandscapeSize(); }
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;

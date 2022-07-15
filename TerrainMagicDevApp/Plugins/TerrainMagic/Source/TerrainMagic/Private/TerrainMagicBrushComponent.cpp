@@ -220,6 +220,11 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	
 	for (ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
+		// Set landscape information where actor can use to position it relative to the landscape
+		LandscapeClip->LandscapeLocation = LandscapeTransform.GetLocation();
+		LandscapeClip->LandscapeScale = LandscapeTransform.GetScale3D();
+		LandscapeClip->LandscapeSize = FVector(LandscapeSize.X, LandscapeSize.Y, 0);
+		
 		if (!LandscapeClip->IsEnabled())
 		{
 			continue;

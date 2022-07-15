@@ -113,6 +113,16 @@ void ALandscapeClip::_ToggleSolo()
 	_Invalidate();
 }
 
+void ALandscapeClip::_MatchLandscapeSize()
+{
+	const FVector CenterLocation = LandscapeLocation + ((LandscapeSize / 2) * LandscapeScale);
+	SetActorLocation(CenterLocation);
+	SetActorScale3D({1, 1, 1});
+	SetActorRotation(FRotator::MakeFromEuler(FVector(0, 0 , 0)));
+	SetClipBaseSize(FVector2D(LandscapeSize.X, LandscapeSize.Y));
+	_Invalidate();
+}
+
 void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Params)
 {
 	if (Material == nullptr)
@@ -169,6 +179,10 @@ int ALandscapeClip::GetHeightMultiplier() const
 FVector2D ALandscapeClip::GetClipBaseSize() const
 {
 	return {};
+}
+
+void ALandscapeClip::SetClipBaseSize(FVector2D BaseSize)
+{
 }
 
 bool ALandscapeClip::IsEnabled() const

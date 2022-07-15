@@ -8,7 +8,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" afterDir="false" />
@@ -135,7 +134,8 @@
       <workItem from="1657497117808" duration="4473000" />
       <workItem from="1657512647454" duration="6113000" />
       <workItem from="1657597918657" duration="1656000" />
-      <workItem from="1657871721110" duration="2911000" />
+      <workItem from="1657871721110" duration="2986000" />
+      <workItem from="1657877074870" duration="1273000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -417,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657599563064</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Add Enable/Disable &amp; Solo support for LandscapeClips.">
+      <created>1657874703724</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1657874703724</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,7 +445,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Update licensing info" />
     <MESSAGE value="Add Area Noise Mask" />
     <MESSAGE value="Introduce Edge Noise Mask" />
     <MESSAGE value="Finished testing with the noise masks." />
@@ -463,6 +469,7 @@
     <MESSAGE value="Refactor for Reusability" />
     <MESSAGE value="Refactor LandscapeClip Materials." />
     <MESSAGE value="Refactor properties in the Editor for ease of use." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor properties in the Editor for ease of use." />
+    <MESSAGE value="Add Enable/Disable &amp; Solo support for LandscapeClips." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Enable/Disable &amp; Solo support for LandscapeClips." />
   </component>
 </project>

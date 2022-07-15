@@ -99,6 +99,20 @@ void ALandscapeClip::_ToggleOutline()
 	bShowOutline = !bShowOutline;
 }
 
+void ALandscapeClip::_ToggleSolo()
+{
+	SoloTime = FDateTime::Now();
+	if (SoloAction == LCSA_SOLO)
+	{
+		SoloAction = LCSA_UNSOLO;
+	} else
+	{
+		SoloAction = LCSA_SOLO;
+	}
+	
+	_Invalidate();
+}
+
 void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Params)
 {
 	if (Material == nullptr)
@@ -155,5 +169,15 @@ int ALandscapeClip::GetHeightMultiplier() const
 FVector2D ALandscapeClip::GetClipBaseSize() const
 {
 	return {};
+}
+
+bool ALandscapeClip::IsEnabled() const
+{
+	return true;
+}
+
+void ALandscapeClip::SetEnabled(bool bEnabled)
+{
+	
 }
 

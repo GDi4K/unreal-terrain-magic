@@ -24,12 +24,20 @@ public:
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams() override;
 	virtual int GetHeightMultiplier() const override;
 	virtual FVector2D GetClipBaseSize() const override;
+	virtual bool IsEnabled() const override;
+	virtual void SetEnabled(bool bEnabledInput) override;
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void Invalidate() { _Invalidate(); }
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void ToggleOutline() { _ToggleOutline(); }
+
+	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
+	void ToggleSolo() { _ToggleSolo(); }
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	bool bEnabled = true;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	UTexture* HeightMap = nullptr;

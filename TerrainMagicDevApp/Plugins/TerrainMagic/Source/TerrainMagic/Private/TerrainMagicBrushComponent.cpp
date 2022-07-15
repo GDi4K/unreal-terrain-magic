@@ -147,6 +147,51 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRen
 	return WeightRenderTarget;
 }
 
+ALandscapeClip* FindSoloClip(TArray<ALandscapeClip*> LandscapeClips)
+{
+	ALandscapeClip* SoloClip = nullptr;
+	for (ALandscapeClip* Clip: LandscapeClips)
+	{
+		if (Clip->SoloAction != LCSA_NONE)
+		{
+			if (SoloClip == nullptr)
+			{
+				SoloClip = Clip;
+				continue;
+			}
+
+			if (Clip->SoloTime > SoloClip->SoloTime)
+			{
+				SoloClip = Clip;
+			}
+		}
+	}
+
+	if (SoloClip != nullptr)
+	{
+		const TEnumAsByte<ELandscapeClipSoloAction> CurrentSoloAction = SoloClip->SoloAction;
+		for (ALandscapeClip* Clip: LandscapeClips)
+		{
+			if (CurrentSoloAction == LCSA_UNSOLO)
+			{
+				Clip->SetEnabled(true);
+				Clip->SoloAction = LCSA_NONE;
+				Clip->SoloTime = 0;
+			} else if (CurrentSoloAction == LCSA_SOLO)
+			{
+				Clip->SetEnabled(SoloClip==Clip);
+				if (SoloClip != Clip)
+				{
+					Clip->SoloAction = LCSA_NONE;
+					Clip->SoloTime = 0;
+				}
+			}
+		}
+	}
+
+	return SoloClip;
+}
+
 UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap)
 {
 	ATerrainMagicManager* Manager = EnsureManager();
@@ -161,6 +206,8 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		return InputHeightMap;
 	}
 
+	const ALandscapeClip* SoloClip = FindSoloClip(LandscapeClips);
+
 	if (BufferRenderTarget == nullptr)
 	{
 		BufferRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
@@ -173,6 +220,11 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	
 	for (ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
+		if (!LandscapeClip->IsEnabled())
+		{
+			continue;
+		}
+		
 		// Apply Params
 		TArray<FTerrainMagicMaterialParam> Params = {};
 		

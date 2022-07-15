@@ -27,6 +27,13 @@ enum ELandscapeClipFadeMode
 	LCF_BOX = 2 UMETA(DisplayName="Box"),
 };
 
+enum ELandscapeClipSoloAction
+{
+	LCSA_NONE = 0,
+	LCSA_SOLO = 1,
+	LCSA_UNSOLO = 2,
+};
+
 UCLASS(Abstract)
 class TERRAINMAGIC_API ALandscapeClip : public AActor
 {
@@ -50,11 +57,16 @@ public:
 	virtual UMaterial* GetSourceMaterial() const;
 	virtual int GetHeightMultiplier() const;
 	virtual FVector2D GetClipBaseSize() const;
+	virtual bool IsEnabled() const;
+	virtual void SetEnabled(bool bEnabled);
 	void _Invalidate();
 	void _ToggleOutline();
+	void _ToggleSolo();
 
 	bool bNeedsInvalidation = false;
 	bool bShowOutline = true;
+	TEnumAsByte<ELandscapeClipSoloAction> SoloAction = LCSA_NONE;
+	FDateTime SoloTime = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	USceneComponent* SceneComponent = nullptr;

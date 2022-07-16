@@ -15,10 +15,23 @@ ALandscapeClip::ALandscapeClip()
 	PrimaryActorTick.bCanEverTick = true;
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
 
+	// Add Outline Component
 	OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
 	OutlineComponent->SetLineThickness(1000.0);
 	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
 
+	// Add Mesh Component
+	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
+	MeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
+
+	const FName PlaneMeshLocation = "/Engine/BasicShapes/Plane.Plane";
+	UStaticMesh* PlaneMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PlaneMeshLocation.ToString()));
+	MeshComponent->SetStaticMesh(PlaneMesh);
+
+	const FName PreviewMaterialLocation = "/TerrainMagic/Core/Materials/M_LandscapeClip_Preview.M_LandscapeClip_Preview";
+	UMaterial* PreviewMaterial = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *PreviewMaterialLocation.ToString()));
+	MeshComponent->SetMaterial(0, PreviewMaterial);
+	
 	SetRootComponent(SceneComponent);
 }
 
@@ -80,6 +93,16 @@ void ALandscapeClip::Tick(float DeltaTime)
 			static_cast<float>(GetHeightMultiplier()/2.0)
 		});
 	}
+
+	// Set the MeshComponent Scale
+	// The plane mesh we set has size of 100cm x 100cm
+	// That's why we divide here by 100
+	const FVector2D ClipBaseSizeInCM = GetClipBaseSize() * 100;
+	MeshComponent->SetRelativeScale3D(FVector(
+		(ClipBaseSizeInCM/100).X,
+		(ClipBaseSizeInCM/100).Y,
+		1
+	));
 }
 
 bool ALandscapeClip::ShouldTickIfViewportsOnly() const

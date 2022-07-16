@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "Types/FTerrainMagicRemap.h"
 #include "Types/OutlineComponent.h"
@@ -75,6 +76,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	UOutlineComponent* OutlineComponent = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
+	UStaticMeshComponent* MeshComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
 	FVector LandscapeLocation = {};

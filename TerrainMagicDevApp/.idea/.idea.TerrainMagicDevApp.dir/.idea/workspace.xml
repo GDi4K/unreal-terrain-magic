@@ -7,13 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add a way to add the preview HeightMap.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightMapLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightMapLandscapeClip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +132,8 @@
       <workItem from="1657877074870" duration="1569000" />
       <workItem from="1657991237321" duration="3872000" />
       <workItem from="1658034788771" duration="1490000" />
-      <workItem from="1658044742105" duration="531000" />
+      <workItem from="1658044742105" duration="1103000" />
+      <workItem from="1658052552156" duration="328000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -447,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658036217464</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Add a way to add the preview HeightMap.">
+      <created>1658045814245</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1658045814245</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,7 +471,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Spawn the TerrainMagicManager if needed." />
     <MESSAGE value="Use a shared RenderTarget across all the brushes.&#10;But uses separate render target for Height &amp; Weight." />
     <MESSAGE value="Optimize WeightBrush to not to affect HeightMap always.&#10;&#10;With this, we can use HeightData from the brush itself, if there is no HeightBrush available in the scene." />
     <MESSAGE value="Add basic clip writing" />
@@ -493,6 +495,7 @@
     <MESSAGE value="Add MatchLandscapeSize button." />
     <MESSAGE value="Start working on the material." />
     <MESSAGE value="Add preview toggling support." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add preview toggling support." />
+    <MESSAGE value="Add a way to add the preview HeightMap." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a way to add the preview HeightMap." />
   </component>
 </project>

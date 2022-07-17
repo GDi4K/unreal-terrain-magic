@@ -5,7 +5,7 @@
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
-
+#include "Engine/StaticMesh.h"
 
 // Sets default values
 ALandscapeClip::ALandscapeClip()

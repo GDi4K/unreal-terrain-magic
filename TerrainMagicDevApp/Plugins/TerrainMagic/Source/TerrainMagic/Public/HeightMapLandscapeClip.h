@@ -27,6 +27,7 @@ public:
 	virtual void SetClipBaseSize(FVector2D BaseSize) override;
 	virtual bool IsEnabled() const override;
 	virtual void SetEnabled(bool bEnabledInput) override;
+	virtual UTexture* GetHeightMap() const override;
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void Invalidate() { _Invalidate(); }
@@ -36,6 +37,9 @@ public:
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void ToggleSolo() { _ToggleSolo(); }
+
+	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
+	void TogglePreview() { _TogglePreview(); }
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void MatchLandscapeSize() { _MatchLandscapeSize(); }

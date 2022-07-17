@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "Types/FTerrainMagicRemap.h"
 #include "Types/OutlineComponent.h"
@@ -53,7 +54,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ShouldTickIfViewportsOnly() const override;
+	
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
+	virtual UTexture* GetHeightMap() const;
 	virtual UMaterial* GetSourceMaterial() const;
 	virtual int GetHeightMultiplier() const;
 	virtual FVector2D GetClipBaseSize() const;
@@ -63,10 +66,12 @@ public:
 	void _Invalidate();
 	void _ToggleOutline();
 	void _ToggleSolo();
+	void _TogglePreview();
 	void _MatchLandscapeSize();
 
 	bool bNeedsInvalidation = false;
 	bool bShowOutline = true;
+	bool bShowPreview = false;
 	TEnumAsByte<ELandscapeClipSoloAction> SoloAction = LCSA_NONE;
 	FDateTime SoloTime = 0;
 
@@ -75,6 +80,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	UOutlineComponent* OutlineComponent = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
+	UStaticMeshComponent* MeshComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
 	FVector LandscapeLocation = {};
@@ -87,6 +95,9 @@ public:
 	
 	UPROPERTY()
 	UMaterialInstanceDynamic* Material = nullptr;
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
 
 	void ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Array);
 	

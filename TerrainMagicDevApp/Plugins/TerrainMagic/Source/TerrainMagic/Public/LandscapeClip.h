@@ -64,10 +64,12 @@ public:
 	void _Invalidate();
 	void _ToggleOutline();
 	void _ToggleSolo();
+	void _TogglePreview();
 	void _MatchLandscapeSize();
 
 	bool bNeedsInvalidation = false;
 	bool bShowOutline = true;
+	bool bShowPreview = false;
 	TEnumAsByte<ELandscapeClipSoloAction> SoloAction = LCSA_NONE;
 	FDateTime SoloTime = 0;
 

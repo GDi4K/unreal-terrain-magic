@@ -17,7 +17,7 @@ ALandscapeClip::ALandscapeClip()
 
 	// Add Outline Component
 	OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
-	OutlineComponent->SetLineThickness(1000.0);
+	OutlineComponent->SetLineThickness(2000.0);
 	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	// Add Mesh Component
@@ -75,6 +75,7 @@ void ALandscapeClip::Tick(float DeltaTime)
 		NewScale3D.X = CurrentScale3D.Y;
 		NewScale3D.Y = CurrentScale3D.Y;
 	}
+	NewScale3D.Z = 1.6;
 
 	PrevScale3D = CurrentScale3D;
 	SetActorScale3D(NewScale3D);
@@ -94,15 +95,26 @@ void ALandscapeClip::Tick(float DeltaTime)
 		});
 	}
 
-	// Set the MeshComponent Scale
-	// The plane mesh we set has size of 100cm x 100cm
-	// That's why we divide here by 100
-	const FVector2D ClipBaseSizeInCM = GetClipBaseSize() * 100;
-	MeshComponent->SetRelativeScale3D(FVector(
-		(ClipBaseSizeInCM/100).X,
-		(ClipBaseSizeInCM/100).Y,
-		1
-	));
+	// Render Preview
+	MeshComponent->SetVisibility(bShowPreview);
+	
+	if (bShowPreview)
+	{
+		// Set the MeshComponent Scale
+		// The plane mesh we set has size of 100cm x 100cm
+		// That's why we divide here by 100
+		const FVector2D ClipBaseSizeInCM = GetClipBaseSize() * 100;
+		MeshComponent->SetRelativeScale3D(FVector(
+			(ClipBaseSizeInCM/100).X,
+			(ClipBaseSizeInCM/100).Y,
+			1
+		));
+		MeshComponent->SetRelativeLocation({
+			0,
+			0,
+			static_cast<float>(GetHeightMultiplier()/2.0)
+		});
+	}
 }
 
 bool ALandscapeClip::ShouldTickIfViewportsOnly() const
@@ -134,6 +146,11 @@ void ALandscapeClip::_ToggleSolo()
 	}
 	
 	_Invalidate();
+}
+
+void ALandscapeClip::_TogglePreview()
+{
+	bShowPreview = !bShowPreview;
 }
 
 void ALandscapeClip::_MatchLandscapeSize()

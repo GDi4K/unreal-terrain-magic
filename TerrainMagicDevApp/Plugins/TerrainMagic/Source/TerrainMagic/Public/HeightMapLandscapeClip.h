@@ -38,6 +38,9 @@ public:
 	void ToggleSolo() { _ToggleSolo(); }
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
+	void TogglePreview() { _TogglePreview(); }
+
+	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void MatchLandscapeSize() { _MatchLandscapeSize(); }
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")

@@ -54,7 +54,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ShouldTickIfViewportsOnly() const override;
+	
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
+	virtual UTexture* GetHeightMap() const;
 	virtual UMaterial* GetSourceMaterial() const;
 	virtual int GetHeightMultiplier() const;
 	virtual FVector2D GetClipBaseSize() const;
@@ -93,6 +95,9 @@ public:
 	
 	UPROPERTY()
 	UMaterialInstanceDynamic* Material = nullptr;
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
 
 	void ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Array);
 	

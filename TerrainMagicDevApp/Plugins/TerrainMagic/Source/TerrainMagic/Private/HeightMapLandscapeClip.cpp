@@ -63,3 +63,8 @@ void AHeightMapLandscapeClip::SetEnabled(bool bEnabledInput)
 	bEnabled = bEnabledInput;
 }
 
+UTexture* AHeightMapLandscapeClip::GetHeightMap() const
+{
+	return HeightMap;
+}
+

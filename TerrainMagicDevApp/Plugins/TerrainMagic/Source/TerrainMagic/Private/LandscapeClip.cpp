@@ -29,7 +29,8 @@ ALandscapeClip::ALandscapeClip()
 	MeshComponent->SetStaticMesh(PlaneMesh);
 
 	const FName PreviewMaterialLocation = "/TerrainMagic/Core/Materials/M_LandscapeClip_Preview.M_LandscapeClip_Preview";
-	UMaterial* PreviewMaterial = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *PreviewMaterialLocation.ToString()));
+	UMaterial* PreviewMaterialSource = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *PreviewMaterialLocation.ToString()));
+	PreviewMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), PreviewMaterialSource);
 	MeshComponent->SetMaterial(0, PreviewMaterial);
 	
 	SetRootComponent(SceneComponent);
@@ -114,6 +115,8 @@ void ALandscapeClip::Tick(float DeltaTime)
 			0,
 			static_cast<float>(GetHeightMultiplier()/2.0)
 		});
+
+		PreviewMaterial->SetTextureParameterValue("HeightMap", GetHeightMap());
 	}
 }
 
@@ -204,6 +207,11 @@ void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Para
 TArray<FTerrainMagicMaterialParam> ALandscapeClip::GetMaterialParams()
 {
 	return {};
+}
+
+UTexture* ALandscapeClip::GetHeightMap() const
+{
+	return nullptr;
 }
 
 UMaterial* ALandscapeClip::GetSourceMaterial() const

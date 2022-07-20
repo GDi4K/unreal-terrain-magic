@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Assign a button to the Details panel.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" afterDir="false" />
@@ -26,6 +26,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -142,7 +143,7 @@
       <workItem from="1658052552156" duration="328000" />
       <workItem from="1658307653993" duration="543000" />
       <workItem from="1658308330143" duration="2600000" />
-      <workItem from="1658313759196" duration="752000" />
+      <workItem from="1658313759196" duration="3612000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -466,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658310662867</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Assign a button to the Details panel.">
+      <created>1658314838104</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1658314838104</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +495,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Optimize WeightBrush to not to affect HeightMap always.&#10;&#10;With this, we can use HeightData from the brush itself, if there is no HeightBrush available in the scene." />
     <MESSAGE value="Add basic clip writing" />
     <MESSAGE value="Add support for changing clip root position." />
     <MESSAGE value="Add center based clip translation." />
@@ -512,6 +519,7 @@
     <MESSAGE value="Add preview toggling support." />
     <MESSAGE value="Add a way to add the preview HeightMap." />
     <MESSAGE value="Add the basic setup for customizing LandscapeClip details panel." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add the basic setup for customizing LandscapeClip details panel." />
+    <MESSAGE value="Assign a button to the Details panel." />
+    <option name="LAST_COMMIT_MESSAGE" value="Assign a button to the Details panel." />
   </component>
 </project>

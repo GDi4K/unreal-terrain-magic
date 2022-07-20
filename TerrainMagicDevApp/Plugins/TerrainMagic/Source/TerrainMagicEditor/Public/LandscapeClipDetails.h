@@ -15,6 +15,10 @@ public:
 
 	// Events
 	FReply OnClickInvalidate();
+	FReply OnClickMatchLandscapeSize();
+	FReply OnClickToggleOutline();
+	FReply OnClickToggleSolo();
+	FReply OnClickTogglePreview();
 
 	// Helpers
 	TArray<ALandscapeClip*> GetSelectedLandscapeClips();

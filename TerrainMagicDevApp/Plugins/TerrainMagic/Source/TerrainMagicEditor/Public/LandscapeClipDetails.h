@@ -1,13 +1,22 @@
 ﻿#pragma once
 
+#include "LandscapeClip.h"
 #include "Editor/PropertyEditor/Public/IDetailCustomization.h"
+#include "Input/Reply.h"
 
 class FLandscapeClipDetails : public IDetailCustomization
 {
 public:
-	/** Makes a new instance of this detail layout class for a specific detail view requesting it */
-	static TSharedRef<IDetailCustomization> MakeInstance();
+	TArray<TWeakObjectPtr<UObject>> CustomizingActors;
 
-	/** IDetailCustomization interface */
+	// Core
+	static TSharedRef<IDetailCustomization> MakeInstance();
 	virtual void CustomizeDetails( IDetailLayoutBuilder& DetailBuilder ) override;
+
+	// Events
+	FReply OnClickInvalidate();
+
+	// Helpers
+	TArray<ALandscapeClip*> GetSelectedLandscapeClips();
+	
 };

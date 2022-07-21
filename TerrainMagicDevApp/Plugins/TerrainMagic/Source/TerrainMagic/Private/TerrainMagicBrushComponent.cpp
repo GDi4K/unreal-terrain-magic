@@ -253,6 +253,10 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
 		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
 	}
+
+	// This will prevent us from a memory leak where holding a render target causes some issues.
+	// It happens when reloading the map inside the Editor
+	CopyRTMaterial->ClearParameterValues();
 	
 	return HeightRenderTarget;
 }

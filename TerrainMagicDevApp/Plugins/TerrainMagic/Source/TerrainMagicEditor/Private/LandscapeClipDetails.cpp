@@ -3,8 +3,9 @@
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
+#include "IDetailGroup.h"
 #include "LandscapeClip.h"
-#include "Widgets/Layout/SWrapBox.h"
+#include "Widgets/Layout/SGridPanel.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -16,49 +17,42 @@ TSharedRef<IDetailCustomization> FLandscapeClipDetails::MakeInstance()
 void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 {
 	// Create a category so this is displayed early in the properties
-	IDetailCategoryBuilder& MyCategory = DetailBuilder.EditCategory("01-General", LOCTEXT("CatName", "01-General"), ECategoryPriority::Important);
+	IDetailCategoryBuilder& MyCategory = DetailBuilder.EditCategory("00-TerrainMagic", LOCTEXT("CatName", "TerrainMagic"), ECategoryPriority::Important);
 	DetailBuilder.GetObjectsBeingCustomized(CustomizingActors);
-	
-	MyCategory.AddCustomRow(LOCTEXT("RowName", "Hello Row"))
-		.NameContent()
+
+	MyCategory.AddGroup("Actions", LOCTEXT("Actions", "Actions"), false, true)
+		.AddWidgetRow()
 		[
-			SNew(STextBlock)
-			.Text(LOCTEXT("KeyName", "Actions"))
-			.Font(IDetailLayoutBuilder::GetDetailFont())
-		]
-		.ValueContent()
-		[
-			SNew(SWrapBox)
-			.Orientation(EOrientation::Orient_Vertical)
-			+SWrapBox::Slot().Padding(5, 2)
-			[
-				SNew(SButton)
-				.Text(LOCTEXT("InvalidateButton", "Invalidate"))
-				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
-			]
-			+SWrapBox::Slot().Padding(5, 2)
-			[
-				SNew(SButton)
-				.Text(LOCTEXT("MatchLandscapeSizeButton", "Match Landscape Size"))
-				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickMatchLandscapeSize)
-			]
-			+SWrapBox::Slot().Padding(5, 2)
+			SNew(SGridPanel)
+			+SGridPanel::Slot(0, 0).Padding(5, 2)
 			[
 				SNew(SButton)
 				.Text(LOCTEXT("ToggleOutlineButton", "Toggle Outline"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleOutline)
 			]
-			+SWrapBox::Slot().Padding(5, 2)
+			+SGridPanel::Slot(1, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("MatchLandscapeSizeButton", "Match Landscape Size"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickMatchLandscapeSize)
+			]
+			+SGridPanel::Slot(0, 1).Padding(5, 2)
 			[
 				SNew(SButton)
 				.Text(LOCTEXT("TogglePreviewButton", "Toggle Preview"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickTogglePreview)
 			]
-			+SWrapBox::Slot().Padding(5, 2)
+			+SGridPanel::Slot(1, 1).Padding(5, 2)
 			[
 				SNew(SButton)
 				.Text(LOCTEXT("ToggleSoloButton", "ToggleSolo"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleSolo)
+			]
+			+SGridPanel::Slot(0, 2).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("InvalidateButton", "Invalidate"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
 			]
 		];
 }

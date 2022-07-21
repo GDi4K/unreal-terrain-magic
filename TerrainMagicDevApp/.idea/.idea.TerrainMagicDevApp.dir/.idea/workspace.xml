@@ -7,8 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add a way to add the preview HeightMap.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,11 @@
         <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -134,6 +141,10 @@
       <workItem from="1658034788771" duration="1490000" />
       <workItem from="1658044742105" duration="1103000" />
       <workItem from="1658052552156" duration="328000" />
+      <workItem from="1658307653993" duration="543000" />
+      <workItem from="1658308330143" duration="2600000" />
+      <workItem from="1658313759196" duration="3612000" />
+      <workItem from="1658396708578" duration="2328000" />
     </task>
     <task id="LOCAL-00001" summary="Add the HeightMap brush">
       <created>1653920259274</created>
@@ -450,7 +461,21 @@
       <option name="project" value="LOCAL" />
       <updated>1658045814245</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Add the basic setup for customizing LandscapeClip details panel.">
+      <created>1658310662866</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1658310662867</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Assign a button to the Details panel.">
+      <created>1658314838104</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1658314838104</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -471,8 +496,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Use a shared RenderTarget across all the brushes.&#10;But uses separate render target for Height &amp; Weight." />
-    <MESSAGE value="Optimize WeightBrush to not to affect HeightMap always.&#10;&#10;With this, we can use HeightData from the brush itself, if there is no HeightBrush available in the scene." />
     <MESSAGE value="Add basic clip writing" />
     <MESSAGE value="Add support for changing clip root position." />
     <MESSAGE value="Add center based clip translation." />
@@ -496,6 +519,8 @@
     <MESSAGE value="Start working on the material." />
     <MESSAGE value="Add preview toggling support." />
     <MESSAGE value="Add a way to add the preview HeightMap." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a way to add the preview HeightMap." />
+    <MESSAGE value="Add the basic setup for customizing LandscapeClip details panel." />
+    <MESSAGE value="Assign a button to the Details panel." />
+    <option name="LAST_COMMIT_MESSAGE" value="Assign a button to the Details panel." />
   </component>
 </project>

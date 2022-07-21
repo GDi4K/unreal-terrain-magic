@@ -24,6 +24,15 @@
 				"Win64",
 				"Win32"
 			]
+		},
+		{
+			"Name": "TerrainMagicEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32"
+			]
 		}
 	]
 }

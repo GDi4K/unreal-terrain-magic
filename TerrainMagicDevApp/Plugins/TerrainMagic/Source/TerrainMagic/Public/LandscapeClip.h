@@ -73,8 +73,7 @@ public:
 
 	UPROPERTY()
 	bool bShowOutline = true;
-
-	UPROPERTY()
+	
 	bool bShowPreview = false;
 
 	TEnumAsByte<ELandscapeClipSoloAction> SoloAction = LCSA_NONE;

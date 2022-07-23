@@ -34,6 +34,12 @@ ALandscapeClip::ALandscapeClip()
 	MeshComponent->SetMaterial(0, PreviewMaterial);
 	
 	SetRootComponent(SceneComponent);
+
+#if WITH_EDITORONLY_DATA
+	#if ENGINE_MAJOR_VERSION == 5
+		bIsSpatiallyLoaded = false;
+	#endif
+#endif
 }
 
 // Called when the game starts or when spawned

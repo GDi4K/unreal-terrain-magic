@@ -11,6 +11,11 @@ ATerrainMagicManager::ATerrainMagicManager()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+#if WITH_EDITORONLY_DATA
+	#if ENGINE_MAJOR_VERSION == 5
+		bIsSpatiallyLoaded = false;
+	#endif
+#endif
 }
 
 // Called when the game starts or when spawned

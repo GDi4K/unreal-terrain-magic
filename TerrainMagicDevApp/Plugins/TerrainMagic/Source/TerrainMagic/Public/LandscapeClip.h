@@ -70,8 +70,13 @@ public:
 	void _MatchLandscapeSize();
 
 	bool bNeedsInvalidation = false;
+
+	UPROPERTY()
 	bool bShowOutline = true;
+
+	UPROPERTY()
 	bool bShowPreview = false;
+
 	TEnumAsByte<ELandscapeClipSoloAction> SoloAction = LCSA_NONE;
 	FDateTime SoloTime = 0;
 

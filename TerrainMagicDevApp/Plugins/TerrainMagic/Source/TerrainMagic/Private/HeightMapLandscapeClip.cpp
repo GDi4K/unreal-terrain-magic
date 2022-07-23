@@ -7,7 +7,6 @@
 // Sets default values
 AHeightMapLandscapeClip::AHeightMapLandscapeClip()
 {
-	
 }
 
 UMaterial* AHeightMapLandscapeClip::GetSourceMaterial() const

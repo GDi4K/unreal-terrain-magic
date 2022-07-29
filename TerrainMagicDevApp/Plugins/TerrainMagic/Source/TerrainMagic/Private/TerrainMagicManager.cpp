@@ -37,8 +37,6 @@ void ATerrainMagicManager::Initialize(const FTransform InputLandscapeTransform, 
 	LandscapeTransform = InputLandscapeTransform;
 	LandscapeSize = InputLandscapeSize;
 	RenderTargetSize = InputRenderTargetSize;
-
-	UE_LOG(LogTemp, Warning, TEXT("Render Target Initialized!"))
 }
 
 TArray<ALandscapeClip*> ATerrainMagicManager::GetAllLandscapeClips() const
@@ -101,10 +99,11 @@ void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
 	HeightMapVersion += 1;
 }
 
-void ATerrainMagicManager::RenderWeightMap(UMaterialInterface* Material) const
+void ATerrainMagicManager::RenderWeightMap(FName LayerName, UMaterialInterface* Material)
 {
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, Material);
+	PaintLayerStore.ProcessPaintLayer(LayerName, WeightRenderTarget);
 }
 
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)

@@ -61,7 +61,7 @@ public:
 	void ResetHeightMapCache();
 
 	void RenderHeightMap(UMaterialInterface* Material);
-	void RenderWeightMap(UMaterialInterface* Material) const;
+	void RenderWeightMap(FName LayerName, UMaterialInterface* Material);
 	
 	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);
 	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);

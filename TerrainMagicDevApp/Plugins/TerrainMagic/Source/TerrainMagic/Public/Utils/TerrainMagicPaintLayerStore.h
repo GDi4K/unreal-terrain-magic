@@ -6,5 +6,5 @@ class FTerrainMagicPaintLayerStore
 {
 	
 public:
-	
+	void ProcessPaintLayer(FName LayerName, UTextureRenderTarget2D* RenderTarget);
 };

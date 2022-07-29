@@ -73,7 +73,7 @@ public:
 	UTextureRenderTarget2D* RenderHeightMap(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	UTextureRenderTarget2D* RenderWeightMap(UTextureRenderTarget2D* InputWeightMap);
+	UTextureRenderTarget2D* RenderWeightMap(FName LayerName, UTextureRenderTarget2D* InputWeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	UTextureRenderTarget2D* RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap);

@@ -135,7 +135,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 	return HeightRenderTarget;
 }
 
-UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputWeightMap)
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(FName LayerName, UTextureRenderTarget2D* InputWeightMap)
 {
 	ATerrainMagicManager* Manager = EnsureManager();
 	// TODO: Remove this after sometime after introducing accessing paint layer info from Blueprints
@@ -149,12 +149,12 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRen
 
 	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
-	Manager->RenderWeightMap(BrushMaterial);
+	Manager->RenderWeightMap(LayerName, BrushMaterial);
 
 	return WeightRenderTarget;
 }
 
-ALandscapeClip* FindSoloClip(TArray<ALandscapeClip*> LandscapeClips)
+ALandscapeClip* HandleSoloClipLogic(TArray<ALandscapeClip*> LandscapeClips)
 {
 	ALandscapeClip* SoloClip = nullptr;
 	for (ALandscapeClip* Clip: LandscapeClips)
@@ -213,7 +213,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		return InputHeightMap;
 	}
 
-	const ALandscapeClip* SoloClip = FindSoloClip(LandscapeClips);
+	HandleSoloClipLogic(LandscapeClips);
 
 	if (BufferRenderTarget == nullptr)
 	{

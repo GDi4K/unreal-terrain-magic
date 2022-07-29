@@ -6,9 +6,16 @@
 #include "LandscapeClip.h"
 #include "GameFramework/Actor.h"
 #include "Engine/TextureRenderTarget2D.h"
-#include "Materials/MaterialInterface.h"
-#include "Utils/TerrainMagicPaintLayerStore.h"
 #include "TerrainMagicManager.generated.h"
+
+USTRUCT()
+struct FTerrainMagicPaintLayer
+{
+	GENERATED_BODY()
+
+	FName LayerName;
+	TArray<FColor> LayerData;
+};
 
 UCLASS()
 class TERRAINMAGIC_API ATerrainMagicManager : public AActor
@@ -16,7 +23,8 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	GENERATED_BODY()
 
 	int HeightMapVersion = 0;
-	FTerrainMagicPaintLayerStore PaintLayerStore;
+	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);
+	FTerrainMagicPaintLayer* FindOrGetPaintLayer(FName LayerName);
 
 public:
 	// Sets default values for this actor's properties
@@ -27,10 +35,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	FTransform LandscapeTransform;
-	FIntPoint LandscapeSize;
-	FIntPoint RenderTargetSize;
-	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -38,6 +42,18 @@ public:
 											 const FIntPoint InputRenderTargetSize);
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
+
+	UPROPERTY()
+	FTransform LandscapeTransform;
+
+	UPROPERTY()
+	FIntPoint LandscapeSize;
+
+	UPROPERTY()
+	FIntPoint RenderTargetSize;
+
+	UPROPERTY()
+	TArray<FTerrainMagicPaintLayer> PaintLayers;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
 	UTextureRenderTarget2D* HeightRenderTarget = nullptr;

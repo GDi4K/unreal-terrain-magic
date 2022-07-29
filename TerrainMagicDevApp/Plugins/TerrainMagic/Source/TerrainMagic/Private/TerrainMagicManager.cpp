@@ -6,6 +6,62 @@
 #include "Kismet/KismetRenderingLibrary.h"
 
 
+void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
+{
+	FTerrainMagicPaintLayer* PaintLayer = FindOrGetPaintLayer(LayerName);
+	FRenderTarget* RenderTargetResource = RenderTarget->GameThread_GetRenderTargetResource();
+	const FIntRect SampleRect = {0, 0, RenderTargetSize.X, RenderTargetSize.Y};
+	
+	const FReadSurfaceDataFlags ReadSurfaceDataFlags;
+	
+	// Read the render target surface data back.	
+	struct FReadSurfaceContext
+	{
+		FRenderTarget* SrcRenderTarget;
+		FTerrainMagicPaintLayer* PaintLayer;
+		FIntRect Rect;
+		FReadSurfaceDataFlags Flags;
+		TFunction<void()> Callback;
+	};
+	
+	FReadSurfaceContext Context =
+	{
+		RenderTargetResource,
+		PaintLayer,
+		SampleRect,
+		ReadSurfaceDataFlags,
+	};
+	
+	ENQUEUE_RENDER_COMMAND(ReadSurfaceCommand)(
+		[Context, this](FRHICommandListImmediate& RHICmdList)
+		{
+			Context.PaintLayer->LayerData.Reset();
+			RHICmdList.ReadSurfaceData(
+				Context.SrcRenderTarget->GetRenderTargetTexture(),
+				Context.Rect,
+				Context.PaintLayer->LayerData,
+				Context.Flags
+			);
+		});
+
+	FlushRenderingCommands();
+}
+
+FTerrainMagicPaintLayer* ATerrainMagicManager::FindOrGetPaintLayer(FName LayerName)
+{
+	for (int Index=0; Index<PaintLayers.Num(); Index++)
+	{
+		FTerrainMagicPaintLayer* PaintLayer = &PaintLayers[0];
+		if (PaintLayer->LayerName == LayerName)
+		{
+			return PaintLayer;
+		}
+	}
+
+	PaintLayers.Push({});
+	return &PaintLayers[PaintLayers.Num() - 1];
+}
+
 // Sets default values
 ATerrainMagicManager::ATerrainMagicManager()
 {
@@ -103,7 +159,7 @@ void ATerrainMagicManager::RenderWeightMap(FName LayerName, UMaterialInterface* 
 {
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, Material);
-	PaintLayerStore.ProcessPaintLayer(LayerName, WeightRenderTarget);
+	ProcessPaintLayerData(LayerName, WeightRenderTarget);
 }
 
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)

@@ -47,6 +47,8 @@ void UTerrainMagicBrushComponent::Initialize(const FTransform InputLandscapeTran
 	LandscapeTransform = InputLandscapeTransform;
 	LandscapeSize = InputLandscapeSize;
 	RenderTargetSize = InputRenderTargetSize;
+
+	EnsureManager()->Initialize(LandscapeTransform, LandscapeSize, RenderTargetSize);
 }
 
 void UTerrainMagicBrushComponent::SetScalarRenderParam(const FName Parameter, const float Value)
@@ -136,6 +138,11 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputWeightMap)
 {
 	ATerrainMagicManager* Manager = EnsureManager();
+	// TODO: Remove this after sometime after introducing accessing paint layer info from Blueprints
+	// This is already doing in the Initialize method o fthis component
+	// But we add this make sure existing projects created without the method of the Manager
+	// In that case, we need to update it like this
+	Manager->Initialize(LandscapeTransform, LandscapeSize, RenderTargetSize);
 	
 	InitializeRenderParams(Manager->GetHeightMap());
 	SetTextureRenderParam("WeightRT", InputWeightMap);

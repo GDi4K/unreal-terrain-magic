@@ -31,6 +31,16 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ATerrainMagicManager::Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
+	const FIntPoint InputRenderTargetSize)
+{
+	LandscapeTransform = InputLandscapeTransform;
+	LandscapeSize = InputLandscapeSize;
+	RenderTargetSize = InputRenderTargetSize;
+
+	UE_LOG(LogTemp, Warning, TEXT("Render Target Initialized!"))
+}
+
 TArray<ALandscapeClip*> ATerrainMagicManager::GetAllLandscapeClips() const
 {
 	TArray<AActor*> Actors;

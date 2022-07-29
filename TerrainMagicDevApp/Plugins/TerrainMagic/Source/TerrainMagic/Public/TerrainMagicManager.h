@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Materials/MaterialInterface.h"
+#include "Utils/TerrainMagicPaintLayerStore.h"
 #include "TerrainMagicManager.generated.h"
 
 UCLASS()
@@ -15,6 +16,7 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	GENERATED_BODY()
 
 	int HeightMapVersion = 0;
+	FTerrainMagicPaintLayerStore PaintLayerStore;
 
 public:
 	// Sets default values for this actor's properties
@@ -25,8 +27,15 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	FTransform LandscapeTransform;
+	FIntPoint LandscapeSize;
+	FIntPoint RenderTargetSize;
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
+											 const FIntPoint InputRenderTargetSize);
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
 

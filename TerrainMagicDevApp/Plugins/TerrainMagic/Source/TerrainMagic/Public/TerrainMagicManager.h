@@ -13,7 +13,10 @@ struct FTerrainMagicPaintLayer
 {
 	GENERATED_BODY()
 
+	UPROPERTY()
 	FName LayerName;
+
+	UPROPERTY()
 	TArray<FColor> LayerData;
 };
 
@@ -25,6 +28,7 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	int HeightMapVersion = 0;
 	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);
 	FTerrainMagicPaintLayer* FindOrGetPaintLayer(FName LayerName);
+	FTerrainMagicPaintLayer* FindPaintLayer(FVector Location);
 
 public:
 	// Sets default values for this actor's properties
@@ -72,6 +76,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
 	void HideClipOutlines() const;
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	static FName FindLandscapePaintLayer(FVector Location);
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	void ResetHeightMapCache();

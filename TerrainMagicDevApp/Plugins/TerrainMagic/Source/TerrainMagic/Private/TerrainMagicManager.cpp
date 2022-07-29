@@ -51,15 +51,30 @@ FTerrainMagicPaintLayer* ATerrainMagicManager::FindOrGetPaintLayer(FName LayerNa
 {
 	for (int Index=0; Index<PaintLayers.Num(); Index++)
 	{
-		FTerrainMagicPaintLayer* PaintLayer = &PaintLayers[0];
+		FTerrainMagicPaintLayer* PaintLayer = &PaintLayers[Index];
 		if (PaintLayer->LayerName == LayerName)
 		{
 			return PaintLayer;
 		}
 	}
 
-	PaintLayers.Push({});
-	return &PaintLayers[PaintLayers.Num() - 1];
+	PaintLayers.Push({LayerName, {}});
+	FTerrainMagicPaintLayer* PaintLayer = &PaintLayers[PaintLayers.Num() - 1];
+	UE_LOG(LogTemp, Warning, TEXT("Adding Paint Layer: %s"), *PaintLayer->LayerName.ToString())
+
+	return PaintLayer;
+}
+
+FTerrainMagicPaintLayer* ATerrainMagicManager::FindPaintLayer(FVector Location)
+{
+	FTerrainMagicPaintLayer* PaintLayer = nullptr;
+	for (int Index=0; Index<PaintLayers.Num(); Index++)
+	{
+		PaintLayer = &PaintLayers[Index];
+		UE_LOG(LogTemp, Warning, TEXT("Paint Layer Found: %s"), *PaintLayer->LayerName.ToString())
+	}
+	
+	return PaintLayer;
 }
 
 // Sets default values
@@ -135,6 +150,28 @@ void ATerrainMagicManager::HideClipOutlines() const
 	{
 		Clip->bShowOutline = false;
 	}
+}
+
+FName ATerrainMagicManager::FindLandscapePaintLayer(FVector Location)
+{
+	AActor* CurrentActor = UGameplayStatics::GetActorOfClass(GEngine->GetCurrentPlayWorld(), StaticClass());
+	if (CurrentActor == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Actor Found"))
+		return FName("No Actor Found");
+	}
+
+	ATerrainMagicManager* Manager = Cast<ATerrainMagicManager>(CurrentActor);
+	
+	const FTerrainMagicPaintLayer* PaintLayer = Manager->FindPaintLayer(Location);
+	if (PaintLayer == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Paint Layer"))
+		return  FName("No Paint Layer");
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Found Something"))
+	return  PaintLayer->LayerName;
 }
 
 void ATerrainMagicManager::CacheHeightMap(UTextureRenderTarget2D* HeightMap)

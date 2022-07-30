@@ -8,7 +8,13 @@
 
 void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
 {
-	FTerrainMagicPaintLayer* PaintLayer = FindOrGetPaintLayer(LayerName);
+	int PaintLayerIndex = PaintLayerNames.Find(LayerName);
+	if (PaintLayerIndex == INDEX_NONE)
+	{
+		PaintLayerNames.Push(LayerName);
+		PaintLayerIndex = PaintLayerNames.Num() - 1;
+	}
+	
 	FRenderTarget* RenderTargetResource = RenderTarget->GameThread_GetRenderTargetResource();
 	const FIntRect SampleRect = {0, 0, RenderTargetSize.X, RenderTargetSize.Y};
 	
@@ -18,16 +24,18 @@ void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRender
 	struct FReadSurfaceContext
 	{
 		FRenderTarget* SrcRenderTarget;
-		FTerrainMagicPaintLayer* PaintLayer;
+		TArray<FColor>* Data;
 		FIntRect Rect;
 		FReadSurfaceDataFlags Flags;
 		TFunction<void()> Callback;
 	};
+
+	TArray<FColor> RenderTargetData;
 	
 	FReadSurfaceContext Context =
 	{
 		RenderTargetResource,
-		PaintLayer,
+		&RenderTargetData,
 		SampleRect,
 		ReadSurfaceDataFlags,
 	};
@@ -35,46 +43,37 @@ void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRender
 	ENQUEUE_RENDER_COMMAND(ReadSurfaceCommand)(
 		[Context, this](FRHICommandListImmediate& RHICmdList)
 		{
-			Context.PaintLayer->LayerData.Reset();
+			Context.Data->Reset();
 			RHICmdList.ReadSurfaceData(
 				Context.SrcRenderTarget->GetRenderTargetTexture(),
 				Context.Rect,
-				Context.PaintLayer->LayerData,
+				*Context.Data,
 				Context.Flags
 			);
 		});
-
+	
 	FlushRenderingCommands();
-}
 
-FTerrainMagicPaintLayer* ATerrainMagicManager::FindOrGetPaintLayer(FName LayerName)
-{
-	for (int Index=0; Index<PaintLayers.Num(); Index++)
+	// TODO: Move this to the reset code
+	PaintLayerData.SetNumZeroed(RenderTargetData.Num());
+	for (int Index =0; Index<RenderTargetData.Num(); Index++)
 	{
-		FTerrainMagicPaintLayer* PaintLayer = &PaintLayers[Index];
-		if (PaintLayer->LayerName == LayerName)
+		const FColor Pixel = RenderTargetData[Index];
+		if (Pixel.R > 20)
 		{
-			return PaintLayer;
+			PaintLayerData[Index] = PaintLayerIndex + 1;
 		}
 	}
-
-	PaintLayers.Push({LayerName, {}});
-	FTerrainMagicPaintLayer* PaintLayer = &PaintLayers[PaintLayers.Num() - 1];
-	UE_LOG(LogTemp, Warning, TEXT("Adding Paint Layer: %s"), *PaintLayer->LayerName.ToString())
-
-	return PaintLayer;
 }
 
-FTerrainMagicPaintLayer* ATerrainMagicManager::FindPaintLayer(FVector Location)
+FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Location)
 {
-	FTerrainMagicPaintLayer* PaintLayer = nullptr;
-	for (int Index=0; Index<PaintLayers.Num(); Index++)
+	if (PaintLayerNames.Num() == 0)
 	{
-		PaintLayer = &PaintLayers[Index];
-		UE_LOG(LogTemp, Warning, TEXT("Paint Layer Found: %s"), *PaintLayer->LayerName.ToString())
+		return  {false, ""};
 	}
-	
-	return PaintLayer;
+
+	return { true, PaintLayerNames[0] };
 }
 
 // Sets default values
@@ -152,26 +151,17 @@ void ATerrainMagicManager::HideClipOutlines() const
 	}
 }
 
-FName ATerrainMagicManager::FindLandscapePaintLayer(FVector Location)
+FTerrainMagicPaintLayerResult ATerrainMagicManager::FindLandscapePaintLayer(FVector Location)
 {
 	AActor* CurrentActor = UGameplayStatics::GetActorOfClass(GEngine->GetCurrentPlayWorld(), StaticClass());
 	if (CurrentActor == nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No Actor Found"))
-		return FName("No Actor Found");
+		return {false};
 	}
 
 	ATerrainMagicManager* Manager = Cast<ATerrainMagicManager>(CurrentActor);
 	
-	const FTerrainMagicPaintLayer* PaintLayer = Manager->FindPaintLayer(Location);
-	if (PaintLayer == nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No Paint Layer"))
-		return  FName("No Paint Layer");
-	}
-
-	UE_LOG(LogTemp, Warning, TEXT("Found Something"))
-	return  PaintLayer->LayerName;
+	return Manager->FindPaintLayer(Location);
 }
 
 void ATerrainMagicManager::CacheHeightMap(UTextureRenderTarget2D* HeightMap)

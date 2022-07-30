@@ -8,16 +8,16 @@
 #include "Engine/TextureRenderTarget2D.h"
 #include "TerrainMagicManager.generated.h"
 
-USTRUCT()
-struct FTerrainMagicPaintLayer
+USTRUCT(BlueprintType)
+struct FTerrainMagicPaintLayerResult
 {
 	GENERATED_BODY()
 
-	UPROPERTY()
-	FName LayerName;
+	UPROPERTY(BlueprintReadOnly, Category="TerrainMagic")
+	bool FoundPaintLayer = false;
 
-	UPROPERTY()
-	TArray<FColor> LayerData;
+	UPROPERTY(BlueprintReadOnly, Category="TerrainMagic")
+	FName PaintLayer;
 };
 
 UCLASS()
@@ -27,8 +27,7 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 
 	int HeightMapVersion = 0;
 	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);
-	FTerrainMagicPaintLayer* FindOrGetPaintLayer(FName LayerName);
-	FTerrainMagicPaintLayer* FindPaintLayer(FVector Location);
+	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 
 public:
 	// Sets default values for this actor's properties
@@ -57,7 +56,10 @@ public:
 	FIntPoint RenderTargetSize;
 
 	UPROPERTY()
-	TArray<FTerrainMagicPaintLayer> PaintLayers;
+	TArray<uint8> PaintLayerData;
+
+	UPROPERTY()
+	TArray<FName> PaintLayerNames;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
 	UTextureRenderTarget2D* HeightRenderTarget = nullptr;
@@ -78,7 +80,7 @@ public:
 	void HideClipOutlines() const;
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	static FName FindLandscapePaintLayer(FVector Location);
+	static FTerrainMagicPaintLayerResult FindLandscapePaintLayer(FVector Location);
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	void ResetHeightMapCache();

@@ -30,6 +30,7 @@
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_4.27/Engine/Source/Runtime/Engine/Private/UnrealEngine.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/include/stdint.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -152,6 +153,7 @@
       <workItem from="1659067988559" duration="1028000" />
       <workItem from="1659089173291" duration="1356000" />
       <workItem from="1659103161633" duration="6333000" />
+      <workItem from="1659155412941" duration="1864000" />
     </task>
     <task id="LOCAL-00003" summary="Add WeightBrush into the plugin">
       <created>1654074155882</created>

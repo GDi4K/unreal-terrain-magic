@@ -53,12 +53,10 @@ void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRender
 		});
 	
 	FlushRenderingCommands();
-
-	// TODO: Move this to the reset code
-	PaintLayerData.SetNumZeroed(RenderTargetData.Num());
+	
 	for (int Index =0; Index<RenderTargetData.Num(); Index++)
 	{
-		const FColor Pixel = RenderTargetData[Index];
+		const FColor Pixel = RenderTargetData[Index];		
 		if (Pixel.R > 20)
 		{
 			PaintLayerData[Index] = PaintLayerIndex + 1;
@@ -68,12 +66,23 @@ void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRender
 
 FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Location)
 {
-	if (PaintLayerNames.Num() == 0)
-	{
-		return  {false, ""};
-	}
+	const FVector RelativeLocation = Location - LandscapeTransform.GetLocation();
+	const FVector RelativeLocationAfterScaleDown = RelativeLocation / LandscapeTransform.GetScale3D();
+	const FIntPoint RelativeLocationToPixels = {
+		FMath::FloorToInt(RelativeLocationAfterScaleDown.X),
+		FMath::FloorToInt(RelativeLocationAfterScaleDown.Y),
+	};
 
-	return { true, PaintLayerNames[0] };
+	const int PixelIndex = RelativeLocationToPixels.Y * RenderTargetSize.X + RelativeLocationToPixels.X;
+	const int PaintLayerInfo = PaintLayerData[PixelIndex];
+	const int PaintLayerIndex = PaintLayerInfo - 1;
+
+	if (PaintLayerIndex == -1)
+	{
+		return {false};
+	}
+	
+	return { true, PaintLayerNames[PaintLayerIndex] };
 }
 
 // Sets default values
@@ -160,7 +169,6 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindLandscapePaintLayer(FVec
 	}
 
 	ATerrainMagicManager* Manager = Cast<ATerrainMagicManager>(CurrentActor);
-	
 	return Manager->FindPaintLayer(Location);
 }
 
@@ -182,11 +190,16 @@ void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
 	HeightMapVersion += 1;
 }
 
-void ATerrainMagicManager::RenderWeightMap(FName LayerName, UMaterialInterface* Material)
+void ATerrainMagicManager::RenderWeightMap(FName LayerName, UMaterialInterface* Material) const
 {
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, Material);
-	ProcessPaintLayerData(LayerName, WeightRenderTarget);
+}
+
+void ATerrainMagicManager::ResetPaintLayerData()
+{
+	PaintLayerNames.Reset();
+	PaintLayerData.SetNumZeroed(RenderTargetSize.X * RenderTargetSize.Y);
 }
 
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)

@@ -26,7 +26,6 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	GENERATED_BODY()
 
 	int HeightMapVersion = 0;
-	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 
 public:
@@ -46,13 +45,13 @@ public:
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	FTransform LandscapeTransform;
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	FIntPoint LandscapeSize;
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	FIntPoint RenderTargetSize;
 
 	UPROPERTY()
@@ -86,7 +85,10 @@ public:
 	void ResetHeightMapCache();
 
 	void RenderHeightMap(UMaterialInterface* Material);
-	void RenderWeightMap(FName LayerName, UMaterialInterface* Material);
+	void RenderWeightMap(FName LayerName, UMaterialInterface* Material) const;
+
+	void ResetPaintLayerData();
+	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);
 	
 	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);
 	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);

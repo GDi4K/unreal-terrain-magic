@@ -98,6 +98,16 @@ int UTerrainMagicBrushComponent::GetHeightMapVersion()
 	return EnsureManager()->GetHeightMapVersion();
 }
 
+void UTerrainMagicBrushComponent::ResetPaintLayerData()
+{
+	EnsureManager()->ResetPaintLayerData();
+}
+
+void UTerrainMagicBrushComponent::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
+{
+	EnsureManager()->ProcessPaintLayerData(LayerName, RenderTarget);
+}
+
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)

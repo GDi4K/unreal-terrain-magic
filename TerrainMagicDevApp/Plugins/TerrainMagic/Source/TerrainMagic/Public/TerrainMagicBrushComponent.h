@@ -95,4 +95,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	int GetHeightMapVersion();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	void ResetPaintLayerData();
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);
 };

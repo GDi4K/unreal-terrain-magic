@@ -91,6 +91,23 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Locat
 	return { true, PaintLayerNames[PaintLayerIndex] };
 }
 
+uint8 ATerrainMagicManager::EncodePaintLayerData(FPaintLayerData Data)
+{
+	const uint8 EncodedPaintLayer = Data.PaintLayerIndex << 4;
+	const uint8 EncodedCoverage = FMath::CeilToInt(FMath::Clamp(Data.Coverage, 0.0f, 1.0f) * 15);
+	
+	return EncodedPaintLayer | EncodedCoverage;
+}
+
+FPaintLayerData ATerrainMagicManager::DecodePaintLayerData(uint8 Encoded)
+{
+	const uint8 DecodedPaintLayer = Encoded >> 4;
+	const uint8 DecodedCoverageInt = Encoded & static_cast<uint8>(15);
+	const float DecodedCoverage = DecodedCoverageInt / 15.0;
+
+	return { DecodedPaintLayer, DecodedCoverage };
+}
+
 // Sets default values
 ATerrainMagicManager::ATerrainMagicManager()
 {
@@ -204,6 +221,12 @@ void ATerrainMagicManager::RenderWeightMap(FName LayerName, UMaterialInterface* 
 
 void ATerrainMagicManager::ResetPaintLayerData()
 {
+	const uint8 Encoded = EncodePaintLayerData({4, 0});
+	const FPaintLayerData Decoded = DecodePaintLayerData(Encoded);
+
+	UE_LOG(LogTemp, Warning, TEXT("PaintLayerIndex: %d, Coverage: %f"), Decoded.PaintLayerIndex, Decoded.Coverage);
+
+	
 	PaintLayerNames.Reset();
 	PaintLayerData.SetNumZeroed(RenderTargetSize.X * RenderTargetSize.Y);
 	LastPaintLayerResetTime = FDateTime::Now();

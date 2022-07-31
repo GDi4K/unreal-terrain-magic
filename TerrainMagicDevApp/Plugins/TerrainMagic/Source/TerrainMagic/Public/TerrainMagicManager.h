@@ -8,6 +8,12 @@
 #include "Engine/TextureRenderTarget2D.h"
 #include "TerrainMagicManager.generated.h"
 
+struct FPaintLayerData
+{
+	uint8 PaintLayerIndex;
+	float Coverage;
+};
+
 USTRUCT(BlueprintType)
 struct FTerrainMagicPaintLayerResult
 {
@@ -28,6 +34,9 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	int HeightMapVersion = 0;
 	FDateTime LastPaintLayerResetTime = 0;
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
+
+	static uint8 EncodePaintLayerData(FPaintLayerData Data);
+	static FPaintLayerData DecodePaintLayerData(uint8 Encoded);
 
 public:
 	// Sets default values for this actor's properties

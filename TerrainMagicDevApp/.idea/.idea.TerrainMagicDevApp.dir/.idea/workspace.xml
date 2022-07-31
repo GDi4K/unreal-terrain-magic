@@ -7,9 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" afterDir="false" />
     </list>
@@ -155,14 +154,7 @@
       <workItem from="1659155412941" duration="4738000" />
       <workItem from="1659163812811" duration="2674000" />
       <workItem from="1659243929799" duration="1000" />
-      <workItem from="1659253204939" duration="415000" />
-    </task>
-    <task id="LOCAL-00006" summary="Move some parameters to the C++ component.">
-      <created>1654490785378</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1654490785378</updated>
+      <workItem from="1659253204939" duration="3427000" />
     </task>
     <task id="LOCAL-00007" summary="Refactor render params code base">
       <created>1654493235735</created>
@@ -500,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659166838953</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush.">
+      <created>1659254033265</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1659254033265</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +520,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add an Outline to the LandscapeClip." />
     <MESSAGE value="Support rendering multiple Clips" />
     <MESSAGE value="Refactor logic on getting all actors.&#10;Now we use a method exposed by the Manager." />
     <MESSAGE value="Update weight brushes automatically when invalidating a LandscapeClip." />
@@ -546,6 +544,7 @@
     <MESSAGE value="Improve the initial game loading speed." />
     <MESSAGE value="Add the Info Brush" />
     <MESSAGE value="Implement accessing paint layer data from Blueprints." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement accessing paint layer data from Blueprints." />
+    <MESSAGE value="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush." />
   </component>
 </project>

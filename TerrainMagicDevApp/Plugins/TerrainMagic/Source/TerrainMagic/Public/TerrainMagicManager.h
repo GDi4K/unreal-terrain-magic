@@ -26,6 +26,7 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	GENERATED_BODY()
 
 	int HeightMapVersion = 0;
+	FDateTime LastPaintLayerResetTime = 0;
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 
 public:

@@ -8,6 +8,12 @@
 
 void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
 {
+	const FTimespan TimeDiffFromLastReset = FDateTime::Now() - LastPaintLayerResetTime;
+	if (TimeDiffFromLastReset.GetTotalSeconds() > 5.0)
+	{
+		return;
+	}
+	
 	int PaintLayerIndex = PaintLayerNames.Find(LayerName);
 	if (PaintLayerIndex == INDEX_NONE)
 	{
@@ -200,6 +206,7 @@ void ATerrainMagicManager::ResetPaintLayerData()
 {
 	PaintLayerNames.Reset();
 	PaintLayerData.SetNumZeroed(RenderTargetSize.X * RenderTargetSize.Y);
+	LastPaintLayerResetTime = FDateTime::Now();
 }
 
 UTextureRenderTarget2D* ATerrainMagicManager::EnsureHeightRenderTarget(const int Width, const int Height)

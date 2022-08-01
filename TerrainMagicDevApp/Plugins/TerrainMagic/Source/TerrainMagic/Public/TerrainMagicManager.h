@@ -34,6 +34,7 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	int HeightMapVersion = 0;
 	FDateTime LastPaintLayerResetTime = 0;
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
+	float PaintLayerActivationThreshold = 0;
 
 	static uint8 EncodePaintLayerData(FPaintLayerItem Data);
 	static FPaintLayerItem DecodePaintLayerData(uint8 Encoded);
@@ -97,7 +98,7 @@ public:
 	void RenderHeightMap(UMaterialInterface* Material);
 	void RenderWeightMap(FName LayerName, UMaterialInterface* Material) const;
 
-	void ResetPaintLayerData();
+	void ResetPaintLayerData(const float ActivationThreshold);
 	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);
 	
 	UTextureRenderTarget2D* EnsureHeightRenderTarget(const int Width, const int Height);

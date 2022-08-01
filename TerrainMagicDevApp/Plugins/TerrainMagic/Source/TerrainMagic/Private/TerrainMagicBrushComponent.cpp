@@ -98,9 +98,9 @@ int UTerrainMagicBrushComponent::GetHeightMapVersion()
 	return EnsureManager()->GetHeightMapVersion();
 }
 
-void UTerrainMagicBrushComponent::ResetPaintLayerData()
+void UTerrainMagicBrushComponent::ResetPaintLayerData(const float ActivationThreshold)
 {
-	EnsureManager()->ResetPaintLayerData();
+	EnsureManager()->ResetPaintLayerData(ActivationThreshold);
 }
 
 void UTerrainMagicBrushComponent::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)

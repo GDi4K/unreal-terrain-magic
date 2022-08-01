@@ -97,7 +97,7 @@ public:
 	int GetHeightMapVersion();
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	void ResetPaintLayerData();
+	void ResetPaintLayerData(const float ActivationThreshold);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget);

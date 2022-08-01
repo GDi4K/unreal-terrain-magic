@@ -64,7 +64,7 @@ void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRender
 	{
 		const FColor Pixel = RenderTargetData[Index];
 		const float Coverage = Pixel.R / 255.0;
-		if (Coverage >= 0.5)
+		if (Coverage >= PaintLayerActivationThreshold)
 		{
 			PaintLayerData[Index] = PaintLayerIndex + 1;
 		}
@@ -219,8 +219,9 @@ void ATerrainMagicManager::RenderWeightMap(FName LayerName, UMaterialInterface* 
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), WeightRenderTarget, Material);
 }
 
-void ATerrainMagicManager::ResetPaintLayerData()
+void ATerrainMagicManager::ResetPaintLayerData(const float ActivationThreshold)
 {
+	PaintLayerActivationThreshold = ActivationThreshold;
 	PaintLayerNames = {};
 	PaintLayerData = {};
 	PaintLayerData.SetNumZeroed(RenderTargetSize.X * RenderTargetSize.Y);

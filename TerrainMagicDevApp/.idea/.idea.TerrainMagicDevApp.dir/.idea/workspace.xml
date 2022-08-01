@@ -7,10 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Attach the PaintLayer Info properly.">
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicBrushComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicBrushComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +26,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_4.27/Engine/Source/Runtime/Engine/Private/UnrealEngine.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -157,14 +159,7 @@
       <workItem from="1659243929799" duration="1000" />
       <workItem from="1659253204939" duration="3529000" />
       <workItem from="1659347698175" duration="1950000" />
-      <workItem from="1659349822270" duration="1527000" />
-    </task>
-    <task id="LOCAL-00008" summary="Refactor Codebase a bit more.">
-      <created>1654495199321</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1654495199321</updated>
+      <workItem from="1659349822270" duration="2063000" />
     </task>
     <task id="LOCAL-00009" summary="Refactor the map.">
       <created>1654763121973</created>
@@ -502,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659256757018</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Attach the PaintLayer Info properly.">
+      <created>1659351572432</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1659351572433</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +525,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor logic on getting all actors.&#10;Now we use a method exposed by the Manager." />
     <MESSAGE value="Update weight brushes automatically when invalidating a LandscapeClip." />
     <MESSAGE value="Experiment with fading options." />
     <MESSAGE value="Add support for fading the heightmap at the edge." />
@@ -548,6 +549,7 @@
     <MESSAGE value="Implement accessing paint layer data from Blueprints." />
     <MESSAGE value="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush." />
     <MESSAGE value="Introduce a PaintLayer Data Encoder." />
-    <option name="LAST_COMMIT_MESSAGE" value="Introduce a PaintLayer Data Encoder." />
+    <MESSAGE value="Attach the PaintLayer Info properly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Attach the PaintLayer Info properly." />
   </component>
 </project>

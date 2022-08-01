@@ -7,10 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Remove unwanted files.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Do not crash when finding paint layers but no data is found.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicInfoBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicInfoBrush.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/TinyLand/M_TinyLand.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/TinyLand/M_TinyLand.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,14 +159,7 @@
       <workItem from="1659253204939" duration="3529000" />
       <workItem from="1659347698175" duration="1950000" />
       <workItem from="1659349822270" duration="2063000" />
-      <workItem from="1659372038692" duration="298000" />
-    </task>
-    <task id="LOCAL-00010" summary="Added TinyLand &amp; the default map.">
-      <created>1654765315452</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1654765315452</updated>
+      <workItem from="1659372038692" duration="1837000" />
     </task>
     <task id="LOCAL-00011" summary="Remove RVT from the TinyLand.">
       <created>1654772876920</created>
@@ -502,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659372243142</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Do not crash when finding paint layers but no data is found.">
+      <created>1659372550018</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1659372550018</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +525,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Experiment with fading options." />
     <MESSAGE value="Add support for fading the heightmap at the edge." />
     <MESSAGE value="Refactor TerrainMagic material for resuability." />
     <MESSAGE value="Load the CopyMaterial from C++." />
@@ -548,6 +549,7 @@
     <MESSAGE value="Introduce a PaintLayer Data Encoder." />
     <MESSAGE value="Attach the PaintLayer Info properly." />
     <MESSAGE value="Remove unwanted files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unwanted files." />
+    <MESSAGE value="Do not crash when finding paint layers but no data is found." />
+    <option name="LAST_COMMIT_MESSAGE" value="Do not crash when finding paint layers but no data is found." />
   </component>
 </project>

@@ -105,6 +105,8 @@ void UTerrainMagicBrushComponent::ResetPaintLayerData(const float ActivationThre
 
 void UTerrainMagicBrushComponent::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
 {
+	// We need to keep this since, this allow us to process paint layers
+	// which haven't use inside any weight brush
 	EnsureManager()->ProcessPaintLayerData(LayerName, RenderTarget);
 }
 
@@ -160,6 +162,11 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(FName Layer
 	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
 	Manager->RenderWeightMap(LayerName, BrushMaterial);
+
+	// We still need to process these here.
+	// Otherwise if the related WeightBrush used below the InfoBrush, then
+	// info brush won't see these changes.
+	Manager->ProcessPaintLayerData(LayerName, WeightRenderTarget);
 
 	return WeightRenderTarget;
 }

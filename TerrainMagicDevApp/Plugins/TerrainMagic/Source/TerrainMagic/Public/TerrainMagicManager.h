@@ -33,8 +33,9 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 
 	int HeightMapVersion = 0;
 	FDateTime LastPaintLayerResetTime = 0;
-	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 	float PaintLayerActivationThreshold = 0;
+
+	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 
 public:
 	// Sets default values for this actor's properties

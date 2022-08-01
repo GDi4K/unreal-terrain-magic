@@ -7,13 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Set ToggleOutline &amp; TogglePreview to save the state&#10;So, when you restart your map, it will remember those settings.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Now, the order of the InfoBrush won't affect the paint layer processing.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +23,10 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_4.27/Engine/Source/Runtime/Engine/Private/UnrealEngine.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/include/stdint.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -150,83 +146,16 @@
       <workItem from="1658396708578" duration="2328000" />
       <workItem from="1658419935014" duration="446000" />
       <workItem from="1658550329730" duration="3593000" />
-    </task>
-    <task id="LOCAL-00001" summary="Add the HeightMap brush">
-      <created>1653920259274</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1653920259274</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Validate the height texture before use">
-      <created>1654070860780</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1654070860780</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Add WeightBrush into the plugin">
-      <created>1654074155882</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1654074155882</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Add location mask.">
-      <created>1654144420480</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1654144420480</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Add support for custom texture based weight maps">
-      <created>1654145752292</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1654145752292</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Move some parameters to the C++ component.">
-      <created>1654490785378</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1654490785378</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Refactor render params code base">
-      <created>1654493235735</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1654493235735</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Refactor Codebase a bit more.">
-      <created>1654495199321</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1654495199321</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Refactor the map.">
-      <created>1654763121973</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1654763121973</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Added TinyLand &amp; the default map.">
-      <created>1654765315452</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1654765315452</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Remove RVT from the TinyLand.">
-      <created>1654772876920</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1654772876920</updated>
+      <workItem from="1659067988559" duration="1028000" />
+      <workItem from="1659089173291" duration="1356000" />
+      <workItem from="1659103161633" duration="6333000" />
+      <workItem from="1659155412941" duration="4738000" />
+      <workItem from="1659163812811" duration="2674000" />
+      <workItem from="1659243929799" duration="1000" />
+      <workItem from="1659253204939" duration="3529000" />
+      <workItem from="1659347698175" duration="1950000" />
+      <workItem from="1659349822270" duration="2063000" />
+      <workItem from="1659372038692" duration="2690000" />
     </task>
     <task id="LOCAL-00012" summary="Remove the default map &amp; added SunSky.">
       <created>1654774084409</created>
@@ -494,7 +423,84 @@
       <option name="project" value="LOCAL" />
       <updated>1658550914043</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Send PaintLayer Information to the Manager">
+      <created>1659090482808</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1659090482809</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Read Paint Layer Data from C++">
+      <created>1659107764877</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1659107764878</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Improve the initial game loading speed.">
+      <created>1659157377272</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1659157377272</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Add the Info Brush">
+      <created>1659158700939</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1659158700939</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Implement accessing paint layer data from Blueprints.">
+      <created>1659166838952</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1659166838953</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush.">
+      <created>1659254033265</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1659254033265</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Introduce a PaintLayer Data Encoder.">
+      <created>1659256757017</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1659256757018</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Attach the PaintLayer Info properly.">
+      <created>1659351572432</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1659351572433</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Remove unwanted files.">
+      <created>1659372243142</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1659372243142</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Do not crash when finding paint layers but no data is found.">
+      <created>1659372550018</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1659372550018</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Now, the order of the InfoBrush won't affect the paint layer processing.">
+      <created>1659373939134</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1659373939134</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,17 +521,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add center based clip translation." />
-    <MESSAGE value="Introduce TerrainMagicClipBrush&#10;&#10;This will take care of rendering LandscapeClips." />
-    <MESSAGE value="Introduce HeightMap blend mode." />
-    <MESSAGE value="Add support for remap control." />
-    <MESSAGE value="Add height scaling &amp; remapping." />
-    <MESSAGE value="Add an Outline to the LandscapeClip." />
-    <MESSAGE value="Support rendering multiple Clips" />
-    <MESSAGE value="Refactor logic on getting all actors.&#10;Now we use a method exposed by the Manager." />
-    <MESSAGE value="Update weight brushes automatically when invalidating a LandscapeClip." />
-    <MESSAGE value="Experiment with fading options." />
-    <MESSAGE value="Add support for fading the heightmap at the edge." />
     <MESSAGE value="Refactor TerrainMagic material for resuability." />
     <MESSAGE value="Load the CopyMaterial from C++." />
     <MESSAGE value="Refactor for Reusability" />
@@ -540,6 +535,17 @@
     <MESSAGE value="Assign a button to the Details panel." />
     <MESSAGE value="Fixed a memory leak related to LandscapeClips&#10;When we are rendering rendering landscape clips, we assign a RenderTarget to a Dynamic Material Instance.&#10;&#10;But we didn't clear that RenderTarget from the material instance after use. &#10;&#10;So, when saving &amp; reloading the same or another map trigger a memory leak &amp; crash it.&#10;&#10;This change will fix it properly." />
     <MESSAGE value="Set ToggleOutline &amp; TogglePreview to save the state&#10;So, when you restart your map, it will remember those settings." />
-    <option name="LAST_COMMIT_MESSAGE" value="Set ToggleOutline &amp; TogglePreview to save the state&#10;So, when you restart your map, it will remember those settings." />
+    <MESSAGE value="Send PaintLayer Information to the Manager" />
+    <MESSAGE value="Read Paint Layer Data from C++" />
+    <MESSAGE value="Improve the initial game loading speed." />
+    <MESSAGE value="Add the Info Brush" />
+    <MESSAGE value="Implement accessing paint layer data from Blueprints." />
+    <MESSAGE value="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush." />
+    <MESSAGE value="Introduce a PaintLayer Data Encoder." />
+    <MESSAGE value="Attach the PaintLayer Info properly." />
+    <MESSAGE value="Remove unwanted files." />
+    <MESSAGE value="Do not crash when finding paint layers but no data is found." />
+    <MESSAGE value="Now, the order of the InfoBrush won't affect the paint layer processing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Now, the order of the InfoBrush won't affect the paint layer processing." />
   </component>
 </project>

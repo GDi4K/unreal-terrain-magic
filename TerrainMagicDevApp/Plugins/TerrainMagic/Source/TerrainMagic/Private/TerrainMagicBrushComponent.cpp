@@ -47,6 +47,8 @@ void UTerrainMagicBrushComponent::Initialize(const FTransform InputLandscapeTran
 	LandscapeTransform = InputLandscapeTransform;
 	LandscapeSize = InputLandscapeSize;
 	RenderTargetSize = InputRenderTargetSize;
+
+	EnsureManager()->Initialize(LandscapeTransform, LandscapeSize, RenderTargetSize);
 }
 
 void UTerrainMagicBrushComponent::SetScalarRenderParam(const FName Parameter, const float Value)
@@ -96,6 +98,18 @@ int UTerrainMagicBrushComponent::GetHeightMapVersion()
 	return EnsureManager()->GetHeightMapVersion();
 }
 
+void UTerrainMagicBrushComponent::ResetPaintLayerData(const float ActivationThreshold)
+{
+	EnsureManager()->ResetPaintLayerData(ActivationThreshold);
+}
+
+void UTerrainMagicBrushComponent::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
+{
+	// We need to keep this since, this allow us to process paint layers
+	// which haven't use inside any weight brush
+	EnsureManager()->ProcessPaintLayerData(LayerName, RenderTarget);
+}
+
 void UTerrainMagicBrushComponent::SetScalarRenderParams(TMap<FName, float> Params)
 {
 	for (const auto Item : Params)
@@ -133,21 +147,31 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderHeightMap(UTextureRen
 	return HeightRenderTarget;
 }
 
-UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(UTextureRenderTarget2D* InputWeightMap)
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(FName LayerName, UTextureRenderTarget2D* InputWeightMap)
 {
 	ATerrainMagicManager* Manager = EnsureManager();
+	// TODO: Remove this after sometime after introducing accessing paint layer info from Blueprints
+	// This is already doing in the Initialize method o fthis component
+	// But we add this make sure existing projects created without the method of the Manager
+	// In that case, we need to update it like this
+	Manager->Initialize(LandscapeTransform, LandscapeSize, RenderTargetSize);
 	
 	InitializeRenderParams(Manager->GetHeightMap());
 	SetTextureRenderParam("WeightRT", InputWeightMap);
 
 	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 
-	Manager->RenderWeightMap(BrushMaterial);
+	Manager->RenderWeightMap(LayerName, BrushMaterial);
+
+	// We still need to process these here.
+	// Otherwise if the related WeightBrush used below the InfoBrush, then
+	// info brush won't see these changes.
+	Manager->ProcessPaintLayerData(LayerName, WeightRenderTarget);
 
 	return WeightRenderTarget;
 }
 
-ALandscapeClip* FindSoloClip(TArray<ALandscapeClip*> LandscapeClips)
+ALandscapeClip* HandleSoloClipLogic(TArray<ALandscapeClip*> LandscapeClips)
 {
 	ALandscapeClip* SoloClip = nullptr;
 	for (ALandscapeClip* Clip: LandscapeClips)
@@ -206,7 +230,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		return InputHeightMap;
 	}
 
-	const ALandscapeClip* SoloClip = FindSoloClip(LandscapeClips);
+	HandleSoloClipLogic(LandscapeClips);
 
 	if (BufferRenderTarget == nullptr)
 	{

@@ -7,12 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Do not crash when finding paint layers but no data is found.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Now, the order of the InfoBrush won't affect the paint layer processing.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicInfoBrush.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicInfoBrush.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/TinyLand/M_TinyLand.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/TinyLand/M_TinyLand.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,14 +155,7 @@
       <workItem from="1659253204939" duration="3529000" />
       <workItem from="1659347698175" duration="1950000" />
       <workItem from="1659349822270" duration="2063000" />
-      <workItem from="1659372038692" duration="1837000" />
-    </task>
-    <task id="LOCAL-00011" summary="Remove RVT from the TinyLand.">
-      <created>1654772876920</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1654772876920</updated>
+      <workItem from="1659372038692" duration="2690000" />
     </task>
     <task id="LOCAL-00012" summary="Remove the default map &amp; added SunSky.">
       <created>1654774084409</created>
@@ -504,7 +493,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659372550018</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Now, the order of the InfoBrush won't affect the paint layer processing.">
+      <created>1659373939134</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1659373939134</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +521,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add support for fading the heightmap at the edge." />
     <MESSAGE value="Refactor TerrainMagic material for resuability." />
     <MESSAGE value="Load the CopyMaterial from C++." />
     <MESSAGE value="Refactor for Reusability" />
@@ -550,6 +545,7 @@
     <MESSAGE value="Attach the PaintLayer Info properly." />
     <MESSAGE value="Remove unwanted files." />
     <MESSAGE value="Do not crash when finding paint layers but no data is found." />
-    <option name="LAST_COMMIT_MESSAGE" value="Do not crash when finding paint layers but no data is found." />
+    <MESSAGE value="Now, the order of the InfoBrush won't affect the paint layer processing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Now, the order of the InfoBrush won't affect the paint layer processing." />
   </component>
 </project>

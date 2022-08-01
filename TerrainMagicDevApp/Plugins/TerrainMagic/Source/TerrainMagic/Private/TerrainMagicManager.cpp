@@ -62,8 +62,9 @@ void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRender
 	
 	for (int Index =0; Index<RenderTargetData.Num(); Index++)
 	{
-		const FColor Pixel = RenderTargetData[Index];		
-		if (Pixel.R > 20)
+		const FColor Pixel = RenderTargetData[Index];
+		const float Coverage = Pixel.R / 255.0;
+		if (Coverage >= 0.5)
 		{
 			PaintLayerData[Index] = PaintLayerIndex + 1;
 		}
@@ -80,18 +81,17 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Locat
 	};
 
 	const int PixelIndex = RelativeLocationToPixels.Y * RenderTargetSize.X + RelativeLocationToPixels.X;
-	const int PaintLayerInfo = PaintLayerData[PixelIndex];
-	const int PaintLayerIndex = PaintLayerInfo - 1;
+	const int ActualPaintLayer = PaintLayerData[PixelIndex] - 1;
 
-	if (PaintLayerIndex == -1)
+	if (ActualPaintLayer == -1)
 	{
 		return {false};
 	}
 	
-	return { true, PaintLayerNames[PaintLayerIndex] };
+	return { true, PaintLayerNames[ActualPaintLayer] };
 }
 
-uint8 ATerrainMagicManager::EncodePaintLayerData(FPaintLayerData Data)
+uint8 ATerrainMagicManager::EncodePaintLayerData(FPaintLayerItem Data)
 {
 	const uint8 EncodedPaintLayer = Data.PaintLayerIndex << 4;
 	const uint8 EncodedCoverage = FMath::CeilToInt(FMath::Clamp(Data.Coverage, 0.0f, 1.0f) * 15);
@@ -99,7 +99,7 @@ uint8 ATerrainMagicManager::EncodePaintLayerData(FPaintLayerData Data)
 	return EncodedPaintLayer | EncodedCoverage;
 }
 
-FPaintLayerData ATerrainMagicManager::DecodePaintLayerData(uint8 Encoded)
+FPaintLayerItem ATerrainMagicManager::DecodePaintLayerData(uint8 Encoded)
 {
 	const uint8 DecodedPaintLayer = Encoded >> 4;
 	const uint8 DecodedCoverageInt = Encoded & static_cast<uint8>(15);
@@ -221,13 +221,8 @@ void ATerrainMagicManager::RenderWeightMap(FName LayerName, UMaterialInterface* 
 
 void ATerrainMagicManager::ResetPaintLayerData()
 {
-	const uint8 Encoded = EncodePaintLayerData({4, 0});
-	const FPaintLayerData Decoded = DecodePaintLayerData(Encoded);
-
-	UE_LOG(LogTemp, Warning, TEXT("PaintLayerIndex: %d, Coverage: %f"), Decoded.PaintLayerIndex, Decoded.Coverage);
-
-	
-	PaintLayerNames.Reset();
+	PaintLayerNames = {};
+	PaintLayerData = {};
 	PaintLayerData.SetNumZeroed(RenderTargetSize.X * RenderTargetSize.Y);
 	LastPaintLayerResetTime = FDateTime::Now();
 }

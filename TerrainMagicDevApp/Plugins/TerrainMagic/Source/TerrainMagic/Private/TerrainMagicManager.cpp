@@ -91,23 +91,6 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Locat
 	return { true, PaintLayerNames[ActualPaintLayer] };
 }
 
-uint8 ATerrainMagicManager::EncodePaintLayerData(FPaintLayerItem Data)
-{
-	const uint8 EncodedPaintLayer = Data.PaintLayerIndex << 4;
-	const uint8 EncodedCoverage = FMath::CeilToInt(FMath::Clamp(Data.Coverage, 0.0f, 1.0f) * 15);
-	
-	return EncodedPaintLayer | EncodedCoverage;
-}
-
-FPaintLayerItem ATerrainMagicManager::DecodePaintLayerData(uint8 Encoded)
-{
-	const uint8 DecodedPaintLayer = Encoded >> 4;
-	const uint8 DecodedCoverageInt = Encoded & static_cast<uint8>(15);
-	const float DecodedCoverage = DecodedCoverageInt / 15.0;
-
-	return { DecodedPaintLayer, DecodedCoverage };
-}
-
 // Sets default values
 ATerrainMagicManager::ATerrainMagicManager()
 {

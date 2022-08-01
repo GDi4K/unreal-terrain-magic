@@ -36,9 +36,6 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 	float PaintLayerActivationThreshold = 0;
 
-	static uint8 EncodePaintLayerData(FPaintLayerItem Data);
-	static FPaintLayerItem DecodePaintLayerData(uint8 Encoded);
-
 public:
 	// Sets default values for this actor's properties
 	ATerrainMagicManager();

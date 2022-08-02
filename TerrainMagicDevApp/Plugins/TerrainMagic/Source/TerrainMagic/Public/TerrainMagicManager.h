@@ -54,13 +54,13 @@ public:
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
 	FTransform LandscapeTransform;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint LandscapeSize;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint RenderTargetSize;
 
 	UPROPERTY()

@@ -4,7 +4,7 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetRenderingLibrary.h"
-
+#include "Engine.h"
 
 void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
 {

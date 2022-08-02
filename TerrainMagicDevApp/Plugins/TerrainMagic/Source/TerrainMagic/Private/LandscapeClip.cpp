@@ -165,8 +165,9 @@ void ALandscapeClip::_TogglePreview()
 void ALandscapeClip::_MatchLandscapeSize()
 {
 	const FVector CenterLocation = LandscapeLocation + ((LandscapeSize / 2) * LandscapeScale);
+	const FVector ScaleFactorFromLandscapeScale = LandscapeScale / 100.0;
 	SetActorLocation(CenterLocation);
-	SetActorScale3D({1, 1, 1});
+	SetActorScale3D(ScaleFactorFromLandscapeScale);
 	SetActorRotation(FRotator::MakeFromEuler(FVector(0, 0 , 0)));
 	SetClipBaseSize(FVector2D(LandscapeSize.X, LandscapeSize.Y));
 	_Invalidate();

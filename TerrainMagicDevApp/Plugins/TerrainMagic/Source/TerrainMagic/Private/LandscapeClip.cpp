@@ -18,11 +18,11 @@ ALandscapeClip::ALandscapeClip()
 	// Add Outline Component
 	OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
 	OutlineComponent->SetLineThickness(2000.0);
-	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
+	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	// Add Mesh Component
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
-	MeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepWorldTransform);
+	MeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	const FName PlaneMeshLocation = "/Engine/BasicShapes/Plane.Plane";
 	UStaticMesh* PlaneMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PlaneMeshLocation.ToString()));

@@ -18,6 +18,7 @@ enum ELandscapeClipBlendMode
 	LCB_AVERAGE = 1 UMETA(DisplayName="Average"),
 	LCB_MIN = 2 UMETA(DisplayName="Min"),
 	LCB_Max = 3 UMETA(DisplayName="Max"),
+	LCB_COPY = 4 UMETA(DisplayName="Copy"),
 };
 
 UENUM(BlueprintType)

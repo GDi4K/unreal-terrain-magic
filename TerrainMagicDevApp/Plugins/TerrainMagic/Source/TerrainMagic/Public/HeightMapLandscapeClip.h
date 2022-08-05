@@ -36,7 +36,7 @@ public:
 	UTexture* HeightMap = nullptr;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_ADD;
+	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	FTerrainMagicRemap HeightMapRange;

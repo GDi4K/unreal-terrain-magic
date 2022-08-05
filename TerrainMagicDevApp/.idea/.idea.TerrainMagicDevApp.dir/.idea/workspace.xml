@@ -7,11 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Change the default FAttachmentTransformRules to KeepRelativeTransform&#10;&#10;Otherwise this will throw some errors when packaging.">
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/NoiseLandscapeClip.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/NoiseLandscapeClip.h" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Introduce the basic class structure for NoiseLandscapeClips.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,19 +39,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="TerrainMagicDevApp" type="Uproject" factoryName="rider.uproject">
       <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TerrainMagicDevApp.uproject" />
@@ -162,14 +162,7 @@
       <workItem from="1659435904812" duration="311000" />
       <workItem from="1659448042248" duration="2315000" />
       <workItem from="1659709065087" duration="3252000" />
-      <workItem from="1659740455519" duration="890000" />
-    </task>
-    <task id="LOCAL-00012" summary="Remove the default map &amp; added SunSky.">
-      <created>1654774084409</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1654774084409</updated>
+      <workItem from="1659740455519" duration="1621000" />
     </task>
     <task id="LOCAL-00013" summary="Include the Example Map.">
       <created>1654782318745</created>
@@ -507,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659373939134</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Introduce the basic class structure for NoiseLandscapeClips.">
+      <created>1659741678979</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1659741678979</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +528,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor TerrainMagic material for resuability." />
     <MESSAGE value="Load the CopyMaterial from C++." />
     <MESSAGE value="Refactor for Reusability" />
     <MESSAGE value="Refactor LandscapeClip Materials." />
@@ -553,6 +552,7 @@
     <MESSAGE value="Remove unwanted files." />
     <MESSAGE value="Do not crash when finding paint layers but no data is found." />
     <MESSAGE value="Now, the order of the InfoBrush won't affect the paint layer processing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Now, the order of the InfoBrush won't affect the paint layer processing." />
+    <MESSAGE value="Introduce the basic class structure for NoiseLandscapeClips." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce the basic class structure for NoiseLandscapeClips." />
   </component>
 </project>

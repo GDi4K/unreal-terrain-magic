@@ -27,10 +27,15 @@ public:
 	virtual void SetClipBaseSize(FVector2D BaseSize) override;
 	virtual bool IsEnabled() const override;
 	virtual void SetEnabled(bool bEnabledInput) override;
+	virtual void SetZIndex(int Index) override;
+	virtual int GetZIndex() const override;
 	virtual UTexture* GetHeightMap() const override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	int ZIndex = 0;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;

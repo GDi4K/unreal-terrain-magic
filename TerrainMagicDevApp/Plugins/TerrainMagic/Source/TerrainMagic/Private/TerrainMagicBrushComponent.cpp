@@ -68,14 +68,7 @@ void UTerrainMagicBrushComponent::SetTextureRenderParam(const FName Parameter, U
 
 ATerrainMagicManager* UTerrainMagicBrushComponent::EnsureManager()
 {
-	AActor* CurrentActor = UGameplayStatics::GetActorOfClass(GetWorld(), ATerrainMagicManager::StaticClass());
-	if (CurrentActor == nullptr)
-	{
-		AActor* SpawnedActor = GetWorld()->SpawnActor(ATerrainMagicManager::StaticClass());
-		return Cast<ATerrainMagicManager>(SpawnedActor);
-	}
-
-	return Cast<ATerrainMagicManager>(CurrentActor);
+	return ATerrainMagicManager::EnsureManager(GetWorld());
 }
 
 bool UTerrainMagicBrushComponent::HasHeightMap()
@@ -244,7 +237,6 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	
 	for (ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Landscape Clip: %s"), *LandscapeClip->GetName())
 		// Set landscape information where actor can use to position it relative to the landscape
 		LandscapeClip->LandscapeLocation = LandscapeTransform.GetLocation();
 		LandscapeClip->LandscapeScale = LandscapeTransform.GetScale3D();

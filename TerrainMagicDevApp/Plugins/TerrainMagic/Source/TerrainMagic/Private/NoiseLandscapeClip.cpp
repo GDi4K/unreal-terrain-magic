@@ -67,6 +67,16 @@ void ANoiseLandscapeClip::SetEnabled(bool bEnabledInput)
 	bEnabled = bEnabledInput;
 }
 
+void ANoiseLandscapeClip::SetZIndex(int Index)
+{
+	ZIndex = Index;
+}
+
+int ANoiseLandscapeClip::GetZIndex() const
+{
+	return ZIndex;
+}
+
 UTexture* ANoiseLandscapeClip::GetHeightMap() const
 {
 	return nullptr;

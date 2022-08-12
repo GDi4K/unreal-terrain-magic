@@ -97,6 +97,18 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Locat
 	return { true, PaintLayerNames[ActualPaintLayer] };
 }
 
+void ATerrainMagicManager::PopulateLastZIndex()
+{
+	const TArray<ALandscapeClip*> LandscapeClips = GetAllLandscapeClips();
+	if (LandscapeClips.Num() == 0)
+	{
+		LastZIndex = -1;
+	} else
+	{
+		LastZIndex = LandscapeClips[LandscapeClips.Num() -1]->GetZIndex();
+	}
+}
+
 // Sets default values
 ATerrainMagicManager::ATerrainMagicManager()
 {
@@ -113,7 +125,6 @@ ATerrainMagicManager::ATerrainMagicManager()
 void ATerrainMagicManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -142,6 +153,10 @@ TArray<ALandscapeClip*> ATerrainMagicManager::GetAllLandscapeClips() const
 		check(LandscapeClip)
 		LandscapeClips.Add(LandscapeClip);
 	}
+
+	LandscapeClips.Sort([](const ALandscapeClip& ip1, const ALandscapeClip& ip2) {
+		return  ip1.GetZIndex() < ip2.GetZIndex();
+	});
 
 	return LandscapeClips;
 }
@@ -241,5 +256,29 @@ UTextureRenderTarget2D* ATerrainMagicManager::EnsureWeightRenderTarget(const int
 int ATerrainMagicManager::GetHeightMapVersion() const
 {
 	return HeightMapVersion;
+}
+
+int ATerrainMagicManager::GetNextLandscapeClipZIndex()
+{
+	// Initialize ZIndex for the first time
+	if (LastZIndex == -2002)
+	{
+		PopulateLastZIndex();
+	}
+	
+	LastZIndex += 1;
+	return LastZIndex;
+}
+
+ATerrainMagicManager* ATerrainMagicManager::EnsureManager(UWorld* World)
+{
+	AActor* CurrentActor = UGameplayStatics::GetActorOfClass(World, StaticClass());
+	if (CurrentActor == nullptr)
+	{
+		AActor* SpawnedActor = World->SpawnActor(StaticClass());
+		return Cast<ATerrainMagicManager>(SpawnedActor);
+	}
+
+	return Cast<ATerrainMagicManager>(CurrentActor);
 }
 

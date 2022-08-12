@@ -33,32 +33,29 @@ public:
 	bool bEnabled = true;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	UTexture* HeightMap = nullptr;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")
 	FTerrainMagicRemap HeightMapRange;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General", meta=(ToolTip="A multiplier that will use with the following HeightMap range output values. This value doesn't scale with the clip actor's scaling factors."))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height", meta=(ToolTip="A multiplier that will use with the following HeightMap range output values. This value doesn't scale with the clip actor's scaling factors."))
 	int HeightMultiplier = 32000;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")
 	float HeightSaturation = 1.0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="Size of the HeightMap in meters before scaling"),  Category="01-General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height", meta=(ToolTip="Size of the HeightMap in meters before scaling"))
 	FVector2D HeightMapBaseSize = {1000, 1000};
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General", meta=(DisplayName="----------------------------------------", EditCondition="false"))
-	bool __Divider = false;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
 	TEnumAsByte<ELandscapeClipFadeMode> FadeMode = LCF_NONE;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
 	float FadeMaskSpan = 1.0;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
 	float FadeSaturation = 1.0;
 };

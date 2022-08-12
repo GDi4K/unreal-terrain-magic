@@ -7,8 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Apply some noises.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add noise parameters.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/NoiseLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/NoiseLandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightMapLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightMapLandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/NoiseLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/NoiseLandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,13 +168,7 @@
       <workItem from="1659740455519" duration="2825000" />
       <workItem from="1660019788970" duration="1837000" />
       <workItem from="1660192180172" duration="1675000" />
-    </task>
-    <task id="LOCAL-00016" summary="Update licensing info">
-      <created>1654940830586</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1654940830586</updated>
+      <workItem from="1660276653670" duration="2829000" />
     </task>
     <task id="LOCAL-00017" summary="Add Area Noise Mask">
       <created>1655703301633</created>
@@ -507,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660202418641</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Add noise parameters.">
+      <created>1660278457255</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1660278457255</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +534,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor properties in the Editor for ease of use." />
     <MESSAGE value="Add Enable/Disable &amp; Solo support for LandscapeClips." />
     <MESSAGE value="Add MatchLandscapeSize button." />
     <MESSAGE value="Start working on the material." />
@@ -553,6 +558,7 @@
     <MESSAGE value="Add some basic noise implementation." />
     <MESSAGE value="Add gradient noise." />
     <MESSAGE value="Apply some noises." />
-    <option name="LAST_COMMIT_MESSAGE" value="Apply some noises." />
+    <MESSAGE value="Add noise parameters." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add noise parameters." />
   </component>
 </project>

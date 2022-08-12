@@ -18,8 +18,13 @@ UMaterial* ANoiseLandscapeClip::GetSourceMaterial() const
 TArray<FTerrainMagicMaterialParam> ANoiseLandscapeClip::GetMaterialParams()
 {
 	TArray<FTerrainMagicMaterialParam> MaterialParams;
+
+	MaterialParams.Push({"MountainNoiseScale", MountainNoiseScale});
+	MaterialParams.Push({"MountainNoiseDetails", MountainNoiseDetails});
+	MaterialParams.Push({"MountainNoiseSharpness", MountainNoiseSharpness});
+	MaterialParams.Push({"MountainNoiseSeed", MountainNoiseSeed});
+	MaterialParams.Push({"MountainNoisePosition", FVector(MountainNoisePosition.X, MountainNoisePosition.Y, 0)});
 	
-	MaterialParams.Push({"Texture", HeightMap});
 	MaterialParams.Push({"HeightMultiplier", static_cast<float>(HeightMultiplier)});
 	MaterialParams.Push({"SelectedBlendMode", static_cast<float>(BlendMode)});
 
@@ -64,6 +69,6 @@ void ANoiseLandscapeClip::SetEnabled(bool bEnabledInput)
 
 UTexture* ANoiseLandscapeClip::GetHeightMap() const
 {
-	return HeightMap;
+	return nullptr;
 }
 

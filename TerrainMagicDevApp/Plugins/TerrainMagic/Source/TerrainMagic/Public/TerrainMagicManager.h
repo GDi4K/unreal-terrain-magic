@@ -38,6 +38,9 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 	void PopulateLastZIndex();
 
+	UPROPERTY()
+	int LastZIndex = -2002;
+
 public:
 	// Sets default values for this actor's properties
 	ATerrainMagicManager();
@@ -47,8 +50,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	UPROPERTY(VisibleAnywhere)
-	int LastZIndex = -2002;
 	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

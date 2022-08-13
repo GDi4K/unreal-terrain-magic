@@ -36,6 +36,10 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	float PaintLayerActivationThreshold = 0;
 
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
+	void PopulateLastZIndex();
+
+	UPROPERTY()
+	int LastZIndex = -2002;
 
 public:
 	// Sets default values for this actor's properties
@@ -46,6 +50,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -103,4 +108,7 @@ public:
 	UTextureRenderTarget2D* EnsureWeightRenderTarget(const int Width, const int Height);
 
 	int GetHeightMapVersion() const;
+	int GetNextLandscapeClipZIndex();
+
+	static ATerrainMagicManager* EnsureManager(UWorld* World);
 };

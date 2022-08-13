@@ -2,6 +2,7 @@
 
 #include "LandscapeClip.h"
 
+#include "TerrainMagicManager.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
@@ -62,6 +63,12 @@ void ALandscapeClip::Tick(float DeltaTime)
 	if (GetWorld()->WorldType != EWorldType::Editor)
 	{
 		return;
+	}
+
+	// Initialize the Z-Index
+	if (GetZIndex() < 0)
+	{
+		SetZIndex(ATerrainMagicManager::EnsureManager(GetWorld())->GetNextLandscapeClipZIndex());
 	}
 	
 	// We only support Z axis based rotation only
@@ -238,6 +245,15 @@ FVector2D ALandscapeClip::GetClipBaseSize() const
 
 void ALandscapeClip::SetClipBaseSize(FVector2D BaseSize)
 {
+}
+
+void ALandscapeClip::SetZIndex(int Index)
+{
+}
+
+int ALandscapeClip::GetZIndex() const
+{
+	return 0;
 }
 
 bool ALandscapeClip::IsEnabled() const

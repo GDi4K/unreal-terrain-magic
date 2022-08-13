@@ -62,6 +62,8 @@ public:
 	virtual int GetHeightMultiplier() const;
 	virtual FVector2D GetClipBaseSize() const;
 	virtual void SetClipBaseSize(FVector2D BaseSize);
+	virtual void SetZIndex(int Index);
+	virtual int GetZIndex() const;
 	virtual bool IsEnabled() const;
 	virtual void SetEnabled(bool bEnabled);
 	void _Invalidate();

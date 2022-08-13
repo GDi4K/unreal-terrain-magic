@@ -68,14 +68,7 @@ void UTerrainMagicBrushComponent::SetTextureRenderParam(const FName Parameter, U
 
 ATerrainMagicManager* UTerrainMagicBrushComponent::EnsureManager()
 {
-	AActor* CurrentActor = UGameplayStatics::GetActorOfClass(GetWorld(), ATerrainMagicManager::StaticClass());
-	if (CurrentActor == nullptr)
-	{
-		AActor* SpawnedActor = GetWorld()->SpawnActor(ATerrainMagicManager::StaticClass());
-		return Cast<ATerrainMagicManager>(SpawnedActor);
-	}
-
-	return Cast<ATerrainMagicManager>(CurrentActor);
+	return ATerrainMagicManager::EnsureManager(GetWorld());
 }
 
 bool UTerrainMagicBrushComponent::HasHeightMap()

@@ -62,6 +62,16 @@ void AHeightMapLandscapeClip::SetEnabled(bool bEnabledInput)
 	bEnabled = bEnabledInput;
 }
 
+void AHeightMapLandscapeClip::SetZIndex(int Index)
+{
+	ZIndex = Index;
+}
+
+int AHeightMapLandscapeClip::GetZIndex() const
+{
+	return ZIndex;
+}
+
 UTexture* AHeightMapLandscapeClip::GetHeightMap() const
 {
 	return HeightMap;

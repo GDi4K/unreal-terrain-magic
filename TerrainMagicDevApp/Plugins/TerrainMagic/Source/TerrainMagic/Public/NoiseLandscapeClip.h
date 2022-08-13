@@ -56,7 +56,10 @@ public:
 	float MountainNoiseDetails = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
-	float MountainNoiseSharpness = 0.8;
+	float MountainNoiseContrast = 0.1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
+	float MountainNoiseSharpness = 0.5;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
 	float MountainNoiseSeed = 0.0;

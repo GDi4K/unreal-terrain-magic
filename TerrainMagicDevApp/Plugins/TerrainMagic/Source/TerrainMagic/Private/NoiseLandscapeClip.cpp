@@ -21,6 +21,7 @@ TArray<FTerrainMagicMaterialParam> ANoiseLandscapeClip::GetMaterialParams()
 
 	MaterialParams.Push({"MountainNoiseScale", MountainNoiseScale});
 	MaterialParams.Push({"MountainNoiseDetails", MountainNoiseDetails});
+	MaterialParams.Push({"MountainNoiseContrast", MountainNoiseContrast});
 	MaterialParams.Push({"MountainNoiseSharpness", MountainNoiseSharpness});
 	MaterialParams.Push({"MountainNoiseSeed", MountainNoiseSeed});
 	MaterialParams.Push({"MountainNoisePosition", FVector(MountainNoisePosition.X, MountainNoisePosition.Y, 0)});

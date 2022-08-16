@@ -180,11 +180,11 @@ void ALandscapeClip::_MatchLandscapeSize()
 	_Invalidate();
 }
 
-void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Params)
+void ALandscapeClip::ApplyMaterialParamsForHeight(TArray<FTerrainMagicMaterialParam> Params)
 {
-	if (Material == nullptr)
+	if (MaterialForHeight == nullptr)
 	{
-		Material = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), GetSourceMaterial());
+		MaterialForHeight = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), GetSourceMaterialForHeight());
 	}
 	
 	// Set Input Params
@@ -192,13 +192,13 @@ void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Para
 	{
 		if (Param.Type == TMMP_SCALAR)
 		{
-			Material->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+			MaterialForHeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
 		} else if (Param.Type == TMMP_VECTOR)
 		{
-			Material->SetVectorParameterValue(Param.Name, Param.VectorValue);
+			MaterialForHeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
 		} else if (Param.Type == TMMP_TEXTURE)
 		{
-			Material->SetTextureParameterValue(Param.Name, Param.TextureValue);
+			MaterialForHeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
 		}
 	}
 	
@@ -207,13 +207,13 @@ void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Para
 	{
 		if (Param.Type == TMMP_SCALAR)
 		{
-			Material->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+			MaterialForHeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
 		} else if (Param.Type == TMMP_VECTOR)
 		{
-			Material->SetVectorParameterValue(Param.Name, Param.VectorValue);
+			MaterialForHeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
 		} else if (Param.Type == TMMP_TEXTURE)
 		{
-			Material->SetTextureParameterValue(Param.Name, Param.TextureValue);
+			MaterialForHeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
 		}
 	}
 }
@@ -228,7 +228,7 @@ UTexture* ALandscapeClip::GetHeightMap() const
 	return nullptr;
 }
 
-UMaterial* ALandscapeClip::GetSourceMaterial() const
+UMaterial* ALandscapeClip::GetSourceMaterialForHeight() const
 {
 	return nullptr;
 }

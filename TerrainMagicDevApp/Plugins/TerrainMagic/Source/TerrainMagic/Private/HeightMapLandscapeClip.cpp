@@ -9,7 +9,7 @@ AHeightMapLandscapeClip::AHeightMapLandscapeClip()
 {
 }
 
-UMaterial* AHeightMapLandscapeClip::GetSourceMaterial() const
+UMaterial* AHeightMapLandscapeClip::GetSourceMaterialForHeight() const
 {
 	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Generic.M_TM_LandscapeClip_Generic";
 	return Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));

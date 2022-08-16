@@ -70,7 +70,7 @@ public:
 	
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
 	virtual UTexture* GetHeightMap() const;
-	virtual UMaterial* GetSourceMaterial() const;
+	virtual UMaterial* GetSourceMaterialForHeight() const;
 	virtual int GetHeightMultiplier() const;
 	virtual FVector2D GetClipBaseSize() const;
 	virtual void SetClipBaseSize(FVector2D BaseSize);
@@ -115,12 +115,12 @@ public:
 	FVector LandscapeSize= {};
 	
 	UPROPERTY()
-	UMaterialInstanceDynamic* Material = nullptr;
+	UMaterialInstanceDynamic* MaterialForHeight = nullptr;
 
 	UPROPERTY()
 	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
 
-	void ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Array);
+	void ApplyMaterialParamsForHeight(TArray<FTerrainMagicMaterialParam> Array);
 	
 
 	FVector HeightMapRoot = {0, 0, 0};

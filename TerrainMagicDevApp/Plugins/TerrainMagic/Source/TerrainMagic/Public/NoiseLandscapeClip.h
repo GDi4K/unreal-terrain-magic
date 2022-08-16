@@ -26,7 +26,7 @@ protected:
 	
 
 public:
-	virtual UMaterial* GetSourceMaterial() const override;
+	virtual UMaterial* GetSourceMaterialForHeight() const override;
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams() override;
 	virtual int GetHeightMultiplier() const override;
 	virtual FVector2D GetClipBaseSize() const override;

@@ -225,15 +225,15 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 
 	HandleSoloClipLogic(LandscapeClips);
 
-	if (BufferRenderTarget == nullptr)
+	if (BufferRenderTargetForHeight == nullptr)
 	{
-		BufferRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
+		BufferRenderTargetForHeight = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
 	}
 
 	// Copy the Input HeightMap at the beginning
 	CopyRTMaterial->SetTextureParameterValue("RenderTarget", InputHeightMap);
-	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTargetForHeight);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTargetForHeight, CopyRTMaterial);
 	
 	for (ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
@@ -250,7 +250,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		// Apply Params
 		TArray<FTerrainMagicMaterialParam> Params = {};
 		
-		Params.Push({"HeightRT", BufferRenderTarget});
+		Params.Push({"HeightRT", BufferRenderTargetForHeight});
 		Params.Push({"LandscapeLocation", LandscapeTransform.GetLocation()});
 		Params.Push({"LandscapeScale", LandscapeTransform.GetScale3D()});
 		Params.Push({"LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0)});
@@ -260,15 +260,15 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		Params.Push({"ClipSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0)});
 		Params.Push({"ClipRotationInDegrees", LandscapeClip->GetActorRotation().Euler()});
 
-		LandscapeClip->ApplyMaterialParams(Params);
+		LandscapeClip->ApplyMaterialParamsForHeight(Params);
 		
 		// Render the Clip
-		Manager->RenderHeightMap(LandscapeClip->Material);
+		Manager->RenderHeightMap(LandscapeClip->MaterialForHeight);
 
 		// Copy the NewHeightMap to the Buffer
 		CopyRTMaterial->SetTextureParameterValue("RenderTarget", HeightRenderTarget);
-		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
-		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
+		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTargetForHeight);
+		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTargetForHeight, CopyRTMaterial);
 	}
 
 	// This will prevent us from a memory leak where holding a render target causes some issues.

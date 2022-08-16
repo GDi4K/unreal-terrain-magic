@@ -30,7 +30,7 @@ class TERRAINMAGIC_API UTerrainMagicBrushComponent : public UActorComponent
 
 	// Here we use this buffer render target to save a copy of a render target
 	UPROPERTY()
-	UTextureRenderTarget2D* BufferRenderTarget = nullptr;
+	UTextureRenderTarget2D* BufferRenderTargetForHeight = nullptr;
 
 public:
 	// Sets default values for this component's properties

@@ -32,6 +32,9 @@ class TERRAINMAGIC_API UTerrainMagicBrushComponent : public UActorComponent
 	UPROPERTY()
 	UTextureRenderTarget2D* BufferRenderTargetForHeight = nullptr;
 
+	UPROPERTY()
+	UTextureRenderTarget2D* BufferRenderTargetForWeight = nullptr;
+
 public:
 	// Sets default values for this component's properties
 	UTerrainMagicBrushComponent();

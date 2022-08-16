@@ -218,6 +218,31 @@ void ALandscapeClip::ApplyMaterialParamsForHeight(TArray<FTerrainMagicMaterialPa
 	}
 }
 
+void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialParam> Params, FLandscapeClipPaintLayerSettings PaintLayerSettings)
+{
+	if (MaterialForWeight == nullptr)
+	{
+		const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Weight.M_TM_LandscapeClip_Weight";
+		UMaterial* SourceMaterial =  Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
+		MaterialForWeight = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
+	}
+	
+	// Set Input Params
+	for (FTerrainMagicMaterialParam Param: Params)
+	{
+		if (Param.Type == TMMP_SCALAR)
+		{
+			MaterialForHeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+		} else if (Param.Type == TMMP_VECTOR)
+		{
+			MaterialForHeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
+		} else if (Param.Type == TMMP_TEXTURE)
+		{
+			MaterialForHeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
+		}
+	}
+}
+
 TArray<FTerrainMagicMaterialParam> ALandscapeClip::GetMaterialParams()
 {
 	return {};

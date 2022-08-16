@@ -118,10 +118,13 @@ public:
 	UMaterialInstanceDynamic* MaterialForHeight = nullptr;
 
 	UPROPERTY()
+	UMaterialInstanceDynamic* MaterialForWeight = nullptr;
+
+	UPROPERTY()
 	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
 
 	void ApplyMaterialParamsForHeight(TArray<FTerrainMagicMaterialParam> Array);
-	
+	void ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialParam> Array, FLandscapeClipPaintLayerSettings PaintLayerSettings);
 
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector2D HeightMapSizeInCM = {};

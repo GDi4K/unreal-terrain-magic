@@ -36,6 +36,18 @@ enum ELandscapeClipSoloAction
 	LCSA_UNSOLO = 2,
 };
 
+USTRUCT(BlueprintType)
+struct FLandscapeClipPaintLayerSettings
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FName PaintLayer;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<FName> AdditionalPaintLayers;
+};
+
 UCLASS(Abstract)
 class TERRAINMAGIC_API ALandscapeClip : public AActor
 {
@@ -66,6 +78,8 @@ public:
 	virtual int GetZIndex() const;
 	virtual bool IsEnabled() const;
 	virtual void SetEnabled(bool bEnabled);
+	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const;
+	
 	void _Invalidate();
 	void _ToggleOutline();
 	void _ToggleSolo();

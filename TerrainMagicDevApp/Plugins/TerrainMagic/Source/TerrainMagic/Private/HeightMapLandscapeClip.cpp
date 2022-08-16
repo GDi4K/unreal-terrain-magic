@@ -77,3 +77,7 @@ UTexture* AHeightMapLandscapeClip::GetHeightMap() const
 	return HeightMap;
 }
 
+TArray<FLandscapeClipPaintLayerSettings> AHeightMapLandscapeClip::GetPaintLayerSettings() const
+{
+	return PaintLayerSettings;
+}

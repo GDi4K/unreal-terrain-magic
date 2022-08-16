@@ -10,6 +10,18 @@
 
 #include "TerrainMagicBrushComponent.generated.h"
 
+USTRUCT(BlueprintType)
+struct FLandscapeClipsInvalidationResponse
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bHasInvalidated = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<FName> AffectedPaintLayers = {};
+};
+
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class TERRAINMAGIC_API UTerrainMagicBrushComponent : public UActorComponent
@@ -79,7 +91,10 @@ public:
 	UTextureRenderTarget2D* RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	bool HasInvalidatedLandscapeClips();
+	UTextureRenderTarget2D* PaintLandscapeClips(FName LayerName, UTextureRenderTarget2D* InputWeightMap);
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	FLandscapeClipsInvalidationResponse HasInvalidatedLandscapeClips();
 	
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	ATerrainMagicManager* EnsureManager();

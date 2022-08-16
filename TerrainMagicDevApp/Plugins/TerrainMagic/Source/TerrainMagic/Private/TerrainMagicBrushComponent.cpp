@@ -278,19 +278,40 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	return HeightRenderTarget;
 }
 
-bool UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::PaintLandscapeClips(FName LayerName,
+	UTextureRenderTarget2D* InputWeightMap)
 {
-	bool bNeedsInvalidation = false;
+	UE_LOG(LogTemp, Warning, TEXT("Paintling Landscape Clips for: %s"), *LayerName.ToString())
+	return InputWeightMap;
+}
+
+FLandscapeClipsInvalidationResponse UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
+{
+	FLandscapeClipsInvalidationResponse Response;
+	Response.bHasInvalidated = false;
 	const ATerrainMagicManager* Manager = EnsureManager();
 
+	TSet<FName> PaintLayers;
 	for (ALandscapeClip* LandscapeClip: Manager->GetAllLandscapeClips())
 	{
 		if (LandscapeClip->bNeedsInvalidation)
 		{
-			bNeedsInvalidation = true;
+			Response.bHasInvalidated  = true;
 		}
 		LandscapeClip->bNeedsInvalidation = false;
+
+		// Finding Paint Layers
+		for(const FLandscapeClipPaintLayerSettings PaintLayerSettings: LandscapeClip->GetPaintLayerSettings())
+		{
+			PaintLayers.Add(PaintLayerSettings.PaintLayer);
+			for(const FName AdditionalPaintLayer: PaintLayerSettings.AdditionalPaintLayers)
+			{
+				PaintLayers.Add(AdditionalPaintLayer);
+			}
+		}
 	}
 
-	return bNeedsInvalidation;
+	Response.AffectedPaintLayers = PaintLayers.Array();
+	
+	return Response;
 }

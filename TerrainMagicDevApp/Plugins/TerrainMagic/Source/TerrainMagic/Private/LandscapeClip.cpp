@@ -266,3 +266,8 @@ void ALandscapeClip::SetEnabled(bool bEnabled)
 	
 }
 
+TArray<FLandscapeClipPaintLayerSettings> ALandscapeClip::GetPaintLayerSettings() const
+{
+	return {};
+}
+

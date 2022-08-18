@@ -227,8 +227,14 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 		MaterialForWeight = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
 	}
 
+	Params.Add({"WeightBrightness", PaintLayerSettings.WeightBrightness});
 	Params.Add({"WeightContrast", PaintLayerSettings.WeightContrast});
-	Params.Add({"WeightSaturation", PaintLayerSettings.WeightSaturation});
+	Params.Add({"FillLayer", PaintLayerSettings.FillLayer? 1.0f: 0.0f});
+
+	Params.Add({"TextureMapMaskEnabled", PaintLayerSettings.TextureMapMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"TextureMapMaskBrightness", PaintLayerSettings.TextureMapMask.Brightness});
+	Params.Add({"TextureMapMaskContrast", PaintLayerSettings.TextureMapMask.Contrast});
+	Params.Add({"TextureMapMaskTexture", PaintLayerSettings.TextureMapMask.Texture});
 	
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)

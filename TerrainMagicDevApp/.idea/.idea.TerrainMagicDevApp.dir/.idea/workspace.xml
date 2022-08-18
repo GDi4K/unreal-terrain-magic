@@ -8,12 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Input.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Input.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Output.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
@@ -177,28 +174,8 @@
       <workItem from="1660401441780" duration="1933000" />
       <workItem from="1660627866198" duration="2387000" />
       <workItem from="1660631986134" duration="2742000" />
-      <workItem from="1660802225318" duration="3406000" />
-    </task>
-    <task id="LOCAL-00022" summary="Optimize WeightBrush to not to affect HeightMap always.&#10;&#10;With this, we can use HeightData from the brush itself, if there is no HeightBrush available in the scene.">
-      <created>1656331955016</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1656331955016</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Add basic clip writing">
-      <created>1656636404766</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1656636404766</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Add support for changing clip root position.">
-      <created>1656652427204</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1656652427204</updated>
+      <workItem from="1660802225318" duration="3808000" />
+      <workItem from="1660833989959" duration="1312000" />
     </task>
     <task id="LOCAL-00025" summary="Add center based clip translation.">
       <created>1656743090224</created>
@@ -522,7 +499,28 @@
       <option name="project" value="LOCAL" />
       <updated>1660634671767</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Add basic paint layer support.">
+      <created>1660805788667</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1660805788667</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Add basic paint layer support.">
+      <created>1660805836991</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1660805836991</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Remove unwanted categories.">
+      <created>1660805985124</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1660805985124</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,8 +541,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add the basic setup for customizing LandscapeClip details panel." />
-    <MESSAGE value="Assign a button to the Details panel." />
     <MESSAGE value="Fixed a memory leak related to LandscapeClips&#10;When we are rendering rendering landscape clips, we assign a RenderTarget to a Dynamic Material Instance.&#10;&#10;But we didn't clear that RenderTarget from the material instance after use. &#10;&#10;So, when saving &amp; reloading the same or another map trigger a memory leak &amp; crash it.&#10;&#10;This change will fix it properly." />
     <MESSAGE value="Set ToggleOutline &amp; TogglePreview to save the state&#10;So, when you restart your map, it will remember those settings." />
     <MESSAGE value="Send PaintLayer Information to the Manager" />
@@ -568,6 +564,8 @@
     <MESSAGE value="Fixed the noise algorithm for better control." />
     <MESSAGE value="Refactor existing RenderLandscapeClips code." />
     <MESSAGE value="Add the paint layer workflow." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add the paint layer workflow." />
+    <MESSAGE value="Add basic paint layer support." />
+    <MESSAGE value="Remove unwanted categories." />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove unwanted categories." />
   </component>
 </project>

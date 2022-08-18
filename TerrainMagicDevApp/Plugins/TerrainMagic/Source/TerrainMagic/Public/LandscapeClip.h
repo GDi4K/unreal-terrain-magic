@@ -9,6 +9,7 @@
 #include "Types/FTerrainMagicRemap.h"
 #include "Types/OutlineComponent.h"
 #include "Types/TerrainMagicMaterialParam.h"
+#include "Types/LandscapeClipPaintLayerSettings.h"
 #include "LandscapeClip.generated.h"
 
 UENUM(BlueprintType)
@@ -34,24 +35,6 @@ enum ELandscapeClipSoloAction
 	LCSA_NONE = 0,
 	LCSA_SOLO = 1,
 	LCSA_UNSOLO = 2,
-};
-
-USTRUCT(BlueprintType)
-struct FLandscapeClipPaintLayerSettings
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FName PaintLayer;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TArray<FName> AdditionalPaintLayers;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float WeightContrast = 1.0;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float WeightSaturation = 1.0;
 };
 
 UCLASS(Abstract)

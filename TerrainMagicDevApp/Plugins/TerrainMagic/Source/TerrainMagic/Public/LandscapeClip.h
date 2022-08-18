@@ -47,10 +47,10 @@ struct FLandscapeClipPaintLayerSettings
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<FName> AdditionalPaintLayers;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Weight Strength")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float WeightContrast = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Weight Strength")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float WeightSaturation = 1.0;
 };
 

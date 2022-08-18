@@ -226,19 +226,40 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 		UMaterial* SourceMaterial =  Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 		MaterialForWeight = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
 	}
+
+	Params.Add({"WeightContrast", PaintLayerSettings.WeightContrast});
+	Params.Add({"WeightSaturation", PaintLayerSettings.WeightSaturation});
 	
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)
 	{
 		if (Param.Type == TMMP_SCALAR)
 		{
-			MaterialForHeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+			MaterialForWeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
 		} else if (Param.Type == TMMP_VECTOR)
 		{
-			MaterialForHeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
+			MaterialForWeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
 		} else if (Param.Type == TMMP_TEXTURE)
 		{
-			MaterialForHeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
+			MaterialForWeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
+		}
+	}
+
+	// Set ChildClass Params
+	// With this, we can get fade params, etc.
+	// So, even for the weight material, this is useful
+	
+	for (FTerrainMagicMaterialParam Param: GetMaterialParams())
+	{
+		if (Param.Type == TMMP_SCALAR)
+		{
+			MaterialForWeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+		} else if (Param.Type == TMMP_VECTOR)
+		{
+			MaterialForWeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
+		} else if (Param.Type == TMMP_TEXTURE)
+		{
+			MaterialForWeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
 		}
 	}
 }

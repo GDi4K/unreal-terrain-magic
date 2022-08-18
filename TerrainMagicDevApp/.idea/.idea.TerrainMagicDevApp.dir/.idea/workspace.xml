@@ -7,13 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Refactor existing RenderLandscapeClips code.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Input.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Input.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Output.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicBrushComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicBrushComponent.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,14 +176,8 @@
       <workItem from="1660383534367" duration="309000" />
       <workItem from="1660401441780" duration="1933000" />
       <workItem from="1660627866198" duration="2387000" />
-      <workItem from="1660631986134" duration="2434000" />
-    </task>
-    <task id="LOCAL-00021" summary="Use a shared RenderTarget across all the brushes.&#10;But uses separate render target for Height &amp; Weight.">
-      <created>1656304390595</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1656304390595</updated>
+      <workItem from="1660631986134" duration="2742000" />
+      <workItem from="1660802225318" duration="3406000" />
     </task>
     <task id="LOCAL-00022" summary="Optimize WeightBrush to not to affect HeightMap always.&#10;&#10;With this, we can use HeightData from the brush itself, if there is no HeightBrush available in the scene.">
       <created>1656331955016</created>
@@ -518,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660632257871</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Add the paint layer workflow.">
+      <created>1660634671767</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1660634671767</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -539,7 +543,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add a way to add the preview HeightMap." />
     <MESSAGE value="Add the basic setup for customizing LandscapeClip details panel." />
     <MESSAGE value="Assign a button to the Details panel." />
     <MESSAGE value="Fixed a memory leak related to LandscapeClips&#10;When we are rendering rendering landscape clips, we assign a RenderTarget to a Dynamic Material Instance.&#10;&#10;But we didn't clear that RenderTarget from the material instance after use. &#10;&#10;So, when saving &amp; reloading the same or another map trigger a memory leak &amp; crash it.&#10;&#10;This change will fix it properly." />
@@ -564,6 +567,7 @@
     <MESSAGE value="Introduce ZIndex support for sorting Landscape Clips." />
     <MESSAGE value="Fixed the noise algorithm for better control." />
     <MESSAGE value="Refactor existing RenderLandscapeClips code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor existing RenderLandscapeClips code." />
+    <MESSAGE value="Add the paint layer workflow." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add the paint layer workflow." />
   </component>
 </project>

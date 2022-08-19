@@ -7,7 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Adding PaintLayer support for NoiseLandscapeClip." />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Remove debug messages and logs.">
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/WeightMapLandscapeClip.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/WeightMapLandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,14 +177,7 @@
       <workItem from="1660631986134" duration="2742000" />
       <workItem from="1660802225318" duration="3808000" />
       <workItem from="1660833989959" duration="2187000" />
-      <workItem from="1660881961927" duration="6524000" />
-    </task>
-    <task id="LOCAL-00030" summary="Add an Outline to the LandscapeClip.">
-      <created>1657123381639</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1657123381639</updated>
+      <workItem from="1660881961927" duration="9254000" />
     </task>
     <task id="LOCAL-00031" summary="Support rendering multiple Clips">
       <created>1657178106360</created>
@@ -517,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660888666053</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Remove debug messages and logs.">
+      <created>1660889049587</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1660889049587</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +543,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add the Info Brush" />
     <MESSAGE value="Implement accessing paint layer data from Blueprints." />
     <MESSAGE value="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush." />
     <MESSAGE value="Introduce a PaintLayer Data Encoder." />
@@ -563,6 +567,7 @@
     <MESSAGE value="Implement proper paint modes." />
     <MESSAGE value="Enable Masks on when selected Mask paint mode." />
     <MESSAGE value="Adding PaintLayer support for NoiseLandscapeClip." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding PaintLayer support for NoiseLandscapeClip." />
+    <MESSAGE value="Remove debug messages and logs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove debug messages and logs." />
   </component>
 </project>

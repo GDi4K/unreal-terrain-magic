@@ -100,12 +100,12 @@ struct FLandscapeClipPaintLayerSettings
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float WeightContrast = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsHeightMask HeightMask;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsNormalMask NormalMask;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsTextureMapMask TextureMapMask;
 };

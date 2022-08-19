@@ -83,3 +83,8 @@ UTexture* ANoiseLandscapeClip::GetHeightMap() const
 	return nullptr;
 }
 
+TArray<FLandscapeClipPaintLayerSettings> ANoiseLandscapeClip::GetPaintLayerSettings() const
+{
+	return PaintLayerSettings;
+}
+

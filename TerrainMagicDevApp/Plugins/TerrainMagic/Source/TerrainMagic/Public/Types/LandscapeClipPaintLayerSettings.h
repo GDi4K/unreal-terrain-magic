@@ -71,7 +71,7 @@ struct FLandscapeClipPaintLayerSettingsNormalMask
 	float Brightness = 1.0;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float Contrast = 1.0;
+	float Contrast = 10.0;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float NormalSmoothMultiplier = 10.0;

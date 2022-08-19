@@ -36,6 +36,7 @@ public:
 	virtual void SetZIndex(int Index) override;
 	virtual int GetZIndex() const override;
 	virtual UTexture* GetHeightMap() const override;
+	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
@@ -87,4 +88,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
 	float FadeSaturation = 1.0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Layer Painting")
+	TArray<FLandscapeClipPaintLayerSettings> PaintLayerSettings = {};
 };

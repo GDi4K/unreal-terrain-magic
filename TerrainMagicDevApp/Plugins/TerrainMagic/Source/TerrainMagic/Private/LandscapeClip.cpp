@@ -229,7 +229,7 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 
 	Params.Add({"WeightBrightness", PaintLayerSettings.WeightBrightness});
 	Params.Add({"WeightContrast", PaintLayerSettings.WeightContrast});
-	Params.Add({"FillLayer", PaintLayerSettings.FillLayer? 1.0f: 0.0f});
+	Params.Add({"PaintMode", static_cast<float>(PaintLayerSettings.PaintMode)});
 
 	Params.Add({"TextureMapMaskEnabled", PaintLayerSettings.TextureMapMask.Enabled? 1.0f : 0.0f});
 	Params.Add({"TextureMapMaskBrightness", PaintLayerSettings.TextureMapMask.Brightness});
@@ -242,6 +242,13 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 	Params.Add({"HeightMaskContrast", PaintLayerSettings.HeightMask.Contrast});
 	Params.Add({"HeightMaskBrightness", PaintLayerSettings.HeightMask.Brightness});
 	Params.Add({"HeightMaskInvert", PaintLayerSettings.HeightMask.Invert? 1.0f : 0.0f});
+
+	Params.Add({"NormalMaskEnabled", PaintLayerSettings.NormalMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"NormalMaskDirection", PaintLayerSettings.NormalMask.Direction});
+	Params.Add({"NormalMaskContrast", PaintLayerSettings.NormalMask.Contrast});
+	Params.Add({"NormalMaskBrightness", PaintLayerSettings.NormalMask.Brightness});
+	Params.Add({"NormalSmoothingMultiplier", PaintLayerSettings.NormalMask.NormalSmoothMultiplier});
+	Params.Add({"NormalMaskInvert", PaintLayerSettings.NormalMask.Invert? 1.0f : 0.0f});
 	
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)

@@ -5,6 +5,15 @@
 #include "Engine/Texture.h"
 #include "LandscapeClipPaintLayerSettings.generated.h"
 
+UENUM(BlueprintType)
+enum FLandscapeClipPaintLayerSettingsPaintMode
+{
+	LCPM_Original = 0 UMETA(DisplayName="Use Original"),
+	LCPM_FILL = 1 UMETA(DisplayName="Fill Layer"),
+	LCPM_CLEAR = 2 UMETA(DisplayName="Clear Layer"),
+	LCPM_MASKS = 3 UMETA(DisplayName="Use Masks"),
+};
+
 USTRUCT(BlueprintType)
 struct FLandscapeClipPaintLayerSettingsTextureMapMask
 {
@@ -48,6 +57,30 @@ struct FLandscapeClipPaintLayerSettingsHeightMask
 };
 
 USTRUCT(BlueprintType)
+struct FLandscapeClipPaintLayerSettingsNormalMask
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool Enabled = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector Direction = {0, 0, 1};
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Brightness = 1.0;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Contrast = 1.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float NormalSmoothMultiplier = 10.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool Invert = false;
+};
+
+USTRUCT(BlueprintType)
 struct FLandscapeClipPaintLayerSettings
 {
 	GENERATED_BODY()
@@ -59,7 +92,7 @@ struct FLandscapeClipPaintLayerSettings
 	TArray<FName> AdditionalPaintLayers;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool FillLayer = false;
+	TEnumAsByte<FLandscapeClipPaintLayerSettingsPaintMode> PaintMode = LCPM_MASKS;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float WeightBrightness = 1.0;
@@ -69,6 +102,9 @@ struct FLandscapeClipPaintLayerSettings
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FLandscapeClipPaintLayerSettingsHeightMask HeightMask;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FLandscapeClipPaintLayerSettingsNormalMask NormalMask;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FLandscapeClipPaintLayerSettingsTextureMapMask TextureMapMask;

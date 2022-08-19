@@ -103,10 +103,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
 	FVector LandscapeSize= {};
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY()
 	UMaterialInstanceDynamic* MaterialForHeight = nullptr;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY()
 	UMaterialInstanceDynamic* MaterialForWeight = nullptr;
 
 	UPROPERTY()

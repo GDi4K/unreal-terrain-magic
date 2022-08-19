@@ -281,8 +281,6 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 UTextureRenderTarget2D* UTerrainMagicBrushComponent::PaintLandscapeClips(FName LayerName,
 	UTextureRenderTarget2D* InputWeightMap)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Paintling Landscape Clips for: %s"), *LayerName.ToString())
-
 	ATerrainMagicManager* Manager = EnsureManager();
 	
 	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
@@ -371,7 +369,6 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::PaintLandscapeClips(FName L
 		
 		// Render the Clip
 		Manager->RenderWeightMap(LayerName, LandscapeClip->MaterialForWeight);
-		UE_LOG(LogTemp, Warning, TEXT("Applying Paintlayer settings, %s"), *LandscapeClip->MaterialForWeight->GetName())
 	
 		// Copy the NewHeightMap to the Buffer
 		CopyRTMaterial->SetTextureParameterValue("RenderTarget", WeightRenderTarget);

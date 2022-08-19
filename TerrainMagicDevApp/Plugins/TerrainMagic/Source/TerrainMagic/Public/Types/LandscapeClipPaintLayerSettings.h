@@ -24,6 +24,30 @@ struct FLandscapeClipPaintLayerSettingsTextureMapMask
 };
 
 USTRUCT(BlueprintType)
+struct FLandscapeClipPaintLayerSettingsHeightMask
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool Enabled = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float RangeStart = 0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float RangeEnd = 2000;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Brightness = 1.0;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Contrast = 1.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool Invert = false;
+};
+
+USTRUCT(BlueprintType)
 struct FLandscapeClipPaintLayerSettings
 {
 	GENERATED_BODY()
@@ -42,6 +66,9 @@ struct FLandscapeClipPaintLayerSettings
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float WeightContrast = 1.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FLandscapeClipPaintLayerSettingsHeightMask HeightMask;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FLandscapeClipPaintLayerSettingsTextureMapMask TextureMapMask;

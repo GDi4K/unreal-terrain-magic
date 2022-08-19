@@ -8,12 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,14 +173,8 @@
       <workItem from="1660627866198" duration="2387000" />
       <workItem from="1660631986134" duration="2742000" />
       <workItem from="1660802225318" duration="3808000" />
-      <workItem from="1660833989959" duration="1312000" />
-    </task>
-    <task id="LOCAL-00025" summary="Add center based clip translation.">
-      <created>1656743090224</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1656743090224</updated>
+      <workItem from="1660833989959" duration="2187000" />
+      <workItem from="1660881961927" duration="659000" />
     </task>
     <task id="LOCAL-00026" summary="Introduce TerrainMagicClipBrush&#10;&#10;This will take care of rendering LandscapeClips.">
       <created>1656774698787</created>
@@ -520,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660805985124</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Introducing TextureMap Mask.">
+      <created>1660835582648</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1660835582648</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +540,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Fixed a memory leak related to LandscapeClips&#10;When we are rendering rendering landscape clips, we assign a RenderTarget to a Dynamic Material Instance.&#10;&#10;But we didn't clear that RenderTarget from the material instance after use. &#10;&#10;So, when saving &amp; reloading the same or another map trigger a memory leak &amp; crash it.&#10;&#10;This change will fix it properly." />
     <MESSAGE value="Set ToggleOutline &amp; TogglePreview to save the state&#10;So, when you restart your map, it will remember those settings." />
     <MESSAGE value="Send PaintLayer Information to the Manager" />
     <MESSAGE value="Read Paint Layer Data from C++" />
@@ -566,6 +564,7 @@
     <MESSAGE value="Add the paint layer workflow." />
     <MESSAGE value="Add basic paint layer support." />
     <MESSAGE value="Remove unwanted categories." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unwanted categories." />
+    <MESSAGE value="Introducing TextureMap Mask." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introducing TextureMap Mask." />
   </component>
 </project>

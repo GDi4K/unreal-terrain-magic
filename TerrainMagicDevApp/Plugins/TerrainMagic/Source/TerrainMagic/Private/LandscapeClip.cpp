@@ -235,6 +235,13 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 	Params.Add({"TextureMapMaskBrightness", PaintLayerSettings.TextureMapMask.Brightness});
 	Params.Add({"TextureMapMaskContrast", PaintLayerSettings.TextureMapMask.Contrast});
 	Params.Add({"TextureMapMaskTexture", PaintLayerSettings.TextureMapMask.Texture});
+
+	Params.Add({"HeightMaskEnabled", PaintLayerSettings.HeightMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"HeightMaskRangeStart", PaintLayerSettings.HeightMask.RangeStart});
+	Params.Add({"HeightMaskRangeEnd", PaintLayerSettings.HeightMask.RangeEnd});
+	Params.Add({"HeightMaskContrast", PaintLayerSettings.HeightMask.Contrast});
+	Params.Add({"HeightMaskBrightness", PaintLayerSettings.HeightMask.Brightness});
+	Params.Add({"HeightMaskInvert", PaintLayerSettings.HeightMask.Invert? 1.0f : 0.0f});
 	
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)

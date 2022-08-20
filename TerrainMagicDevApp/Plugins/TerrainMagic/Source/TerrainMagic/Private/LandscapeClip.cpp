@@ -256,7 +256,14 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 	Params.Add({"LocationMaskContrast", PaintLayerSettings.LocationMask.Contrast});
 	Params.Add({"LocationMaskBrightness", PaintLayerSettings.LocationMask.Brightness});
 	Params.Add({"LocationMaskInvert", PaintLayerSettings.LocationMask.Invert? 1.0f : 0.0f});
-	
+
+	Params.Add({"EdgeNoiseMaskEnabled", PaintLayerSettings.EdgeNoiseMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"EdgeNoiseMaskScale", PaintLayerSettings.EdgeNoiseMask.Scale});
+	Params.Add({"EdgeNoiseMaskContrast", PaintLayerSettings.EdgeNoiseMask.Contrast});
+	Params.Add({"EdgeNoiseMaskRangeStart", PaintLayerSettings.EdgeNoiseMask.RangeStart});
+	Params.Add({"EdgeNoiseMaskRangeEnd", PaintLayerSettings.EdgeNoiseMask.RangeEnd});
+	Params.Add({"EdgeNoiseMaskSeed", PaintLayerSettings.EdgeNoiseMask.Seed});
+
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)
 	{

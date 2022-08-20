@@ -104,6 +104,30 @@ struct FLandscapeClipPaintLayerSettingsLocationMask
 	bool Invert = false;
 };
 
+USTRUCT(BlueprintType)
+struct FLandscapeClipPaintLayerSettingsEdgeNoiseMask
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool Enabled = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Scale = 1.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Contrast = 1.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float RangeStart = 0.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float RangeEnd= 1.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector Seed = {0, 0, 0};
+};
+
 
 USTRUCT(BlueprintType)
 struct FLandscapeClipPaintLayerSettings
@@ -136,4 +160,7 @@ struct FLandscapeClipPaintLayerSettings
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsHeightMask HeightMask;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	FLandscapeClipPaintLayerSettingsEdgeNoiseMask EdgeNoiseMask;
 };

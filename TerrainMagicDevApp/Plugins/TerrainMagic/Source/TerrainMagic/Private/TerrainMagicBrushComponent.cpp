@@ -225,15 +225,15 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 
 	HandleSoloClipLogic(LandscapeClips);
 
-	if (BufferRenderTarget == nullptr)
+	if (BufferRenderTargetForHeight == nullptr)
 	{
-		BufferRenderTarget = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
+		BufferRenderTargetForHeight = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
 	}
 
 	// Copy the Input HeightMap at the beginning
 	CopyRTMaterial->SetTextureParameterValue("RenderTarget", InputHeightMap);
-	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
-	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTargetForHeight);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTargetForHeight, CopyRTMaterial);
 	
 	for (ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
@@ -250,7 +250,7 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		// Apply Params
 		TArray<FTerrainMagicMaterialParam> Params = {};
 		
-		Params.Push({"HeightRT", BufferRenderTarget});
+		Params.Push({"HeightRT", BufferRenderTargetForHeight});
 		Params.Push({"LandscapeLocation", LandscapeTransform.GetLocation()});
 		Params.Push({"LandscapeScale", LandscapeTransform.GetScale3D()});
 		Params.Push({"LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0)});
@@ -260,15 +260,15 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 		Params.Push({"ClipSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0)});
 		Params.Push({"ClipRotationInDegrees", LandscapeClip->GetActorRotation().Euler()});
 
-		LandscapeClip->ApplyMaterialParams(Params);
+		LandscapeClip->ApplyMaterialParamsForHeight(Params);
 		
 		// Render the Clip
-		Manager->RenderHeightMap(LandscapeClip->Material);
+		Manager->RenderHeightMap(LandscapeClip->MaterialForHeight);
 
 		// Copy the NewHeightMap to the Buffer
 		CopyRTMaterial->SetTextureParameterValue("RenderTarget", HeightRenderTarget);
-		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTarget);
-		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTarget, CopyRTMaterial);
+		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTargetForHeight);
+		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTargetForHeight, CopyRTMaterial);
 	}
 
 	// This will prevent us from a memory leak where holding a render target causes some issues.
@@ -278,19 +278,138 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextu
 	return HeightRenderTarget;
 }
 
-bool UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
+UTextureRenderTarget2D* UTerrainMagicBrushComponent::PaintLandscapeClips(FName LayerName,
+	UTextureRenderTarget2D* InputWeightMap)
 {
-	bool bNeedsInvalidation = false;
+	ATerrainMagicManager* Manager = EnsureManager();
+	
+	UTextureRenderTarget2D* WeightRenderTarget = Manager->EnsureWeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), WeightRenderTarget);
+	
+	TArray<ALandscapeClip*> LandscapeClips = Manager->GetAllLandscapeClips();
+
+	if (LandscapeClips.Num() == 0)
+	{
+		return InputWeightMap;
+	}
+
+	HandleSoloClipLogic(LandscapeClips);
+
+	if (BufferRenderTargetForWeight == nullptr)
+	{
+		BufferRenderTargetForWeight = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
+	}
+
+	// Copy the Input HeightMap at the beginning
+	CopyRTMaterial->SetTextureParameterValue("RenderTarget", InputWeightMap);
+	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTargetForWeight);
+	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTargetForWeight, CopyRTMaterial);
+	
+	for (ALandscapeClip* LandscapeClip: LandscapeClips)
+	{
+		// Set landscape information where actor can use to position it relative to the landscape
+		LandscapeClip->LandscapeLocation = LandscapeTransform.GetLocation();
+		LandscapeClip->LandscapeScale = LandscapeTransform.GetScale3D();
+		LandscapeClip->LandscapeSize = FVector(LandscapeSize.X, LandscapeSize.Y, 0);
+		
+		if (!LandscapeClip->IsEnabled())
+		{
+			continue;
+		}
+	
+		// Check whether this clip needs to run for this paint layer
+		FLandscapeClipPaintLayerSettings RelatedPaintLayerSettings;
+		bool bFoundPaintLayer = false;
+		for (FLandscapeClipPaintLayerSettings PaintLayerSettings: LandscapeClip->GetPaintLayerSettings())
+		{
+			if (PaintLayerSettings.PaintLayer == LayerName)
+			{
+				bFoundPaintLayer = true;
+				RelatedPaintLayerSettings = PaintLayerSettings;
+				break;
+			}
+	
+			for (FName PaintLayer: PaintLayerSettings.AdditionalPaintLayers)
+			{
+				if (PaintLayer == LayerName)
+				{
+					bFoundPaintLayer = true;
+					RelatedPaintLayerSettings = PaintLayerSettings;
+					break;
+				}
+			}
+	
+			if (bFoundPaintLayer)
+			{
+				break;
+			}
+		}
+	
+		if (!bFoundPaintLayer)
+		{
+			continue;
+		}
+		
+		// Apply Params
+		TArray<FTerrainMagicMaterialParam> Params = {};
+		
+		Params.Push({"HeightRT", Manager->GetHeightMap()});
+		Params.Push({"LandscapeLocation", LandscapeTransform.GetLocation()});
+		Params.Push({"LandscapeScale", LandscapeTransform.GetScale3D()});
+		Params.Push({"LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0)});
+		Params.Push({"RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0)});
+	
+		Params.Push({"ClipRoot", LandscapeClip->HeightMapRoot});
+		Params.Push({"ClipSizeInCM", FVector(LandscapeClip->HeightMapSizeInCM.X, LandscapeClip->HeightMapSizeInCM.Y, 0)});
+		Params.Push({"ClipRotationInDegrees", LandscapeClip->GetActorRotation().Euler()});
+	
+		Params.Push({"WeightRT", BufferRenderTargetForWeight});
+	
+		LandscapeClip->ApplyMaterialParamsForWeight(Params, RelatedPaintLayerSettings);
+		
+		// Render the Clip
+		Manager->RenderWeightMap(LayerName, LandscapeClip->MaterialForWeight);
+	
+		// Copy the NewHeightMap to the Buffer
+		CopyRTMaterial->SetTextureParameterValue("RenderTarget", WeightRenderTarget);
+		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BufferRenderTargetForWeight);
+		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BufferRenderTargetForWeight, CopyRTMaterial);
+	}
+
+	// This will prevent us from a memory leak where holding a render target causes some issues.
+	// It happens when reloading the map inside the Editor
+	CopyRTMaterial->ClearParameterValues();
+	
+	return WeightRenderTarget;
+}
+
+FLandscapeClipsInvalidationResponse UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
+{
+	FLandscapeClipsInvalidationResponse Response;
+	Response.bHasInvalidated = false;
 	const ATerrainMagicManager* Manager = EnsureManager();
 
+	TSet<FName> PaintLayers;
 	for (ALandscapeClip* LandscapeClip: Manager->GetAllLandscapeClips())
 	{
 		if (LandscapeClip->bNeedsInvalidation)
 		{
-			bNeedsInvalidation = true;
+			Response.bHasInvalidated  = true;
 		}
 		LandscapeClip->bNeedsInvalidation = false;
+
+		// Finding Paint Layers
+		for(const FLandscapeClipPaintLayerSettings PaintLayerSettings: LandscapeClip->GetPaintLayerSettings())
+		{
+			PaintLayers.Add(PaintLayerSettings.PaintLayer);
+			for(const FName AdditionalPaintLayer: PaintLayerSettings.AdditionalPaintLayers)
+			{
+				PaintLayers.Add(AdditionalPaintLayer);
+			}
+		}
 	}
 
-	return bNeedsInvalidation;
+	Response.AffectedPaintLayers = PaintLayers.Array();
+	
+	return Response;
 }

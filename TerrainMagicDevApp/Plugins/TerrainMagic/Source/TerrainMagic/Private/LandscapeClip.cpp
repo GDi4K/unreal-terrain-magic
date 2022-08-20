@@ -180,11 +180,11 @@ void ALandscapeClip::_MatchLandscapeSize()
 	_Invalidate();
 }
 
-void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Params)
+void ALandscapeClip::ApplyMaterialParamsForHeight(TArray<FTerrainMagicMaterialParam> Params)
 {
-	if (Material == nullptr)
+	if (MaterialForHeight == nullptr)
 	{
-		Material = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), GetSourceMaterial());
+		MaterialForHeight = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), GetSourceMaterialForHeight());
 	}
 	
 	// Set Input Params
@@ -192,13 +192,13 @@ void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Para
 	{
 		if (Param.Type == TMMP_SCALAR)
 		{
-			Material->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+			MaterialForHeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
 		} else if (Param.Type == TMMP_VECTOR)
 		{
-			Material->SetVectorParameterValue(Param.Name, Param.VectorValue);
+			MaterialForHeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
 		} else if (Param.Type == TMMP_TEXTURE)
 		{
-			Material->SetTextureParameterValue(Param.Name, Param.TextureValue);
+			MaterialForHeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
 		}
 	}
 	
@@ -207,13 +207,99 @@ void ALandscapeClip::ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Para
 	{
 		if (Param.Type == TMMP_SCALAR)
 		{
-			Material->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+			MaterialForHeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
 		} else if (Param.Type == TMMP_VECTOR)
 		{
-			Material->SetVectorParameterValue(Param.Name, Param.VectorValue);
+			MaterialForHeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
 		} else if (Param.Type == TMMP_TEXTURE)
 		{
-			Material->SetTextureParameterValue(Param.Name, Param.TextureValue);
+			MaterialForHeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
+		}
+	}
+}
+
+void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialParam> Params, FLandscapeClipPaintLayerSettings PaintLayerSettings)
+{
+	if (MaterialForWeight == nullptr)
+	{
+		const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Weight.M_TM_LandscapeClip_Weight";
+		UMaterial* SourceMaterial =  Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
+		MaterialForWeight = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
+	}
+
+	Params.Add({"WeightBrightness", PaintLayerSettings.WeightBrightness});
+	Params.Add({"WeightContrast", PaintLayerSettings.WeightContrast});
+	Params.Add({"PaintMode", static_cast<float>(PaintLayerSettings.PaintMode)});
+
+	Params.Add({"TextureMapMaskEnabled", PaintLayerSettings.TextureMapMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"TextureMapMaskBrightness", PaintLayerSettings.TextureMapMask.Brightness});
+	Params.Add({"TextureMapMaskContrast", PaintLayerSettings.TextureMapMask.Contrast});
+	Params.Add({"TextureMapMaskTexture", PaintLayerSettings.TextureMapMask.Texture});
+
+	Params.Add({"HeightMaskEnabled", PaintLayerSettings.HeightMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"HeightMaskRangeStart", PaintLayerSettings.HeightMask.RangeStart});
+	Params.Add({"HeightMaskRangeEnd", PaintLayerSettings.HeightMask.RangeEnd});
+	Params.Add({"HeightMaskContrast", PaintLayerSettings.HeightMask.Contrast});
+	Params.Add({"HeightMaskBrightness", PaintLayerSettings.HeightMask.Brightness});
+	Params.Add({"HeightMaskInvert", PaintLayerSettings.HeightMask.Invert? 1.0f : 0.0f});
+
+	Params.Add({"NormalMaskEnabled", PaintLayerSettings.NormalMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"NormalMaskDirection", PaintLayerSettings.NormalMask.Direction});
+	Params.Add({"NormalMaskContrast", PaintLayerSettings.NormalMask.Contrast});
+	Params.Add({"NormalMaskBrightness", PaintLayerSettings.NormalMask.Brightness});
+	Params.Add({"NormalSmoothingMultiplier", PaintLayerSettings.NormalMask.NormalSmoothMultiplier});
+	Params.Add({"NormalMaskInvert", PaintLayerSettings.NormalMask.Invert? 1.0f : 0.0f});
+
+	Params.Add({"LocationMaskEnabled", PaintLayerSettings.LocationMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"LocationMaskUVCenter", FVector(PaintLayerSettings.LocationMask.UVCenter, 0)});
+	Params.Add({"LocationMaskExpandScale", PaintLayerSettings.LocationMask.ExpandScale});
+	Params.Add({"LocationMaskContrast", PaintLayerSettings.LocationMask.Contrast});
+	Params.Add({"LocationMaskBrightness", PaintLayerSettings.LocationMask.Brightness});
+	Params.Add({"LocationMaskInvert", PaintLayerSettings.LocationMask.Invert? 1.0f : 0.0f});
+
+	Params.Add({"EdgeNoiseMaskEnabled", PaintLayerSettings.EdgeNoiseMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"EdgeNoiseMaskScale", PaintLayerSettings.EdgeNoiseMask.Scale});
+	Params.Add({"EdgeNoiseMaskContrast", PaintLayerSettings.EdgeNoiseMask.Contrast});
+	Params.Add({"EdgeNoiseMaskRangeStart", PaintLayerSettings.EdgeNoiseMask.RangeStart});
+	Params.Add({"EdgeNoiseMaskRangeEnd", PaintLayerSettings.EdgeNoiseMask.RangeEnd});
+	Params.Add({"EdgeNoiseMaskSeed", PaintLayerSettings.EdgeNoiseMask.Seed});
+
+	Params.Add({"AreaNoiseMaskEnabled", PaintLayerSettings.AreaNoiseMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"AreaNoiseMaskScale", PaintLayerSettings.AreaNoiseMask.Scale});
+	Params.Add({"AreaNoiseMaskRangeStart", PaintLayerSettings.AreaNoiseMask.RangeStart});
+	Params.Add({"AreaNoiseMaskRangeEnd", PaintLayerSettings.AreaNoiseMask.RangeEnd});
+	Params.Add({"AreaNoiseMaskSeed", PaintLayerSettings.AreaNoiseMask.Seed});
+
+	// Set Input Params
+	for (FTerrainMagicMaterialParam Param: Params)
+	{
+		if (Param.Type == TMMP_SCALAR)
+		{
+			MaterialForWeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+		} else if (Param.Type == TMMP_VECTOR)
+		{
+			MaterialForWeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
+		} else if (Param.Type == TMMP_TEXTURE)
+		{
+			MaterialForWeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
+		}
+	}
+
+	// Set ChildClass Params
+	// With this, we can get fade params, etc.
+	// So, even for the weight material, this is useful
+	
+	for (FTerrainMagicMaterialParam Param: GetMaterialParams())
+	{
+		if (Param.Type == TMMP_SCALAR)
+		{
+			MaterialForWeight->SetScalarParameterValue(Param.Name, Param.ScalarValue);
+		} else if (Param.Type == TMMP_VECTOR)
+		{
+			MaterialForWeight->SetVectorParameterValue(Param.Name, Param.VectorValue);
+		} else if (Param.Type == TMMP_TEXTURE)
+		{
+			MaterialForWeight->SetTextureParameterValue(Param.Name, Param.TextureValue);
 		}
 	}
 }
@@ -228,7 +314,7 @@ UTexture* ALandscapeClip::GetHeightMap() const
 	return nullptr;
 }
 
-UMaterial* ALandscapeClip::GetSourceMaterial() const
+UMaterial* ALandscapeClip::GetSourceMaterialForHeight() const
 {
 	return nullptr;
 }
@@ -264,5 +350,10 @@ bool ALandscapeClip::IsEnabled() const
 void ALandscapeClip::SetEnabled(bool bEnabled)
 {
 	
+}
+
+TArray<FLandscapeClipPaintLayerSettings> ALandscapeClip::GetPaintLayerSettings() const
+{
+	return {};
 }
 

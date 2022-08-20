@@ -9,6 +9,7 @@
 #include "Types/FTerrainMagicRemap.h"
 #include "Types/OutlineComponent.h"
 #include "Types/TerrainMagicMaterialParam.h"
+#include "Types/LandscapeClipPaintLayerSettings.h"
 #include "LandscapeClip.generated.h"
 
 UENUM(BlueprintType)
@@ -58,7 +59,7 @@ public:
 	
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
 	virtual UTexture* GetHeightMap() const;
-	virtual UMaterial* GetSourceMaterial() const;
+	virtual UMaterial* GetSourceMaterialForHeight() const;
 	virtual int GetHeightMultiplier() const;
 	virtual FVector2D GetClipBaseSize() const;
 	virtual void SetClipBaseSize(FVector2D BaseSize);
@@ -66,6 +67,8 @@ public:
 	virtual int GetZIndex() const;
 	virtual bool IsEnabled() const;
 	virtual void SetEnabled(bool bEnabled);
+	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const;
+	
 	void _Invalidate();
 	void _ToggleOutline();
 	void _ToggleSolo();
@@ -101,13 +104,16 @@ public:
 	FVector LandscapeSize= {};
 	
 	UPROPERTY()
-	UMaterialInstanceDynamic* Material = nullptr;
+	UMaterialInstanceDynamic* MaterialForHeight = nullptr;
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* MaterialForWeight = nullptr;
 
 	UPROPERTY()
 	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
 
-	void ApplyMaterialParams(TArray<FTerrainMagicMaterialParam> Array);
-	
+	void ApplyMaterialParamsForHeight(TArray<FTerrainMagicMaterialParam> Array);
+	void ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialParam> Array, FLandscapeClipPaintLayerSettings PaintLayerSettings);
 
 	FVector HeightMapRoot = {0, 0, 0};
 	FVector2D HeightMapSizeInCM = {};

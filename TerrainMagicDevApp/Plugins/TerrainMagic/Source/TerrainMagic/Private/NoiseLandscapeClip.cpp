@@ -9,7 +9,7 @@ ANoiseLandscapeClip::ANoiseLandscapeClip()
 {
 }
 
-UMaterial* ANoiseLandscapeClip::GetSourceMaterial() const
+UMaterial* ANoiseLandscapeClip::GetSourceMaterialForHeight() const
 {
 	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Noise.M_TM_LandscapeClip_Noise";
 	return Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
@@ -81,5 +81,10 @@ int ANoiseLandscapeClip::GetZIndex() const
 UTexture* ANoiseLandscapeClip::GetHeightMap() const
 {
 	return nullptr;
+}
+
+TArray<FLandscapeClipPaintLayerSettings> ANoiseLandscapeClip::GetPaintLayerSettings() const
+{
+	return PaintLayerSettings;
 }
 

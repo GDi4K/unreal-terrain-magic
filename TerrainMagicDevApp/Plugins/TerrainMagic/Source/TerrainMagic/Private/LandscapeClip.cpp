@@ -264,6 +264,12 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 	Params.Add({"EdgeNoiseMaskRangeEnd", PaintLayerSettings.EdgeNoiseMask.RangeEnd});
 	Params.Add({"EdgeNoiseMaskSeed", PaintLayerSettings.EdgeNoiseMask.Seed});
 
+	Params.Add({"AreaNoiseMaskEnabled", PaintLayerSettings.AreaNoiseMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"AreaNoiseMaskScale", PaintLayerSettings.AreaNoiseMask.Scale});
+	Params.Add({"AreaNoiseMaskRangeStart", PaintLayerSettings.AreaNoiseMask.RangeStart});
+	Params.Add({"AreaNoiseMaskRangeEnd", PaintLayerSettings.AreaNoiseMask.RangeEnd});
+	Params.Add({"AreaNoiseMaskSeed", PaintLayerSettings.AreaNoiseMask.Seed});
+
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)
 	{

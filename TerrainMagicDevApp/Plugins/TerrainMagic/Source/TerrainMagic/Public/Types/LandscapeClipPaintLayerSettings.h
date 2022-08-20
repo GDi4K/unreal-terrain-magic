@@ -81,6 +81,31 @@ struct FLandscapeClipPaintLayerSettingsNormalMask
 };
 
 USTRUCT(BlueprintType)
+struct FLandscapeClipPaintLayerSettingsLocationMask
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool Enabled = false;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector2D UVCenter = {0.5, 0.5};
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float ExpandScale = 0.2;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Brightness = 1.0;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Contrast = 1.0;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool Invert = false;
+};
+
+
+USTRUCT(BlueprintType)
 struct FLandscapeClipPaintLayerSettings
 {
 	GENERATED_BODY()
@@ -101,11 +126,14 @@ struct FLandscapeClipPaintLayerSettings
 	float WeightContrast = 1.0;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
-	FLandscapeClipPaintLayerSettingsHeightMask HeightMask;
+	FLandscapeClipPaintLayerSettingsLocationMask LocationMask;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsNormalMask NormalMask;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsTextureMapMask TextureMapMask;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	FLandscapeClipPaintLayerSettingsHeightMask HeightMask;
 };

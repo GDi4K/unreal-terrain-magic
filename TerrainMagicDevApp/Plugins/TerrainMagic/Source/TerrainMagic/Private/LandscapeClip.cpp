@@ -249,6 +249,13 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 	Params.Add({"NormalMaskBrightness", PaintLayerSettings.NormalMask.Brightness});
 	Params.Add({"NormalSmoothingMultiplier", PaintLayerSettings.NormalMask.NormalSmoothMultiplier});
 	Params.Add({"NormalMaskInvert", PaintLayerSettings.NormalMask.Invert? 1.0f : 0.0f});
+
+	Params.Add({"LocationMaskEnabled", PaintLayerSettings.LocationMask.Enabled? 1.0f : 0.0f});
+	Params.Add({"LocationMaskUVCenter", FVector(PaintLayerSettings.LocationMask.UVCenter, 0)});
+	Params.Add({"LocationMaskExpandScale", PaintLayerSettings.LocationMask.ExpandScale});
+	Params.Add({"LocationMaskContrast", PaintLayerSettings.LocationMask.Contrast});
+	Params.Add({"LocationMaskBrightness", PaintLayerSettings.LocationMask.Brightness});
+	Params.Add({"LocationMaskInvert", PaintLayerSettings.LocationMask.Invert? 1.0f : 0.0f});
 	
 	// Set Input Params
 	for (FTerrainMagicMaterialParam Param: Params)

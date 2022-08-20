@@ -7,11 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Remove debug messages and logs.">
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/WeightMapLandscapeClip.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/WeightMapLandscapeClip.h" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +26,6 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_4.27/Engine/Source/Runtime/Engine/Private/UnrealEngine.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -177,14 +174,8 @@
       <workItem from="1660631986134" duration="2742000" />
       <workItem from="1660802225318" duration="3808000" />
       <workItem from="1660833989959" duration="2187000" />
-      <workItem from="1660881961927" duration="9254000" />
-    </task>
-    <task id="LOCAL-00031" summary="Support rendering multiple Clips">
-      <created>1657178106360</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1657178106360</updated>
+      <workItem from="1660881961927" duration="9369000" />
+      <workItem from="1660969947783" duration="1461000" />
     </task>
     <task id="LOCAL-00032" summary="Refactor logic on getting all actors.&#10;Now we use a method exposed by the Manager.">
       <created>1657180012069</created>
@@ -522,7 +513,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660889049587</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Introduce a WeightMap Landscape Clip.">
+      <created>1660892474633</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1660892474634</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +541,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Implement accessing paint layer data from Blueprints." />
     <MESSAGE value="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush." />
     <MESSAGE value="Introduce a PaintLayer Data Encoder." />
     <MESSAGE value="Attach the PaintLayer Info properly." />
@@ -568,6 +565,7 @@
     <MESSAGE value="Enable Masks on when selected Mask paint mode." />
     <MESSAGE value="Adding PaintLayer support for NoiseLandscapeClip." />
     <MESSAGE value="Remove debug messages and logs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove debug messages and logs." />
+    <MESSAGE value="Introduce a WeightMap Landscape Clip." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce a WeightMap Landscape Clip." />
   </component>
 </project>

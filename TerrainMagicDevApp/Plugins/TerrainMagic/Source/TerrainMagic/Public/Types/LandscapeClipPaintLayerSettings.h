@@ -19,16 +19,16 @@ struct FLandscapeClipPaintLayerSettingsTextureMapMask
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Enabled = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	UTexture* Texture = nullptr;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Brightness = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Contrast = 1.0;
 };
 
@@ -37,22 +37,22 @@ struct FLandscapeClipPaintLayerSettingsHeightMask
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Enabled = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float RangeStart = 0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float RangeEnd = 2000;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Brightness = 1.0;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Contrast = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Invert = false;
 };
 
@@ -61,22 +61,22 @@ struct FLandscapeClipPaintLayerSettingsNormalMask
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Enabled = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	FVector Direction = {0, 0, 1};
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Brightness = 1.0;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Contrast = 10.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float NormalSmoothMultiplier = 10.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Invert = false;
 };
 
@@ -85,22 +85,22 @@ struct FLandscapeClipPaintLayerSettingsLocationMask
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Enabled = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	FVector2D UVCenter = {0.5, 0.5};
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float ExpandScale = 0.2;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Brightness = 1.0;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Contrast = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Invert = false;
 };
 
@@ -109,19 +109,19 @@ struct FLandscapeClipPaintLayerSettingsAreaNoiseMask
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Enabled = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Scale = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float RangeStart = 0.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float RangeEnd= 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	FVector Seed = {0, 0, 0};
 };
 
@@ -130,22 +130,22 @@ struct FLandscapeClipPaintLayerSettingsEdgeNoiseMask
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	bool Enabled = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Scale = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float Contrast = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float RangeStart = 0.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float RangeEnd= 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	FVector Seed = {0, 0, 0};
 };
 
@@ -155,36 +155,36 @@ struct FLandscapeClipPaintLayerSettings
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	FName PaintLayer;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	TArray<FName> AdditionalPaintLayers;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	TEnumAsByte<FLandscapeClipPaintLayerSettingsPaintMode> PaintMode = LCPM_MASKS;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float WeightBrightness = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere)
 	float WeightContrast = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsLocationMask LocationMask;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsNormalMask NormalMask;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsTextureMapMask TextureMapMask;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsHeightMask HeightMask;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsAreaNoiseMask AreaNoiseMask;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
+	UPROPERTY(Category="TerrainMagic", BlueprintReadWrite, EditAnywhere, meta=(EditCondition="PaintMode == 3"))
 	FLandscapeClipPaintLayerSettingsEdgeNoiseMask EdgeNoiseMask;
 };

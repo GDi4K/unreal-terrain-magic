@@ -15,10 +15,10 @@ struct FLandscapeClipsInvalidationResponse
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="TerrainMagic")
 	bool bHasInvalidated = false;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="TerrainMagic")
 	TArray<FName> AffectedPaintLayers = {};
 };
 

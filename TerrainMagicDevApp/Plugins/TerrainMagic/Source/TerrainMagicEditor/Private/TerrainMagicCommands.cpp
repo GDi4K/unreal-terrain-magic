@@ -4,6 +4,8 @@
 
 #include "TerrainMagicCommands.h"
 #include "InputCoreTypes.h"
+#include "LandscapeClip.h"
+#include "Engine/Selection.h"
 #define LOCTEXT_NAMESPACE "FTerrainMagicCommands"
 
 void FTerrainMagicCommands::RegisterCommands()
@@ -17,13 +19,19 @@ void FTerrainMagicCommands::RegisterCommands()
 
 void FTerrainMagicCommands::OnInvalidateLandscapeClips() const
 {
-	// Put your "OnButtonClicked" stuff here
-	const FText DialogText = FText::Format(
-							LOCTEXT("TerrainMagic Invalidated!", "We clicked it: {0}, {1}"),
-							FText::FromString(TEXT("FClickMeModule::PluginButtonClicked()")),
-							FText::FromString(TEXT("ClickMe.cpp"))
-					   );
-	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
+	TGuardValue<bool> UnattendedScriptGuard(GIsRunningUnattendedScript, true);
+	
+	for (FSelectionIterator Iter(*GEditor->GetSelectedActors()); Iter; ++Iter)
+	{
+		ALandscapeClip* Clip = Cast<ALandscapeClip>(*Iter);
+		if (Clip)
+		{
+			Clip->_Invalidate();
+			UE_LOG(LogTemp, Display, TEXT("Invalidating Landscape Clip: %s"), *Clip->GetName())
+		}
+	}
+
+	
 }
 
 #undef LOCTEXT_NAMESPACE

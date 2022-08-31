@@ -109,6 +109,30 @@ void ATerrainMagicManager::PopulateLastZIndex()
 	}
 }
 
+void ATerrainMagicManager::HandleInvalidateKeyEvent()
+{
+	UE_LOG(LogTemp, Warning, TEXT("It's Invalidated!!!"))
+}
+
+void ATerrainMagicManager::SetupInputHandling()
+{
+	// Initialize our component
+	InputComponent = NewObject<UInputComponent>(this);
+	InputComponent->RegisterComponent();
+	if (InputComponent)
+	{
+		InputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &ATerrainMagicManager::HandleInvalidateKeyEvent);
+		// Bind inputs here
+		// InputComponent->BindAction("Jump", IE_Pressed, this, &AUnrealisticPawn::Jump);
+		// etc...
+
+		// Now hook up our InputComponent to one in a Player
+		// Controller, so that input flows down to us
+		EnableInput(GetWorld()->GetFirstPlayerController());
+		UE_LOG(LogTemp, Warning, TEXT("TerrainMagic Input Handling is done!"))
+	}    
+}
+
 // Sets default values
 ATerrainMagicManager::ATerrainMagicManager()
 {

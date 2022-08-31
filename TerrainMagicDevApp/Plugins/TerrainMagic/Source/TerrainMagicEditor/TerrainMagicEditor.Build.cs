@@ -16,12 +16,17 @@ public class TerrainMagicEditor : ModuleRules
 		{
 			"Core", "CoreUObject", "Engine",
 			"UnrealEd", "DetailCustomizations",
-			"PropertyEditor", "EditorStyle"
+			"PropertyEditor", "EditorStyle",
 		});
 		
 		PrivateDependencyModuleNames.AddRange(new []
 		{
-			"Slate", "SlateCore", "TerrainMagic"
+			"Slate", "SlateCore", "TerrainMagic",
+			"InputCore",
+			"ToolMenus", "Projects", "EditorStyle",
+#if UE_5_0_OR_LATER
+                "EditorFramework",
+#endif
 		});
 	}
 }

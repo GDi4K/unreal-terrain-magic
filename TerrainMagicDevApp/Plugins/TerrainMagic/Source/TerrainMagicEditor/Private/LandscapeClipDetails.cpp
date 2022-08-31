@@ -52,6 +52,7 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 			[
 				SNew(SButton)
 				.Text(LOCTEXT("InvalidateButton", "Invalidate"))
+				.ToolTipText(LOCTEXT("InvalidateButtonToolTip", "Use ALT+Q or Editor Toolbar"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
 			]
 		];

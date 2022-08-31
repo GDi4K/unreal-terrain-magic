@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
+
+#pragma once
 
 #include "LandscapeClip.h"
 #include "Editor/PropertyEditor/Public/IDetailCustomization.h"

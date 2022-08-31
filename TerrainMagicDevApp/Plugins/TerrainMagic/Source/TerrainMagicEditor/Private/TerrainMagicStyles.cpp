@@ -43,7 +43,7 @@ TSharedRef< FSlateStyleSet > FTerrainMagicStyles::Create()
 	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet(GetStyleSetName()));
 	Style->SetContentRoot(IPluginManager::Get().FindPlugin("TerrainMagic")->GetBaseDir() / TEXT("Resources"));
 	
-	Style->Set("TerrainMagicCommands.InvalidateLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon128"), Icon40x40));
+	Style->Set("TerrainMagicCommands.InvalidateLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon_Invalidate_40"), Icon40x40));
 	return Style;
 }
 

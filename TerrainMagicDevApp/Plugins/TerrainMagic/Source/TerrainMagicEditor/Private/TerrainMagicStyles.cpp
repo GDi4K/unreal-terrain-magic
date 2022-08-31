@@ -6,8 +6,15 @@
 #include "Slate/SlateGameResources.h"
 #include "Interfaces/IPluginManager.h"
 
+#if ENGINE_MAJOR_VERSION == 5
+	#include "Styling/SlateStyleMacros.h"
+#endif
+
 #define RootToContentDir Style->RootToContentDir
-#define IMAGE_BRUSH( RelativePath, ... ) FSlateImageBrush( RootToContentDir( RelativePath, TEXT(".png") ), __VA_ARGS__ )
+
+#if ENGINE_MAJOR_VERSION == 4
+	#define IMAGE_BRUSH( RelativePath, ... ) FSlateImageBrush( RootToContentDir( RelativePath, TEXT(".png") ), __VA_ARGS__ )
+#endif
 
 TSharedPtr<FSlateStyleSet> FTerrainMagicStyles::StyleInstance = nullptr;
 
@@ -42,8 +49,13 @@ TSharedRef< FSlateStyleSet > FTerrainMagicStyles::Create()
 {
 	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet(GetStyleSetName()));
 	Style->SetContentRoot(IPluginManager::Get().FindPlugin("TerrainMagic")->GetBaseDir() / TEXT("Resources"));
-	
+
+#if ENGINE_MAJOR_VERSION == 5
+	Style->Set("TerrainMagicCommands.InvalidateLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon_Invalidate_20"), Icon20x20));
+#else
 	Style->Set("TerrainMagicCommands.InvalidateLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon_Invalidate_40"), Icon40x40));
+#endif
+	
 	return Style;
 }
 

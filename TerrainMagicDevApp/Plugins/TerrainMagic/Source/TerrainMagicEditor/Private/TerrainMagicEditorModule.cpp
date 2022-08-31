@@ -41,8 +41,14 @@ void FTerrainMagicEditorModule::RegisterMenus()
 {
 	// Owner will be used for cleanup in call to UToolMenus::UnregisterOwner
 	FToolMenuOwnerScoped OwnerScoped(this);
+
+#if ENGINE_MAJOR_VERSION == 5
+	UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.PlayToolBar");
+	FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("PluginTools");
+#else
 	UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar");
 	FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("Settings");
+#endif
 	
 	const FTerrainMagicCommands Commands = FTerrainMagicCommands::Get();
 	FToolMenuEntry& Entry = Section.AddEntry(FToolMenuEntry::InitToolBarButton(Commands.InvalidateLandscapeClipsAction));

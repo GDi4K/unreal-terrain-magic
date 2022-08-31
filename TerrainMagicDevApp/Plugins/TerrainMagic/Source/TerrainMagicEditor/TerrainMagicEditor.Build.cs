@@ -22,6 +22,7 @@ public class TerrainMagicEditor : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new []
 		{
 			"Slate", "SlateCore", "TerrainMagic",
+			"InputCore",
 			"ToolMenus", "Projects", "EditorStyle",
 #if UE_5_0_OR_LATER
                 "EditorFramework",

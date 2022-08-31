@@ -40,10 +40,10 @@ const FVector2D Icon40x40(40.0f, 40.0f);
 
 TSharedRef< FSlateStyleSet > FTerrainMagicStyles::Create()
 {
-	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet("TerrainMagicStyle"));
+	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet(GetStyleSetName()));
 	Style->SetContentRoot(IPluginManager::Get().FindPlugin("TerrainMagic")->GetBaseDir() / TEXT("Resources"));
 	
-	Style->Set("TerrainMagicCommands.InvalidateLandscapeClips", new IMAGE_BRUSH(TEXT("Icon128"), Icon40x40));
+	Style->Set("TerrainMagicCommands.InvalidateLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon128"), Icon40x40));
 	return Style;
 }
 

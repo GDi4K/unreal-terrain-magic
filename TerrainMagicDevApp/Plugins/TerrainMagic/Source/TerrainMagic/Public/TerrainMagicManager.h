@@ -37,6 +37,7 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 	void PopulateLastZIndex();
+	void HandleInvalidateKeyEvent();
 
 	UPROPERTY()
 	int LastZIndex = -2002;
@@ -94,6 +95,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	static FTerrainMagicPaintLayerResult FindLandscapePaintLayer(FVector Location);
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TMRemove")
+	void SetupInputHandling();
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	void ResetHeightMapCache();

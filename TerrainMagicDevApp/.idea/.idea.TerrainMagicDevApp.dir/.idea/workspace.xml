@@ -7,9 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Implement the Invalidating Functionality.">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add a nice icon.">
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,14 +184,7 @@
       <workItem from="1661915221234" duration="818000" />
       <workItem from="1661941063997" duration="900000" />
       <workItem from="1661943187661" duration="2906000" />
-      <workItem from="1661952539054" duration="2564000" />
-    </task>
-    <task id="LOCAL-00036" summary="Refactor TerrainMagic material for resuability.">
-      <created>1657501786105</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1657501786105</updated>
+      <workItem from="1661952539054" duration="3041000" />
     </task>
     <task id="LOCAL-00037" summary="Load the CopyMaterial from C++.">
       <created>1657513280841</created>
@@ -530,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661954265366</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Add a nice icon.">
+      <created>1661955493739</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1661955493739</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +550,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Do not crash when finding paint layers but no data is found." />
     <MESSAGE value="Now, the order of the InfoBrush won't affect the paint layer processing." />
     <MESSAGE value="Introduce the basic class structure for NoiseLandscapeClips." />
     <MESSAGE value="Add some basic noise implementation." />
@@ -576,6 +574,7 @@
     <MESSAGE value="Add Edge Noise Scale." />
     <MESSAGE value="Integrate the Button into the Editor Toolbar." />
     <MESSAGE value="Implement the Invalidating Functionality." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement the Invalidating Functionality." />
+    <MESSAGE value="Add a nice icon." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a nice icon." />
   </component>
 </project>

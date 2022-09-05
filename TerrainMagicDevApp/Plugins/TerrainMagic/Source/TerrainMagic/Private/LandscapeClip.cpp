@@ -129,7 +129,13 @@ void ALandscapeClip::Tick(float DeltaTime)
 			static_cast<float>(GetHeightMultiplier()/2.0)
 		});
 
-		PreviewMaterial->SetTextureParameterValue("HeightMap", GetHeightMap());
+		if (PreviewMaterial && IsValid(PreviewMaterial))
+		{
+			PreviewMaterial->SetTextureParameterValue("HeightMap", GetHeightMap());
+		} else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("PreviewMaterial is missing!"))
+		}
 	}
 }
 

@@ -7,8 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add UE5 support.">
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add missing copyright notice.">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +26,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" root0="FORCE_HIGHLIGHTING" />
@@ -185,14 +186,8 @@
       <workItem from="1661915221234" duration="818000" />
       <workItem from="1661941063997" duration="900000" />
       <workItem from="1661943187661" duration="2906000" />
-      <workItem from="1661952539054" duration="6274000" />
-    </task>
-    <task id="LOCAL-00039" summary="Refactor LandscapeClip Materials.">
-      <created>1657518220735</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1657518220735</updated>
+      <workItem from="1661952539054" duration="6653000" />
+      <workItem from="1662376106196" duration="1269000" />
     </task>
     <task id="LOCAL-00040" summary="Refactor properties in the Editor for ease of use.">
       <created>1657599563063</created>
@@ -530,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661965875570</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Add missing copyright notice.">
+      <created>1661966404512</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1661966404512</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +553,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add some basic noise implementation." />
     <MESSAGE value="Add gradient noise." />
     <MESSAGE value="Apply some noises." />
     <MESSAGE value="Add noise parameters." />
@@ -576,6 +577,7 @@
     <MESSAGE value="Add a nice icon." />
     <MESSAGE value="Add a Tooltip for existing Invalidate button." />
     <MESSAGE value="Add UE5 support." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add UE5 support." />
+    <MESSAGE value="Add missing copyright notice." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add missing copyright notice." />
   </component>
 </project>

@@ -44,7 +44,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category="01-General|Modify Height")
 	float HeightSaturation = 1.0;
 
-	UPROPERTY(BlueprintReadWrite, Category="01-General|Modify Height", meta=(ToolTip="Size of the HeightMap in meters before scaling"))
+	UPROPERTY(EditAnywhere, Category="Actor", meta=(ToolTip="Size of the HeightMap in meters before scaling"))
 	FVector2D HeightMapBaseSize = {1000, 1000};
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Layer Painting|Fading")

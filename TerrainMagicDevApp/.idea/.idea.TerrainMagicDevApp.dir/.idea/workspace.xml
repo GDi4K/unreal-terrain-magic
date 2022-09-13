@@ -7,13 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add missing copyright notice.">
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Config/DefaultTerrainMagic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Config/DefaultTerrainMagic.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/TerrainMagicMaterialParam.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/TerrainMagicMaterialParam.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_RT_HeighChange_Landscape_Clip.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_RT_HeighChange_Landscape_Clip.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,14 +189,8 @@
       <workItem from="1661943187661" duration="2906000" />
       <workItem from="1661952539054" duration="6653000" />
       <workItem from="1662376106196" duration="2317000" />
-      <workItem from="1662963224575" duration="2073000" />
-    </task>
-    <task id="LOCAL-00040" summary="Refactor properties in the Editor for ease of use.">
-      <created>1657599563063</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1657599563064</updated>
+      <workItem from="1662963224575" duration="2162000" />
+      <workItem from="1663059638912" duration="1051000" />
     </task>
     <task id="LOCAL-00041" summary="Add Enable/Disable &amp; Solo support for LandscapeClips.">
       <created>1657874703724</created>
@@ -536,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661966404512</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Add the basic HeightChangeLandscapeClip">
+      <created>1662965394313</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1662965394313</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +556,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add gradient noise." />
     <MESSAGE value="Apply some noises." />
     <MESSAGE value="Add noise parameters." />
     <MESSAGE value="Integrated Noise Settings into the Edior." />
@@ -582,6 +580,7 @@
     <MESSAGE value="Add a Tooltip for existing Invalidate button." />
     <MESSAGE value="Add UE5 support." />
     <MESSAGE value="Add missing copyright notice." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add missing copyright notice." />
+    <MESSAGE value="Add the basic HeightChangeLandscapeClip" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add the basic HeightChangeLandscapeClip" />
   </component>
 </project>

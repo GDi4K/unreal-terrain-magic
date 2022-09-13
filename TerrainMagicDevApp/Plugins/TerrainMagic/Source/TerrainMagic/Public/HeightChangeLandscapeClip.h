@@ -13,6 +13,9 @@ class TERRAINMAGIC_API AHeightChangeLandscapeClip : public ALandscapeClip
 {
 	GENERATED_BODY()
 
+	uint8* SourceData;
+	FUpdateTextureRegion2D WholeTextureRegion;
+
 public:
 	// Sets default values for this actor's properties
 	AHeightChangeLandscapeClip();
@@ -44,6 +47,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
 	UTextureRenderTarget* RenderTarget = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
+	UTexture2D* G16Texture = nullptr;
+
+	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
+	void UpdateTexture();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
 	UMaterialInstanceDynamic* RenderTargetMaterial = nullptr;

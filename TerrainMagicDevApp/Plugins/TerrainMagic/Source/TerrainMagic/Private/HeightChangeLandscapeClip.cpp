@@ -2,6 +2,7 @@
 
 #include "HeightChangeLandscapeClip.h"
 
+#include "AssetRegistry/AssetRegistryModule.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/Material.h"
 #include "Kismet/KismetRenderingLibrary.h"
@@ -28,9 +29,43 @@ AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_RT_HeighChange_Landscape_Clip.M_RT_HeighChange_Landscape_Clip";
 	UMaterial* SourceMaterial = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 	RenderTargetMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
-
+	
 	constexpr int TextureWidth = 2048;
-	G16Texture = UTexture2D::CreateTransient(TextureWidth, TextureWidth, PF_G16);
+
+	// // Create Transient Texture
+	// UPackage* TransientPackage = NewObject<UPackage>(nullptr, TEXT("/Engine/Transient"), RF_Transient);
+	// TransientPackage->AddToRoot();
+	// G16Texture = NewObject<UTexture2D>(TransientPackage, NAME_None, RF_Transient);
+
+	// // Create Serializable Texture (Which is gonna saved in the actor)
+	// // Only difference from the above is, we gave it a name
+	// UPackage* SerializablePackage = NewObject<UPackage>(nullptr, TEXT("/Engine/Transient"), RF_Transient);
+	// SerializablePackage->AddToRoot();
+	// const FString PackageNameSerializable = "GiveSomeName";
+	// G16Texture = NewObject<UTexture2D>(SerializablePackage, *PackageNameSerializable, RF_Transient);
+ 
+	// Persistable Package
+	FString PersistableTextureName = "MyTexture";
+	FString PersistablePackageName = TEXT("/Game/") + PersistableTextureName;
+	UPackage* PersistablePackage = CreatePackage(*PersistablePackageName);
+	PersistablePackage->FullyLoad();
+	G16Texture = NewObject<UTexture2D>(PersistablePackage, *PersistableTextureName, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone);
+
+	G16Texture->PlatformData = new FTexturePlatformData();
+	G16Texture->PlatformData->SizeX = TextureWidth;
+	G16Texture->PlatformData->SizeY = TextureWidth;
+	G16Texture->PlatformData->PixelFormat = EPixelFormat::PF_G16;
+	
+	const int32 NumBlocksX = TextureWidth / GPixelFormats[PF_G16].BlockSizeX;
+	const int32 NumBlocksY = TextureWidth / GPixelFormats[PF_G16].BlockSizeY;
+	FTexture2DMipMap* Mip = new FTexture2DMipMap();
+	G16Texture->PlatformData->Mips.Add(Mip);
+	Mip->SizeX = TextureWidth;
+	Mip->SizeY = TextureWidth;
+	Mip->BulkData.Lock(LOCK_READ_WRITE);
+	Mip->BulkData.Realloc(NumBlocksX * NumBlocksY * GPixelFormats[PF_G16].BlockBytes);
+	Mip->BulkData.Unlock();
+	
 	G16Texture->CompressionSettings = TC_VectorDisplacementmap;
 	G16Texture->SRGB = 0;
 	G16Texture->AddToRoot();
@@ -41,6 +76,18 @@ AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 #endif
 	
 	G16Texture->UpdateResource();
+
+	// Save it
+	PersistablePackage->MarkPackageDirty();
+	FAssetRegistryModule::AssetCreated(G16Texture);
+	G16Texture->MarkPackageDirty();
+	G16Texture->PostEditChange();
+	PersistablePackage->SetDirtyFlag(true);
+		
+
+	// We can call this later on. (Not on the constructor)
+	// FString PackageFileName = FPackageName::LongPackageNameToFilename(PersistablePackageName, FPackageName::GetAssetPackageExtension());
+	// bool bSaved = UPackage::SavePackage(PersistablePackage, G16Texture, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *PackageFileName, GError, nullptr, true, true, SAVE_NoError);
 	
 	// Allocate Data
 	constexpr  int BytesPerPixel = 2;

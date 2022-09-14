@@ -50,7 +50,8 @@ AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 	UPackage* PersistablePackage = CreatePackage(*PersistablePackageName);
 	PersistablePackage->FullyLoad();
 	G16Texture = NewObject<UTexture2D>(PersistablePackage, *PersistableTextureName, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone);
-
+	
+	
 	G16Texture->PlatformData = new FTexturePlatformData();
 	G16Texture->PlatformData->SizeX = TextureWidth;
 	G16Texture->PlatformData->SizeY = TextureWidth;

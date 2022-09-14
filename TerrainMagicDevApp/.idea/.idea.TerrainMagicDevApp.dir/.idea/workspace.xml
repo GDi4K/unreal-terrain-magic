@@ -8,8 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/G16Texture.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/G16Texture.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,14 +195,9 @@
       <workItem from="1663059638912" duration="1869000" />
       <workItem from="1663093103041" duration="5969000" />
       <workItem from="1663120070344" duration="3420000" />
-      <workItem from="1663130091998" duration="1655000" />
-    </task>
-    <task id="LOCAL-00043" summary="Start working on the material.">
-      <created>1657998538254</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1657998538254</updated>
+      <workItem from="1663130091998" duration="2144000" />
+      <workItem from="1663133189032" duration="1872000" />
+      <workItem from="1663198145404" duration="1549000" />
     </task>
     <task id="LOCAL-00044" summary="Add preview toggling support.">
       <created>1658036217464</created>
@@ -537,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663099227950</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="Allow to save G16 textures.">
+      <created>1663132220256</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1663132220256</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -562,7 +567,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Integrated Noise Settings into the Edior." />
     <MESSAGE value="Introduce ZIndex support for sorting Landscape Clips." />
     <MESSAGE value="Fixed the noise algorithm for better control." />
     <MESSAGE value="Refactor existing RenderLandscapeClips code." />
@@ -587,6 +591,7 @@
     <MESSAGE value="Add the basic HeightChangeLandscapeClip" />
     <MESSAGE value="Start working with the custom RenderTarget." />
     <MESSAGE value="Create G16 Textures." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create G16 Textures." />
+    <MESSAGE value="Allow to save G16 textures." />
+    <option name="LAST_COMMIT_MESSAGE" value="Allow to save G16 textures." />
   </component>
 </project>

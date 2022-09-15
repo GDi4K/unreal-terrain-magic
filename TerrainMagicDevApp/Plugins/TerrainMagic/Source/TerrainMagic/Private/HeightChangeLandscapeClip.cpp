@@ -30,29 +30,58 @@ AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 	UMaterial* SourceMaterial = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 	RenderTargetMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
 
-	constexpr int32 TextureWidth = 2048;
+	const FName MapBoxTexturePath = "/TerrainMagic/HeightMaps/T_TM_height2_debris.T_TM_height2_debris";
+	UTexture2D* MapBoxTexture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), nullptr, *MapBoxTexturePath.ToString()));
+	SourceTexture = MapBoxTexture;
+	SourceTexture->CompressionSettings = TextureCompressionSettings::TC_VectorDisplacementmap;
+	SourceTexture->MipGenSettings = TextureMipGenSettings::TMGS_NoMipmaps;
+	SourceTexture->SRGB = false;
+	SourceTexture->Filter = TF_Bilinear;
+	SourceTexture->UpdateResource();
+
+	const int32 TextureWidth = SourceTexture->GetSizeX();
 	G16Texture = UG16Texture::MakeSerializable(TextureWidth, "Hello Texture");
 	Texture = G16Texture->GetTexture();
 
-	for (int X=0; X < TextureWidth; X++)
-	{
-		for (int Y=0; Y < TextureWidth; Y++)
-		{
-			double U = X / static_cast<float>(TextureWidth);
-			double V = Y / static_cast<float>(TextureWidth);
+	const FTexture2DMipMap& SourceTextureMip = SourceTexture->PlatformData->Mips[0];
+	const uint8* SourceTextureData = static_cast<const uint8*>(SourceTextureMip.BulkData.LockReadOnly());
+	const int32 Max16BitValue = FMath::Pow(2, 16) - 1;
 
-			U = U - 0.5;
-			V = V - 0.5;
-
-			double Distance = 1.0 - FMath::Sqrt(U*U + V*V);
-			Distance = FMath::Clamp(Distance,0.0, 1.0);
-			Distance = smoothstep(0.0, 1.0, Distance);
-
-			G16Texture->WritePixel(X, Y, Distance * 65535);
-		}
-	}
+	 for (int32 X = 0; X<SourceTexture->GetSizeX(); X++)
+	 {
+	 	for (int32 Y=0; Y <SourceTexture->GetSizeY(); Y++)
+	 	{
+	 		const int32 Index = Y * SourceTexture->GetSizeX() + X;
+	 		const uint8 Height = SourceTextureData[Index];
+	 		const double HeightNormalized = Height / 255.0;
 	
-	G16Texture->UpdateTexture();
+	 		G16Texture->WritePixel(X, Y, HeightNormalized * Max16BitValue);
+	 	}
+	 }
+	
+	 SourceTextureMip.BulkData.Unlock();
+	 G16Texture->UpdateTexture();
+
+	// for (int X=0; X < TextureWidth; X++)
+	// {
+	// 	for (int Y=0; Y < TextureWidth; Y++)
+	// 	{
+	// 		double U = X / static_cast<float>(TextureWidth);
+	// 		double V = Y / static_cast<float>(TextureWidth);
+	//
+	// 		U = U - 0.5;
+	// 		V = V - 0.5;
+	//
+	// 		double Distance = 1.0 - FMath::Sqrt(U*U + V*V);
+	// 		Distance = FMath::Clamp(Distance,0.0, 1.0);
+	// 		Distance = (FMath::Sin(Distance * 40) + 1) / 2.0;
+	// 		//Distance = smoothstep(0.0, 1.0, Distance);
+	//
+	// 		G16Texture->WritePixel(X, Y, Distance * 65535);
+	// 	}
+	// }
+	//
+	// G16Texture->UpdateTexture();
 }
 
 UMaterial* AHeightChangeLandscapeClip::GetSourceMaterialForHeight() const

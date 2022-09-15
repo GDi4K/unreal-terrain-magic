@@ -21,7 +21,7 @@ void UG16Texture::InitTexture() const
 	Mip->BulkData.Realloc(NumBlocksX * NumBlocksY * GPixelFormats[PF_G16].BlockBytes);
 	Mip->BulkData.Unlock();
 	
-	Texture->CompressionSettings = TC_Displacementmap;
+	Texture->CompressionSettings = TC_VectorDisplacementmap;
 	Texture->SRGB = 0;
 	Texture->AddToRoot();
 	Texture->Filter = TF_Bilinear;
@@ -119,13 +119,13 @@ void UG16Texture::WritePixel(const int32 X, const int32 Y, const int32 Value)
 
 void UG16Texture::UpdateTexture()
 {
-	UpdateRegion = FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
+	FUpdateTextureRegion2D* UpdateRegionNew = new FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
 	constexpr int32 BytesPerPixel = 2;
 	const int32 BytesPerRow = TextureWidth * BytesPerPixel;
 
 	uint16* SourceDataPtr = SourceData.GetData();
 	uint8* SourceByteDataPtr = reinterpret_cast<uint8*>(SourceDataPtr);
-	Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), &UpdateRegion,
+	Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew,
 								  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceByteDataPtr);
 }
 

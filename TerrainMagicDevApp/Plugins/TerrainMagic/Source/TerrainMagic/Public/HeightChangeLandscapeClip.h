@@ -50,6 +50,9 @@ public:
 	UTextureRenderTarget* RenderTarget = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
+	UTexture2D* SourceTexture = nullptr;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
 	UTexture2D* Texture = nullptr;
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")

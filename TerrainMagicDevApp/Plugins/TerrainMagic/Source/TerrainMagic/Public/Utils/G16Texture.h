@@ -18,26 +18,36 @@ class TERRAINMAGIC_API UG16Texture : public UObject
 	FString PackageFilePath;
 
 	UPROPERTY()
-	FString TextureName;
+	FName TextureName;
 
 	UPROPERTY()
-	UPackage* Package;
+	UPackage* Package = nullptr;
 
 	UPROPERTY()
 	int32 TextureWidth;
 
 	UPROPERTY()
-	UTexture2D* Texture;
+	UTexture2D* Texture = nullptr;
+
+	UPROPERTY()
+	TArray<uint16> SourceData;
+	
+	FUpdateTextureRegion2D UpdateRegion;
+
+	void InitTexture() const;
 
 public:
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	static UG16Texture* MakeTransient(int32 InputTextureWidth);
+	void Init(const int32 InputTextureWidth);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	static UG16Texture* MakeSerializable(int32 InputTextureWidth, FString InputTextureName);
+	static UG16Texture* MakeTransient(const int32 InputTextureWidth);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	static UG16Texture* MakePersistable(int32 InputTextureWidth, FString InputTextureName, FString TextureDirectory);
+	static UG16Texture* MakeSerializable(int32 InputTextureWidth, FName InputTextureName);
+	
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	static UG16Texture* MakePersistable(int32 InputTextureWidth, FName InputTextureName, FName TextureDirectory);
 
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	int32 GetTextureWidth();
@@ -54,9 +64,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
 	void UpdateTexture();
 
-	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	void UpdateTextureRegion(FIntPoint Offset, FIntPoint Size);
-
-	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
-	void SaveTexture();
+	// UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	// void UpdateTextureRegion(FIntPoint Offset, FIntPoint Size);
+	//
+	// UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	// void SaveTexture();
 };

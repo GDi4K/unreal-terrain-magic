@@ -29,72 +29,10 @@ AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_RT_HeighChange_Landscape_Clip.M_RT_HeighChange_Landscape_Clip";
 	UMaterial* SourceMaterial = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 	RenderTargetMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
-	
-	constexpr int TextureWidth = 2048;
 
-	// // Create Transient Texture
-	// UPackage* TransientPackage = NewObject<UPackage>(nullptr, TEXT("/Engine/Transient"), RF_Transient);
-	// TransientPackage->AddToRoot();
-	// G16Texture = NewObject<UTexture2D>(TransientPackage, NAME_None, RF_Transient);
-
-	// // Create Serializable Texture (Which is gonna saved in the actor)
-	// // Only difference from the above is, we gave it a name
-	// UPackage* SerializablePackage = NewObject<UPackage>(nullptr, TEXT("/Engine/Transient"), RF_Transient);
-	// SerializablePackage->AddToRoot();
-	// const FString PackageNameSerializable = "GiveSomeName";
-	// G16Texture = NewObject<UTexture2D>(SerializablePackage, *PackageNameSerializable, RF_Transient);
- 
-	// Persistable Package
-	FString PersistableTextureName = "MyTexture";
-	FString PersistablePackageName = TEXT("/Game/") + PersistableTextureName;
-	UPackage* PersistablePackage = CreatePackage(*PersistablePackageName);
-	PersistablePackage->FullyLoad();
-	G16Texture = NewObject<UTexture2D>(PersistablePackage, *PersistableTextureName, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone);
-	
-	
-	G16Texture->PlatformData = new FTexturePlatformData();
-	G16Texture->PlatformData->SizeX = TextureWidth;
-	G16Texture->PlatformData->SizeY = TextureWidth;
-	G16Texture->PlatformData->PixelFormat = EPixelFormat::PF_G16;
-	
-	const int32 NumBlocksX = TextureWidth / GPixelFormats[PF_G16].BlockSizeX;
-	const int32 NumBlocksY = TextureWidth / GPixelFormats[PF_G16].BlockSizeY;
-	FTexture2DMipMap* Mip = new FTexture2DMipMap();
-	G16Texture->PlatformData->Mips.Add(Mip);
-	Mip->SizeX = TextureWidth;
-	Mip->SizeY = TextureWidth;
-	Mip->BulkData.Lock(LOCK_READ_WRITE);
-	Mip->BulkData.Realloc(NumBlocksX * NumBlocksY * GPixelFormats[PF_G16].BlockBytes);
-	Mip->BulkData.Unlock();
-	
-	G16Texture->CompressionSettings = TC_VectorDisplacementmap;
-	G16Texture->SRGB = 0;
-	G16Texture->AddToRoot();
-	G16Texture->Filter = TF_Bilinear;
-
-#if WITH_EDITORONLY_DATA
-	G16Texture->MipGenSettings = TMGS_NoMipmaps;
-#endif
-	
-	G16Texture->UpdateResource();
-
-	// Save it
-	PersistablePackage->MarkPackageDirty();
-	FAssetRegistryModule::AssetCreated(G16Texture);
-	G16Texture->MarkPackageDirty();
-	G16Texture->PostEditChange();
-	PersistablePackage->SetDirtyFlag(true);
-		
-
-	// We can call this later on. (Not on the constructor)
-	// FString PackageFileName = FPackageName::LongPackageNameToFilename(PersistablePackageName, FPackageName::GetAssetPackageExtension());
-	// bool bSaved = UPackage::SavePackage(PersistablePackage, G16Texture, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *PackageFileName, GError, nullptr, true, true, SAVE_NoError);
-	
-	// Allocate Data
-	constexpr  int BytesPerPixel = 2;
-	constexpr int32 BufferSize = TextureWidth * TextureWidth * BytesPerPixel;
-	SourceData = new uint8[BufferSize];
-	uint16* SourceData16 = reinterpret_cast<uint16*>(SourceData);
+	constexpr int32 TextureWidth = 2048;
+	G16Texture = UG16Texture::MakeSerializable(TextureWidth, "Hello Texture");
+	Texture = G16Texture->GetTexture();
 
 	for (int X=0; X < TextureWidth; X++)
 	{
@@ -106,20 +44,15 @@ AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 			U = U - 0.5;
 			V = V - 0.5;
 
-			double distance = 1.0 - FMath::Sqrt(U*U + V*V);
-			distance = FMath::Clamp(distance,0.0, 1.0);
-			distance = smoothstep(0.0, 1.0, distance);
-			
-			const int Index = Y * TextureWidth + X;
-			SourceData16[Index] = distance * 65535;
+			double Distance = 1.0 - FMath::Sqrt(U*U + V*V);
+			Distance = FMath::Clamp(Distance,0.0, 1.0);
+			Distance = smoothstep(0.0, 1.0, Distance);
+
+			G16Texture->WritePixel(X, Y, Distance * 65535);
 		}
 	}
 	
-	
-	WholeTextureRegion = FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
-	constexpr int32 BytesPerRow = TextureWidth * BytesPerPixel;
-	G16Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), &WholeTextureRegion,
-								  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceData);
+	G16Texture->UpdateTexture();
 }
 
 UMaterial* AHeightChangeLandscapeClip::GetSourceMaterialForHeight() const
@@ -135,7 +68,7 @@ TArray<FTerrainMagicMaterialParam> AHeightChangeLandscapeClip::GetMaterialParams
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), Cast<UTextureRenderTarget2D>(RenderTarget));
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), Cast<UTextureRenderTarget2D>(RenderTarget), RenderTargetMaterial);
 	
-	MaterialParams.Push({"Texture", G16Texture});
+	MaterialParams.Push({"Texture", Texture});
 	MaterialParams.Push({"HeightMultiplier", static_cast<float>(HeightMultiplier)});
 	MaterialParams.Push({"SelectedBlendMode", static_cast<float>(BlendMode)});
 

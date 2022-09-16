@@ -44,6 +44,9 @@ public:
 	int ZIndex = -1;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	FString TileInfoString = "";
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
@@ -56,7 +59,7 @@ public:
 	UTexture2D* Texture = nullptr;
 
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
-	void UpdateTexture();
+	void DownloadTexture();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
 	UMaterialInstanceDynamic* RenderTargetMaterial = nullptr;

@@ -19,6 +19,7 @@ public class TerrainMagic : ModuleRules
 			"Engine",
 			"RenderCore",
 			"RHI",
+			"HTTP"
 		}); 
 	}
 }

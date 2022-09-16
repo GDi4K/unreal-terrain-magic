@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "LandscapeClip.h"
 #include "Engine/TextureRenderTarget.h"
-#include "GameFramework/Actor.h"
+#include "Interfaces/IHttpRequest.h"
 #include "Utils/G16Texture.h"
 #include "HeightChangeLandscapeClip.generated.h"
 
@@ -36,6 +36,8 @@ public:
 	virtual int GetZIndex() const override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
+	
+	void HandleDownloadedImage(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
@@ -57,7 +59,7 @@ public:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="01-General")
 	UTexture2D* Texture = nullptr;
-
+	
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void DownloadTexture();
 

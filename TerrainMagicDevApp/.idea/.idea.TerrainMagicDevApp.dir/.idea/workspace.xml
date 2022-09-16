@@ -7,15 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/G16Convert.txt" afterDir="false" />
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add MapBox URL generator.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/demomap.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/figma.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,14 +198,8 @@
       <workItem from="1663198145404" duration="1549000" />
       <workItem from="1663211186310" duration="9501000" />
       <workItem from="1663233624306" duration="4549000" />
-      <workItem from="1663290890822" duration="1741000" />
-    </task>
-    <task id="LOCAL-00046" summary="Add the basic setup for customizing LandscapeClip details panel.">
-      <created>1658310662866</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1658310662867</updated>
+      <workItem from="1663290890822" duration="3253000" />
+      <workItem from="1663302346146" duration="2947000" />
     </task>
     <task id="LOCAL-00047" summary="Assign a button to the Details panel.">
       <created>1658314838104</created>
@@ -547,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663222449674</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Add MapBox URL generator.">
+      <created>1663292868315</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1663292868315</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,7 +565,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor existing RenderLandscapeClips code." />
     <MESSAGE value="Add the paint layer workflow." />
     <MESSAGE value="Add basic paint layer support." />
     <MESSAGE value="Remove unwanted categories." />
@@ -593,6 +589,7 @@
     <MESSAGE value="Allow to save G16 textures." />
     <MESSAGE value="Refactor the codebase &amp; introduce G16Texture." />
     <MESSAGE value="Experiment on Reading files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Experiment on Reading files." />
+    <MESSAGE value="Add MapBox URL generator." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add MapBox URL generator." />
   </component>
 </project>

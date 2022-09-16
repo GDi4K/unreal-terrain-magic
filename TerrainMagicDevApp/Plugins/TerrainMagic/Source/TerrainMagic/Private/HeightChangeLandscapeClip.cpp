@@ -9,6 +9,7 @@
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/Material.h"
 #include "Kismet/KismetRenderingLibrary.h"
+#include "Utils/MapBoxUtils.h"
 
 
 float smoothstep (float edge0, float edge1, float x)
@@ -118,22 +119,37 @@ void AHeightChangeLandscapeClip::DownloadTexture()
 	TileInfoString.TrimStartAndEnd().ParseIntoArray(Parts, TEXT(","), true);
 	checkf(Parts.Num() == 3, TEXT("TileInfo text is invalid!"))
 	
-	const int32 X = FCString::Atoi(*Parts[0].TrimStartAndEnd());;
-	const int32 Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());;
-	const int32 Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());;
-	const FString ImageURL = FString::Printf(TEXT("https://api.mapbox.com/v4/mapbox.terrain-rgb/%d/%d/%d@2x.pngraw?access_token=%s"), Zoom, X, Y, *AccessToken);
+	const int32 X = FCString::Atoi(*Parts[0].TrimStartAndEnd());
+	const int32 Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
+	const int32 Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
 
-	TSharedRef<IHttpRequest, ESPMode::ThreadSafe> HttpRequest = FHttpModule::Get().CreateRequest();
-	const int32 TileId = 1;
-	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this, [this, TileId](FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
+	FMapBoxUtils::DownloadTile(X, Y, Zoom, [this](TArray<uint16> G16HeightArray)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Handling TileId: %d"), TileId);
-		HandleDownloadedImage(Request, Response, bWasSuccessful);
-	});
+		UE_LOG(LogTemp, Warning, TEXT("Tile Downloaded: %d"), G16HeightArray.Num())
+		// Create a Serializable Texture
+		Texture = UTexture2D::CreateTransient(512, 512, PF_G16);
+		Texture->CompressionSettings = TC_VectorDisplacementmap;
+		Texture->SRGB = 0;
+		Texture->AddToRoot();
+		Texture->Filter = TF_Bilinear;
+		Texture->UpdateResource();
 
-	HttpRequest->SetURL(ImageURL);
-	HttpRequest->SetVerb(TEXT("GET"));
-	HttpRequest->ProcessRequest();
+		const TSharedPtr<TArray<uint16>> NewImageData = MakeShared<TArray<uint16>>();
+		for (uint16 Height: G16HeightArray)
+		{
+			(*NewImageData).Push(Height);
+		}
+
+		const TSharedPtr<FUpdateTextureRegion2D> UpdateRegionNew = MakeShared<FUpdateTextureRegion2D>(0, 0, 0, 0, 512, 512);
+		constexpr int32 BytesPerPixel = 2;
+		constexpr int32 BytesPerRow = 512 * BytesPerPixel;
+
+		uint16* SourceDataPtr = NewImageData->GetData();
+		uint8* SourceByteDataPtr = reinterpret_cast<uint8*>(SourceDataPtr);
+		Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew.Get(),
+								  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceByteDataPtr);
+
+	});
 }
 
 void AHeightChangeLandscapeClip::HandleDownloadedImage(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded)

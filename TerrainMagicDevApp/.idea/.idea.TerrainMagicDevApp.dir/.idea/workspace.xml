@@ -7,11 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add MapBox URL generator.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Allow to download Map tiles directly inside the Engine.">
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,14 +201,8 @@
       <workItem from="1663211186310" duration="9501000" />
       <workItem from="1663233624306" duration="4549000" />
       <workItem from="1663290890822" duration="3253000" />
-      <workItem from="1663302346146" duration="2947000" />
-    </task>
-    <task id="LOCAL-00047" summary="Assign a button to the Details panel.">
-      <created>1658314838104</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1658314838104</updated>
+      <workItem from="1663302346146" duration="5501000" />
+      <workItem from="1663317027155" duration="2869000" />
     </task>
     <task id="LOCAL-00048" summary="Fixed a memory leak related to LandscapeClips&#10;When we are rendering rendering landscape clips, we assign a RenderTarget to a Dynamic Material Instance.&#10;&#10;But we didn't clear that RenderTarget from the material instance after use. &#10;&#10;So, when saving &amp; reloading the same or another map trigger a memory leak &amp; crash it.&#10;&#10;This change will fix it properly.">
       <created>1658420375621</created>
@@ -544,7 +540,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663292868315</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="Allow to download Map tiles directly inside the Engine.">
+      <created>1663305423156</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1663305423156</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +568,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add the paint layer workflow." />
     <MESSAGE value="Add basic paint layer support." />
     <MESSAGE value="Remove unwanted categories." />
     <MESSAGE value="Introducing TextureMap Mask." />
@@ -590,6 +592,7 @@
     <MESSAGE value="Refactor the codebase &amp; introduce G16Texture." />
     <MESSAGE value="Experiment on Reading files." />
     <MESSAGE value="Add MapBox URL generator." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add MapBox URL generator." />
+    <MESSAGE value="Allow to download Map tiles directly inside the Engine." />
+    <option name="LAST_COMMIT_MESSAGE" value="Allow to download Map tiles directly inside the Engine." />
   </component>
 </project>

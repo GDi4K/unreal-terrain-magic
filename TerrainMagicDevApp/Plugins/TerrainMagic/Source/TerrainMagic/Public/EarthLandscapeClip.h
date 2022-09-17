@@ -4,14 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "LandscapeClip.h"
-#include "Engine/TextureRenderTarget.h"
-#include "Interfaces/IHttpRequest.h"
-#include "Utils/G16Texture.h"
 #include "Utils/MapBoxUtils.h"
-#include "HeightChangeLandscapeClip.generated.h"
+#include "EarthLandscapeClip.generated.h"
+
+UENUM()
+enum EHeightMapTileWidth
+{
+	HMW_512 = 0 UMETA(DisplayName="512"),
+	HMW_1024 = 1 UMETA(DisplayName="1024"),
+	HMW_2048 = 2 UMETA(DisplayName="2048"),
+	HMW_4096 = 3 UMETA(DisplayName="4096"),
+};
 
 UCLASS()
-class TERRAINMAGIC_API AHeightChangeLandscapeClip : public ALandscapeClip
+class TERRAINMAGIC_API AEarthLandscapeClip : public ALandscapeClip
 {
 	GENERATED_BODY()
 
@@ -20,10 +26,12 @@ class TERRAINMAGIC_API AHeightChangeLandscapeClip : public ALandscapeClip
 	
 	TSharedPtr<FMapBoxTileResponse> CurrentTileResponse = nullptr;
 	bool HasTextureReloaded = false;
+
+	void ReloadTextureIfNeeded();
 	
 public:
 	// Sets default values for this actor's properties
-	AHeightChangeLandscapeClip();
+	AEarthLandscapeClip();
 
 protected:
 	
@@ -49,19 +57,16 @@ public:
 	int ZIndex = -1;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
+	UTexture2D* HeightMap = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	FString TileInfoString = "";
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	int32 ZoomInLevel = 0;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	UTexture2D* HeightMap = nullptr;
-
-	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
-	void ReloadTextureIfNeeded();
+	TEnumAsByte<EHeightMapTileWidth> TileResolution = HMW_512;
 	
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void DownloadTexture();

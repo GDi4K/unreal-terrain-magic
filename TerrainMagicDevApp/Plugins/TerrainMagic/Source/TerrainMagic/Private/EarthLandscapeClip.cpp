@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
-#include "HeightChangeLandscapeClip.h"
+#include "EarthLandscapeClip.h"
 
 #include "HttpModule.h"
 #include "IImageWrapper.h"
@@ -28,7 +28,7 @@ float smoothstep (float edge0, float edge1, float x)
 }
 
 // Sets default values
-AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
+AEarthLandscapeClip::AEarthLandscapeClip()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Check HeightData!"))
 	if (CurrentHeightData.Num() > 0)
@@ -41,13 +41,13 @@ AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 	}
 }
 
-UMaterial* AHeightChangeLandscapeClip::GetSourceMaterialForHeight() const
+UMaterial* AEarthLandscapeClip::GetSourceMaterialForHeight() const
 {
 	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_HeightChange.M_TM_LandscapeClip_HeightChange";
 	return Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 }
 
-TArray<FTerrainMagicMaterialParam> AHeightChangeLandscapeClip::GetMaterialParams()
+TArray<FTerrainMagicMaterialParam> AEarthLandscapeClip::GetMaterialParams()
 {
 	TArray<FTerrainMagicMaterialParam> MaterialParams;
 	
@@ -73,42 +73,42 @@ TArray<FTerrainMagicMaterialParam> AHeightChangeLandscapeClip::GetMaterialParams
 	return MaterialParams;
 }
 
-int AHeightChangeLandscapeClip::GetHeightMultiplier() const
+int AEarthLandscapeClip::GetHeightMultiplier() const
 {
 	return HeightMultiplier;
 }
 
-FVector2D AHeightChangeLandscapeClip::GetClipBaseSize() const
+FVector2D AEarthLandscapeClip::GetClipBaseSize() const
 {
 	return HeightMapBaseSize;
 }
 
-void AHeightChangeLandscapeClip::SetClipBaseSize(FVector2D BaseSize)
+void AEarthLandscapeClip::SetClipBaseSize(FVector2D BaseSize)
 {
 	HeightMapBaseSize = BaseSize;
 }
 
-bool AHeightChangeLandscapeClip::IsEnabled() const
+bool AEarthLandscapeClip::IsEnabled() const
 {
 	return bEnabled;
 }
 
-void AHeightChangeLandscapeClip::SetEnabled(bool bEnabledInput)
+void AEarthLandscapeClip::SetEnabled(bool bEnabledInput)
 {
 	bEnabled = bEnabledInput;
 }
 
-void AHeightChangeLandscapeClip::SetZIndex(int Index)
+void AEarthLandscapeClip::SetZIndex(int Index)
 {
 	ZIndex = Index;
 }
 
-int AHeightChangeLandscapeClip::GetZIndex() const
+int AEarthLandscapeClip::GetZIndex() const
 {
 	return ZIndex;
 }
 
-void AHeightChangeLandscapeClip::Tick(float DeltaSeconds)
+void AEarthLandscapeClip::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	
@@ -119,17 +119,17 @@ void AHeightChangeLandscapeClip::Tick(float DeltaSeconds)
 	ReloadTextureIfNeeded();
 }
 
-UTexture* AHeightChangeLandscapeClip::GetHeightMap() const
+UTexture* AEarthLandscapeClip::GetHeightMap() const
 {
 	return HeightMap;
 }
 
-TArray<FLandscapeClipPaintLayerSettings> AHeightChangeLandscapeClip::GetPaintLayerSettings() const
+TArray<FLandscapeClipPaintLayerSettings> AEarthLandscapeClip::GetPaintLayerSettings() const
 {
 	return PaintLayerSettings;
 }
 
-void AHeightChangeLandscapeClip::ReloadTextureIfNeeded()
+void AEarthLandscapeClip::ReloadTextureIfNeeded()
 {
 	if (HasTextureReloaded)
 	{
@@ -149,7 +149,7 @@ void AHeightChangeLandscapeClip::ReloadTextureIfNeeded()
 	});
 }
 
-void AHeightChangeLandscapeClip::DownloadTexture()
+void AEarthLandscapeClip::DownloadTexture()
 {
 	const FString AccessToken = "pk.eyJ1IjoiYXJ1bm9kYSIsImEiOiJjbDgxNm0wM3QwNGN0M3VudW5pbHJzcHFoIn0.S9PCT354lP_MKHrWFqEbxQ";
 
@@ -161,7 +161,7 @@ void AHeightChangeLandscapeClip::DownloadTexture()
 	TileQuery.X = FCString::Atoi(*Parts[0].TrimStartAndEnd());
 	TileQuery.Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
 	TileQuery.Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
-	TileQuery.ZoomInLevels = ZoomInLevel;
+	TileQuery.ZoomInLevels = TileResolution;
 	
 	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery](TSharedPtr<FMapBoxTileResponse> TileData)
 	{

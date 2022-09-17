@@ -141,26 +141,7 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 
 void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, TFunction<void(UTexture2D*)> Callback)
 {
-	const FName TextureName = "HeightMap_";
-	UPackage* Package = NewObject<UPackage>(nullptr, TEXT("/Engine/Transient"), RF_Standalone | RF_Public);
-	Package->AddToRoot();
-	
-	UTexture2D* Texture = NewObject<UTexture2D>(Package, TextureName, RF_Standalone | RF_Public);
-	Texture->PlatformData = new FTexturePlatformData();
-	Texture->PlatformData->SizeX = TextureWidth;
-	Texture->PlatformData->SizeY = TextureWidth;
-	Texture->PlatformData->PixelFormat = PF_G16;
-	
-	const int32 NumBlocksX = TextureWidth / GPixelFormats[PF_G16].BlockSizeX;
-	const int32 NumBlocksY = TextureWidth / GPixelFormats[PF_G16].BlockSizeY;
-	FTexture2DMipMap* Mip = new FTexture2DMipMap();
-	Texture->PlatformData->Mips.Add(Mip);
-	Mip->SizeX = TextureWidth;
-	Mip->SizeY = TextureWidth;
-	Mip->BulkData.Lock(LOCK_READ_WRITE);
-	Mip->BulkData.Realloc(NumBlocksX * NumBlocksY * GPixelFormats[PF_G16].BlockBytes);
-	Mip->BulkData.Unlock();
-	
+	UTexture2D* Texture = UTexture2D::CreateTransient(TextureWidth, TextureWidth, PF_G16);
 	Texture->CompressionSettings = TC_VectorDisplacementmap;
 	Texture->SRGB = 0;
 	Texture->AddToRoot();

@@ -119,14 +119,16 @@ void AHeightChangeLandscapeClip::DownloadTexture()
 	TileInfoString.TrimStartAndEnd().ParseIntoArray(Parts, TEXT(","), true);
 	checkf(Parts.Num() == 3, TEXT("TileInfo text is invalid!"))
 	
-	const int32 X = FCString::Atoi(*Parts[0].TrimStartAndEnd());
-	const int32 Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
-	const int32 Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
-	
-	FMapBoxUtils::DownloadTileSet(X, Y, Zoom, ZoomInLevel, [this](FMapBoxTileData* TileData)
+	FMapBoxTileQuery TileQuery = {};
+	TileQuery.X = FCString::Atoi(*Parts[0].TrimStartAndEnd());
+	TileQuery.Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
+	TileQuery.Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
+	TileQuery.ZoomInLevels = ZoomInLevel;
+
+	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery](FMapBoxTileResponse* TileData)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Tile Downloaded: %d"), TileData->HeightData.Num())
-		const int32 TilesPerRow = FMath::Pow(2, ZoomInLevel);
+		const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
 		const int32 PixelsPerRow = 512 * TilesPerRow;
 		
 		// TODO: Create a Serializable Texture

@@ -7,13 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Implement Merging HeightMaps Support.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -205,14 +203,8 @@
       <workItem from="1663302346146" duration="5501000" />
       <workItem from="1663317027155" duration="6138000" />
       <workItem from="1663348243839" duration="516000" />
-      <workItem from="1663371254623" duration="8115000" />
-    </task>
-    <task id="LOCAL-00049" summary="Set ToggleOutline &amp; TogglePreview to save the state&#10;So, when you restart your map, it will remember those settings.">
-      <created>1658550914043</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1658550914043</updated>
+      <workItem from="1663371254623" duration="8707000" />
+      <workItem from="1663423475502" duration="745000" />
     </task>
     <task id="LOCAL-00050" summary="Send PaintLayer Information to the Manager">
       <created>1659090482808</created>
@@ -550,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663319973904</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Implement Merging HeightMaps Support.">
+      <created>1663380055136</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1663380055136</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +570,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Remove unwanted categories." />
     <MESSAGE value="Introducing TextureMap Mask." />
     <MESSAGE value="Added the HeightMask" />
     <MESSAGE value="Implement proper paint modes." />
@@ -596,6 +594,7 @@
     <MESSAGE value="Add MapBox URL generator." />
     <MESSAGE value="Allow to download Map tiles directly inside the Engine." />
     <MESSAGE value="Added the Tile Download logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the Tile Download logic." />
+    <MESSAGE value="Implement Merging HeightMaps Support." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement Merging HeightMaps Support." />
   </component>
 </project>

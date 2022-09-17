@@ -47,6 +47,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	FString TileInfoString = "";
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	int32 ZoomInLevel = 0;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;

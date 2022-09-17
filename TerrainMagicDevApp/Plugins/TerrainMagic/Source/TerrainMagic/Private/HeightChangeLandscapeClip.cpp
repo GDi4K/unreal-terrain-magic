@@ -122,25 +122,28 @@ void AHeightChangeLandscapeClip::DownloadTexture()
 	const int32 X = FCString::Atoi(*Parts[0].TrimStartAndEnd());
 	const int32 Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
 	const int32 Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
-
-	FMapBoxUtils::DownloadTile(X, Y, Zoom, [this](TSharedPtr<FMapBoxTileData> TileData)
+	
+	FMapBoxUtils::DownloadTileSet(X, Y, Zoom, ZoomInLevel, [this](FMapBoxTileData* TileData)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Tile Downloaded: %d"), TileData->HeightData.Num())
-		// Create a Serializable Texture
-		Texture = UTexture2D::CreateTransient(512, 512, PF_G16);
+		const int32 TilesPerRow = FMath::Pow(2, ZoomInLevel);
+		const int32 PixelsPerRow = 512 * TilesPerRow;
+		
+		// TODO: Create a Serializable Texture
+		Texture = UTexture2D::CreateTransient(PixelsPerRow, PixelsPerRow, PF_G16);
 		Texture->CompressionSettings = TC_VectorDisplacementmap;
 		Texture->SRGB = 0;
 		Texture->AddToRoot();
 		Texture->Filter = TF_Bilinear;
 		Texture->UpdateResource();
-		
-		const TSharedPtr<FUpdateTextureRegion2D> UpdateRegionNew = MakeShared<FUpdateTextureRegion2D>(0, 0, 0, 0, 512, 512);
+
+		const FUpdateTextureRegion2D* UpdateRegionNew = new FUpdateTextureRegion2D(0, 0, 0, 0, PixelsPerRow, PixelsPerRow);
 		constexpr int32 BytesPerPixel = 2;
-		constexpr int32 BytesPerRow = 512 * BytesPerPixel;
+		const int32 BytesPerRow = PixelsPerRow * BytesPerPixel;
 
 		uint16* SourceDataPtr = TileData->HeightData.GetData();
 		uint8* SourceByteDataPtr = reinterpret_cast<uint8*>(SourceDataPtr);
-		Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew.Get(),
+		Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew,
 								  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceByteDataPtr);
 	});
 }

@@ -27,6 +27,6 @@ struct FMapBoxTileQuery
 class FMapBoxUtils
 {
 public:
-	static void DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(FMapBoxTileResponseRaw)> Callback);
+	static void DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(TSharedPtr<FMapBoxTileResponseRaw>)> Callback);
 	static void DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<void(FMapBoxTileResponse*)> Callback);
 };

@@ -138,3 +138,49 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 		}
 	}
 }
+
+void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, TFunction<void(UTexture2D*)> Callback)
+{
+	const FName TextureName = "HeightMap_";
+	UPackage* Package = NewObject<UPackage>(nullptr, TEXT("/Engine/Transient"), RF_Standalone | RF_Public);
+	Package->AddToRoot();
+	
+	UTexture2D* Texture = NewObject<UTexture2D>(Package, TextureName, RF_Standalone | RF_Public);
+	Texture->PlatformData = new FTexturePlatformData();
+	Texture->PlatformData->SizeX = TextureWidth;
+	Texture->PlatformData->SizeY = TextureWidth;
+	Texture->PlatformData->PixelFormat = PF_G16;
+	
+	const int32 NumBlocksX = TextureWidth / GPixelFormats[PF_G16].BlockSizeX;
+	const int32 NumBlocksY = TextureWidth / GPixelFormats[PF_G16].BlockSizeY;
+	FTexture2DMipMap* Mip = new FTexture2DMipMap();
+	Texture->PlatformData->Mips.Add(Mip);
+	Mip->SizeX = TextureWidth;
+	Mip->SizeY = TextureWidth;
+	Mip->BulkData.Lock(LOCK_READ_WRITE);
+	Mip->BulkData.Realloc(NumBlocksX * NumBlocksY * GPixelFormats[PF_G16].BlockBytes);
+	Mip->BulkData.Unlock();
+	
+	Texture->CompressionSettings = TC_VectorDisplacementmap;
+	Texture->SRGB = 0;
+	Texture->AddToRoot();
+	Texture->Filter = TF_Bilinear;
+
+#if WITH_EDITORONLY_DATA
+	Texture->MipGenSettings = TMGS_NoMipmaps;
+#endif
+	
+	Texture->UpdateResource();
+
+	const FUpdateTextureRegion2D* UpdateRegionNew = new FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
+	constexpr int32 BytesPerPixel = 2;
+	const int32 BytesPerRow = TextureWidth * BytesPerPixel;
+
+	uint8* SourceByteDataPtr = reinterpret_cast<uint8*>(HeightData);
+	Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew,
+							  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceByteDataPtr,
+							  [Callback, Texture](uint8*, const FUpdateTextureRegion2D*)
+							  {
+								  Callback(Texture);
+							  });
+}

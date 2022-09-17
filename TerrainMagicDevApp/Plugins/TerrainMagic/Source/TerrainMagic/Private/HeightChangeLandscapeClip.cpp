@@ -5,6 +5,7 @@
 #include "HttpModule.h"
 #include "IImageWrapper.h"
 #include "IImageWrapperModule.h"
+#include "AssetRegistry/AssetRegistryModule.h"
 #include "Interfaces/IHttpResponse.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/Material.h"
@@ -29,7 +30,15 @@ float smoothstep (float edge0, float edge1, float x)
 // Sets default values
 AHeightChangeLandscapeClip::AHeightChangeLandscapeClip()
 {
-	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_RT_HeighChange_Landscape_Clip.M_RT_HeighChange_Landscape_Clip";
+	UE_LOG(LogTemp, Warning, TEXT("Check HeightData!"))
+	if (CurrentHeightData.Num() > 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Have HeightData!"))
+		// FMapBoxUtils::MakeG16Texture(512, CurrentHeightData.GetData(), [this](UTexture2D* Texture)
+		// {
+		// 	HeightMap = Texture;
+		// });
+	}
 }
 
 UMaterial* AHeightChangeLandscapeClip::GetSourceMaterialForHeight() const
@@ -99,6 +108,17 @@ int AHeightChangeLandscapeClip::GetZIndex() const
 	return ZIndex;
 }
 
+void AHeightChangeLandscapeClip::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	
+	if (GetWorld()->WorldType != EWorldType::Editor)
+	{
+		return;
+	}
+	ReloadTextureIfNeeded();
+}
+
 UTexture* AHeightChangeLandscapeClip::GetHeightMap() const
 {
 	return HeightMap;
@@ -107,6 +127,26 @@ UTexture* AHeightChangeLandscapeClip::GetHeightMap() const
 TArray<FLandscapeClipPaintLayerSettings> AHeightChangeLandscapeClip::GetPaintLayerSettings() const
 {
 	return PaintLayerSettings;
+}
+
+void AHeightChangeLandscapeClip::ReloadTextureIfNeeded()
+{
+	if (HasTextureReloaded)
+	{
+		return;
+	}
+	HasTextureReloaded = true;
+
+	if (CurrentHeightData.Num() == 0)
+	{
+		return;
+	}
+
+	const int32 TextureWidth = FMath::Sqrt(CurrentHeightData.Num());
+	FMapBoxUtils::MakeG16Texture(TextureWidth, CurrentHeightData.GetData(), [this](UTexture2D* Texture)
+	{
+		HeightMap = Texture;
+	});
 }
 
 void AHeightChangeLandscapeClip::DownloadTexture()
@@ -122,33 +162,20 @@ void AHeightChangeLandscapeClip::DownloadTexture()
 	TileQuery.Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
 	TileQuery.Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
 	TileQuery.ZoomInLevels = ZoomInLevel;
-
+	
 	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery](TSharedPtr<FMapBoxTileResponse> TileData)
 	{
-		CurrentTileResponse = TileData;
 		UE_LOG(LogTemp, Warning, TEXT("Tile Downloaded: %d"), TileData->HeightData.Num())
 		const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
 		const int32 PixelsPerRow = 512 * TilesPerRow;
-		
-		// TODO: Create a Serializable Texture
-		HeightMap = UTexture2D::CreateTransient(PixelsPerRow, PixelsPerRow, PF_G16);
-		HeightMap->CompressionSettings = TC_VectorDisplacementmap;
-		HeightMap->SRGB = 0;
-		HeightMap->AddToRoot();
-		HeightMap->Filter = TF_Bilinear;
-		HeightMap->UpdateResource();
-
-		const FUpdateTextureRegion2D* UpdateRegionNew = new FUpdateTextureRegion2D(0, 0, 0, 0, PixelsPerRow, PixelsPerRow);
-		constexpr int32 BytesPerPixel = 2;
-		const int32 BytesPerRow = PixelsPerRow * BytesPerPixel;
-
-		uint16* SourceDataPtr = TileData->HeightData.GetData();
-		uint8* SourceByteDataPtr = reinterpret_cast<uint8*>(SourceDataPtr);
-		HeightMap->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew,
-								  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceByteDataPtr,
-								  [this](uint8*, const FUpdateTextureRegion2D*)
-								  {
-									  CurrentTileResponse = nullptr;
-								  });
+	
+		// This is important, otherwise the TileData will be garbage collected
+		CurrentTileResponse = TileData;
+		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileData->HeightData.GetData(), [this](UTexture2D* Texture)
+		{
+			HeightMap = Texture;
+			CurrentHeightData = CurrentTileResponse->HeightData;
+			CurrentTileResponse = nullptr;
+		});
 	});
 }

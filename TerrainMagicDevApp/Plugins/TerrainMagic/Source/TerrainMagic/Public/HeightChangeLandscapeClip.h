@@ -16,10 +16,11 @@ class TERRAINMAGIC_API AHeightChangeLandscapeClip : public ALandscapeClip
 	GENERATED_BODY()
 
 	UPROPERTY()
-	UG16Texture* G16Texture = nullptr;
-
+	TArray<uint16> CurrentHeightData;
+	
 	TSharedPtr<FMapBoxTileResponse> CurrentTileResponse = nullptr;
-
+	bool HasTextureReloaded = false;
+	
 public:
 	// Sets default values for this actor's properties
 	AHeightChangeLandscapeClip();
@@ -37,6 +38,7 @@ public:
 	virtual void SetEnabled(bool bEnabledInput) override;
 	virtual void SetZIndex(int Index) override;
 	virtual int GetZIndex() const override;
+	virtual void Tick(float DeltaSeconds) override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
 	
@@ -55,8 +57,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	UTexture2D* HeightMap = nullptr;
+
+	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
+	void ReloadTextureIfNeeded();
 	
 	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
 	void DownloadTexture();

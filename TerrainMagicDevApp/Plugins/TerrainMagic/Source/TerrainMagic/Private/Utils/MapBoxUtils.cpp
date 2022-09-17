@@ -60,7 +60,7 @@ void FMapBoxUtils::DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(
 	HttpRequest->ProcessRequest();
 }
 
-void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<void(FMapBoxTileResponse*)> Callback)
+void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<void(TSharedPtr<FMapBoxTileResponse>)> Callback)
 {
 	const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
 	const int32 PixelsPerRow = 512 * TilesPerRow;
@@ -106,7 +106,7 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 				*TotalTilesDownloaded += 1;
 				if (*TotalTilesDownloaded == TilesPerRow * TilesPerRow)
 				{
-					FMapBoxTileResponse* CombinedTileData = new FMapBoxTileResponse();
+					const TSharedPtr<FMapBoxTileResponse> CombinedTileData = MakeShared<FMapBoxTileResponse>();
 					CombinedTileData->HeightData.SetNumUninitialized(PixelsPerRow * PixelsPerRow);
 					
 					CombinedTileData->MinHeight = FMath::Min(*HeightData);

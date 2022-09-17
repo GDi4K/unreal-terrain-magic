@@ -7,6 +7,7 @@
 #include "Engine/TextureRenderTarget.h"
 #include "Interfaces/IHttpRequest.h"
 #include "Utils/G16Texture.h"
+#include "Utils/MapBoxUtils.h"
 #include "HeightChangeLandscapeClip.generated.h"
 
 UCLASS()
@@ -16,6 +17,8 @@ class TERRAINMAGIC_API AHeightChangeLandscapeClip : public ALandscapeClip
 
 	UPROPERTY()
 	UG16Texture* G16Texture = nullptr;
+
+	TSharedPtr<FMapBoxTileResponse> CurrentTileResponse = nullptr;
 
 public:
 	// Sets default values for this actor's properties

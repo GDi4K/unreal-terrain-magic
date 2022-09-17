@@ -125,8 +125,9 @@ void AHeightChangeLandscapeClip::DownloadTexture()
 	TileQuery.Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
 	TileQuery.ZoomInLevels = ZoomInLevel;
 
-	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery](FMapBoxTileResponse* TileData)
+	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery](TSharedPtr<FMapBoxTileResponse> TileData)
 	{
+		CurrentTileResponse = TileData;
 		UE_LOG(LogTemp, Warning, TEXT("Tile Downloaded: %d"), TileData->HeightData.Num())
 		const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
 		const int32 PixelsPerRow = 512 * TilesPerRow;
@@ -146,7 +147,11 @@ void AHeightChangeLandscapeClip::DownloadTexture()
 		uint16* SourceDataPtr = TileData->HeightData.GetData();
 		uint8* SourceByteDataPtr = reinterpret_cast<uint8*>(SourceDataPtr);
 		Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew,
-								  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceByteDataPtr);
+								  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), SourceByteDataPtr,
+								  [this](uint8*, const FUpdateTextureRegion2D*)
+								  {
+									  CurrentTileResponse = nullptr;
+								  });
 	});
 }
 

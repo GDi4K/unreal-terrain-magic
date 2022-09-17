@@ -7,12 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Improved internal memory management.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Handle the final response properly.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Config/DefaultTerrainMagic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Config/DefaultTerrainMagic.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightChangeLandscapeClip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightChangeLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
@@ -206,14 +208,7 @@
       <workItem from="1663317027155" duration="6138000" />
       <workItem from="1663348243839" duration="516000" />
       <workItem from="1663371254623" duration="8707000" />
-      <workItem from="1663423475502" duration="1794000" />
-    </task>
-    <task id="LOCAL-00052" summary="Improve the initial game loading speed.">
-      <created>1659157377272</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1659157377272</updated>
+      <workItem from="1663423475502" duration="4870000" />
     </task>
     <task id="LOCAL-00053" summary="Add the Info Brush">
       <created>1659158700939</created>
@@ -551,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663424898736</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="Handle the final response properly.">
+      <created>1663425333143</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1663425333144</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,7 +574,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Implement proper paint modes." />
     <MESSAGE value="Enable Masks on when selected Mask paint mode." />
     <MESSAGE value="Adding PaintLayer support for NoiseLandscapeClip." />
     <MESSAGE value="Remove debug messages and logs." />
@@ -597,6 +598,7 @@
     <MESSAGE value="Implement Merging HeightMaps Support." />
     <MESSAGE value="Refactor the API." />
     <MESSAGE value="Improved internal memory management." />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved internal memory management." />
+    <MESSAGE value="Handle the final response properly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Handle the final response properly." />
   </component>
 </project>

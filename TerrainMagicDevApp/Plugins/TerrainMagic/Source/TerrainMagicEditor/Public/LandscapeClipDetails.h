@@ -23,6 +23,7 @@ public:
 	FReply OnClickToggleSolo();
 	FReply OnClickTogglePreview();
 	FReply OnClickDownloadTile();
+	FReply OnOpenMap();
 
 	// Helpers
 	TArray<ALandscapeClip*> GetSelectedLandscapeClips();

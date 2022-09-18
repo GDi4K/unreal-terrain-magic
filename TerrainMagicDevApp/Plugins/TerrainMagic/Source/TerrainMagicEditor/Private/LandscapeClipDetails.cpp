@@ -90,7 +90,13 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 				.ToolTipText(LOCTEXT("InvalidateButtonToolTip", "Use ALT+Q or Editor Toolbar"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
 			]
-			+SGridPanel::Slot(1, 2).Padding(5, 2)
+			+SGridPanel::Slot(0, 3).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("OpenMapButton", "Open the Map"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnOpenMap)
+			]
+			+SGridPanel::Slot(1, 3).Padding(5, 2)
 			[
 				SNew(SButton)
 				.Text(LOCTEXT("DownloadButton", "Download Tile"))
@@ -165,6 +171,12 @@ FReply FLandscapeClipDetails::OnClickDownloadTile()
 		}
 	}
 	
+	return FReply::Handled();
+}
+
+FReply FLandscapeClipDetails::OnOpenMap()
+{
+	FPlatformProcess::LaunchURL(TEXT("https://www.gdi4k.com/terrainmagic/map"), NULL, NULL);
 	return FReply::Handled();
 }
 

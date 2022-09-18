@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "EarthLandscapeClip.h"
 #include "LandscapeClip.h"
 #include "Editor/PropertyEditor/Public/IDetailCustomization.h"
 #include "Input/Reply.h"
@@ -21,8 +22,10 @@ public:
 	FReply OnClickToggleOutline();
 	FReply OnClickToggleSolo();
 	FReply OnClickTogglePreview();
+	FReply OnClickDownloadTile();
 
 	// Helpers
 	TArray<ALandscapeClip*> GetSelectedLandscapeClips();
+	bool CanShowDownloadTileButton();
 	
 };

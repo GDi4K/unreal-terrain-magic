@@ -3,6 +3,7 @@
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
+#include "EarthLandscapeClip.h"
 #include "IDetailGroup.h"
 #include "LandscapeClip.h"
 #include "Widgets/Layout/SGridPanel.h"
@@ -20,10 +21,44 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 	IDetailCategoryBuilder& MyCategory = DetailBuilder.EditCategory("00-TerrainMagic", LOCTEXT("CatName", "TerrainMagic"), ECategoryPriority::Important);
 	DetailBuilder.GetObjectsBeingCustomized(CustomizingActors);
 
-	MyCategory.AddGroup("Actions", LOCTEXT("Actions", "Actions"), false, true)
-		.AddWidgetRow()
-		[
-			SNew(SGridPanel)
+	bool ShowDownloadTileButton = CanShowDownloadTileButton();
+	
+	auto WidgetRow = SNew(SGridPanel)
+			+SGridPanel::Slot(0, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ToggleOutlineButton", "Toggle Outline"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleOutline)
+			]
+			+SGridPanel::Slot(1, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("MatchLandscapeSizeButton", "Match Landscape Size"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickMatchLandscapeSize)
+			]
+			+SGridPanel::Slot(0, 1).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("TogglePreviewButton", "Toggle Preview"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickTogglePreview)
+			]
+			+SGridPanel::Slot(1, 1).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ToggleSoloButton", "ToggleSolo"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleSolo)
+			]
+			+SGridPanel::Slot(0, 2).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("InvalidateButton", "Invalidate"))
+				.ToolTipText(LOCTEXT("InvalidateButtonToolTip", "Use ALT+Q or Editor Toolbar"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
+			];
+
+	if (ShowDownloadTileButton)
+	{
+		WidgetRow = SNew(SGridPanel)
 			+SGridPanel::Slot(0, 0).Padding(5, 2)
 			[
 				SNew(SButton)
@@ -55,7 +90,18 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 				.ToolTipText(LOCTEXT("InvalidateButtonToolTip", "Use ALT+Q or Editor Toolbar"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
 			]
-		];
+			+SGridPanel::Slot(1, 2).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("DownloadButton", "Download Tile"))
+				.ToolTipText(LOCTEXT("DownloadButtonTooltip", "Use ALT+D"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickDownloadTile)
+			];
+	}
+
+	
+	MyCategory.AddGroup("Actions", LOCTEXT("Actions", "Actions"), false, true)
+		.AddWidgetRow()[WidgetRow];
 }
 
 FReply FLandscapeClipDetails::OnClickInvalidate()
@@ -108,6 +154,20 @@ FReply FLandscapeClipDetails::OnClickTogglePreview()
 	return FReply::Handled();
 }
 
+FReply FLandscapeClipDetails::OnClickDownloadTile()
+{
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
+		if (EarthLandscapeClip != nullptr)
+		{
+			EarthLandscapeClip->DownloadTile();
+		}
+	}
+	
+	return FReply::Handled();
+}
+
 TArray<ALandscapeClip*> FLandscapeClipDetails::GetSelectedLandscapeClips()
 {
 	TArray<ALandscapeClip*> SelectedLandscapeClips;
@@ -130,5 +190,26 @@ TArray<ALandscapeClip*> FLandscapeClipDetails::GetSelectedLandscapeClips()
 
 	return SelectedLandscapeClips;
 }
+
+bool FLandscapeClipDetails::CanShowDownloadTileButton()
+{
+	const TArray<ALandscapeClip*> SelectedClips = GetSelectedLandscapeClips();
+	if (SelectedClips.Num() == 0)
+	{
+		return false;
+	}
+
+	for (ALandscapeClip* Clip: SelectedClips)
+	{
+		const AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
+		if (EarthLandscapeClip == nullptr)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 
 #undef LOCTEXT_NAMESPACE

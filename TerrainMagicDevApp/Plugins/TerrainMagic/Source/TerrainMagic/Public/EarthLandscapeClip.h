@@ -49,6 +49,7 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
+	void DownloadTile();
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
@@ -67,9 +68,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<EHeightMapTileWidth> TileResolution = HMW_512;
-	
-	UFUNCTION(CallInEditor, BlueprintCallable, Category="01-General")
-	void DownloadTexture();
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
 	int32 BlurDistance = 0;

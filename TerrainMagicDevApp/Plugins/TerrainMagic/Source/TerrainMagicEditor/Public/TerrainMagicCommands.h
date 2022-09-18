@@ -22,6 +22,8 @@ public:
 public:
 	TSharedPtr<class FUICommandList> CommandsList;
 	TSharedPtr< FUICommandInfo > InvalidateLandscapeClipsAction;
+	TSharedPtr< FUICommandInfo > DownloadTileAction;
 
 	void OnInvalidateLandscapeClips() const;
+	void OnDownloadTile() const;
 };

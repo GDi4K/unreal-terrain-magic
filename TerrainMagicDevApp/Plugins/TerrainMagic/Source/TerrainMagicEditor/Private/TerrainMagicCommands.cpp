@@ -3,6 +3,8 @@
 #pragma once
 
 #include "TerrainMagicCommands.h"
+
+#include "EarthLandscapeClip.h"
 #include "InputCoreTypes.h"
 #include "LandscapeClip.h"
 #include "Engine/Selection.h"
@@ -14,6 +16,12 @@ void FTerrainMagicCommands::RegisterCommands()
 	CommandsList->MapAction(
 		InvalidateLandscapeClipsAction,
 		FExecuteAction::CreateRaw(this, &FTerrainMagicCommands::OnInvalidateLandscapeClips),
+		FCanExecuteAction());
+
+	UI_COMMAND(DownloadTileAction, "Downlod Tile", "Download Tile", EUserInterfaceActionType::Button, FInputChord(EKeys::D, false, false, true, false));
+	CommandsList->MapAction(
+		DownloadTileAction,
+		FExecuteAction::CreateRaw(this, &FTerrainMagicCommands::OnDownloadTile),
 		FCanExecuteAction());
 }
 
@@ -32,6 +40,21 @@ void FTerrainMagicCommands::OnInvalidateLandscapeClips() const
 	}
 
 	
+}
+
+void FTerrainMagicCommands::OnDownloadTile() const
+{
+	TGuardValue<bool> UnattendedScriptGuard(GIsRunningUnattendedScript, true);
+	
+	for (FSelectionIterator Iter(*GEditor->GetSelectedActors()); Iter; ++Iter)
+	{
+		AEarthLandscapeClip* Clip = Cast<AEarthLandscapeClip>(*Iter);
+		if (Clip)
+		{
+			Clip->DownloadTile();
+			UE_LOG(LogTemp, Display, TEXT("Downloding Tile: %s"), *Clip->GetName())
+		}
+	}
 }
 
 #undef LOCTEXT_NAMESPACE

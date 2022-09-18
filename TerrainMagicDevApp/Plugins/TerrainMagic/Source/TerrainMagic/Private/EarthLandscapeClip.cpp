@@ -149,7 +149,7 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 	});
 }
 
-void AEarthLandscapeClip::DownloadTexture()
+void AEarthLandscapeClip::DownloadTile()
 {
 	const FString AccessToken = "pk.eyJ1IjoiYXJ1bm9kYSIsImEiOiJjbDgxNm0wM3QwNGN0M3VudW5pbHJzcHFoIn0.S9PCT354lP_MKHrWFqEbxQ";
 
@@ -176,6 +176,7 @@ void AEarthLandscapeClip::DownloadTexture()
 			HeightMap = Texture;
 			CurrentHeightData = CurrentTileResponse->HeightData;
 			CurrentTileResponse = nullptr;
+			_Invalidate();
 		});
 	});
 }

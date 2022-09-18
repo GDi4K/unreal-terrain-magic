@@ -134,7 +134,7 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 		return;
 	}
 
-	const int32 TextureWidth = FMath::Sqrt(CurrentHeightData.Num());
+	const int32 TextureWidth = FMath::Sqrt(static_cast<float>(CurrentHeightData.Num()));
 	FMapBoxUtils::MakeG16Texture(TextureWidth, CurrentHeightData.GetData(), [this](UTexture2D* Texture)
 	{
 		HeightMap = Texture;
@@ -165,7 +165,7 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 			return;
 		}
 		
-		const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
+		const int32 TilesPerRow = FMath::Pow(2.0, static_cast<float>(TileQuery.ZoomInLevels));
 		const int32 PixelsPerRow = 512 * TilesPerRow;
 	
 		// This is important, otherwise the TileData will be garbage collected

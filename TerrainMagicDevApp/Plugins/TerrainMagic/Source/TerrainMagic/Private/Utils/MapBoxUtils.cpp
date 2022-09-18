@@ -104,7 +104,7 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 					CombinedTileData->MinHeight = FMath::Min(*HeightData);
 					const float MaxHeight = FMath::Max(*HeightData);
 					CombinedTileData->HeightRange = MaxHeight - CombinedTileData->MinHeight;
-					const int32 Max16BitValue = FMath::Pow(2, 16) -1;
+					const int32 Max16BitValue = FMath::Pow(2.0, 16.0) - 1;
 					const float HeightRangeRatio = Max16BitValue / CombinedTileData->HeightRange;
 
 					for (int32 HX = 0; HX<PixelsPerRow; HX++)

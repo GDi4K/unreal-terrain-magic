@@ -7,14 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add download map support.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/G16Texture.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/G16Texture.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,11 +28,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/ucrt/corecrt_math.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_4.27/Engine/Source/Runtime/Engine/Private/UnrealEngine.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/include/stdint.h" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -210,14 +208,8 @@
       <workItem from="1663423475502" duration="8810000" />
       <workItem from="1663437501796" duration="647000" />
       <workItem from="1663463722239" duration="2716000" />
-      <workItem from="1663508303222" duration="4827000" />
-    </task>
-    <task id="LOCAL-00056" summary="Introduce a PaintLayer Data Encoder.">
-      <created>1659256757017</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1659256757018</updated>
+      <workItem from="1663508303222" duration="5041000" />
+      <workItem from="1663517118944" duration="2784000" />
     </task>
     <task id="LOCAL-00057" summary="Attach the PaintLayer Info properly.">
       <created>1659351572432</created>
@@ -555,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663509235441</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="Show proper messaging.">
+      <created>1663513304340</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1663513304340</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +575,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Introduce a WeightMap Landscape Clip." />
     <MESSAGE value="Introduce the Location Mask." />
     <MESSAGE value="Add Edge Noise Scale." />
     <MESSAGE value="Integrate the Button into the Editor Toolbar." />
@@ -601,6 +599,7 @@
     <MESSAGE value="Add Radial Blur Support" />
     <MESSAGE value="Refactor codebase for usability." />
     <MESSAGE value="Add download map support." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add download map support." />
+    <MESSAGE value="Show proper messaging." />
+    <option name="LAST_COMMIT_MESSAGE" value="Show proper messaging." />
   </component>
 </project>

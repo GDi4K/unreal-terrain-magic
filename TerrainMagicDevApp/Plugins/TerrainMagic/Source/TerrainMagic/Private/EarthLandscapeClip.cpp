@@ -11,6 +11,7 @@
 #include "Materials/Material.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Utils/MapBoxUtils.h"
+#include "Utils/TerrainMagicThreading.h"
 
 
 float smoothstep (float edge0, float edge1, float x)
@@ -30,15 +31,6 @@ float smoothstep (float edge0, float edge1, float x)
 // Sets default values
 AEarthLandscapeClip::AEarthLandscapeClip()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Check HeightData!"))
-	if (CurrentHeightData.Num() > 0)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Have HeightData!"))
-		// FMapBoxUtils::MakeG16Texture(512, CurrentHeightData.GetData(), [this](UTexture2D* Texture)
-		// {
-		// 	HeightMap = Texture;
-		// });
-	}
 }
 
 UMaterial* AEarthLandscapeClip::GetSourceMaterialForHeight() const
@@ -149,7 +141,7 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 	});
 }
 
-void AEarthLandscapeClip::DownloadTile()
+void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)> StatusCallback)
 {
 	const FString AccessToken = "pk.eyJ1IjoiYXJ1bm9kYSIsImEiOiJjbDgxNm0wM3QwNGN0M3VudW5pbHJzcHFoIn0.S9PCT354lP_MKHrWFqEbxQ";
 
@@ -162,21 +154,37 @@ void AEarthLandscapeClip::DownloadTile()
 	TileQuery.Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
 	TileQuery.Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
 	TileQuery.ZoomInLevels = TileResolution;
-	
-	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery](TSharedPtr<FMapBoxTileResponse> TileData)
+
+	TileDownloadProgress = "Start downloading tiles";
+	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery, StatusCallback](TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress, TSharedPtr<FMapBoxTileResponse> TileData)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tile Downloaded: %d"), TileData->HeightData.Num())
+		TileDownloadProgress = FString::Printf(TEXT("Completed: %d/%d"), DownloadProgress->TilesDownloaded, DownloadProgress->TotalTiles);
+
+		if (TileData == nullptr)
+		{
+			return;
+		}
+		
 		const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
 		const int32 PixelsPerRow = 512 * TilesPerRow;
 	
 		// This is important, otherwise the TileData will be garbage collected
 		CurrentTileResponse = TileData;
-		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileData->HeightData.GetData(), [this](UTexture2D* Texture)
+		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
 		{
-			HeightMap = Texture;
-			CurrentHeightData = CurrentTileResponse->HeightData;
-			CurrentTileResponse = nullptr;
-			_Invalidate();
+			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()
+			{
+				HeightMap = Texture;
+				CurrentHeightData = CurrentTileResponse->HeightData;
+				CurrentTileResponse = nullptr;
+				_Invalidate();
+
+				if (StatusCallback != nullptr)
+				{
+					const FEarthTileDownloadStatus Status = {false, "", 1.0};
+					StatusCallback(Status);
+				}
+			});
 		});
 	});
 }

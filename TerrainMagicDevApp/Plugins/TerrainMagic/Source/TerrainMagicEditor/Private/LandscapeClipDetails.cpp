@@ -6,7 +6,9 @@
 #include "EarthLandscapeClip.h"
 #include "IDetailGroup.h"
 #include "LandscapeClip.h"
+#include "Framework/Notifications/NotificationManager.h"
 #include "Widgets/Layout/SGridPanel.h"
+#include "Widgets/Notifications/SNotificationList.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -167,7 +169,21 @@ FReply FLandscapeClipDetails::OnClickDownloadTile()
 		AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
 		if (EarthLandscapeClip != nullptr)
 		{
-			EarthLandscapeClip->DownloadTile();
+			EarthLandscapeClip->DownloadTile([](FEarthTileDownloadStatus Status)
+			{
+				if (Status.IsError)
+				{
+					UE_LOG(LogTemp, Error, TEXT("Tile Download Error: %s"), *Status.ErrorMessage);
+					
+					FNotificationInfo Info(LOCTEXT("SpawnNotification_Notification", "Tile Download Error"));
+					Info.ExpireDuration = 10.0f;
+					Info.WidthOverride = 300.0f;
+					Info.Hyperlink = FSimpleDelegate();
+					Info.Hyperlink.BindLambda([]() {});
+					Info.HyperlinkText = FText::FromString("Check Output Log for details");
+					FSlateNotificationManager::Get().AddNotification(Info);
+				}
+			});
 		}
 	}
 	

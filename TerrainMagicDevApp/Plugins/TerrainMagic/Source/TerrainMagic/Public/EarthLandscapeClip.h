@@ -16,6 +16,13 @@ enum EHeightMapTileWidth
 	HMW_4096 = 3 UMETA(DisplayName="4096"),
 };
 
+struct FEarthTileDownloadStatus
+{
+	bool IsError = false;
+	FString ErrorMessage = "";
+	float DownloadProgress = 0.0f;
+};
+
 UCLASS()
 class TERRAINMAGIC_API AEarthLandscapeClip : public ALandscapeClip
 {
@@ -49,7 +56,7 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
-	void DownloadTile();
+	void DownloadTile(TFunction<void(FEarthTileDownloadStatus)> StatusCallback = nullptr);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
@@ -68,6 +75,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<EHeightMapTileWidth> TileResolution = HMW_512;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
+	FString TileDownloadProgress = "";
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
 	int32 BlurDistance = 0;

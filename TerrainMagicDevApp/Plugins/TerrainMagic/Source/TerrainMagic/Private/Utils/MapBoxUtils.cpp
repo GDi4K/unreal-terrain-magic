@@ -28,14 +28,6 @@ void FMapBoxUtils::DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(
 		constexpr ERGBFormat InFormat = ERGBFormat::BGRA;
 		const bool HasFetchImageData = ImageWrapper->GetRaw(InFormat, 8, RawImageData);
 
-		if (HasFetchImageData)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Fetching Image Data is a Success!"))
-		} else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Fetching Image Data has Failed!"))
-		}
-
 		TSharedPtr<FMapBoxTileResponseRaw> TileResponse = MakeShared<FMapBoxTileResponseRaw>();
 		TileResponse->RGBHeight.SetNumUninitialized(512 * 512);
 		
@@ -60,7 +52,7 @@ void FMapBoxUtils::DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(
 	HttpRequest->ProcessRequest();
 }
 
-void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<void(TSharedPtr<FMapBoxTileResponse>)> Callback)
+void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<void(TSharedPtr<FMapBoxTileDownloadProgress>, TSharedPtr<FMapBoxTileResponse>)> Callback)
 {
 	const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
 	const int32 PixelsPerRow = 512 * TilesPerRow;
@@ -81,7 +73,6 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 			
 			DownloadTileRaw(NewX, NewY, NewZoom, [TilesPerRow, PixelsPerRow, U, V, NewX, NewY, NewZoom, HeightData, TotalTilesDownloaded, Callback](TSharedPtr<FMapBoxTileResponseRaw> TileResponseRaw)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("It's here: %d, %d, %d"), NewX, NewY, NewZoom);
 				for (int32 TX=0; TX<512; TX++)
 				{
 					for (int32 TY=0; TY<512; TY++)
@@ -93,17 +84,18 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 						const int32 HeightPixelY = V * 512 + TY;
 						const int32 HeightPixelIndex = HeightPixelY * PixelsPerRow + HeightPixelX;
 
-						//(*HeightData)[HeightPixelIndex] = U+V*2;
 						(*HeightData)[HeightPixelIndex] = -10000 + ((Pixel.R * 256 * 256 + Pixel.G * 256 + Pixel.B) * 0.1);
-						if (TY == 200)
-						{
-							//UE_LOG(LogTemp, Warning, TEXT("UV Data: %d, %d"), U, V);
-							// UE_LOG(LogTemp, Warning, TEXT("HeightData: %d"), (*HeightData)[HeightPixelIndex])
-						}
 					}
 				}
 
 				*TotalTilesDownloaded += 1;
+				
+				TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress = MakeShared<FMapBoxTileDownloadProgress>();
+				DownloadProgress->TotalTiles = TilesPerRow * TilesPerRow;
+				DownloadProgress->TilesDownloaded = *TotalTilesDownloaded;
+
+				Callback(DownloadProgress, nullptr);
+
 				if (*TotalTilesDownloaded == TilesPerRow * TilesPerRow)
 				{
 					const TSharedPtr<FMapBoxTileResponse> CombinedTileData = MakeShared<FMapBoxTileResponse>();
@@ -115,8 +107,6 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 					const int32 Max16BitValue = FMath::Pow(2, 16) -1;
 					const float HeightRangeRatio = Max16BitValue / CombinedTileData->HeightRange;
 
-					UE_LOG(LogTemp, Warning, TEXT("Min Max Range: %f, %f, %f"), CombinedTileData->MinHeight, MaxHeight, CombinedTileData->HeightRange)
-					
 					for (int32 HX = 0; HX<PixelsPerRow; HX++)
 					{
 						for (int32 HY=0; HY <PixelsPerRow; HY++)
@@ -125,14 +115,11 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 							const uint16 G16Height = ((*HeightData)[Index] - CombinedTileData->MinHeight) * HeightRangeRatio;
 							
 							CombinedTileData->HeightData[Index] = G16Height;
-							// if (HY == 200)
-							// {
-							// 	UE_LOG(LogTemp, Warning, TEXT("New HeightData: %d"), CombinedTileData->HeightData[Index])
-							// }
 						}
 					}
 
-					Callback(CombinedTileData);
+					
+					Callback(DownloadProgress, CombinedTileData);
 				}
 			});
 		}

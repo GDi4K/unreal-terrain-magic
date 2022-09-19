@@ -143,8 +143,6 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 
 void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)> StatusCallback)
 {
-	const FString AccessToken = "pk.eyJ1IjoiYXJ1bm9kYSIsImEiOiJjbDgxNm0wM3QwNGN0M3VudW5pbHJzcHFoIn0.S9PCT354lP_MKHrWFqEbxQ";
-
 	TArray<FString> Parts;
 	TileInfoString.TrimStartAndEnd().ParseIntoArray(Parts, TEXT(","), true);
 	checkf(Parts.Num() == 3, TEXT("TileInfo text is invalid!"))
@@ -156,12 +154,22 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 	TileQuery.ZoomInLevels = TileResolution;
 
 	TileDownloadProgress = "Start downloading tiles";
-	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery, StatusCallback](TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress, TSharedPtr<FMapBoxTileResponse> TileData)
+	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery, StatusCallback](TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress, TSharedPtr<FMapBoxTileResponse> TileResponseData)
 	{
 		TileDownloadProgress = FString::Printf(TEXT("Completed: %d/%d"), DownloadProgress->TilesDownloaded, DownloadProgress->TotalTiles);
 
-		if (TileData == nullptr)
+		if (TileResponseData == nullptr)
 		{
+			return;
+		}
+
+		if (!TileResponseData->IsSuccess)
+		{
+			FEarthTileDownloadStatus Status;
+			Status.IsError = true;
+			Status.ErrorMessage = TileResponseData->ErrorMessage;
+			
+			StatusCallback(Status);
 			return;
 		}
 		
@@ -169,8 +177,8 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 		const int32 PixelsPerRow = 512 * TilesPerRow;
 	
 		// This is important, otherwise the TileData will be garbage collected
-		CurrentTileResponse = TileData;
-		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
+		CurrentTileResponse = TileResponseData;
+		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileResponseData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
 		{
 			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()
 			{
@@ -181,7 +189,9 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 
 				if (StatusCallback != nullptr)
 				{
-					const FEarthTileDownloadStatus Status = {false, "", 1.0};
+					FEarthTileDownloadStatus Status;
+					Status.IsError = false;
+					
 					StatusCallback(Status);
 				}
 			});

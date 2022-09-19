@@ -20,7 +20,6 @@ struct FEarthTileDownloadStatus
 {
 	bool IsError = false;
 	FString ErrorMessage = "";
-	float DownloadProgress = 0.0f;
 };
 
 UCLASS()

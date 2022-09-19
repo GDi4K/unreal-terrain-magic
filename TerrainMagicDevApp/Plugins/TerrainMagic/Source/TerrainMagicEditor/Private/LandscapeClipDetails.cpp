@@ -169,7 +169,7 @@ FReply FLandscapeClipDetails::OnClickDownloadTile()
 		AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
 		if (EarthLandscapeClip != nullptr)
 		{
-			EarthLandscapeClip->DownloadTile([](FEarthTileDownloadStatus Status)
+			EarthLandscapeClip->DownloadTile([](const FEarthTileDownloadStatus Status)
 			{
 				if (Status.IsError)
 				{

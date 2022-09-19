@@ -14,12 +14,41 @@ void FMapBoxUtils::DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(
 	const TSharedRef<IHttpRequest, ESPMode::ThreadSafe> HttpRequest = FHttpModule::Get().CreateRequest();
 	HttpRequest->OnProcessRequestComplete().BindLambda([Callback](FHttpRequestPtr Request, FHttpResponsePtr Response, bool HasCompleted)
 	{
-		const bool HasDownloaded = HasCompleted && Request.IsValid() && Response->GetContentLength() > 0;
-		if (!HasDownloaded)
+		if (!HasCompleted)
 		{
+			const TSharedPtr<FMapBoxTileResponseRaw> TileResponseError = MakeShared<FMapBoxTileResponseRaw>();
+			TileResponseError->IsSuccess = false;
+			
+			if (Response.IsValid())
+			{
+				TileResponseError->ErrorMessage = "HTTP Response Error: " + Response->GetContentAsString();
+			} else
+			{
+				TileResponseError->ErrorMessage = "Invalid HTTP Request or Network Failure";
+			}
+
+			Callback(TileResponseError);
 			return;
 		}
 
+		if (Response->GetResponseCode() / 100 != 2)
+		{
+			const TSharedPtr<FMapBoxTileResponseRaw> TileResponseError = MakeShared<FMapBoxTileResponseRaw>();
+			TileResponseError->IsSuccess = false;
+			TileResponseError->ErrorMessage = "Invalid HTTP Response Code: " + FString::FromInt(Response->GetResponseCode());
+			Callback(TileResponseError);
+			return;
+		}
+
+		if (Response->GetContentLength() == 0)
+		{
+			const TSharedPtr<FMapBoxTileResponseRaw> TileResponseError = MakeShared<FMapBoxTileResponseRaw>();
+			TileResponseError->IsSuccess = false;
+			TileResponseError->ErrorMessage = "No data found in the response";
+			Callback(TileResponseError);
+			return;
+		}
+		
 		IImageWrapperModule& ImageWrapperModule = FModuleManager::LoadModuleChecked<IImageWrapperModule>(FName("ImageWrapper"));
 		const TSharedPtr<IImageWrapper> ImageWrapper = ImageWrapperModule.CreateImageWrapper(EImageFormat::PNG);
 
@@ -28,7 +57,16 @@ void FMapBoxUtils::DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(
 		constexpr ERGBFormat InFormat = ERGBFormat::BGRA;
 		const bool HasFetchImageData = ImageWrapper->GetRaw(InFormat, 8, RawImageData);
 
-		TSharedPtr<FMapBoxTileResponseRaw> TileResponse = MakeShared<FMapBoxTileResponseRaw>();
+		if (!HasFetchImageData)
+		{
+			const TSharedPtr<FMapBoxTileResponseRaw> TileResponseError = MakeShared<FMapBoxTileResponseRaw>();
+			TileResponseError->IsSuccess = false;
+			TileResponseError->ErrorMessage = "Corrupted tile data found.";
+			Callback(TileResponseError);
+			return;
+		}
+
+		const TSharedPtr<FMapBoxTileResponseRaw> TileResponse = MakeShared<FMapBoxTileResponseRaw>();
 		TileResponse->RGBHeight.SetNumUninitialized(512 * 512);
 		
 		for (int32 X=0; X<512; X++)
@@ -63,6 +101,9 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 
 	TSharedPtr<int32> TotalTilesDownloaded = MakeShared<int32>();
 	*TotalTilesDownloaded = 0;
+
+	const TSharedPtr<bool> RequestCompleted = MakeShared<bool>();
+	*RequestCompleted = false;
 	
 	for (int32 U=0; U<TilesPerRow; U++)
 	{
@@ -71,8 +112,30 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 			const int32 NewX = TileQuery.X * TilesPerRow + U;
 			const int32 NewY = TileQuery.Y * TilesPerRow + V;
 			
-			DownloadTileRaw(NewX, NewY, NewZoom, [TilesPerRow, PixelsPerRow, U, V, NewX, NewY, NewZoom, HeightData, TotalTilesDownloaded, Callback](TSharedPtr<FMapBoxTileResponseRaw> TileResponseRaw)
+			DownloadTileRaw(NewX, NewY, NewZoom, [TilesPerRow, PixelsPerRow, U, V, NewX, NewY, NewZoom, HeightData, TotalTilesDownloaded, Callback, RequestCompleted](TSharedPtr<FMapBoxTileResponseRaw> TileResponseRaw)
 			{
+				if (*RequestCompleted)
+				{
+					return;
+				}
+
+				if (!TileResponseRaw->IsSuccess)
+				{
+					const TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress = MakeShared<FMapBoxTileDownloadProgress>();
+					DownloadProgress->TotalTiles = TilesPerRow * TilesPerRow;
+					DownloadProgress->TilesDownloaded = *TotalTilesDownloaded;
+
+					const TSharedPtr<FMapBoxTileResponse> ErrorResponse = MakeShared<FMapBoxTileResponse>();
+					ErrorResponse->IsSuccess = false;
+					ErrorResponse->ErrorMessage = TileResponseRaw->ErrorMessage;
+					
+					*RequestCompleted = false;
+
+					Callback(DownloadProgress, ErrorResponse);
+					
+					return;
+				}
+				
 				for (int32 TX=0; TX<512; TX++)
 				{
 					for (int32 TY=0; TY<512; TY++)
@@ -89,8 +152,8 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 				}
 
 				*TotalTilesDownloaded += 1;
-				
-				TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress = MakeShared<FMapBoxTileDownloadProgress>();
+
+				const TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress = MakeShared<FMapBoxTileDownloadProgress>();
 				DownloadProgress->TotalTiles = TilesPerRow * TilesPerRow;
 				DownloadProgress->TilesDownloaded = *TotalTilesDownloaded;
 

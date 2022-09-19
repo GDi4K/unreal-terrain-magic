@@ -30,6 +30,7 @@ struct FTerrainMagicMaterialParam
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
 	UTexture* TextureValue = nullptr;
+	
 
 	FTerrainMagicMaterialParam() {}
 	

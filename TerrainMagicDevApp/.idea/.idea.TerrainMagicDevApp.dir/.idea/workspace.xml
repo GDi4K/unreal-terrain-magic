@@ -7,9 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add missing copyright notice.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +33,7 @@
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/TerrainMagic.uplugin" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/ucrt/corecrt_math.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_4.27/Engine/Source/Runtime/Engine/Private/UnrealEngine.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/include/stdint.h" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -187,125 +192,27 @@
       <workItem from="1661943187661" duration="2906000" />
       <workItem from="1661952539054" duration="6653000" />
       <workItem from="1662376106196" duration="2317000" />
-    </task>
-    <task id="LOCAL-00040" summary="Refactor properties in the Editor for ease of use.">
-      <created>1657599563063</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1657599563064</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Add Enable/Disable &amp; Solo support for LandscapeClips.">
-      <created>1657874703724</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1657874703724</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Add MatchLandscapeSize button.">
-      <created>1657878615524</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1657878615524</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Start working on the material.">
-      <created>1657998538254</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1657998538254</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Add preview toggling support.">
-      <created>1658036217464</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1658036217464</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Add a way to add the preview HeightMap.">
-      <created>1658045814245</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1658045814245</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Add the basic setup for customizing LandscapeClip details panel.">
-      <created>1658310662866</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1658310662867</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Assign a button to the Details panel.">
-      <created>1658314838104</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1658314838104</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Fixed a memory leak related to LandscapeClips&#10;When we are rendering rendering landscape clips, we assign a RenderTarget to a Dynamic Material Instance.&#10;&#10;But we didn't clear that RenderTarget from the material instance after use. &#10;&#10;So, when saving &amp; reloading the same or another map trigger a memory leak &amp; crash it.&#10;&#10;This change will fix it properly.">
-      <created>1658420375621</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1658420375621</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Set ToggleOutline &amp; TogglePreview to save the state&#10;So, when you restart your map, it will remember those settings.">
-      <created>1658550914043</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1658550914043</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Send PaintLayer Information to the Manager">
-      <created>1659090482808</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1659090482809</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Read Paint Layer Data from C++">
-      <created>1659107764877</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1659107764878</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Improve the initial game loading speed.">
-      <created>1659157377272</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1659157377272</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Add the Info Brush">
-      <created>1659158700939</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1659158700939</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Implement accessing paint layer data from Blueprints.">
-      <created>1659166838952</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1659166838953</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Fix performance issues when doing layer painting.&#10;Now, we only process paint layers only after the user click the reset cache button on the InfoBrush.">
-      <created>1659254033265</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1659254033265</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Introduce a PaintLayer Data Encoder.">
-      <created>1659256757017</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1659256757018</updated>
+      <workItem from="1662963224575" duration="2162000" />
+      <workItem from="1663059638912" duration="1869000" />
+      <workItem from="1663093103041" duration="5969000" />
+      <workItem from="1663120070344" duration="3420000" />
+      <workItem from="1663130091998" duration="2144000" />
+      <workItem from="1663133189032" duration="1872000" />
+      <workItem from="1663198145404" duration="1549000" />
+      <workItem from="1663211186310" duration="9501000" />
+      <workItem from="1663233624306" duration="4549000" />
+      <workItem from="1663290890822" duration="3253000" />
+      <workItem from="1663302346146" duration="5501000" />
+      <workItem from="1663317027155" duration="6138000" />
+      <workItem from="1663348243839" duration="516000" />
+      <workItem from="1663371254623" duration="8707000" />
+      <workItem from="1663423475502" duration="8810000" />
+      <workItem from="1663437501796" duration="647000" />
+      <workItem from="1663463722239" duration="2716000" />
+      <workItem from="1663508303222" duration="5041000" />
+      <workItem from="1663517118944" duration="3256000" />
+      <workItem from="1663547711562" duration="1992000" />
+      <workItem from="1663549826756" duration="688000" />
     </task>
     <task id="LOCAL-00057" summary="Attach the PaintLayer Info properly.">
       <created>1659351572432</created>
@@ -531,7 +438,126 @@
       <option name="project" value="LOCAL" />
       <updated>1661966404512</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Add the basic HeightChangeLandscapeClip">
+      <created>1662965394313</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1662965394313</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Start working with the custom RenderTarget.">
+      <created>1663062626689</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1663062626690</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Create G16 Textures.">
+      <created>1663099227950</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1663099227950</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Allow to save G16 textures.">
+      <created>1663132220256</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1663132220256</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Refactor the codebase &amp; introduce G16Texture.">
+      <created>1663215068934</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1663215068934</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Experiment on Reading files.">
+      <created>1663222449674</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1663222449674</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Add MapBox URL generator.">
+      <created>1663292868315</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1663292868315</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Allow to download Map tiles directly inside the Engine.">
+      <created>1663305423156</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1663305423156</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Added the Tile Download logic.">
+      <created>1663319973904</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1663319973904</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Implement Merging HeightMaps Support.">
+      <created>1663380055136</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1663380055136</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Refactor the API.">
+      <created>1663424423565</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1663424423565</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Improved internal memory management.">
+      <created>1663424898736</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1663424898736</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Handle the final response properly.">
+      <created>1663425333143</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1663425333144</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Add Radial Blur Support">
+      <created>1663432131668</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1663432131668</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Refactor codebase for usability.">
+      <created>1663438151831</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1663438151832</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Add download map support.">
+      <created>1663509235441</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1663509235441</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Show proper messaging.">
+      <created>1663513304340</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1663513304340</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,23 +578,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add gradient noise." />
-    <MESSAGE value="Apply some noises." />
-    <MESSAGE value="Add noise parameters." />
-    <MESSAGE value="Integrated Noise Settings into the Edior." />
-    <MESSAGE value="Introduce ZIndex support for sorting Landscape Clips." />
-    <MESSAGE value="Fixed the noise algorithm for better control." />
-    <MESSAGE value="Refactor existing RenderLandscapeClips code." />
-    <MESSAGE value="Add the paint layer workflow." />
-    <MESSAGE value="Add basic paint layer support." />
-    <MESSAGE value="Remove unwanted categories." />
-    <MESSAGE value="Introducing TextureMap Mask." />
-    <MESSAGE value="Added the HeightMask" />
-    <MESSAGE value="Implement proper paint modes." />
-    <MESSAGE value="Enable Masks on when selected Mask paint mode." />
-    <MESSAGE value="Adding PaintLayer support for NoiseLandscapeClip." />
-    <MESSAGE value="Remove debug messages and logs." />
-    <MESSAGE value="Introduce a WeightMap Landscape Clip." />
     <MESSAGE value="Introduce the Location Mask." />
     <MESSAGE value="Add Edge Noise Scale." />
     <MESSAGE value="Integrate the Button into the Editor Toolbar." />
@@ -577,6 +586,23 @@
     <MESSAGE value="Add a Tooltip for existing Invalidate button." />
     <MESSAGE value="Add UE5 support." />
     <MESSAGE value="Add missing copyright notice." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add missing copyright notice." />
+    <MESSAGE value="Add the basic HeightChangeLandscapeClip" />
+    <MESSAGE value="Start working with the custom RenderTarget." />
+    <MESSAGE value="Create G16 Textures." />
+    <MESSAGE value="Allow to save G16 textures." />
+    <MESSAGE value="Refactor the codebase &amp; introduce G16Texture." />
+    <MESSAGE value="Experiment on Reading files." />
+    <MESSAGE value="Add MapBox URL generator." />
+    <MESSAGE value="Allow to download Map tiles directly inside the Engine." />
+    <MESSAGE value="Added the Tile Download logic." />
+    <MESSAGE value="Implement Merging HeightMaps Support." />
+    <MESSAGE value="Refactor the API." />
+    <MESSAGE value="Improved internal memory management." />
+    <MESSAGE value="Handle the final response properly." />
+    <MESSAGE value="Add Radial Blur Support" />
+    <MESSAGE value="Refactor codebase for usability." />
+    <MESSAGE value="Add download map support." />
+    <MESSAGE value="Show proper messaging." />
+    <option name="LAST_COMMIT_MESSAGE" value="Show proper messaging." />
   </component>
 </project>

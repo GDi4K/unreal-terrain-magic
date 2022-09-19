@@ -40,6 +40,7 @@ ALandscapeClip::ALandscapeClip()
 	#if ENGINE_MAJOR_VERSION == 5
 		bIsSpatiallyLoaded = false;
 	#endif
+	bIsEditorOnlyActor = true;
 #endif
 }
 

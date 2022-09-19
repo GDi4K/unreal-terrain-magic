@@ -16,6 +16,13 @@ enum EHeightMapTileWidth
 	HMW_4096 = 3 UMETA(DisplayName="4096"),
 };
 
+UENUM()
+enum EHeightMapTileHeightRange
+{
+	HMHR_POSITIVE = 0 UMETA(DisplayName="Positive Only"),
+	HMHR_POSITIVE_NEGATIVE = 1 UMETA(DisplayName="Positive & Negative"),
+};
+
 struct FEarthTileDownloadStatus
 {
 	bool IsError = false;
@@ -56,6 +63,10 @@ public:
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
 	void DownloadTile(TFunction<void(FEarthTileDownloadStatus)> StatusCallback = nullptr);
+
+#if WITH_EDITOR 
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
@@ -69,14 +80,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
 	UTexture2D* HeightMap = nullptr;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
+	FString TileDownloadProgress = "";
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	FString TileInfoString = "";
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<EHeightMapTileWidth> TileResolution = HMW_512;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
-	FString TileDownloadProgress = "";
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	TEnumAsByte<EHeightMapTileHeightRange> HeightRange = HMHR_POSITIVE_NEGATIVE;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
 	int32 BlurDistance = 0;
@@ -88,7 +102,7 @@ public:
 	int32 BlurRadialSteps = 8;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")
-	FTerrainMagicRemap HeightMapRange = {0, 1, 0, 1};
+	FTerrainMagicRemap HeightMapRange = {0, 1, -1, 1};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height", meta=(ToolTip="A multiplier that will use with the following HeightMap range output values. This value doesn't scale with the clip actor's scaling factors."))
 	int HeightMultiplier = 32000;

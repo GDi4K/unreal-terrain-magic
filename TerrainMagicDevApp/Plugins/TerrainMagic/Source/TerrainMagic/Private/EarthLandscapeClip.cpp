@@ -198,3 +198,22 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 		});
 	});
 }
+
+#if WITH_EDITOR
+void AEarthLandscapeClip::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	if (PropertyChangedEvent.Property->GetName() == "HeightRange")
+	{
+		if (HeightRange == HMHR_POSITIVE)
+		{
+			HeightMapRange.OutputMin = 0;
+			HeightMapRange.OutputMax = 1;
+		} else if (HeightRange == HMHR_POSITIVE_NEGATIVE)
+		{
+			HeightMapRange.OutputMin = -1;
+			HeightMapRange.OutputMax = 1;
+		}
+	}
+}
+#endif

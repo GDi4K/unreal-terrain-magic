@@ -94,7 +94,7 @@ void FMapBoxUtils::DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(
 
 void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<void(TSharedPtr<FMapBoxTileDownloadProgress>, TSharedPtr<FMapBoxTileResponse>)> Callback)
 {
-	const int32 TilesPerRow = FMath::Pow(2, TileQuery.ZoomInLevels);
+	const int32 TilesPerRow = FMath::Pow(2.0, static_cast<float>(TileQuery.ZoomInLevels));
 	const int32 PixelsPerRow = 512 * TilesPerRow;
 	const int32 NewZoom = TileQuery.Zoom + TileQuery.ZoomInLevels;
 

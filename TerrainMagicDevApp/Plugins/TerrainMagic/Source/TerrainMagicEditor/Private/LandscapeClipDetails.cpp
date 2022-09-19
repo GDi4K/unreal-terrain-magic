@@ -1,4 +1,6 @@
-﻿#include "LandscapeClipDetails.h"
+﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
+
+#include "LandscapeClipDetails.h"
 
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"

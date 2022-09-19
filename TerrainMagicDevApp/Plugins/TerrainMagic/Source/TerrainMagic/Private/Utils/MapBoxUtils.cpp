@@ -1,4 +1,6 @@
-﻿#include "Utils/MapBoxUtils.h"
+﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
+
+#include "Utils/MapBoxUtils.h"
 
 #include "HttpModule.h"
 #include "IImageWrapper.h"

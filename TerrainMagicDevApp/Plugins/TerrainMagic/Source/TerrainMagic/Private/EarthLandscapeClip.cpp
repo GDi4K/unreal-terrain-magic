@@ -145,7 +145,15 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 {
 	TArray<FString> Parts;
 	TileInfoString.TrimStartAndEnd().ParseIntoArray(Parts, TEXT(","), true);
-	checkf(Parts.Num() == 3, TEXT("TileInfo text is invalid!"))
+	if (Parts.Num() != 3)
+	{
+		FEarthTileDownloadStatus Status;
+		Status.IsError = true;
+		Status.ErrorMessage = "Invalid TileInfo String";
+			
+		StatusCallback(Status);
+		return;
+	}
 	
 	FMapBoxTileQuery TileQuery = {};
 	TileQuery.X = FCString::Atoi(*Parts[0].TrimStartAndEnd());

@@ -111,6 +111,7 @@ void AEarthLandscapeClip::Tick(float DeltaSeconds)
 	{
 		return;
 	}
+
 	ReloadTextureIfNeeded();
 }
 
@@ -132,13 +133,7 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 	}
 	HasTextureReloaded = true;
 
-	if (CurrentHeightData.Num() == 0)
-	{
-		return;
-	}
-
-	const int32 TextureWidth = FMath::Sqrt(static_cast<float>(CurrentHeightData.Num()));
-	FMapBoxUtils::MakeG16Texture(TextureWidth, CurrentHeightData.GetData(), [this](UTexture2D* Texture)
+	FMapBoxUtils::LoadCachedTexture(GetName(), [this](UTexture2D* Texture)
 	{
 		HeightMap = Texture;
 	});
@@ -189,12 +184,12 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 	
 		// This is important, otherwise the TileData will be garbage collected
 		CurrentTileResponse = TileResponseData;
-		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileResponseData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
+		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileResponseData->HeightData.GetData(), GetName(), [this, StatusCallback](UTexture2D* Texture)
 		{
 			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()
 			{
 				HeightMap = Texture;
-				CurrentHeightData = CurrentTileResponse->HeightData;
+				//CurrentHeightData = CurrentTileResponse->HeightData;
 				CurrentTileResponse = nullptr;
 				_Invalidate();
 

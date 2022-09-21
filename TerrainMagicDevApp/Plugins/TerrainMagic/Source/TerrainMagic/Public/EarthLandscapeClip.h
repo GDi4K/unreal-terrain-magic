@@ -46,8 +46,8 @@ class TERRAINMAGIC_API AEarthLandscapeClip : public ALandscapeClip
 {
 	GENERATED_BODY()
 
-	UPROPERTY()
-	TArray<uint16> CurrentHeightData;
+	// UPROPERTY()
+	// TArray<uint16> CurrentHeightData;
 	
 	TSharedPtr<FMapBoxTileResponse> CurrentTileResponse = nullptr;
 	bool HasTextureReloaded = false;

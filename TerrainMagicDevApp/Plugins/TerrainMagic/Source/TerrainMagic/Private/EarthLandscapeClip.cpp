@@ -47,6 +47,9 @@ TArray<FTerrainMagicMaterialParam> AEarthLandscapeClip::GetMaterialParams()
 	MaterialParams.Push({"BlurDistance", static_cast<float>(BlurDistance)});
 	MaterialParams.Push({"BlurDistanceSteps", static_cast<float>(BlurDistanceSteps)});
 	MaterialParams.Push({"BlurRadialSteps", static_cast<float>(BlurRadialSteps)});
+
+	MaterialParams.Push({"TileRepositionZoomScale", TileRepositioning.Scale});
+	MaterialParams.Push({"TileRepositionPanning", FVector(TileRepositioning.Panning, 0.0)});
 	
 	MaterialParams.Push({"HeightMultiplier", static_cast<float>(HeightMultiplier)});
 	MaterialParams.Push({"SelectedBlendMode", static_cast<float>(BlendMode)});

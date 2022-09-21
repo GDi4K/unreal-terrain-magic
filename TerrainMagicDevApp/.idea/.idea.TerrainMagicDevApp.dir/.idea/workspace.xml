@@ -7,8 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Check for the invalid TileQuery.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,13 +214,7 @@
       <workItem from="1663547711562" duration="1992000" />
       <workItem from="1663549826756" duration="688000" />
       <workItem from="1663563697640" duration="4412000" />
-    </task>
-    <task id="LOCAL-00058" summary="Remove unwanted files.">
-      <created>1659372243142</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1659372243142</updated>
+      <workItem from="1663754089708" duration="2219000" />
     </task>
     <task id="LOCAL-00059" summary="Do not crash when finding paint layers but no data is found.">
       <created>1659372550018</created>
@@ -554,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663566302810</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="Check for the invalid TileQuery.">
+      <created>1663754753906</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1663754753907</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,7 +580,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add Edge Noise Scale." />
     <MESSAGE value="Integrate the Button into the Editor Toolbar." />
     <MESSAGE value="Implement the Invalidating Functionality." />
     <MESSAGE value="Add a nice icon." />
@@ -600,6 +604,7 @@
     <MESSAGE value="Add download map support." />
     <MESSAGE value="Show proper messaging." />
     <MESSAGE value=" Set the default height range to -1 to 1 &amp; provide an easyway to change it." />
-    <option name="LAST_COMMIT_MESSAGE" value=" Set the default height range to -1 to 1 &amp; provide an easyway to change it." />
+    <MESSAGE value="Check for the invalid TileQuery." />
+    <option name="LAST_COMMIT_MESSAGE" value="Check for the invalid TileQuery." />
   </component>
 </project>

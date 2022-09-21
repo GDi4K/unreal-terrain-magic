@@ -23,6 +23,18 @@ enum EHeightMapTileHeightRange
 	HMHR_POSITIVE_NEGATIVE = 1 UMETA(DisplayName="Positive & Negative"),
 };
 
+USTRUCT(BlueprintType)
+struct FEarthLandscapeClipTileRepositioning
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	float Scale = 1.0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	FVector2D Panning = {0.0, 0.0};
+};
+
 struct FEarthTileDownloadStatus
 {
 	bool IsError = false;
@@ -91,6 +103,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<EHeightMapTileHeightRange> HeightRange = HMHR_POSITIVE_NEGATIVE;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	FEarthLandscapeClipTileRepositioning TileRepositioning;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
 	int32 BlurDistance = 0;

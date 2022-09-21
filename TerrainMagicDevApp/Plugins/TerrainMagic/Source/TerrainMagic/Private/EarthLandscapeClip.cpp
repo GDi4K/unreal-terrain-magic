@@ -133,10 +133,7 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 	}
 	HasTextureReloaded = true;
 
-	FMapBoxUtils::LoadCachedTexture(GetName(), [this](UTexture2D* Texture)
-	{
-		HeightMap = Texture;
-	});
+	HeightMap = FMapBoxUtils::LoadCachedTexture(GetName());
 }
 
 void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)> StatusCallback)
@@ -184,6 +181,7 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 	
 		// This is important, otherwise the TileData will be garbage collected
 		CurrentTileResponse = TileResponseData;
+		UE_LOG(LogTemp, Warning, TEXT("Full Name: %s, Name: %s"), *GetFullName(), *GetName())
 		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileResponseData->HeightData.GetData(), GetName(), [this, StatusCallback](UTexture2D* Texture)
 		{
 			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()

@@ -270,42 +270,8 @@ void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, FStrin
 							  });
 }
 
-void FMapBoxUtils::LoadCachedTexture(FString CacheTextureName, TFunction<void(UTexture2D*)> Callback)
+UTexture2D* FMapBoxUtils::LoadCachedTexture(FString CacheTextureName)
 {
-	const FString TexturePath = "/Game/TerrainMagic/HeightMaps/" + CacheTextureName + ".HeightChangeLandscapeClip3";
-	const UTexture2D* CachedTexture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), nullptr, *TexturePath));
-
-	if (CachedTexture == nullptr)
-	{
-		return;
-	}
-	
-	const int32 TextureWidth = CachedTexture->GetSizeX();
-	const void* TextureData = CachedTexture->PlatformData->Mips[0].BulkData.LockReadOnly();
-	uint8* TextureDataBytes = (uint8*)(TextureData);
-
-	// Create the Runtime Texture
-	UTexture2D* Texture = UTexture2D::CreateTransient(TextureWidth, TextureWidth, PF_G16);
-	Texture->CompressionSettings = TC_VectorDisplacementmap;
-	Texture->SRGB = 0;
-	Texture->AddToRoot();
-	Texture->Filter = TF_Bilinear;
-
-#if WITH_EDITORONLY_DATA
-	Texture->MipGenSettings = TMGS_NoMipmaps;
-#endif
-	
-	Texture->UpdateResource();
-
-	const FUpdateTextureRegion2D* UpdateRegionNew = new FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
-	constexpr int32 BytesPerPixel = 2;
-	const int32 BytesPerRow = TextureWidth * BytesPerPixel;
-
-	Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), UpdateRegionNew,
-							  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), TextureDataBytes,
-							  [Callback, Texture, CachedTexture](uint8*, const FUpdateTextureRegion2D*)
-							  {
-								CachedTexture->PlatformData->Mips[0].BulkData.Unlock();
-							  	Callback(Texture);
-							  });
+	const FString TexturePath = "/Game/TerrainMagic/HeightMaps/" + CacheTextureName + "." + CacheTextureName;
+	return Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), nullptr, *TexturePath));
 }

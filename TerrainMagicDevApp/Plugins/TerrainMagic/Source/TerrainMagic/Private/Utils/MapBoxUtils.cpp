@@ -194,6 +194,7 @@ void FMapBoxUtils::DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<v
 
 void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, FString CacheTextureName, TFunction<void(UTexture2D*)> Callback)
 {
+#if WITH_EDITORONLY_DATA
 	uint8* HeightDataBytes = reinterpret_cast<uint8*>(HeightData);
 
 	const FString PackageName = TEXT("/Game/TerrainMagic/HeightMaps/") + CacheTextureName;
@@ -201,11 +202,11 @@ void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, FStrin
 	CacheTexturePackage->FullyLoad();
 	
 	UTexture2D* CacheTexture = NewObject<UTexture2D>(CacheTexturePackage, *CacheTextureName, RF_Public | RF_Standalone);
+	CacheTexture->CompressionSettings = TC_Grayscale;
 	CacheTexture->PlatformData = new FTexturePlatformData();
 	CacheTexture->PlatformData->SizeX = TextureWidth;
 	CacheTexture->PlatformData->SizeY = TextureWidth;
 	CacheTexture->PlatformData->PixelFormat = EPixelFormat::PF_G16;
-	CacheTexture->CompressionSettings = TC_Grayscale;
 	
 	#if WITH_EDITORONLY_DATA
 		CacheTexture->MipGenSettings = TMGS_NoMipmaps;
@@ -238,11 +239,7 @@ void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, FStrin
 		CacheTexturePackage->SetDirtyFlag(true);
 	
 		FString PackageFileName = FPackageName::LongPackageNameToFilename(PackageName, FPackageName::GetAssetPackageExtension());
-		bool bSaved = UPackage::SavePackage(CacheTexturePackage, CacheTexture, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *PackageFileName, GError, nullptr, true, true, SAVE_NoError);
-	
-		const FUpdateTextureRegion2D* UpdateRegionNew = new FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
-		constexpr int32 BytesPerPixel = 2;
-		const int32 BytesPerRow = TextureWidth * BytesPerPixel;
+		UPackage::SavePackage(CacheTexturePackage, CacheTexture, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *PackageFileName, GError, nullptr, true, true, SAVE_NoError);
 	}
 	
 	// Create the Runtime Texture
@@ -251,10 +248,8 @@ void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, FStrin
 	Texture->SRGB = 0;
 	Texture->AddToRoot();
 	Texture->Filter = TF_Bilinear;
-
-#if WITH_EDITORONLY_DATA
+	
 	Texture->MipGenSettings = TMGS_NoMipmaps;
-#endif
 	
 	Texture->UpdateResource();
 
@@ -268,6 +263,7 @@ void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, FStrin
 							  {
 								  Callback(Texture);
 							  });
+#endif
 }
 
 UTexture2D* FMapBoxUtils::LoadCachedTexture(FString CacheTextureName)

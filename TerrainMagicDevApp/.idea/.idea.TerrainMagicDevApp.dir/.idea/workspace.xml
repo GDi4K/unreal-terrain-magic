@@ -7,13 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add support to caching the HeightMap.&#10;Unfortunately, we cannot directly use it. &#10;If we use that, we cannot get a notification when the texture is written to the disk. Then we cannot know really when to add it to the material instance.&#10;So, we still use a cached texture.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Allow to load cached textures in UE5.&#10;Now we don't create a transient version from it. Because, we can simply use the cached texture :)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/HeightChangeLandscapeClip3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/HeightChangeLandscapeClip3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +26,6 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" root0="FORCE_HIGHLIGHTING" />
@@ -216,14 +213,8 @@
       <workItem from="1663549826756" duration="688000" />
       <workItem from="1663563697640" duration="4412000" />
       <workItem from="1663754089708" duration="2290000" />
-      <workItem from="1663773336592" duration="9877000" />
-    </task>
-    <task id="LOCAL-00061" summary="Introduce the basic class structure for NoiseLandscapeClips.">
-      <created>1659741678979</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1659741678979</updated>
+      <workItem from="1663773336592" duration="10368000" />
+      <workItem from="1663838510393" duration="450000" />
     </task>
     <task id="LOCAL-00062" summary="Add some basic noise implementation.">
       <created>1659743562281</created>
@@ -561,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663783069382</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Allow to load cached textures in UE5.&#10;Now we don't create a transient version from it. Because, we can simply use the cached texture :)">
+      <created>1663785319601</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1663785319601</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -582,7 +580,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add a nice icon." />
     <MESSAGE value="Add a Tooltip for existing Invalidate button." />
     <MESSAGE value="Add UE5 support." />
     <MESSAGE value="Add missing copyright notice." />
@@ -607,6 +604,7 @@
     <MESSAGE value="Check for the invalid TileQuery." />
     <MESSAGE value="Add Tile Repositioning support." />
     <MESSAGE value="Add support to caching the HeightMap.&#10;Unfortunately, we cannot directly use it. &#10;If we use that, we cannot get a notification when the texture is written to the disk. Then we cannot know really when to add it to the material instance.&#10;So, we still use a cached texture." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add support to caching the HeightMap.&#10;Unfortunately, we cannot directly use it. &#10;If we use that, we cannot get a notification when the texture is written to the disk. Then we cannot know really when to add it to the material instance.&#10;So, we still use a cached texture." />
+    <MESSAGE value="Allow to load cached textures in UE5.&#10;Now we don't create a transient version from it. Because, we can simply use the cached texture :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Allow to load cached textures in UE5.&#10;Now we don't create a transient version from it. Because, we can simply use the cached texture :)" />
   </component>
 </project>

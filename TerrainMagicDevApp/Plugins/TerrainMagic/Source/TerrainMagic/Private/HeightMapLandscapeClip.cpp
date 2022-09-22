@@ -20,7 +20,9 @@ TArray<FTerrainMagicMaterialParam> AHeightMapLandscapeClip::GetMaterialParams()
 	TArray<FTerrainMagicMaterialParam> MaterialParams;
 	
 	MaterialParams.Push({"Texture", HeightMap});
-	MaterialParams.Push({"HeightMultiplier", static_cast<float>(HeightMultiplier)});
+	
+	float HeightMultiplierInput = (HeightMap == nullptr)? 0.0f : HeightMultiplier;
+	MaterialParams.Push({"HeightMultiplier", HeightMultiplierInput});
 	MaterialParams.Push({"SelectedBlendMode", static_cast<float>(BlendMode)});
 
 	MaterialParams.Push({"HeightMapInputMin", HeightMapRange.InputMin});

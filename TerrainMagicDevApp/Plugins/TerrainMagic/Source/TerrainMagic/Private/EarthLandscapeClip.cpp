@@ -50,8 +50,9 @@ TArray<FTerrainMagicMaterialParam> AEarthLandscapeClip::GetMaterialParams()
 
 	MaterialParams.Push({"TileRepositionZoomScale", TileRepositioning.Scale});
 	MaterialParams.Push({"TileRepositionPanning", FVector(TileRepositioning.Panning, 0.0)});
-	
-	MaterialParams.Push({"HeightMultiplier", static_cast<float>(HeightMultiplier)});
+
+	float HeightMultiplierInput = (HeightMap == nullptr)? 0.0f : HeightMultiplier;
+	MaterialParams.Push({"HeightMultiplier", HeightMultiplierInput});
 	MaterialParams.Push({"SelectedBlendMode", static_cast<float>(BlendMode)});
 
 	MaterialParams.Push({"HeightMapInputMin", HeightMapRange.InputMin});

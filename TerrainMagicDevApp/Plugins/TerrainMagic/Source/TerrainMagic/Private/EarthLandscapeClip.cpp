@@ -66,6 +66,7 @@ TArray<FTerrainMagicMaterialParam> AEarthLandscapeClip::GetMaterialParams()
 	MaterialParams.Push({"SelectedFadeMode", static_cast<float>(FadeMode)});
 	MaterialParams.Push({"FadeSaturation", FadeSaturation});
 	MaterialParams.Push({"FadeMaskSpan", FadeMaskSpan});
+	MaterialParams.Push({"FadeUseRemapMin", static_cast<float>(FadeMinimum)});
 	
 	return MaterialParams;
 }

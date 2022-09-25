@@ -139,6 +139,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
 	float FadeSaturation = 1.0;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
+	TEnumAsByte<ELandscapeClipFadeMinimum> FadeMinimum = LCFM_ZERO;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Layer Painting")
 	TArray<FLandscapeClipPaintLayerSettings> PaintLayerSettings = {};

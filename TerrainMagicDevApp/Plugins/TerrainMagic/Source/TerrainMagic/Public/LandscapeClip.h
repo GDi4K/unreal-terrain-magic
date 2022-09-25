@@ -30,6 +30,13 @@ enum ELandscapeClipFadeMode
 	LCF_BOX = 2 UMETA(DisplayName="Box"),
 };
 
+UENUM(BlueprintType)
+enum ELandscapeClipFadeMinimum
+{
+	LCFM_ZERO = 0 UMETA(DisplayName="0"),
+	LCFM_REMAP_MIN = 1 UMETA(DisplayName="HeightMap Range Output Min")
+};
+
 enum ELandscapeClipSoloAction
 {
 	LCSA_NONE = 0,

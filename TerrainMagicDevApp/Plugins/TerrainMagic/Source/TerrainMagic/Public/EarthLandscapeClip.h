@@ -113,10 +113,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
 	int32 BlurDistance = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur", meta=(ClampMin=0, ClampMax=100))
 	int32 BlurDistanceSteps = 16;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur", meta=(ClampMin=0, ClampMax=100))
 	int32 BlurRadialSteps = 8;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")

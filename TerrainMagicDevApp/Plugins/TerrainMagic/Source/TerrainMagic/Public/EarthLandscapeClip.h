@@ -33,6 +33,9 @@ struct FEarthLandscapeClipTileRepositioning
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
 	FVector2D Panning = {0.0, 0.0};
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic", meta=(ToolTip="In Degrees", ClampMax=360, ClampMin=0))
+	float Rotation = 0.0f;
 };
 
 struct FEarthTileDownloadStatus

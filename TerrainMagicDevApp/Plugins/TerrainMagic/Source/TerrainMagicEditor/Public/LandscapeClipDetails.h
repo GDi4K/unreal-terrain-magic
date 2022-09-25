@@ -27,6 +27,6 @@ public:
 
 	// Helpers
 	TArray<ALandscapeClip*> GetSelectedLandscapeClips();
-	bool CanShowDownloadTileButton();
-	
+	bool IsEarthLandscapeClip();
+	bool IsBaseLandscapeClip();
 };

@@ -2,6 +2,7 @@
 
 #include "LandscapeClipDetails.h"
 
+#include "BaseLandscapeClip.h"
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
@@ -24,8 +25,6 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 	// Create a category so this is displayed early in the properties
 	IDetailCategoryBuilder& MyCategory = DetailBuilder.EditCategory("00-TerrainMagic", LOCTEXT("CatName", "TerrainMagic"), ECategoryPriority::Important);
 	DetailBuilder.GetObjectsBeingCustomized(CustomizingActors);
-
-	bool ShowDownloadTileButton = CanShowDownloadTileButton();
 	
 	auto WidgetRow = SNew(SGridPanel)
 			+SGridPanel::Slot(0, 0).Padding(5, 2)
@@ -60,7 +59,7 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
 			];
 
-	if (ShowDownloadTileButton)
+	if (IsEarthLandscapeClip())
 	{
 		WidgetRow = SNew(SGridPanel)
 			+SGridPanel::Slot(0, 0).Padding(5, 2)
@@ -109,6 +108,17 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 			];
 	}
 
+	if (IsBaseLandscapeClip())
+	{
+		WidgetRow = SNew(SGridPanel)
+			+SGridPanel::Slot(0, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("InvalidateButton", "Invalidate"))
+				.ToolTipText(LOCTEXT("InvalidateButtonToolTip", "Use ALT+Q or Editor Toolbar"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
+			];
+	}	
 	
 	MyCategory.AddGroup("Actions", LOCTEXT("Actions", "Actions"), false, true)
 		.AddWidgetRow()[WidgetRow];
@@ -221,7 +231,7 @@ TArray<ALandscapeClip*> FLandscapeClipDetails::GetSelectedLandscapeClips()
 	return SelectedLandscapeClips;
 }
 
-bool FLandscapeClipDetails::CanShowDownloadTileButton()
+bool FLandscapeClipDetails::IsEarthLandscapeClip()
 {
 	const TArray<ALandscapeClip*> SelectedClips = GetSelectedLandscapeClips();
 	if (SelectedClips.Num() == 0)
@@ -233,6 +243,26 @@ bool FLandscapeClipDetails::CanShowDownloadTileButton()
 	{
 		const AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
 		if (EarthLandscapeClip == nullptr)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool FLandscapeClipDetails::IsBaseLandscapeClip()
+{
+	const TArray<ALandscapeClip*> SelectedClips = GetSelectedLandscapeClips();
+	if (SelectedClips.Num() == 0)
+	{
+		return false;
+	}
+
+	for (ALandscapeClip* Clip: SelectedClips)
+	{
+		const ABaseLandscapeClip* BaseLandscapeClip = Cast<ABaseLandscapeClip>(Clip);
+		if (BaseLandscapeClip == nullptr)
 		{
 			return false;
 		}

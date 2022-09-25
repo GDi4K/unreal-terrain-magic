@@ -7,14 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" afterDir="false" />
-    </list>
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add support for Reposition Rotation." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +21,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" root0="FORCE_HIGHLIGHTING" />
@@ -219,14 +213,7 @@
       <workItem from="1663838510393" duration="450000" />
       <workItem from="1663889753157" duration="705000" />
       <workItem from="1663950366606" duration="325000" />
-      <workItem from="1664080923445" duration="1364000" />
-    </task>
-    <task id="LOCAL-00062" summary="Add some basic noise implementation.">
-      <created>1659743562281</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1659743562281</updated>
+      <workItem from="1664080923445" duration="1682000" />
     </task>
     <task id="LOCAL-00063" summary="Add gradient noise.">
       <created>1660194220979</created>
@@ -564,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663785319601</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="Add support for Reposition Rotation.">
+      <created>1664082477872</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1664082477872</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,7 +579,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add a Tooltip for existing Invalidate button." />
     <MESSAGE value="Add UE5 support." />
     <MESSAGE value="Add missing copyright notice." />
     <MESSAGE value="Add the basic HeightChangeLandscapeClip" />
@@ -610,6 +603,7 @@
     <MESSAGE value="Add Tile Repositioning support." />
     <MESSAGE value="Add support to caching the HeightMap.&#10;Unfortunately, we cannot directly use it. &#10;If we use that, we cannot get a notification when the texture is written to the disk. Then we cannot know really when to add it to the material instance.&#10;So, we still use a cached texture." />
     <MESSAGE value="Allow to load cached textures in UE5.&#10;Now we don't create a transient version from it. Because, we can simply use the cached texture :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Allow to load cached textures in UE5.&#10;Now we don't create a transient version from it. Because, we can simply use the cached texture :)" />
+    <MESSAGE value="Add support for Reposition Rotation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add support for Reposition Rotation." />
   </component>
 </project>

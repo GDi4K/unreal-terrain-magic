@@ -51,6 +51,9 @@ class TERRAINMAGIC_API ALandscapeClip : public AActor
 
 	FVector PrevScale3D = {1, 1, 1};
 
+	UPROPERTY()
+	float InitialZPosition = -12424.0;
+
 public:
 	// Sets default values for this actor's properties
 	ALandscapeClip();
@@ -75,6 +78,7 @@ public:
 	virtual bool IsEnabled() const;
 	virtual void SetEnabled(bool bEnabled);
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const;
+	float GetHeightAddition() const;
 	
 	void _Invalidate();
 	void _ToggleOutline();

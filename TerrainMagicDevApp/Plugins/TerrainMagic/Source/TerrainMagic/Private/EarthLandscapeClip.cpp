@@ -60,9 +60,9 @@ TArray<FTerrainMagicMaterialParam> AEarthLandscapeClip::GetMaterialParams()
 	MaterialParams.Push({"HeightMapInputMax", HeightMapRange.InputMax});
 	MaterialParams.Push({"HeightMapOutputMin", HeightMapRange.OutputMin});
 	MaterialParams.Push({"HeightMapOutputMax", HeightMapRange.OutputMax});
-
 	MaterialParams.Push({"HeightSaturation", HeightSaturation});
-
+	MaterialParams.Push({"HeightAddition", GetHeightAddition()});
+	
 	MaterialParams.Push({"SelectedFadeMode", static_cast<float>(FadeMode)});
 	MaterialParams.Push({"FadeSaturation", FadeSaturation});
 	MaterialParams.Push({"FadeMaskSpan", FadeMaskSpan});

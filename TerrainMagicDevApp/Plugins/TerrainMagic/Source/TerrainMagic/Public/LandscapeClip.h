@@ -30,6 +30,13 @@ enum ELandscapeClipFadeMode
 	LCF_BOX = 2 UMETA(DisplayName="Box"),
 };
 
+UENUM(BlueprintType)
+enum ELandscapeClipFadeMinimum
+{
+	LCFM_ZERO = 0 UMETA(DisplayName="0"),
+	LCFM_REMAP_MIN = 1 UMETA(DisplayName="HeightMap Range Output Min")
+};
+
 enum ELandscapeClipSoloAction
 {
 	LCSA_NONE = 0,
@@ -43,6 +50,9 @@ class TERRAINMAGIC_API ALandscapeClip : public AActor
 	GENERATED_BODY()
 
 	FVector PrevScale3D = {1, 1, 1};
+
+	UPROPERTY()
+	float InitialZPosition = -12424.0;
 
 public:
 	// Sets default values for this actor's properties
@@ -68,6 +78,7 @@ public:
 	virtual bool IsEnabled() const;
 	virtual void SetEnabled(bool bEnabled);
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const;
+	float GetHeightAddition() const;
 	
 	void _Invalidate();
 	void _ToggleOutline();

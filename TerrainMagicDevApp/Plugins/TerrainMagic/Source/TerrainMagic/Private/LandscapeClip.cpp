@@ -138,6 +138,12 @@ void ALandscapeClip::Tick(float DeltaTime)
 			UE_LOG(LogTemp, Warning, TEXT("PreviewMaterial is missing!"))
 		}
 	}
+
+	// Set Initial Z Position
+	if (InitialZPosition == -12424.0)
+	{
+		InitialZPosition = GetActorLocation().Z;
+	}
 }
 
 bool ALandscapeClip::ShouldTickIfViewportsOnly() const
@@ -179,6 +185,8 @@ void ALandscapeClip::_TogglePreview()
 void ALandscapeClip::_MatchLandscapeSize()
 {
 	const FVector CenterLocation = LandscapeLocation + ((LandscapeSize / 2) * LandscapeScale);
+	InitialZPosition = CenterLocation.Z;
+
 	const FVector ScaleFactorFromLandscapeScale = LandscapeScale / 100.0;
 	SetActorLocation(CenterLocation);
 	SetActorScale3D(ScaleFactorFromLandscapeScale);
@@ -362,5 +370,10 @@ void ALandscapeClip::SetEnabled(bool bEnabled)
 TArray<FLandscapeClipPaintLayerSettings> ALandscapeClip::GetPaintLayerSettings() const
 {
 	return {};
+}
+
+float ALandscapeClip::GetHeightAddition() const
+{
+	return GetActorLocation().Z - InitialZPosition;
 }
 

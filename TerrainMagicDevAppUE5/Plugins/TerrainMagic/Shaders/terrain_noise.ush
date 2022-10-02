@@ -1,0 +1,57 @@
+﻿const float2x2 m = {0.8,-0.6,0.6,0.8};
+
+struct Lib
+{
+  float hash(float2 p)  // replace this by something better
+  {
+    p  = 10.0*frac( p*0.3183099 + float2(0.71,0.113));
+    return -1.0+2.0*frac( p.x*p.y*(p.x+p.y+p.y) );
+
+    //return frac(sin(dot(p, float2(23.232, 32.2424)) * 23232.2323));
+  }
+
+  float3 noised(float2 x )
+  {
+      float2 f = frac(x);
+      float2 u = f*f*f*(f*(f*6.0-15.0)+10.0);
+      float2 du = 30.0*f*f*(f*(f-2.0)+1.0);
+
+      // texture version    
+      float2 p = floor(x);
+      float a = this.hash(p);
+      float b = this.hash(p + float2(1.0, 0.0));
+      float c = this.hash(p + float2(0.0, 1.0));
+      float d = this.hash(p + float2(1.0, 1.0));
+      
+    return float3(a+(b-a)*u.x+(c-a)*u.y+(a-b-c+d)*u.x*u.y,
+          du*(float2(b-a,c-a)+(a-b-c+d)*u.yx));
+  }
+
+  float terrain(float2 p)
+  {
+    float a = 0.0;
+    float b = 1.0;
+    float2  d = float2(0.0, 0.0);
+    
+    float2x2 m2 = m * 1;
+
+    for( int i=0; i<15; i++ )
+    {
+        float3  n=this.noised(p);
+        d +=n.yz;
+        a +=b*n.x/(1.0+dot(d,d));
+        b *=0.5;
+        p=mul(m2, p)*2;
+    }
+    return(a + 1.0) / 2.0;
+  }
+
+};
+
+Lib lib;
+
+float3 UV3 = float3(UV.x, UV.y, 0.0);
+
+float3 noise = lib.terrain(UV);
+
+return noise.x;

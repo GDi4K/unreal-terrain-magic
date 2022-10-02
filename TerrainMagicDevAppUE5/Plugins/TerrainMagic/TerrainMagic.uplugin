@@ -1,0 +1,38 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.13.0",
+	"FriendlyName": "Terrain Magic",
+	"Description": "Supercharging Landscape Creation in Unreal Engine.",
+	"Category": "CodePlugins",
+	"CreatedBy": "GDi4K",
+	"CreatedByURL": "https://gdi4k.com",
+	"DocsURL": "https://bit.ly/terrainmagic-docs",
+	"SupportURL": "https://bit.ly/terrainmagic-docs",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"EngineVersion": "5.0.0",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/e3f025f0cbf34b12b3fa2719f37ef522",
+	"Modules": [
+		{
+			"Name": "TerrainMagic",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32"
+			]
+		},
+		{
+			"Name": "TerrainMagicEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32"
+			]
+		}
+	]
+}

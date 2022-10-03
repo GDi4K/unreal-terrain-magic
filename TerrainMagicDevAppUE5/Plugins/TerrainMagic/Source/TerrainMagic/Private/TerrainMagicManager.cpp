@@ -133,6 +133,12 @@ void ATerrainMagicManager::SetupInputHandling()
 	}    
 }
 
+void ATerrainMagicManager::TogglePreview()
+{
+	bShowPreviewMesh = !bShowPreviewMesh;
+	PreviewMeshComponent->SetVisibility(bShowPreviewMesh);
+}
+
 // Sets default values
 ATerrainMagicManager::ATerrainMagicManager()
 {
@@ -143,6 +149,16 @@ ATerrainMagicManager::ATerrainMagicManager()
 		bIsSpatiallyLoaded = false;
 	#endif
 #endif
+
+	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	
+	// Add Preview Mesh Component
+	PreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
+	PreviewMeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
+	const FName PlaneMeshLocation = "/Game/_GENERATED/aruno/Rectangle_CFB69142.Rectangle_CFB69142";
+	UStaticMesh* PlaneMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PlaneMeshLocation.ToString()));
+	PreviewMeshComponent->SetStaticMesh(PlaneMesh);
 }
 
 // Called when the game starts or when spawned
@@ -155,10 +171,28 @@ void ATerrainMagicManager::BeginPlay()
 void ATerrainMagicManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	PreviewMeshComponent->SetRelativeScale3D(FVector(
+		LandscapeSize.X,
+		LandscapeSize.Y,
+		1
+	));
+	PreviewMeshComponent->SetRelativeLocation({
+		0,
+		0,
+		LandscapeTransform.GetLocation().Z
+	});
+}
+
+bool ATerrainMagicManager::ShouldTickIfViewportsOnly() const
+{
+	if (GetWorld() != nullptr && GetWorld()->WorldType == EWorldType::Editor)
+		return true;
+	return false;
 }
 
 void ATerrainMagicManager::Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
-	const FIntPoint InputRenderTargetSize)
+                                      const FIntPoint InputRenderTargetSize)
 {
 	LandscapeTransform = InputLandscapeTransform;
 	LandscapeSize = InputLandscapeSize;

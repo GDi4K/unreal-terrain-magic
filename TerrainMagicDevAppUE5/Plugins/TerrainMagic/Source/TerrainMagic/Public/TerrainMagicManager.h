@@ -42,6 +42,9 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	UPROPERTY()
 	int LastZIndex = -2002;
 
+	UPROPERTY()
+	bool bShowPreviewMesh = true;
+
 public:
 	// Sets default values for this actor's properties
 	ATerrainMagicManager();
@@ -54,11 +57,18 @@ public:
 	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual bool ShouldTickIfViewportsOnly() const override;
 
 	void Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
 											 const FIntPoint InputRenderTargetSize);
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
+	USceneComponent* SceneComponent = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
+	UStaticMeshComponent* PreviewMeshComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
 	FTransform LandscapeTransform;
@@ -98,6 +108,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="TMRemove")
 	void SetupInputHandling();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
+	void TogglePreview();
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	void ResetHeightMapCache();

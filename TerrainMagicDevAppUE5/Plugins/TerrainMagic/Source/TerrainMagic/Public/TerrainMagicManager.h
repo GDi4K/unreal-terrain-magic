@@ -51,6 +51,13 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	UPROPERTY()
 	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
 
+	// Here we use this buffer render target to save a copy of a render target
+	UPROPERTY()
+	UTextureRenderTarget2D* BufferRenderTargetForHeight = nullptr;
+
+	UPROPERTY()
+	UTextureRenderTarget2D* BufferRenderTargetForWeight = nullptr;
+
 public:
 	// Sets default values for this actor's properties
 	ATerrainMagicManager();
@@ -67,6 +74,8 @@ public:
 
 	void Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
 											 const FIntPoint InputRenderTargetSize);
+	UTextureRenderTarget2D* RenderLandscapeClipsHeightMap(UTextureRenderTarget2D* InputHeightMap);
+	UTextureRenderTarget2D* RenderLandscapeClipsWeightMap(FName LayerName, UTextureRenderTarget2D* InputWeightMap);
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
 
@@ -84,6 +93,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint RenderTargetSize;
+
+	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
+	UMaterialInstanceDynamic* CopyRTMaterial = nullptr;
 
 	UPROPERTY()
 	TArray<uint8> PaintLayerData;

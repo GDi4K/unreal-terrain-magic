@@ -209,7 +209,7 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 		PreviewMeshComponent->SetRelativeScale3D(FVector(
 			LandscapeSize.X,
 			LandscapeSize.Y,
-			1
+			0.1
 		));
 		PreviewMeshComponent->SetRelativeLocation({
 			LandscapeMid.X,
@@ -314,7 +314,11 @@ void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, Material);
 	if (PreviewMaterial != nullptr)
 	{
-		PreviewMaterial->SetTextureParameterValue("HeightMap", HeightRenderTarget);
+		PreviewMaterial->SetTextureParameterValue("HeightRT", HeightRenderTarget);
+		PreviewMaterial->SetVectorParameterValue("LandscapeLocation", LandscapeLocationBeforePreview);
+		PreviewMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
+		PreviewMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
+		PreviewMaterial->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
 	}
 	HeightMapVersion += 1;
 }

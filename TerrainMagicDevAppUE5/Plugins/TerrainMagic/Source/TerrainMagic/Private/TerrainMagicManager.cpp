@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine.h"
+#include "Landscape.h"
 
 void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
 {
@@ -136,7 +137,20 @@ void ATerrainMagicManager::SetupInputHandling()
 void ATerrainMagicManager::TogglePreview()
 {
 	bShowPreviewMesh = !bShowPreviewMesh;
-	PreviewMeshComponent->SetVisibility(bShowPreviewMesh);
+	ALandscape* Landscape = Cast<ALandscape>(UGameplayStatics::GetActorOfClass(GetWorld(), ALandscape::StaticClass()));
+	
+	if (bShowPreviewMesh)
+	{
+		LandscapeLocationBeforePreview = Landscape->GetActorLocation();
+		Landscape->SetActorLocation({
+			LandscapeLocationBeforePreview.X,
+			LandscapeLocationBeforePreview.Y,
+			-100000
+		});
+	} else
+	{
+		Landscape->SetActorLocation(LandscapeLocationBeforePreview);
+	}
 }
 
 // Sets default values
@@ -172,16 +186,32 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	PreviewMeshComponent->SetRelativeScale3D(FVector(
-		LandscapeSize.X,
-		LandscapeSize.Y,
-		1
-	));
-	PreviewMeshComponent->SetRelativeLocation({
-		0,
-		0,
-		LandscapeTransform.GetLocation().Z
-	});
+	if (bShowPreviewMesh)
+	{
+		const FVector LandscapeScale = LandscapeTransform.GetScale3D();
+		const FVector2D LandscapeSizeInCm = {
+			LandscapeSize.X * LandscapeScale.X,
+			LandscapeSize.Y * LandscapeScale.Y
+		};
+		const FVector2D Landscape2DLocation = FVector2d(LandscapeLocationBeforePreview);
+		const FVector2D LandscapeMid = Landscape2DLocation + LandscapeSizeInCm/2.0;
+		
+		PreviewMeshComponent->SetRelativeScale3D(FVector(
+			LandscapeSize.X,
+			LandscapeSize.Y,
+			1
+		));
+		PreviewMeshComponent->SetRelativeLocation({
+			LandscapeMid.X,
+			LandscapeMid.Y,
+			LandscapeLocationBeforePreview.Z
+		});
+		PreviewMeshComponent->SetVisibility(true);
+	} else
+	{
+		PreviewMeshComponent->SetVisibility(false);
+	}
+
 }
 
 bool ATerrainMagicManager::ShouldTickIfViewportsOnly() const

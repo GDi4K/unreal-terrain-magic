@@ -169,6 +169,7 @@ FReply FLandscapeClipDetails::OnClickTogglePreview()
 	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
 	{
 		Clip->_TogglePreview();
+		break;
 	}
 	
 	return FReply::Handled();

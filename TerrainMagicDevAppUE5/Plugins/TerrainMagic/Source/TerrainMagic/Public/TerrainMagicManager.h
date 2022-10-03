@@ -43,7 +43,10 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	int LastZIndex = -2002;
 
 	UPROPERTY()
-	bool bShowPreviewMesh = true;
+	bool bShowPreviewMesh = false;
+
+	UPROPERTY()
+	FVector LandscapeLocationBeforePreview{};
 
 public:
 	// Sets default values for this actor's properties

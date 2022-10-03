@@ -90,8 +90,6 @@ public:
 
 	UPROPERTY()
 	bool bShowOutline = true;
-	
-	bool bShowPreview = false;
 
 	TEnumAsByte<ELandscapeClipSoloAction> SoloAction = LCSA_NONE;
 	FDateTime SoloTime = 0;
@@ -101,9 +99,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	UOutlineComponent* OutlineComponent = nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
-	UStaticMeshComponent* MeshComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
 	FVector LandscapeLocation = {};

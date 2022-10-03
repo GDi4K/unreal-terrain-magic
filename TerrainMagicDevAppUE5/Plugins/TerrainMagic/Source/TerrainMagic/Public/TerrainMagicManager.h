@@ -48,6 +48,9 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	UPROPERTY()
 	FVector LandscapeLocationBeforePreview{};
 
+	UPROPERTY()
+	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
+
 public:
 	// Sets default values for this actor's properties
 	ATerrainMagicManager();

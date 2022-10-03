@@ -6,6 +6,7 @@
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine.h"
 #include "Landscape.h"
+#include "Kismet/KismetMaterialLibrary.h"
 
 void ATerrainMagicManager::ProcessPaintLayerData(FName LayerName, UTextureRenderTarget2D* RenderTarget)
 {
@@ -170,6 +171,7 @@ ATerrainMagicManager::ATerrainMagicManager()
 	PreviewMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	PreviewMeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
+	// Assign the PreviewMaterial
 	const FName PlaneMeshLocation = "/Game/_GENERATED/aruno/Rectangle_CFB69142.Rectangle_CFB69142";
 	UStaticMesh* PlaneMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PlaneMeshLocation.ToString()));
 	PreviewMeshComponent->SetStaticMesh(PlaneMesh);
@@ -185,6 +187,14 @@ void ATerrainMagicManager::BeginPlay()
 void ATerrainMagicManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (PreviewMaterial == nullptr)
+	{
+		const FName PreviewMaterialPath = "/TerrainMagic/Core/Materials/M_TerrainMagicPreview.M_TerrainMagicPreview";
+		UMaterial* PreviewMaterialSource = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *PreviewMaterialPath.ToString()));
+		PreviewMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), PreviewMaterialSource);
+		PreviewMeshComponent->SetMaterial(0, PreviewMaterial);
+	}
 
 	if (bShowPreviewMesh)
 	{
@@ -302,6 +312,10 @@ void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
 {
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
 	UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), HeightRenderTarget, Material);
+	if (PreviewMaterial != nullptr)
+	{
+		PreviewMaterial->SetTextureParameterValue("HeightMap", HeightRenderTarget);
+	}
 	HeightMapVersion += 1;
 }
 

@@ -137,6 +137,7 @@ void ALandscapeClip::_ToggleSolo()
 
 void ALandscapeClip::_TogglePreview()
 {
+	_Invalidate();
 	ATerrainMagicManager::EnsureManager(GetWorld())->TogglePreview();
 }
 

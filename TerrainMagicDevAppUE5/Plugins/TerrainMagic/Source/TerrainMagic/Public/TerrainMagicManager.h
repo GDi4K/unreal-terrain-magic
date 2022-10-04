@@ -58,6 +58,10 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	UPROPERTY()
 	UTextureRenderTarget2D* BufferRenderTargetForWeight = nullptr;
 
+	// This is the initial render target & we need to keep a copy for the later use
+	UPROPERTY()
+	UTextureRenderTarget2D* BaseRenderTargetForHeight = nullptr;
+
 public:
 	// Sets default values for this actor's properties
 	ATerrainMagicManager();

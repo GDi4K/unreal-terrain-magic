@@ -203,6 +203,12 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 
 	if (bShowPreviewMesh)
 	{
+		// TODO: Do not do this on every frame
+		RenderLandscapeClipsHeightMap(BaseRenderTargetForHeight);
+	}
+
+	if (bShowPreviewMesh)
+	{
 		const FVector LandscapeScale = LandscapeTransform.GetScale3D();
 		const FVector2D LandscapeSizeInCm = {
 			LandscapeSize.X * LandscapeScale.X,
@@ -292,6 +298,19 @@ ALandscapeClip* HandleLandscapeClipSoloProcess(TArray<ALandscapeClip*> Landscape
 
 UTextureRenderTarget2D* ATerrainMagicManager::RenderLandscapeClipsHeightMap(UTextureRenderTarget2D* InputHeightMap)
 {
+	if (!bShowPreviewMesh)
+	{
+		// Copy a version of the BaseHeightMap where we use it in the preview mode to invoke this function
+		if (BaseRenderTargetForHeight == nullptr)
+		{
+			BaseRenderTargetForHeight = UKismetRenderingLibrary::CreateRenderTarget2D(GetWorld(), RenderTargetSize.X, RenderTargetSize.Y, RTF_RGBA8);
+		}
+		
+		CopyRTMaterial->SetTextureParameterValue("RenderTarget", InputHeightMap);
+		UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), BaseRenderTargetForHeight);
+		UKismetRenderingLibrary::DrawMaterialToRenderTarget(GetWorld(), BaseRenderTargetForHeight, CopyRTMaterial);
+	}
+	
 	EnsureHeightRenderTarget(RenderTargetSize.X, RenderTargetSize.Y);
 	UKismetRenderingLibrary::ClearRenderTarget2D(GetWorld(), HeightRenderTarget);
 	

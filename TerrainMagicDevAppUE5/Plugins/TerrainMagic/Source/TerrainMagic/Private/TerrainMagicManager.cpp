@@ -351,7 +351,7 @@ UTextureRenderTarget2D* ATerrainMagicManager::RenderLandscapeClipsHeightMap(UTex
 	for (ALandscapeClip* LandscapeClip: LandscapeClips)
 	{
 		// Set landscape information where actor can use to position it relative to the landscape
-		LandscapeClip->LandscapeLocation = LandscapeTransform.GetLocation();
+		LandscapeClip->LandscapeLocation = bShowPreviewMesh? LandscapeLocationBeforePreview : LandscapeTransform.GetLocation();
 		LandscapeClip->LandscapeScale = LandscapeTransform.GetScale3D();
 		LandscapeClip->LandscapeSize = FVector(LandscapeSize.X, LandscapeSize.Y, 0);
 		

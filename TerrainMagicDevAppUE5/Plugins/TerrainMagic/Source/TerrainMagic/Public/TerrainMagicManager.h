@@ -34,10 +34,12 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	int HeightMapVersion = 0;
 	FDateTime LastPaintLayerResetTime = 0;
 	float PaintLayerActivationThreshold = 0;
+	bool bClipsAreDirty = false;
 
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 	void PopulateLastZIndex();
 	void HandleInvalidateKeyEvent();
+	bool CanRenderPreviewMesh() const;
 
 	UPROPERTY()
 	int LastZIndex = -2002;
@@ -80,6 +82,7 @@ public:
 											 const FIntPoint InputRenderTargetSize);
 	UTextureRenderTarget2D* RenderLandscapeClipsHeightMap(UTextureRenderTarget2D* InputHeightMap);
 	UTextureRenderTarget2D* RenderLandscapeClipsWeightMap(FName LayerName, UTextureRenderTarget2D* InputWeightMap);
+	void ClipsAreDirty();
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
 

@@ -111,6 +111,20 @@ bool ALandscapeClip::ShouldTickIfViewportsOnly() const
 	return false;
 }
 
+#if WITH_EDITOR
+void ALandscapeClip::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	ATerrainMagicManager::EnsureManager(GetWorld())->ClipsAreDirty();
+}
+
+void ALandscapeClip::PostEditMove(bool bFinished)
+{
+	Super::PostEditMove(bFinished);
+	ATerrainMagicManager::EnsureManager(GetWorld())->ClipsAreDirty();
+}
+#endif
+
 void ALandscapeClip::_Invalidate()
 {
 	bNeedsInvalidation = true;

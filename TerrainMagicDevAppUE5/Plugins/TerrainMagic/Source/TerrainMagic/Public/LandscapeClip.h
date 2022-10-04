@@ -66,6 +66,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ShouldTickIfViewportsOnly() const override;
+#if WITH_EDITOR	
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+	virtual void PostEditMove(bool bFinished) override;
+#endif
 	
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
 	virtual UTexture* GetHeightMap() const;

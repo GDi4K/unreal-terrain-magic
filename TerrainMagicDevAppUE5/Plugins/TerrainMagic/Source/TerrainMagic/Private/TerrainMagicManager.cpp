@@ -188,6 +188,21 @@ void ATerrainMagicManager::BeginPlay()
 	Super::BeginPlay();
 }
 
+bool ATerrainMagicManager::CanRenderPreviewMesh() const
+{
+	if (!bShowPreviewMesh)
+	{
+		return false;
+	}
+
+	if (bClipsAreDirty)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 // Called every frame
 void ATerrainMagicManager::Tick(float DeltaTime)
 {
@@ -201,9 +216,9 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 		PreviewMeshComponent->SetMaterial(0, PreviewMaterial);
 	}
 
-	if (bShowPreviewMesh)
+	if (CanRenderPreviewMesh())
 	{
-		// TODO: Do not do this on every frame
+		bClipsAreDirty = false;
 		RenderLandscapeClipsHeightMap(BaseRenderTargetForHeight);
 	}
 
@@ -477,6 +492,11 @@ UTextureRenderTarget2D* ATerrainMagicManager::RenderLandscapeClipsWeightMap(FNam
 	CopyRTMaterial->ClearParameterValues();
 	
 	return WeightRenderTarget;
+}
+
+void ATerrainMagicManager::ClipsAreDirty()
+{
+	bClipsAreDirty = true;
 }
 
 TArray<ALandscapeClip*> ATerrainMagicManager::GetAllLandscapeClips() const

@@ -84,13 +84,11 @@ public:
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const;
 	float GetHeightAddition() const;
 	
-	void _Invalidate();
+	void _Invalidate() const;
 	void _ToggleOutline();
 	void _ToggleSolo();
 	void _TogglePreview();
 	void _MatchLandscapeSize();
-
-	bool bNeedsInvalidation = false;
 
 	UPROPERTY()
 	bool bShowOutline = true;

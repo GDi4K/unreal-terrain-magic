@@ -180,18 +180,12 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::PaintLandscapeClips(FName L
 FLandscapeClipsInvalidationResponse UTerrainMagicBrushComponent::HasInvalidatedLandscapeClips()
 {
 	FLandscapeClipsInvalidationResponse Response;
-	Response.bHasInvalidated = false;
-	const ATerrainMagicManager* Manager = EnsureManager();
+	ATerrainMagicManager* Manager = EnsureManager();
+	Response.bHasInvalidated = Manager->NeedToInvalidateClips();
 
 	TSet<FName> PaintLayers;
 	for (ALandscapeClip* LandscapeClip: Manager->GetAllLandscapeClips())
 	{
-		if (LandscapeClip->bNeedsInvalidation)
-		{
-			Response.bHasInvalidated  = true;
-		}
-		LandscapeClip->bNeedsInvalidation = false;
-
 		// Finding Paint Layers
 		for(const FLandscapeClipPaintLayerSettings PaintLayerSettings: LandscapeClip->GetPaintLayerSettings())
 		{

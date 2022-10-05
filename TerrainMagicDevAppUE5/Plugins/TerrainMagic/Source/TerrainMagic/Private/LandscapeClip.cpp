@@ -125,9 +125,9 @@ void ALandscapeClip::PostEditMove(bool bFinished)
 }
 #endif
 
-void ALandscapeClip::_Invalidate()
+void ALandscapeClip::_Invalidate() const
 {
-	bNeedsInvalidation = true;
+	ATerrainMagicManager::EnsureManager(GetWorld())->InvalidateClips();
 }
 
 void ALandscapeClip::_ToggleOutline()

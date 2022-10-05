@@ -152,6 +152,8 @@ void ATerrainMagicManager::TogglePreview()
 	{
 		Landscape->SetActorLocation(LandscapeLocationBeforePreview);
 	}
+	
+	InvalidateClips();
 }
 
 // Sets default values
@@ -497,6 +499,22 @@ UTextureRenderTarget2D* ATerrainMagicManager::RenderLandscapeClipsWeightMap(FNam
 void ATerrainMagicManager::ClipsAreDirty()
 {
 	bClipsAreDirty = true;
+}
+
+void ATerrainMagicManager::InvalidateClips()
+{
+	bNeedToInvalidateClips = true;
+}
+
+bool ATerrainMagicManager::NeedToInvalidateClips()
+{
+	if (bNeedToInvalidateClips)
+	{
+		bNeedToInvalidateClips = false;
+		return true;
+	}
+
+	return false;
 }
 
 TArray<ALandscapeClip*> ATerrainMagicManager::GetAllLandscapeClips() const

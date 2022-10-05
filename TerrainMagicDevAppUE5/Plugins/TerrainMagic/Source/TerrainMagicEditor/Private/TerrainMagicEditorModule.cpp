@@ -53,6 +53,9 @@ void FTerrainMagicEditorModule::RegisterMenus()
 	const FTerrainMagicCommands Commands = FTerrainMagicCommands::Get();
 	FToolMenuEntry& Entry = Section.AddEntry(FToolMenuEntry::InitToolBarButton(Commands.InvalidateLandscapeClipsAction));
 	Entry.SetCommandList(Commands.CommandsList);
+
+	FToolMenuEntry& Entry2 = Section.AddEntry(FToolMenuEntry::InitToolBarButton(Commands.TogglePreviewLandscapeClipsAction));
+	Entry2.SetCommandList(Commands.CommandsList);
 }
 
 IMPLEMENT_MODULE(FTerrainMagicEditorModule, TerrainMagic)

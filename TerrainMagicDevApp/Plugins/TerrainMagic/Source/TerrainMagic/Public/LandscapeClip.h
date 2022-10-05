@@ -66,6 +66,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ShouldTickIfViewportsOnly() const override;
+#if WITH_EDITOR	
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+	virtual void PostEditMove(bool bFinished) override;
+#endif
 	
 	virtual TArray<FTerrainMagicMaterialParam> GetMaterialParams();
 	virtual UTexture* GetHeightMap() const;
@@ -80,18 +84,14 @@ public:
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const;
 	float GetHeightAddition() const;
 	
-	void _Invalidate();
+	void _Invalidate() const;
 	void _ToggleOutline();
 	void _ToggleSolo();
 	void _TogglePreview();
 	void _MatchLandscapeSize();
 
-	bool bNeedsInvalidation = false;
-
 	UPROPERTY()
 	bool bShowOutline = true;
-	
-	bool bShowPreview = false;
 
 	TEnumAsByte<ELandscapeClipSoloAction> SoloAction = LCSA_NONE;
 	FDateTime SoloTime = 0;
@@ -101,9 +101,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	UOutlineComponent* OutlineComponent = nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
-	UStaticMeshComponent* MeshComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Actor")
 	FVector LandscapeLocation = {};

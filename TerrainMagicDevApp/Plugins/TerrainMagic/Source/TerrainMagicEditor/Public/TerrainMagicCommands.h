@@ -8,6 +8,7 @@
 
 class FTerrainMagicCommands : public TCommands<FTerrainMagicCommands>
 {
+	static void ShowSelectAnActorNotification();
 public:
 
 	FTerrainMagicCommands()
@@ -18,12 +19,14 @@ public:
 
 	// TCommands<> interface
 	virtual void RegisterCommands() override;
-
-public:
+	
 	TSharedPtr<class FUICommandList> CommandsList;
+	
 	TSharedPtr< FUICommandInfo > InvalidateLandscapeClipsAction;
+	TSharedPtr< FUICommandInfo > TogglePreviewLandscapeClipsAction;
 	TSharedPtr< FUICommandInfo > DownloadTileAction;
 
 	void OnInvalidateLandscapeClips() const;
+	void OnTogglePreviewLandscapeClips() const;
 	void OnDownloadTile() const;
 };

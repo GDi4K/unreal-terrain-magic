@@ -20,19 +20,6 @@ ALandscapeClip::ALandscapeClip()
 	OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
 	OutlineComponent->SetLineThickness(2000.0);
 	OutlineComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
-	// Add Mesh Component
-	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
-	MeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
-	const FName PlaneMeshLocation = "/Engine/BasicShapes/Plane.Plane";
-	UStaticMesh* PlaneMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PlaneMeshLocation.ToString()));
-	MeshComponent->SetStaticMesh(PlaneMesh);
-
-	const FName PreviewMaterialLocation = "/TerrainMagic/Core/Materials/M_LandscapeClip_Preview.M_LandscapeClip_Preview";
-	UMaterial* PreviewMaterialSource = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *PreviewMaterialLocation.ToString()));
-	PreviewMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), PreviewMaterialSource);
-	MeshComponent->SetMaterial(0, PreviewMaterial);
 	
 	SetRootComponent(SceneComponent);
 
@@ -109,36 +96,7 @@ void ALandscapeClip::Tick(float DeltaTime)
 			static_cast<float>(GetHeightMultiplier()/2.0)
 		});
 	}
-
-	// Render Preview
-	MeshComponent->SetVisibility(bShowPreview);
 	
-	if (bShowPreview)
-	{
-		// Set the MeshComponent Scale
-		// The plane mesh we set has size of 100cm x 100cm
-		// That's why we divide here by 100
-		const FVector2D ClipBaseSizeInCM = GetClipBaseSize() * 100;
-		MeshComponent->SetRelativeScale3D(FVector(
-			(ClipBaseSizeInCM/100).X,
-			(ClipBaseSizeInCM/100).Y,
-			1
-		));
-		MeshComponent->SetRelativeLocation({
-			0,
-			0,
-			static_cast<float>(GetHeightMultiplier()/2.0)
-		});
-
-		if (PreviewMaterial && IsValid(PreviewMaterial))
-		{
-			PreviewMaterial->SetTextureParameterValue("HeightMap", GetHeightMap());
-		} else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("PreviewMaterial is missing!"))
-		}
-	}
-
 	// Set Initial Z Position
 	if (InitialZPosition == -12424.0)
 	{
@@ -153,9 +111,23 @@ bool ALandscapeClip::ShouldTickIfViewportsOnly() const
 	return false;
 }
 
-void ALandscapeClip::_Invalidate()
+#if WITH_EDITOR
+void ALandscapeClip::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
-	bNeedsInvalidation = true;
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	ATerrainMagicManager::EnsureManager(GetWorld())->ClipsAreDirty();
+}
+
+void ALandscapeClip::PostEditMove(bool bFinished)
+{
+	Super::PostEditMove(bFinished);
+	ATerrainMagicManager::EnsureManager(GetWorld())->ClipsAreDirty();
+}
+#endif
+
+void ALandscapeClip::_Invalidate() const
+{
+	ATerrainMagicManager::EnsureManager(GetWorld())->InvalidateClips();
 }
 
 void ALandscapeClip::_ToggleOutline()
@@ -179,7 +151,8 @@ void ALandscapeClip::_ToggleSolo()
 
 void ALandscapeClip::_TogglePreview()
 {
-	bShowPreview = !bShowPreview;
+	_Invalidate();
+	ATerrainMagicManager::EnsureManager(GetWorld())->TogglePreview();
 }
 
 void ALandscapeClip::_MatchLandscapeSize()

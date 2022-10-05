@@ -9,14 +9,22 @@
   <component name="ChangeListManager">
     <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add Editor support for BaseLandscapeClip">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/NoiseLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/NoiseLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightMapLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightMapLandscapeClip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/NoiseLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/NoiseLandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicCommands.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicCommands.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicEditorModule.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicEditorModule.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicCommands.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicCommands.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +40,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" root0="FORCE_HIGHLIGHTING" />
@@ -226,6 +233,7 @@
       <workItem from="1664080923445" duration="2346000" />
       <workItem from="1664098258828" duration="4299000" />
       <workItem from="1664113051568" duration="5460000" />
+      <workItem from="1664981542628" duration="285000" />
     </task>
     <task id="LOCAL-00067" summary="Introduce ZIndex support for sorting Landscape Clips.">
       <created>1660283714868</created>

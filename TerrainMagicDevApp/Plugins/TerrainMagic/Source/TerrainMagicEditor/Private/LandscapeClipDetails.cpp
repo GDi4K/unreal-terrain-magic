@@ -9,7 +9,9 @@
 #include "EarthLandscapeClip.h"
 #include "IDetailGroup.h"
 #include "LandscapeClip.h"
+#include "TerrainMagicManager.h"
 #include "Framework/Notifications/NotificationManager.h"
+#include "Kismet/GameplayStatics.h"
 #include "Widgets/Layout/SGridPanel.h"
 #include "Widgets/Notifications/SNotificationList.h"
 
@@ -126,9 +128,16 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 
 FReply FLandscapeClipDetails::OnClickInvalidate()
 {
-	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	for (TWeakObjectPtr<UObject> Actor: CustomizingActors)
 	{
-		Clip->_Invalidate();
+		if (!Actor.IsValid())
+		{
+			continue;
+		}
+
+		ATerrainMagicManager* Manager = Cast<ATerrainMagicManager>(UGameplayStatics::GetActorOfClass(Actor->GetWorld(), ATerrainMagicManager::StaticClass()));
+		Manager->InvalidateClips();
+		break;
 	}
 	
 	return FReply::Handled();
@@ -166,9 +175,16 @@ FReply FLandscapeClipDetails::OnClickToggleSolo()
 
 FReply FLandscapeClipDetails::OnClickTogglePreview()
 {
-	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	for (TWeakObjectPtr<UObject> Actor: CustomizingActors)
 	{
-		Clip->_TogglePreview();
+		if (!Actor.IsValid())
+		{
+			continue;
+		}
+
+		ATerrainMagicManager* Manager = Cast<ATerrainMagicManager>(UGameplayStatics::GetActorOfClass(Actor->GetWorld(), ATerrainMagicManager::StaticClass()));
+		Manager->TogglePreview();
+		break;
 	}
 	
 	return FReply::Handled();

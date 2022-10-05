@@ -203,10 +203,19 @@ void FMapBoxUtils::MakeG16Texture(int32 TextureWidth, uint16* HeightData, FStrin
 	
 	UTexture2D* CacheTexture = NewObject<UTexture2D>(CacheTexturePackage, *CacheTextureName, RF_Public | RF_Standalone);
 	CacheTexture->CompressionSettings = TC_Grayscale;
+
+#if ENGINE_MAJOR_VERSION == 5
+	FTexturePlatformData* PlatformData = new FTexturePlatformData();
+	PlatformData->SizeX = TextureWidth;
+	PlatformData->SizeY = TextureWidth;
+	PlatformData->PixelFormat = EPixelFormat::PF_G16;
+	CacheTexture->SetPlatformData(PlatformData);
+#else
 	CacheTexture->PlatformData = new FTexturePlatformData();
 	CacheTexture->PlatformData->SizeX = TextureWidth;
 	CacheTexture->PlatformData->SizeY = TextureWidth;
 	CacheTexture->PlatformData->PixelFormat = EPixelFormat::PF_G16;
+#endif
 	
 	#if WITH_EDITORONLY_DATA
 		CacheTexture->MipGenSettings = TMGS_NoMipmaps;

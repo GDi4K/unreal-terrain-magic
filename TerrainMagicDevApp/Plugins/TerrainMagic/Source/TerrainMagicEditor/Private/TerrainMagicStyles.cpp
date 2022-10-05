@@ -52,8 +52,10 @@ TSharedRef< FSlateStyleSet > FTerrainMagicStyles::Create()
 
 #if ENGINE_MAJOR_VERSION == 5
 	Style->Set("TerrainMagicCommands.InvalidateLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon_Invalidate_20"), Icon20x20));
+	Style->Set("TerrainMagicCommands.TogglePreviewLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon_TogglePreview_20"), Icon20x20));
 #else
 	Style->Set("TerrainMagicCommands.InvalidateLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon_Invalidate_40"), Icon40x40));
+	Style->Set("TerrainMagicCommands.TogglePreviewLandscapeClipsAction", new IMAGE_BRUSH(TEXT("Icon_TogglePreview_40"), Icon40x40));
 #endif
 	
 	return Style;

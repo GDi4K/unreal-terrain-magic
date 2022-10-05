@@ -34,13 +34,36 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 	int HeightMapVersion = 0;
 	FDateTime LastPaintLayerResetTime = 0;
 	float PaintLayerActivationThreshold = 0;
+	bool bClipsAreDirty = false;
+	bool bNeedToInvalidateClips = false;
 
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 	void PopulateLastZIndex();
 	void HandleInvalidateKeyEvent();
+	bool CanRenderPreviewMesh() const;
 
 	UPROPERTY()
 	int LastZIndex = -2002;
+
+	UPROPERTY()
+	bool bShowPreviewMesh = false;
+
+	UPROPERTY()
+	FVector LandscapeLocationBeforePreview{};
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* PreviewMaterial = nullptr;
+
+	// Here we use this buffer render target to save a copy of a render target
+	UPROPERTY()
+	UTextureRenderTarget2D* BufferRenderTargetForHeight = nullptr;
+
+	UPROPERTY()
+	UTextureRenderTarget2D* BufferRenderTargetForWeight = nullptr;
+
+	// This is the initial render target & we need to keep a copy for the later use
+	UPROPERTY()
+	UTextureRenderTarget2D* BaseRenderTargetForHeight = nullptr;
 
 public:
 	// Sets default values for this actor's properties
@@ -54,11 +77,23 @@ public:
 	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual bool ShouldTickIfViewportsOnly() const override;
 
 	void Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
 											 const FIntPoint InputRenderTargetSize);
+	UTextureRenderTarget2D* RenderLandscapeClipsHeightMap(UTextureRenderTarget2D* InputHeightMap);
+	UTextureRenderTarget2D* RenderLandscapeClipsWeightMap(FName LayerName, UTextureRenderTarget2D* InputWeightMap);
+	void ClipsAreDirty();
+	void InvalidateClips();
+	bool NeedToInvalidateClips();
 
 	TArray<ALandscapeClip*> GetAllLandscapeClips() const;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
+	USceneComponent* SceneComponent = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
+	UStaticMeshComponent* PreviewMeshComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
 	FTransform LandscapeTransform;
@@ -68,6 +103,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
 	FIntPoint RenderTargetSize;
+
+	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
+	UMaterialInstanceDynamic* CopyRTMaterial = nullptr;
 
 	UPROPERTY()
 	TArray<uint8> PaintLayerData;
@@ -98,6 +136,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="TMRemove")
 	void SetupInputHandling();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
+	void TogglePreview();
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);
 	void ResetHeightMapCache();

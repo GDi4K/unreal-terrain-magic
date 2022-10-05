@@ -111,30 +111,6 @@ void ATerrainMagicManager::PopulateLastZIndex()
 	}
 }
 
-void ATerrainMagicManager::HandleInvalidateKeyEvent()
-{
-	UE_LOG(LogTemp, Warning, TEXT("It's Invalidated!!!"))
-}
-
-void ATerrainMagicManager::SetupInputHandling()
-{
-	// Initialize our component
-	InputComponent = NewObject<UInputComponent>(this);
-	InputComponent->RegisterComponent();
-	if (InputComponent)
-	{
-		InputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &ATerrainMagicManager::HandleInvalidateKeyEvent);
-		// Bind inputs here
-		// InputComponent->BindAction("Jump", IE_Pressed, this, &AUnrealisticPawn::Jump);
-		// etc...
-
-		// Now hook up our InputComponent to one in a Player
-		// Controller, so that input flows down to us
-		EnableInput(GetWorld()->GetFirstPlayerController());
-		UE_LOG(LogTemp, Warning, TEXT("TerrainMagic Input Handling is done!"))
-	}    
-}
-
 void ATerrainMagicManager::TogglePreview()
 {
 	bShowPreviewMesh = !bShowPreviewMesh;
@@ -258,6 +234,14 @@ bool ATerrainMagicManager::ShouldTickIfViewportsOnly() const
 		return true;
 	return false;
 }
+
+#if WITH_EDITOR
+void ATerrainMagicManager::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	ClipsAreDirty();
+}
+#endif
 
 void ATerrainMagicManager::Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
                                       const FIntPoint InputRenderTargetSize)
@@ -597,6 +581,8 @@ void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
 		PreviewMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
 		PreviewMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
 		PreviewMaterial->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
+		PreviewMaterial->SetScalarParameterValue("Roughness", PreviewRoughness);
+		PreviewMaterial->SetVectorParameterValue("BaseColor", PreviewBaseColor);
 	}
 	HeightMapVersion += 1;
 }

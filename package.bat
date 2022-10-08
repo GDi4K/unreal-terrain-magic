@@ -26,10 +26,17 @@ xcopy ToPackage\TerrainMagic ToPackage\TerrainMagic_UE5 /E/H
 
 cscript //NoLogo sed.vbs s/(4.27.0)/5.0.0/ < ToPackage\TerrainMagic\TerrainMagic.uplugin > ToPackage\TerrainMagic_UE5\TerrainMagic.uplugin
 
+echo "Copying the UE5.1 version"
+md ToPackage\TerrainMagic_UE51
+xcopy ToPackage\TerrainMagic ToPackage\TerrainMagic_UE51 /E/H
+
+cscript //NoLogo sed.vbs s/(4.27.0)/5.1.0/ < ToPackage\TerrainMagic\TerrainMagic.uplugin > ToPackage\TerrainMagic_UE51\TerrainMagic.uplugin
+
 @REM Identifying the version
 FOR /F "tokens=*" %%g IN ('git describe --tags') do (SET VERSION=%%g)
 
 @REM Making zip files
 cd ToPackage
+tar.exe -a -c -f TerrainMagic_UE51_%VERSION%.zip TerrainMagic_UE51
 tar.exe -a -c -f TerrainMagic_UE5_%VERSION%.zip TerrainMagic_UE5
 tar.exe -a -c -f TerrainMagic_%VERSION%.zip TerrainMagic

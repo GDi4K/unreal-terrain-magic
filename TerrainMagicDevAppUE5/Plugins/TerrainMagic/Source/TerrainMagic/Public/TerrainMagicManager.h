@@ -39,7 +39,6 @@ class TERRAINMAGIC_API ATerrainMagicManager : public AActor
 
 	FTerrainMagicPaintLayerResult FindPaintLayer(FVector Location);
 	void PopulateLastZIndex();
-	void HandleInvalidateKeyEvent();
 	bool CanRenderPreviewMesh() const;
 
 	UPROPERTY()
@@ -78,6 +77,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual bool ShouldTickIfViewportsOnly() const override;
+#if WITH_EDITOR
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 
 	void Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
 											 const FIntPoint InputRenderTargetSize);
@@ -92,19 +94,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Actor")
 	USceneComponent* SceneComponent = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic|General")
 	UStaticMeshComponent* PreviewMeshComponent = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic|General")
 	FTransform LandscapeTransform;
 
-	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic|General")
 	FIntPoint LandscapeSize;
 
-	UPROPERTY(VisibleAnywhere, Category="TerrainMagic")
+	UPROPERTY(VisibleAnywhere, Category="TerrainMagic|General")
 	FIntPoint RenderTargetSize;
 
-	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic")
+	UPROPERTY(BlueprintReadWrite, Category="TerrainMagic|General")
 	UMaterialInstanceDynamic* CopyRTMaterial = nullptr;
 
 	UPROPERTY()
@@ -113,31 +115,34 @@ public:
 	UPROPERTY()
 	TArray<FName> PaintLayerNames;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic|General")
 	UTextureRenderTarget2D* HeightRenderTarget = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic|General")
 	UTextureRenderTarget2D* WeightRenderTarget = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="TerrainMagic|General")
 	UTextureRenderTarget2D* CachedHeightMap = nullptr;
 
-	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic|PreviewMesh")
+	FLinearColor PreviewBaseColor = {0.15, 0.06, 0.04};
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic|PreviewMesh")
+	float PreviewRoughness = 0.5;
+
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic|General")
 	UTextureRenderTarget2D* GetHeightMap();
 
-	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic|General")
 	void ShowClipOutlines() const;
 
-	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic|General")
 	void HideClipOutlines() const;
 
-	UFUNCTION(BlueprintCallable, Category="TerrainMagic")
+	UFUNCTION(BlueprintCallable, Category="TerrainMagic|General")
 	static FTerrainMagicPaintLayerResult FindLandscapePaintLayer(FVector Location);
 
-	UFUNCTION(BlueprintCallable, CallInEditor, Category="TMRemove")
-	void SetupInputHandling();
-
-	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic")
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="TerrainMagic|General")
 	void TogglePreview();
 	
 	void CacheHeightMap(UTextureRenderTarget2D* HeightMap);

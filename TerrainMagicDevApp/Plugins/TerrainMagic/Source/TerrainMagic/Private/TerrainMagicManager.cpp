@@ -78,8 +78,9 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Locat
 	const FVector RelativeLocation = Location - LandscapeTransform.GetLocation();
 	const FVector RelativeLocationAfterScaleDown = RelativeLocation / LandscapeTransform.GetScale3D();
 	const FIntPoint RelativeLocationToPixels = {
-		FMath::FloorToInt(RelativeLocationAfterScaleDown.X),
-		FMath::FloorToInt(RelativeLocationAfterScaleDown.Y),
+		// This conversion need for the 5.1 support
+		(int32)FMath::FloorToInt(RelativeLocationAfterScaleDown.X),
+		(int32)FMath::FloorToInt(RelativeLocationAfterScaleDown.Y),
 	};
 
 	const int PixelIndex = RelativeLocationToPixels.Y * RenderTargetSize.X + RelativeLocationToPixels.X;

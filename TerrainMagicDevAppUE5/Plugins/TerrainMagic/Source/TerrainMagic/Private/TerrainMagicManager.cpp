@@ -78,8 +78,8 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Locat
 	const FVector RelativeLocation = Location - LandscapeTransform.GetLocation();
 	const FVector RelativeLocationAfterScaleDown = RelativeLocation / LandscapeTransform.GetScale3D();
 	const FIntPoint RelativeLocationToPixels = {
-		FMath::FloorToInt(RelativeLocationAfterScaleDown.X),
-		FMath::FloorToInt(RelativeLocationAfterScaleDown.Y),
+		(int32)FMath::FloorToInt(RelativeLocationAfterScaleDown.X),
+		(int32)FMath::FloorToInt(RelativeLocationAfterScaleDown.Y),
 	};
 
 	const int PixelIndex = RelativeLocationToPixels.Y * RenderTargetSize.X + RelativeLocationToPixels.X;
@@ -109,30 +109,6 @@ void ATerrainMagicManager::PopulateLastZIndex()
 	{
 		LastZIndex = LandscapeClips[LandscapeClips.Num() -1]->GetZIndex();
 	}
-}
-
-void ATerrainMagicManager::HandleInvalidateKeyEvent()
-{
-	UE_LOG(LogTemp, Warning, TEXT("It's Invalidated!!!"))
-}
-
-void ATerrainMagicManager::SetupInputHandling()
-{
-	// Initialize our component
-	InputComponent = NewObject<UInputComponent>(this);
-	InputComponent->RegisterComponent();
-	if (InputComponent)
-	{
-		InputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &ATerrainMagicManager::HandleInvalidateKeyEvent);
-		// Bind inputs here
-		// InputComponent->BindAction("Jump", IE_Pressed, this, &AUnrealisticPawn::Jump);
-		// etc...
-
-		// Now hook up our InputComponent to one in a Player
-		// Controller, so that input flows down to us
-		EnableInput(GetWorld()->GetFirstPlayerController());
-		UE_LOG(LogTemp, Warning, TEXT("TerrainMagic Input Handling is done!"))
-	}    
 }
 
 void ATerrainMagicManager::TogglePreview()
@@ -174,7 +150,7 @@ ATerrainMagicManager::ATerrainMagicManager()
 	PreviewMeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	// Assign the PreviewMaterial
-	const FName PlaneMeshLocation = "/Game/_GENERATED/aruno/Rectangle_CFB69142.Rectangle_CFB69142";
+	const FName PlaneMeshLocation = "/TerrainMagic/Core/Meshes/SM_TM_PreviewMesh.SM_TM_PreviewMesh";
 	UStaticMesh* PlaneMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PlaneMeshLocation.ToString()));
 	PreviewMeshComponent->SetStaticMesh(PlaneMesh);
 
@@ -231,7 +207,7 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 			LandscapeSize.X * LandscapeScale.X,
 			LandscapeSize.Y * LandscapeScale.Y
 		};
-		const FVector2D Landscape2DLocation = FVector2d(LandscapeLocationBeforePreview);
+		const FVector2D Landscape2DLocation = FVector2D(LandscapeLocationBeforePreview);
 		const FVector2D LandscapeMid = Landscape2DLocation + LandscapeSizeInCm/2.0;
 		
 		PreviewMeshComponent->SetRelativeScale3D(FVector(
@@ -258,6 +234,14 @@ bool ATerrainMagicManager::ShouldTickIfViewportsOnly() const
 		return true;
 	return false;
 }
+
+#if WITH_EDITOR
+void ATerrainMagicManager::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	ClipsAreDirty();
+}
+#endif
 
 void ATerrainMagicManager::Initialize(const FTransform InputLandscapeTransform, const FIntPoint InputLandscapeSize,
                                       const FIntPoint InputRenderTargetSize)
@@ -597,6 +581,8 @@ void ATerrainMagicManager::RenderHeightMap(UMaterialInterface* Material)
 		PreviewMaterial->SetVectorParameterValue("LandscapeScale", LandscapeTransform.GetScale3D());
 		PreviewMaterial->SetVectorParameterValue("LandscapeSize", FVector(LandscapeSize.X, LandscapeSize.Y, 0));
 		PreviewMaterial->SetVectorParameterValue("RenderTargetSize", FVector(RenderTargetSize.X, RenderTargetSize.Y, 0));
+		PreviewMaterial->SetScalarParameterValue("Roughness", PreviewRoughness);
+		PreviewMaterial->SetVectorParameterValue("BaseColor", PreviewBaseColor);
 	}
 	HeightMapVersion += 1;
 }

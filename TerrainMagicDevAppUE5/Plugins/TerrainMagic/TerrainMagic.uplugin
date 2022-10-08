@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.13.0",
+	"VersionName": "1.14.0",
 	"FriendlyName": "Terrain Magic",
 	"Description": "Supercharging Landscape Creation in Unreal Engine.",
 	"Category": "CodePlugins",
@@ -13,7 +13,7 @@
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
 	"Installed": false,
-	"EngineVersion": "5.0.0",
+	"EngineVersion": "4.27.0",
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/e3f025f0cbf34b12b3fa2719f37ef522",
 	"Modules": [
 		{

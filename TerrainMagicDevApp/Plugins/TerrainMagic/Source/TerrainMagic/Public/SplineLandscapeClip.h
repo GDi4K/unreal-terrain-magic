@@ -5,12 +5,20 @@
 #include "CoreMinimal.h"
 #include "LandscapeClip.h"
 #include "GameFramework/Actor.h"
+#include "Utils/G16Texture.h"
 #include "SplineLandscapeClip.generated.h"
 
 UCLASS()
 class TERRAINMAGIC_API ASplineLandscapeClip : public ALandscapeClip
 {
 	GENERATED_BODY()
+
+	UPROPERTY()
+	UG16Texture* G16Texture = nullptr;
+
+	bool HasTextureReloaded = false;
+
+	void ReloadTextureIfNeeded();
 
 public:
 	// Sets default values for this actor's properties
@@ -31,7 +39,11 @@ public:
 	virtual int GetZIndex() const override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
+	virtual void Tick(float DeltaSeconds) override;
 
+	UFUNCTION(CallInEditor, Category="01-General")
+	void Draw();
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
 
@@ -41,7 +53,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
 	UTexture* HeightMap = nullptr;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")

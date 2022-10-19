@@ -4,6 +4,20 @@
 #include "Materials/Material.h"
 
 
+void ASplineLandscapeClip::ReloadTextureIfNeeded()
+{
+	if (HasTextureReloaded)
+	{
+		return;
+	}
+	HasTextureReloaded = true;
+
+	if (IsValid(G16Texture))
+	{
+		HeightMap = G16Texture->LoadCachedTexture();
+	}
+}
+
 // Sets default values
 ASplineLandscapeClip::ASplineLandscapeClip()
 {
@@ -83,4 +97,34 @@ UTexture* ASplineLandscapeClip::GetHeightMap() const
 TArray<FLandscapeClipPaintLayerSettings> ASplineLandscapeClip::GetPaintLayerSettings() const
 {
 	return PaintLayerSettings;
+}
+
+void ASplineLandscapeClip::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	
+	if (GetWorld()->WorldType != EWorldType::Editor)
+	{
+		return;
+	}
+
+	ReloadTextureIfNeeded();
+}
+
+void ASplineLandscapeClip::Draw()
+{
+	if(G16Texture == nullptr)
+	{
+		// TODO: Change the TextureWidth as needed
+		G16Texture = UG16Texture::Create(this, 2048, "/Game/TerrainMagic/HeightMaps/Spline/", GetName());
+	}
+	
+	TArray<uint16>* HeightData = new TArray<uint16>();
+	HeightData->SetNumZeroed(2048 * 2048);
+
+	G16Texture->Update(HeightData->GetData(), [this, HeightData](UTexture2D* Texture)
+	{
+		HeightMap = Texture;
+		delete HeightData;
+	});
 }

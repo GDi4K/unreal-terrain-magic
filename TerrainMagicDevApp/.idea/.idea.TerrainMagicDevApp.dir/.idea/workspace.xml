@@ -7,24 +7,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add the Actor for SplineLandscapeClip">
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/G16Texture.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/G16Texture.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevApp.dir/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevApp.dir/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevApp.dir/.idea/projectSettingsUpdater.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevApp.dir/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/DefaultInput.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_DecodeHeight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_DecodeHeight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicPreview.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicPreview.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/TerrainMagic.uplugin" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/TerrainMagic.uplugin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/TerrainMagicDevAppUE5.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/TerrainMagicDevAppUE5.uproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../package.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip2_3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip6.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip7.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip8.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_4.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_5.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/HeightChangeLandscapeClip3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/terrain1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,13 +236,8 @@
       <workItem from="1664113051568" duration="5460000" />
       <workItem from="1664981542628" duration="4212000" />
       <workItem from="1665241633500" duration="1180000" />
-    </task>
-    <task id="LOCAL-00069" summary="Refactor existing RenderLandscapeClips code.">
-      <created>1660632257871</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1660632257871</updated>
+      <workItem from="1666136867413" duration="682000" />
+      <workItem from="1666187725986" duration="4368000" />
     </task>
     <task id="LOCAL-00070" summary="Add the paint layer workflow.">
       <created>1660634671767</created>
@@ -579,7 +575,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664984168611</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="Add the Actor for SplineLandscapeClip">
+      <created>1666137470366</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1666137470367</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -600,7 +603,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor the codebase &amp; introduce G16Texture." />
     <MESSAGE value="Experiment on Reading files." />
     <MESSAGE value="Add MapBox URL generator." />
     <MESSAGE value="Allow to download Map tiles directly inside the Engine." />
@@ -625,6 +627,7 @@
     <MESSAGE value="Add Editor support for BaseLandscapeClip" />
     <MESSAGE value="Migrate everything to UE4" />
     <MESSAGE value="Fix the normals issue a bit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the normals issue a bit." />
+    <MESSAGE value="Add the Actor for SplineLandscapeClip" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add the Actor for SplineLandscapeClip" />
   </component>
 </project>

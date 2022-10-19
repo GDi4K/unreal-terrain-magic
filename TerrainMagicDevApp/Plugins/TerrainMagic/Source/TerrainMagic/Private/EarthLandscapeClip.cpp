@@ -136,7 +136,14 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 	}
 	HasTextureReloaded = true;
 
-	HeightMap = FMapBoxUtils::LoadCachedTexture(GetName());
+	if (IsValid(G16Texture))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("G16Texture is valid!"))
+		HeightMap = G16Texture->LoadCachedTexture();
+	} else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("G16Texture is not valid!"))
+	}
 }
 
 void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)> StatusCallback)
@@ -185,12 +192,14 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 		// This is important, otherwise the TileData will be garbage collected
 		CurrentTileResponse = TileResponseData;
 		UE_LOG(LogTemp, Warning, TEXT("Full Name: %s, Name: %s"), *GetFullName(), *GetName())
-		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileResponseData->HeightData.GetData(), GetName(), [this, StatusCallback](UTexture2D* Texture)
+
+		
+		G16Texture = UG16Texture::Create(this, PixelsPerRow, "/Game/TerrainMagic/HeightMaps/", GetName());
+		G16Texture->Update(TileResponseData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
 		{
 			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()
 			{
 				HeightMap = Texture;
-				//CurrentHeightData = CurrentTileResponse->HeightData;
 				CurrentTileResponse = nullptr;
 				_Invalidate();
 

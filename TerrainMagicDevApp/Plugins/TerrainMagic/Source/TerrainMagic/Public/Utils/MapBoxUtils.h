@@ -37,6 +37,4 @@ class FMapBoxUtils
 public:
 	static void DownloadTileRaw(int32 X, int32 Y, int32 Zoom, TFunction<void(TSharedPtr<FMapBoxTileResponseRaw>)> Callback);
 	static void DownloadTileSet(const FMapBoxTileQuery TileQuery, TFunction<void(TSharedPtr<FMapBoxTileDownloadProgress>, TSharedPtr<FMapBoxTileResponse>)> Callback);
-	static void MakeG16Texture(int32 TextureWidth, uint16* HeightData, FString CacheTextureName, TFunction<void(UTexture2D*)> Callback);
-	static UTexture2D* LoadCachedTexture(FString CacheTextureName);
 };

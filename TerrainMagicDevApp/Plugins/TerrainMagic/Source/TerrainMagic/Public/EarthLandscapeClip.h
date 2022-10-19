@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "G16Texture.h"
+#include "Utils/G16Texture.h"
 #include "LandscapeClip.h"
 #include "Utils/MapBoxUtils.h"
 #include "EarthLandscapeClip.generated.h"

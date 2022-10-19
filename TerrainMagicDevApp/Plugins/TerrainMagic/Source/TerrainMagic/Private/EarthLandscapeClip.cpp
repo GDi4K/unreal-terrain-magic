@@ -138,11 +138,7 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 
 	if (IsValid(G16Texture))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("G16Texture is valid!"))
 		HeightMap = G16Texture->LoadCachedTexture();
-	} else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("G16Texture is not valid!"))
 	}
 }
 
@@ -194,7 +190,7 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 		UE_LOG(LogTemp, Warning, TEXT("Full Name: %s, Name: %s"), *GetFullName(), *GetName())
 
 		
-		G16Texture = UG16Texture::Create(this, PixelsPerRow, "/Game/TerrainMagic/HeightMaps/", GetName());
+		G16Texture = UG16Texture::Create(this, PixelsPerRow, "/Game/TerrainMagic/HeightMaps/Earth/", GetName());
 		G16Texture->Update(TileResponseData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
 		{
 			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()

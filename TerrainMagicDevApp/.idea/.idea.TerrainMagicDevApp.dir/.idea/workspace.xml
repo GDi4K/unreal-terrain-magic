@@ -7,11 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Refactor codebase G16Texture usage codebase.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/Spline/SplineLandscapeClip_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/Spline/SplineLandscapeClip_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/SplineLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/SplineLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/SplineLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/SplineLandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +27,6 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" root0="FORCE_HIGHLIGHTING" />
@@ -225,14 +225,8 @@
       <workItem from="1665241633500" duration="1180000" />
       <workItem from="1666136867413" duration="682000" />
       <workItem from="1666187725986" duration="5310000" />
-      <workItem from="1666220917959" duration="1801000" />
-    </task>
-    <task id="LOCAL-00072" summary="Add basic paint layer support.">
-      <created>1660805836991</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1660805836991</updated>
+      <workItem from="1666220917959" duration="3755000" />
+      <workItem from="1666225379900" duration="736000" />
     </task>
     <task id="LOCAL-00073" summary="Remove unwanted categories.">
       <created>1660805985124</created>
@@ -570,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666221506545</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="Configure the G16Texture to the SplineLandscape Clip.">
+      <created>1666223016956</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1666223016956</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,7 +604,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Allow to download Map tiles directly inside the Engine." />
     <MESSAGE value="Added the Tile Download logic." />
     <MESSAGE value="Implement Merging HeightMaps Support." />
     <MESSAGE value="Refactor the API." />
@@ -628,6 +628,7 @@
     <MESSAGE value="Add the Actor for SplineLandscapeClip" />
     <MESSAGE value="Introducing a new G16Texture class." />
     <MESSAGE value="Refactor codebase G16Texture usage codebase." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor codebase G16Texture usage codebase." />
+    <MESSAGE value="Configure the G16Texture to the SplineLandscape Clip." />
+    <option name="LAST_COMMIT_MESSAGE" value="Configure the G16Texture to the SplineLandscape Clip." />
   </component>
 </project>

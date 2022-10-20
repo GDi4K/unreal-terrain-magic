@@ -1,8 +1,24 @@
 ﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
 #include "SplineLandscapeClip.h"
-#include "Materials/Material.h"
 
+#include "TerrainMagicManager.h"
+#include "Materials/Material.h"
+#include "Utils/TerrainMagicThreading.h"
+
+float smoothstep (float edge0, float edge1, float x)
+{
+	if (x < edge0)
+		return 0;
+
+	if (x >= edge1)
+		return 1;
+
+	// Scale/bias into [0..1] range
+	x = (x - edge0) / (edge1 - edge0);
+
+	return x * x * (3 - 2 * x);
+}
 
 void ASplineLandscapeClip::ReloadTextureIfNeeded()
 {
@@ -113,18 +129,38 @@ void ASplineLandscapeClip::Tick(float DeltaSeconds)
 
 void ASplineLandscapeClip::Draw()
 {
+	// TODO: Change the TextureWidth as needed
+	constexpr int32 TextureWidth = 2048;
+	
 	if(G16Texture == nullptr)
 	{
-		// TODO: Change the TextureWidth as needed
-		G16Texture = UG16Texture::Create(this, 2048, "/Game/TerrainMagic/HeightMaps/Spline/", GetName());
+		G16Texture = UG16Texture::Create(this, TextureWidth, "/Game/TerrainMagic/HeightMaps/Spline/", GetName());
 	}
 	
 	TArray<uint16>* HeightData = new TArray<uint16>();
-	HeightData->SetNumZeroed(2048 * 2048);
+	HeightData->SetNumZeroed(TextureWidth * TextureWidth);
+	const int32 Max16Bit = FMath::Pow(2, 16) - 1;
+
+	for (int32 X=0; X<TextureWidth; X++)
+	{
+		for (int32 Y=0; Y<TextureWidth; Y++)
+		{
+			FVector2D UV = {X/static_cast<float>(TextureWidth), Y/static_cast<float>(TextureWidth)};
+			const int32 Index = (Y * TextureWidth) + X;
+
+			float Distance = 1.0f - FMath::Clamp((UV - 0.5f).Size() * 2.0f, 0.0f, 1.0f);
+			Distance = smoothstep(0.0f, 1.0f, Distance);
+			(*HeightData)[Index] = Distance * Max16Bit;
+		}
+	}
 
 	G16Texture->Update(HeightData->GetData(), [this, HeightData](UTexture2D* Texture)
 	{
 		HeightMap = Texture;
 		delete HeightData;
+		FTerrainMagicThreading::RunOnGameThread([this]()
+		{
+			ATerrainMagicManager::EnsureManager(GetWorld())->ClipsAreDirty();
+		});
 	});
 }

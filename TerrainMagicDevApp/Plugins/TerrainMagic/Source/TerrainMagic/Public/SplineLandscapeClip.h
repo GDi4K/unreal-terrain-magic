@@ -19,6 +19,7 @@ class TERRAINMAGIC_API ASplineLandscapeClip : public ALandscapeClip
 	bool HasTextureReloaded = false;
 	FThreadSafeCounter DrawCounter = 0;
 	bool bNeedsToDrawAgain = false;
+	bool bNeedsToCacheToDisk = false;
 
 	void ReloadTextureIfNeeded();
 
@@ -42,6 +43,7 @@ public:
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void OnAfterInvalidated() override;
 
 #if WITH_EDITOR 
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;

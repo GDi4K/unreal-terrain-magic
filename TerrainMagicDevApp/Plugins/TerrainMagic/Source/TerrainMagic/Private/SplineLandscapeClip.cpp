@@ -127,6 +127,16 @@ void ASplineLandscapeClip::Tick(float DeltaSeconds)
 	ReloadTextureIfNeeded();
 }
 
+void ASplineLandscapeClip::OnAfterInvalidated()
+{
+	Super::OnAfterInvalidated();
+	if (G16Texture != nullptr && bNeedsToCacheToDisk)
+	{
+		bNeedsToCacheToDisk = false;
+		G16Texture->CacheToDisk();
+	}
+}
+
 void ASplineLandscapeClip::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
@@ -152,6 +162,7 @@ void ASplineLandscapeClip::Draw()
 		return;
 	}
 
+	bNeedsToCacheToDisk = true;
 	DrawCounter.Increment();
 
 	FTerrainMagicThreading::RunOnAnyBackgroundThread([this, TextureWidth]()

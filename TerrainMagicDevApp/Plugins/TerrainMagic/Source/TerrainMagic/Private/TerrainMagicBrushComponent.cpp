@@ -167,7 +167,12 @@ UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderWeightMap(FName Layer
 UTextureRenderTarget2D* UTerrainMagicBrushComponent::RenderLandscapeClips(UTextureRenderTarget2D* InputHeightMap)
 {
 	ATerrainMagicManager* Manager = EnsureManager();
-	return Manager->RenderLandscapeClipsHeightMap(InputHeightMap);
+	UTextureRenderTarget2D* OutputHeightMap = Manager->RenderLandscapeClipsHeightMap(InputHeightMap);
+	for (ALandscapeClip* Clip: Manager->GetAllLandscapeClips())
+	{
+		Clip->OnAfterInvalidated();
+	}
+	return OutputHeightMap;
 }
 
 UTextureRenderTarget2D* UTerrainMagicBrushComponent::PaintLandscapeClips(FName LayerName,

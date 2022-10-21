@@ -81,6 +81,7 @@ public:
 	virtual int GetZIndex() const;
 	virtual bool IsEnabled() const;
 	virtual void SetEnabled(bool bEnabled);
+	virtual void OnAfterInvalidated();
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const;
 	float GetHeightAddition() const;
 	

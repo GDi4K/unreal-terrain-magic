@@ -5,16 +5,75 @@
 #include "IImageWrapper.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 
+void UG16Texture::Init()
+{
+	TextureData = new TArray<uint8>();
+	TextureData->SetNumUninitialized(TextureWidth * TextureWidth * 2);
+	
+	RuntimeTexture = UTexture2D::CreateTransient(TextureWidth, TextureWidth, PF_G16);
+	RuntimeTexture->CompressionSettings = TC_VectorDisplacementmap;
+	RuntimeTexture->SRGB = 0;
+	RuntimeTexture->AddToRoot();
+	RuntimeTexture->Filter = TF_Bilinear;
+	RuntimeTexture->MipGenSettings = TMGS_NoMipmaps;
+	
+	RuntimeTexture->UpdateResource();
+}
+
 UG16Texture::UG16Texture()
 {
 	
 }
 
-void UG16Texture::Update(uint16* HeightData, TFunction<void(UTexture2D*)> Callback)
+UG16Texture::~UG16Texture()
 {
-#if WITH_EDITORONLY_DATA
-	uint8* HeightDataBytes = reinterpret_cast<uint8*>(HeightData);
+	if (TextureData != nullptr)
+	{
+		TextureData->Empty();
+		delete TextureData;
+	}
+}
 
+int32 UG16Texture::GetTextureWidth() const
+{
+	return TextureWidth;
+}
+
+void UG16Texture::UpdateOnly(uint16* HeightData, TFunction<void(UTexture2D*)> Callback)
+{
+	if (RuntimeTexture == nullptr)
+	{
+		Init();
+	}
+
+	FMemory::Memcpy( TextureData->GetData(), HeightData, TextureWidth * TextureWidth * 2);
+	
+	constexpr int32 BytesPerPixel = 2;
+	const int32 BytesPerRow = TextureWidth * BytesPerPixel;
+	
+	UpdateRegion = FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
+	RuntimeTexture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), &UpdateRegion,
+							  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), TextureData->GetData(),
+							  [Callback, this](uint8*, const FUpdateTextureRegion2D*)
+							  {
+								  Callback(RuntimeTexture);
+							  });
+}
+
+void UG16Texture::UpdateAndCache(uint16* HeightData, TFunction<void(UTexture2D*)> Callback)
+{
+	UpdateOnly(HeightData, Callback);
+	CacheToDisk();
+}
+
+void UG16Texture::CacheToDisk() const
+{
+	if (TextureData == nullptr)
+	{
+		return;
+	}
+
+#if WITH_EDITORONLY_DATA
 	const FString PackageName = Directory + Filename;
 	UPackage* CacheTexturePackage = CreatePackage(*PackageName);
 	CacheTexturePackage->FullyLoad();
@@ -35,9 +94,7 @@ void UG16Texture::Update(uint16* HeightData, TFunction<void(UTexture2D*)> Callba
 	CacheTexture->PlatformData->PixelFormat = EPixelFormat::PF_G16;
 #endif
 	
-	#if WITH_EDITORONLY_DATA
-		CacheTexture->MipGenSettings = TMGS_NoMipmaps;
-	#endif
+	CacheTexture->MipGenSettings = TMGS_NoMipmaps;
 	
 	if (CacheTexture != NULL)
 	{
@@ -56,7 +113,7 @@ void UG16Texture::Update(uint16* HeightData, TFunction<void(UTexture2D*)> Callba
 	
 		// Save Asset;
 		CacheTexture->AddToRoot();
-		CacheTexture->Source.Init(TextureWidth, TextureWidth, 1, 1, ETextureSourceFormat::TSF_G16, HeightDataBytes);
+		CacheTexture->Source.Init(TextureWidth, TextureWidth, 1, 1, ETextureSourceFormat::TSF_G16, TextureData->GetData());
 		CacheTexture->UpdateResource();
 		CacheTexturePackage->MarkPackageDirty();
 	
@@ -68,29 +125,7 @@ void UG16Texture::Update(uint16* HeightData, TFunction<void(UTexture2D*)> Callba
 		FString PackageFileName = FPackageName::LongPackageNameToFilename(PackageName, FPackageName::GetAssetPackageExtension());
 		UPackage::SavePackage(CacheTexturePackage, CacheTexture, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *PackageFileName, GError, nullptr, true, true, SAVE_NoError);
 	}
-	
-	// Create the Runtime Texture
-	UTexture2D* Texture = UTexture2D::CreateTransient(TextureWidth, TextureWidth, PF_G16);
-	Texture->CompressionSettings = TC_VectorDisplacementmap;
-	Texture->SRGB = 0;
-	Texture->AddToRoot();
-	Texture->Filter = TF_Bilinear;
-	
-	Texture->MipGenSettings = TMGS_NoMipmaps;
-	
-	Texture->UpdateResource();
-
-	constexpr int32 BytesPerPixel = 2;
-	const int32 BytesPerRow = TextureWidth * BytesPerPixel;
-
-	UpdateRegion = FUpdateTextureRegion2D(0, 0, 0, 0, TextureWidth, TextureWidth);
-	Texture->UpdateTextureRegions(static_cast<int32>(0), static_cast<uint32>(1), &UpdateRegion,
-							  static_cast<uint32>(BytesPerRow), static_cast<uint32>(BytesPerPixel), HeightDataBytes,
-							  [Callback, Texture](uint8*, const FUpdateTextureRegion2D*)
-							  {
-								  Callback(Texture);
-							  });
-#endif
+#endif	
 }
 
 UTexture2D* UG16Texture::LoadCachedTexture() const

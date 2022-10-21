@@ -132,7 +132,7 @@ void ASplineLandscapeClip::Draw()
 	// TODO: Change the TextureWidth as needed
 	constexpr int32 TextureWidth = 2048;
 	
-	if(G16Texture == nullptr)
+	if(G16Texture == nullptr || TextureWidth != G16Texture->GetTextureWidth())
 	{
 		G16Texture = UG16Texture::Create(this, TextureWidth, "/Game/TerrainMagic/HeightMaps/Spline/", GetName());
 	}
@@ -154,7 +154,7 @@ void ASplineLandscapeClip::Draw()
 		}
 	}
 
-	G16Texture->Update(HeightData->GetData(), [this, HeightData](UTexture2D* Texture)
+	G16Texture->UpdateAndCache(HeightData->GetData(), [this, HeightData](UTexture2D* Texture)
 	{
 		HeightMap = Texture;
 		delete HeightData;

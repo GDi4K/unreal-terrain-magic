@@ -174,9 +174,12 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 		CurrentTileResponse = TileResponseData;
 		UE_LOG(LogTemp, Warning, TEXT("Full Name: %s, Name: %s"), *GetFullName(), *GetName())
 
+		if (G16Texture == nullptr || G16Texture->GetTextureWidth() != PixelsPerRow)
+		{
+			G16Texture = UG16Texture::Create(this, PixelsPerRow, "/Game/TerrainMagic/HeightMaps/Earth/", GetName());
+		}
 		
-		G16Texture = UG16Texture::Create(this, PixelsPerRow, "/Game/TerrainMagic/HeightMaps/Earth/", GetName());
-		G16Texture->Update(TileResponseData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
+		G16Texture->UpdateAndCache(TileResponseData->HeightData.GetData(), [this, StatusCallback](UTexture2D* Texture)
 		{
 			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()
 			{

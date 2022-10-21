@@ -22,12 +22,24 @@ class TERRAINMAGIC_API UG16Texture : public UObject
 
 	UPROPERTY()
 	FString Filename;
+
+	UPROPERTY()
+	UTexture2D* RuntimeTexture = nullptr;
+
+	TArray<uint8>* TextureData = nullptr;
 	
 	FUpdateTextureRegion2D UpdateRegion;
+	
+	void Init();
 
 public:
 	UG16Texture();
-	void Update(uint16* HeightData, TFunction<void(UTexture2D*)> Callback);
+	~UG16Texture();
+	
+	int32 GetTextureWidth() const;
+	void UpdateOnly(uint16* HeightData, TFunction<void(UTexture2D*)> Callback);
+	void CacheToDisk() const;
+	void UpdateAndCache(uint16* HeightData, TFunction<void(UTexture2D*)> Callback);
 	UTexture2D* LoadCachedTexture() const;
 
 	static UG16Texture* Create(UObject* Outer, int32 TextureWidth, FString Directory, FString Filename);

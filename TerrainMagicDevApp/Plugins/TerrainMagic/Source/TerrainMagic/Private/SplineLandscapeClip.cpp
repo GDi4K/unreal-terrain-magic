@@ -127,6 +127,15 @@ void ASplineLandscapeClip::Tick(float DeltaSeconds)
 	ReloadTextureIfNeeded();
 }
 
+void ASplineLandscapeClip::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	if (PropertyChangedEvent.Property->GetName() == "Center")
+	{
+		Draw();
+	}
+}
+
 void ASplineLandscapeClip::Draw()
 {
 	// TODO: Change the TextureWidth as needed
@@ -136,31 +145,55 @@ void ASplineLandscapeClip::Draw()
 	{
 		G16Texture = UG16Texture::Create(this, TextureWidth, "/Game/TerrainMagic/HeightMaps/Spline/", GetName());
 	}
-	
-	TArray<uint16>* HeightData = new TArray<uint16>();
-	HeightData->SetNumZeroed(TextureWidth * TextureWidth);
-	const int32 Max16Bit = FMath::Pow(2, 16) - 1;
 
-	for (int32 X=0; X<TextureWidth; X++)
+	if (DrawCounter.GetValue() > 0)
 	{
-		for (int32 Y=0; Y<TextureWidth; Y++)
-		{
-			FVector2D UV = {X/static_cast<float>(TextureWidth), Y/static_cast<float>(TextureWidth)};
-			const int32 Index = (Y * TextureWidth) + X;
-
-			float Distance = 1.0f - FMath::Clamp((UV - 0.5f).Size() * 2.0f, 0.0f, 1.0f);
-			Distance = smoothstep(0.0f, 1.0f, Distance);
-			(*HeightData)[Index] = Distance * Max16Bit;
-		}
+		bNeedsToDrawAgain = true;
+		return;
 	}
 
-	G16Texture->UpdateAndCache(HeightData->GetData(), [this, HeightData](UTexture2D* Texture)
+	DrawCounter.Increment();
+
+	FTerrainMagicThreading::RunOnAnyBackgroundThread([this, TextureWidth]()
 	{
-		HeightMap = Texture;
-		delete HeightData;
-		FTerrainMagicThreading::RunOnGameThread([this]()
+		TArray<uint16>* HeightData = new TArray<uint16>();
+		HeightData->SetNumZeroed(TextureWidth * TextureWidth);
+		const int32 Max16Bit = FMath::Pow(2, 16) - 1;
+
+		for (int32 X=0; X<TextureWidth; X++)
 		{
-			ATerrainMagicManager::EnsureManager(GetWorld())->ClipsAreDirty();
+			for (int32 Y=0; Y<TextureWidth; Y++)
+			{
+				FVector2D UV = {X/static_cast<float>(TextureWidth), Y/static_cast<float>(TextureWidth)};
+				const int32 Index = (Y * TextureWidth) + X;
+
+				float Distance = 1.0f - FMath::Clamp((UV - Center).Size() * 2.0f, 0.0f, 1.0f);
+				Distance = smoothstep(0.0f, 1.0f, Distance);
+				(*HeightData)[Index] = Distance * Max16Bit;
+			}
+		}
+
+		FTerrainMagicThreading::RunOnGameThread([this, HeightData]()
+		{
+			G16Texture->UpdateOnly(HeightData->GetData(), [this, HeightData](UTexture2D* Texture)
+			{
+				HeightMap = Texture;
+				delete HeightData;
+				FTerrainMagicThreading::RunOnGameThread([this]()
+				{
+					DrawCounter.Decrement();
+					ATerrainMagicManager::EnsureManager(GetWorld())->ClipsAreDirty();
+					if (bNeedsToDrawAgain)
+					{
+						bNeedsToDrawAgain = false;
+						Draw();
+					}
+				});
+			});
 		});
 	});
+	
+	
+
+	
 }

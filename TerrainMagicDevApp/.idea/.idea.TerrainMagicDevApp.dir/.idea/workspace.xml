@@ -7,14 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Add fading support for all the blend modes.">
+    <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="Refactor the G16Texture for efficient texture management.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/Spline/SplineLandscapeClip_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/Spline/SplineLandscapeClip_1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/SplineLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/SplineLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/G16Texture.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/G16Texture.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/G16Texture.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/G16Texture.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/SplineLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/SplineLandscapeClip.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,14 +227,8 @@
       <workItem from="1666187725986" duration="5310000" />
       <workItem from="1666220917959" duration="3755000" />
       <workItem from="1666225379900" duration="736000" />
-      <workItem from="1666312328888" duration="4603000" />
-    </task>
-    <task id="LOCAL-00074" summary="Introducing TextureMap Mask.">
-      <created>1660835582648</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1660835582648</updated>
+      <workItem from="1666312328888" duration="4906000" />
+      <workItem from="1666329853295" duration="1857000" />
     </task>
     <task id="LOCAL-00075" summary="Added the HeightMask">
       <created>1660883157649</created>
@@ -574,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666314190268</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Refactor the G16Texture for efficient texture management.">
+      <created>1666317992261</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1666317992261</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +606,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Implement Merging HeightMaps Support." />
     <MESSAGE value="Refactor the API." />
     <MESSAGE value="Improved internal memory management." />
     <MESSAGE value="Handle the final response properly." />
@@ -632,6 +630,7 @@
     <MESSAGE value="Refactor codebase G16Texture usage codebase." />
     <MESSAGE value="Configure the G16Texture to the SplineLandscape Clip." />
     <MESSAGE value="Add fading support for all the blend modes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add fading support for all the blend modes." />
+    <MESSAGE value="Refactor the G16Texture for efficient texture management." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor the G16Texture for efficient texture management." />
   </component>
 </project>

@@ -17,6 +17,8 @@ class TERRAINMAGIC_API ASplineLandscapeClip : public ALandscapeClip
 	UG16Texture* G16Texture = nullptr;
 
 	bool HasTextureReloaded = false;
+	FThreadSafeCounter DrawCounter = 0;
+	bool bNeedsToDrawAgain = false;
 
 	void ReloadTextureIfNeeded();
 
@@ -41,8 +43,15 @@ public:
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
 	virtual void Tick(float DeltaSeconds) override;
 
+#if WITH_EDITOR 
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+	
 	UFUNCTION(CallInEditor, Category="01-General")
 	void Draw();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	float Center = 0.5;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
@@ -51,13 +60,13 @@ public:
 	int ZIndex = -1;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
+	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_ADD;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
 	UTexture* HeightMap = nullptr;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")
-	FTerrainMagicRemap HeightMapRange;
+	FTerrainMagicRemap HeightMapRange = {0.0, 1.0, 0.0, 1.0};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height", meta=(ToolTip="A multiplier that will use with the following HeightMap range output values. This value doesn't scale with the clip actor's scaling factors."))
 	int HeightMultiplier = 32000;

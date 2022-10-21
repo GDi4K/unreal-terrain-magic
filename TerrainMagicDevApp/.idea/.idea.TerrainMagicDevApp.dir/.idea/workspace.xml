@@ -8,11 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5607face-ab15-4229-9605-80f12342b685" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/Spline/SplineLandscapeClip_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/Spline/SplineLandscapeClip_1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/SplineLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/SplineLandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,6 +226,7 @@
       <workItem from="1666187725986" duration="5310000" />
       <workItem from="1666220917959" duration="3755000" />
       <workItem from="1666225379900" duration="736000" />
+      <workItem from="1666312328888" duration="743000" />
     </task>
     <task id="LOCAL-00073" summary="Remove unwanted categories.">
       <created>1660805985124</created>

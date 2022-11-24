@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "LandscapeClip.h"
-#include "Utils/MapBoxUtils.h"
+#include "Utils/MapUtils.h"
 #include "EarthLandscapeClip.generated.h"
 
 UENUM()
@@ -52,7 +52,7 @@ class TERRAINMAGIC_API AEarthLandscapeClip : public ALandscapeClip
 	// UPROPERTY()
 	// TArray<uint16> CurrentHeightData;
 	
-	TSharedPtr<FMapBoxTileResponse> CurrentTileResponse = nullptr;
+	TSharedPtr<FMapTileResponse> CurrentTileResponse = nullptr;
 	bool HasTextureReloaded = false;
 
 	void ReloadTextureIfNeeded();
@@ -97,6 +97,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
 	FString TileDownloadProgress = "";
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	TEnumAsByte<EMapSource> MapSource = MS_MAPBOX;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	FString TileInfoString = "";

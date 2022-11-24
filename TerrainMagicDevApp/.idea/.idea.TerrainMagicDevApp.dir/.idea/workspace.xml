@@ -7,35 +7,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="Update the devapp.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEditorPerProjectUserSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditorPerProjectUserSettings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Main.umap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip2.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip2_3.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip6.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip7.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip8.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_4.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_5.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/HeightChangeLandscapeClip3.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap.umap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/terrain1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Shaders/noises.ush" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Shaders/terrain_noise.ush" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapUtils.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapUtils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicCommands.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicCommands.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2HykNyLkGsbIJ5dkvPAHL1wdl8t" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -107,8 +95,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669264677517</updated>
-      <workItem from="1669264720120" duration="610000" />
+      <workItem from="1669264720120" duration="2168000" />
     </task>
+    <task id="LOCAL-00001" summary="Update the devapp.">
+      <created>1669265451183</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669265451183</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,5 +125,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Update the devapp." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update the devapp." />
   </component>
 </project>

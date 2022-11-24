@@ -10,7 +10,7 @@
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Materials/Material.h"
 #include "Kismet/KismetRenderingLibrary.h"
-#include "Utils/MapBoxUtils.h"
+#include "Utils/MapUtils.h"
 #include "Utils/TerrainMagicThreading.h"
 
 
@@ -136,7 +136,7 @@ void AEarthLandscapeClip::ReloadTextureIfNeeded()
 	}
 	HasTextureReloaded = true;
 
-	HeightMap = FMapBoxUtils::LoadCachedTexture(GetName());
+	HeightMap = FMapUtils::LoadCachedTexture(GetName());
 }
 
 void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)> StatusCallback)
@@ -153,14 +153,14 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 		return;
 	}
 	
-	FMapBoxTileQuery TileQuery = {};
+	FMapTileQuery TileQuery = {};
 	TileQuery.X = FCString::Atoi(*Parts[0].TrimStartAndEnd());
 	TileQuery.Y = FCString::Atoi(*Parts[1].TrimStartAndEnd());
 	TileQuery.Zoom = FCString::Atoi(*Parts[2].TrimStartAndEnd());
 	TileQuery.ZoomInLevels = TileResolution;
 
 	TileDownloadProgress = "Start downloading tiles";
-	FMapBoxUtils::DownloadTileSet(TileQuery, [this, TileQuery, StatusCallback](TSharedPtr<FMapBoxTileDownloadProgress> DownloadProgress, TSharedPtr<FMapBoxTileResponse> TileResponseData)
+	FMapUtils::DownloadTileSet(MapSource, TileQuery, [this, TileQuery, StatusCallback](TSharedPtr<FMapTileDownloadProgress> DownloadProgress, TSharedPtr<FMapTileResponse> TileResponseData)
 	{
 		TileDownloadProgress = FString::Printf(TEXT("Completed: %d/%d"), DownloadProgress->TilesDownloaded, DownloadProgress->TotalTiles);
 
@@ -185,7 +185,7 @@ void AEarthLandscapeClip::DownloadTile(TFunction<void(FEarthTileDownloadStatus)>
 		// This is important, otherwise the TileData will be garbage collected
 		CurrentTileResponse = TileResponseData;
 		UE_LOG(LogTemp, Warning, TEXT("Full Name: %s, Name: %s"), *GetFullName(), *GetName())
-		FMapBoxUtils::MakeG16Texture(PixelsPerRow, TileResponseData->HeightData.GetData(), GetName(), [this, StatusCallback](UTexture2D* Texture)
+		FMapUtils::MakeG16Texture(PixelsPerRow, TileResponseData->HeightData.GetData(), GetName(), [this, StatusCallback](UTexture2D* Texture)
 		{
 			FTerrainMagicThreading::RunOnGameThread([this, Texture, StatusCallback]()
 			{

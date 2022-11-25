@@ -121,10 +121,31 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur", meta=(ClampMin=0, ClampMax=100))
 	int32 BlurRadialSteps = 8;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise", meta=(ClampMin=0, ClampMax=1))
+	float NoiseInfluence = 0.0;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
+	float MountainNoiseScale = 3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
+	float MountainNoiseDetails = 1.2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
+	float MountainNoiseContrast = 0.1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
+	float MountainNoiseSharpness = 0.5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
+	float MountainNoiseSeed = 0.0;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Mountain Noise")
+	FVector2D MountainNoisePosition = {0, 0};
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")
 	FTerrainMagicRemap HeightMapRange = {0, 1, -1, 1};
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height", meta=(ToolTip="A multiplier that will use with the following HeightMap range output values. This value doesn't scale with the clip actor's scaling factors."))
 	int HeightMultiplier = 32000;
 	
@@ -144,7 +165,7 @@ public:
 	float FadeSaturation = 1.0;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
-	TEnumAsByte<ELandscapeClipFadeMinimum> FadeMinimum = LCFM_ZERO;
+	TEnumAsByte<ELandscapeClipFadeMinimum> FadeMinimum = LCFM_REMAP_MIN;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="02-Layer Painting")
 	TArray<FLandscapeClipPaintLayerSettings> PaintLayerSettings = {};

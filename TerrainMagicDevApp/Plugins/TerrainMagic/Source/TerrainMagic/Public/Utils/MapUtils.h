@@ -6,8 +6,7 @@
 UENUM(BlueprintType)
 enum EMapSource
 {
-	MS_MAPBOX = 0 UMETA(DisplayName="Maxbox"),
-	MS_PLANETARY_COMPUTER = 1 UMETA(DisplayName="Planetary Computer"),
+	MS_MAPBOX = 0 UMETA(DisplayName="Maxbox")
 };
 
 

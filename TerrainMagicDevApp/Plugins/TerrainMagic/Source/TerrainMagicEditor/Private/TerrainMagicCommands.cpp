@@ -97,7 +97,21 @@ void FTerrainMagicCommands::OnDownloadTile() const
 		AEarthLandscapeClip* Clip = Cast<AEarthLandscapeClip>(*Iter);
 		if (Clip)
 		{
-			Clip->DownloadTile();
+			Clip->DownloadTile([](const FEarthTileDownloadStatus Status)
+			{
+				if (Status.IsError)
+				{
+					UE_LOG(LogTemp, Error, TEXT("Tile Download Error: %s"), *Status.ErrorMessage);
+					
+					FNotificationInfo Info(LOCTEXT("SpawnNotification_Notification", "Tile Download Error"));
+					Info.ExpireDuration = 10.0f;
+					Info.WidthOverride = 300.0f;
+					Info.Hyperlink = FSimpleDelegate();
+					Info.Hyperlink.BindLambda([]() {});
+					Info.HyperlinkText = FText::FromString("Check Output Log for details");
+					FSlateNotificationManager::Get().AddNotification(Info);
+				}
+			});
 			UE_LOG(LogTemp, Display, TEXT("Downloding Tile: %s"), *Clip->GetName())
 		}
 	}

@@ -2,22 +2,5 @@
 	"FileVersion": 3,
 	"EngineAssociation": "4.27",
 	"Category": "",
-	"Description": "",
-	"Modules": [
-		{
-			"Name": "TerrainMagicDevApp",
-			"Type": "Runtime",
-			"LoadingPhase": "Default"
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "EditorScriptingUtilities",
-			"Enabled": true
-		},
-		{
-			"Name": "ModelingToolsEditorMode",
-			"Enabled": true
-		}
-	]
+	"Description": ""
 }

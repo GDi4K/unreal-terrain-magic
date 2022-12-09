@@ -13,8 +13,13 @@ public class TerrainMagicEditor : ModuleRules
 		PrivateIncludePaths.Add(ModuleDirectory + "/Private");
 		
 		PublicAdditionalLibraries.Add(ModuleDirectory + "/ThirdParty/gdal_i.lib");
-		RuntimeDependencies.Add(PluginDirectory + "Binaries/Win64/gdal304.dll");
-		RuntimeDependencies.Add(PluginDirectory + "Binaries/Win64/geos_c.dll");
+		
+		PublicDelayLoadDLLs.Add("gdal304.dll");
+		PublicDelayLoadDLLs.Add("geos_c.dll");
+		
+		// // We don't need to load this DLL at runtime. That's we don't want to do this.
+		// RuntimeDependencies.Add(PluginDirectory + "Binaries/Win64/gdal304.dll", ModuleDirectory + "/ThirdParty/gdal304.dll");
+		// RuntimeDependencies.Add(PluginDirectory + "Binaries/Win64/geos_c.dll", ModuleDirectory + "/ThirdParty/geos_c.dll");
 		
 		PublicDependencyModuleNames.AddRange(new[]
 		{

@@ -14,7 +14,6 @@
 #include "gdal/gdal_priv.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/Layout/SGridPanel.h"
-#include "Widgets/Notifications/SNotificationList.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -203,6 +202,7 @@ FReply FLandscapeClipDetails::OnClickTogglePreview()
 FReply FLandscapeClipDetails::OnClickDownloadTile()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Download Me."))
+	
 	GDALAllRegister();
 	GDALDataset* SourceRasterDS = (GDALDataset*) GDALOpen("C:\\Data\\Tmp\\terrain-files\\sample.tif",GA_ReadOnly);
 	// auto Band = SourceRasterDS->GetRasterBand(1);

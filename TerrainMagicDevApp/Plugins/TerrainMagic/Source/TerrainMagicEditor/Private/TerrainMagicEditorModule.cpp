@@ -13,6 +13,8 @@
 
 void FTerrainMagicEditorModule::StartupModule()
 {
+	FPlatformProcess::GetDllHandle(TEXT("C:\\Data\\Repos\\GDi4K\\terrain-magic\\TerrainMagicDevApp\\Plugins\\TerrainMagic\\Source\\TerrainMagicEditor\\ThirdParty\\gdal304.dll"));
+	
 	FPropertyEditorModule& PropertyModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
 
 	// Initialize Styles & Commands

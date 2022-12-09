@@ -7,16 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="Add built-in noise layer for the earth landscape clip.">
+    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicEditorModule.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicEditorModule.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,7 +92,10 @@
       <option name="presentableId" value="Default" />
       <updated>1669264677517</updated>
       <workItem from="1669264720120" duration="2168000" />
-      <workItem from="1669389580747" duration="2828000" />
+      <workItem from="1669389580747" duration="3686000" />
+      <workItem from="1670021870375" duration="3583000" />
+      <workItem from="1670026457171" duration="1119000" />
+      <workItem from="1670544116657" duration="3182000" />
     </task>
     <task id="LOCAL-00001" summary="Update the devapp.">
       <created>1669265451183</created>

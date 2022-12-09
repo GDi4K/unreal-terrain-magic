@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
 #include "LandscapeClipDetails.h"
-
 #include "BaseLandscapeClip.h"
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
@@ -11,11 +10,22 @@
 #include "LandscapeClip.h"
 #include "TerrainMagicManager.h"
 #include "Framework/Notifications/NotificationManager.h"
+#include "gdal/gdal.h"
+#include "gdal/gdal_priv.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/Layout/SGridPanel.h"
 #include "Widgets/Notifications/SNotificationList.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
+
+void LoadDLL()
+{
+	const auto Handle = FPlatformProcess::GetDllHandle(TEXT("C:\\Data\\Repos\\GDi4K\\terrain-magic\\TerrainMagicDevApp\\Plugins\\TerrainMagic\\Source\\TerrainMagicEditor\\ThirdParty\\gdal304.dll"));
+	if (Handle == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Failed to load required library"));
+	}
+}
 
 TSharedRef<IDetailCustomization> FLandscapeClipDetails::MakeInstance()
 {
@@ -192,28 +202,38 @@ FReply FLandscapeClipDetails::OnClickTogglePreview()
 
 FReply FLandscapeClipDetails::OnClickDownloadTile()
 {
-	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
-	{
-		AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
-		if (EarthLandscapeClip != nullptr)
-		{
-			EarthLandscapeClip->DownloadTile([](const FEarthTileDownloadStatus Status)
-			{
-				if (Status.IsError)
-				{
-					UE_LOG(LogTemp, Error, TEXT("Tile Download Error: %s"), *Status.ErrorMessage);
-					
-					FNotificationInfo Info(LOCTEXT("SpawnNotification_Notification", "Tile Download Error"));
-					Info.ExpireDuration = 10.0f;
-					Info.WidthOverride = 300.0f;
-					Info.Hyperlink = FSimpleDelegate();
-					Info.Hyperlink.BindLambda([]() {});
-					Info.HyperlinkText = FText::FromString("Check Output Log for details");
-					FSlateNotificationManager::Get().AddNotification(Info);
-				}
-			});
-		}
-	}
+	UE_LOG(LogTemp, Warning, TEXT("Download Me."))
+	GDALAllRegister();
+	GDALDataset* SourceRasterDS = (GDALDataset*) GDALOpen("C:\\Data\\Tmp\\terrain-files\\sample.tif",GA_ReadOnly);
+	// auto Band = SourceRasterDS->GetRasterBand(1);
+	// auto data = Band->AsMDArray();
+	// data->GetDimensionCount();
+	double transform[10];
+	auto ref = SourceRasterDS->GetGeoTransform(transform);
+	UE_LOG(LogTemp, Warning, TEXT("Transform: %f"), transform[0])
+	
+	// for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	// {
+	// 	AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
+	// 	if (EarthLandscapeClip != nullptr)
+	// 	{
+	// 		EarthLandscapeClip->DownloadTile([](const FEarthTileDownloadStatus Status)
+	// 		{
+	// 			if (Status.IsError)
+	// 			{
+	// 				UE_LOG(LogTemp, Error, TEXT("Tile Download Error: %s"), *Status.ErrorMessage);
+	// 				
+	// 				FNotificationInfo Info(LOCTEXT("SpawnNotification_Notification", "Tile Download Error"));
+	// 				Info.ExpireDuration = 10.0f;
+	// 				Info.WidthOverride = 300.0f;
+	// 				Info.Hyperlink = FSimpleDelegate();
+	// 				Info.Hyperlink.BindLambda([]() {});
+	// 				Info.HyperlinkText = FText::FromString("Check Output Log for details");
+	// 				FSlateNotificationManager::Get().AddNotification(Info);
+	// 			}
+	// 		});
+	// 	}
+	// }
 	
 	return FReply::Handled();
 }

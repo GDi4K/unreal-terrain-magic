@@ -11,12 +11,16 @@ public class TerrainMagicEditor : ModuleRules
 
 		PublicIncludePaths.Add(ModuleDirectory + "/Public");
 		PrivateIncludePaths.Add(ModuleDirectory + "/Private");
-
+		
+		PublicAdditionalLibraries.Add(ModuleDirectory + "/ThirdParty/gdal_i.lib");
+		RuntimeDependencies.Add(PluginDirectory + "Binaries/Win64/gdal304.dll");
+		RuntimeDependencies.Add(PluginDirectory + "Binaries/Win64/geos_c.dll");
+		
 		PublicDependencyModuleNames.AddRange(new[]
 		{
 			"Core", "CoreUObject", "Engine",
 			"UnrealEd", "DetailCustomizations",
-			"PropertyEditor", "EditorStyle",
+			"PropertyEditor", "EditorStyle"
 		});
 		
 		PrivateDependencyModuleNames.AddRange(new []

@@ -14,6 +14,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/Layout/SGridPanel.h"
 #include "Widgets/Notifications/SNotificationList.h"
+#include "gdal/gdal_priv.h"
+#include "gdal/cpl_conv.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -268,7 +270,51 @@ FReply FLandscapeClipDetails::OnOpenMap()
 
 FReply FLandscapeClipDetails::OnImportGeoTiff()
 {
-	UE_LOG(LogTemp, Warning, TEXT("GeoTiff file imported!"))
+	UE_LOG(LogTemp, Warning, TEXT("Importing the GeoTiff file..."))
+		
+	GDALAllRegister();
+	GDALDataset  *dataset = (GDALDataset *) GDALOpen("C:\\Data\\Tmp\\terrain-files\\sample.tif", GA_ReadOnly);
+
+	if( dataset == NULL ) {
+		UE_LOG(LogTemp, Warning, TEXT(" Failed to open the geotiff file"))
+		return FReply::Handled();
+	}
+
+	// Get image metadata
+	uint32 Width = dataset->GetRasterXSize();
+	uint32 Height = dataset->GetRasterYSize();
+
+	UE_LOG(LogTemp, Warning, TEXT(" Width: %d, Height: %d"), Width, Height)
+
+	// Get image resolution data
+	FVector2D Origin;
+	FVector2D PixelSize;
+    
+	double geoTransform[6];
+	if (dataset->GetGeoTransform(geoTransform) == CE_None ) {
+		Origin.X = geoTransform[0];
+		Origin.Y = geoTransform[3];
+		PixelSize.X = geoTransform[1];
+		PixelSize.Y = geoTransform[5];
+	} else {
+		UE_LOG(LogTemp, Warning, TEXT(" Failed to read geotransform info"))
+		exit(1);
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT(" Origin: %s, PixelSize: %s"), *Origin.ToString(), *PixelSize.ToString())
+
+	// Load the Data
+	GDALRasterBand  *elevationBand = dataset->GetRasterBand(1);
+	uint32 ReadResolution = 1024; // or this can be Width as well to get the full data
+	std::vector<float> data(ReadResolution * ReadResolution, 0.0f);
+   
+	// Read the entire file into the array (you can change the options to read only a portion
+	// of the file, or even scale it down if you want)
+     
+	UE_LOG(LogTemp, Warning, TEXT(" Loading Image..."))
+	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, &data[0], ReadResolution, ReadResolution, GDT_Float32, 0, 0);
+	UE_LOG(LogTemp, Warning, TEXT(" Image Loaded!"))
+	
 	return FReply::Handled();
 }
 

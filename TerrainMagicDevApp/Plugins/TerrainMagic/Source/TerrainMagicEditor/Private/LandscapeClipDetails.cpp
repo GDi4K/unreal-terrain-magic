@@ -6,25 +6,16 @@
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
 #include "EarthLandscapeClip.h"
+#include "GeoTiffLandscapeClip.h"
 #include "IDetailGroup.h"
 #include "LandscapeClip.h"
 #include "TerrainMagicManager.h"
 #include "Framework/Notifications/NotificationManager.h"
-#include "gdal/gdal.h"
-#include "gdal/gdal_priv.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/Layout/SGridPanel.h"
+#include "Widgets/Notifications/SNotificationList.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
-
-void LoadDLL()
-{
-	const auto Handle = FPlatformProcess::GetDllHandle(TEXT("C:\\Data\\Repos\\GDi4K\\terrain-magic\\TerrainMagicDevApp\\Plugins\\TerrainMagic\\Source\\TerrainMagicEditor\\ThirdParty\\gdal304.dll"));
-	if (Handle == nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Failed to load required library"));
-	}
-}
 
 TSharedRef<IDetailCustomization> FLandscapeClipDetails::MakeInstance()
 {
@@ -119,6 +110,48 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 			];
 	}
 
+	if (IsGeoTiffLandscapeClip())
+	{
+		WidgetRow = SNew(SGridPanel)
+			+SGridPanel::Slot(0, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ToggleOutlineButton", "Toggle Outline"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleOutline)
+			]
+			+SGridPanel::Slot(1, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("MatchLandscapeSizeButton", "Match Landscape Size"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickMatchLandscapeSize)
+			]
+			+SGridPanel::Slot(0, 1).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("TogglePreviewButton", "Toggle Preview"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickTogglePreview)
+			]
+			+SGridPanel::Slot(1, 1).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ToggleSoloButton", "ToggleSolo"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleSolo)
+			]
+			+SGridPanel::Slot(0, 2).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("InvalidateButton", "Invalidate"))
+				.ToolTipText(LOCTEXT("InvalidateButtonToolTip", "Use ALT+Q or Editor Toolbar"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
+			]
+			+SGridPanel::Slot(0, 3).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("Import", "Import"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnImportGeoTiff)
+			];
+	}
+
 	if (IsBaseLandscapeClip())
 	{
 		WidgetRow = SNew(SGridPanel)
@@ -201,39 +234,28 @@ FReply FLandscapeClipDetails::OnClickTogglePreview()
 
 FReply FLandscapeClipDetails::OnClickDownloadTile()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Download Me."))
-	
-	GDALAllRegister();
-	GDALDataset* SourceRasterDS = (GDALDataset*) GDALOpen("C:\\Data\\Tmp\\terrain-files\\sample.tif",GA_ReadOnly);
-	// auto Band = SourceRasterDS->GetRasterBand(1);
-	// auto data = Band->AsMDArray();
-	// data->GetDimensionCount();
-	double transform[10];
-	auto ref = SourceRasterDS->GetGeoTransform(transform);
-	UE_LOG(LogTemp, Warning, TEXT("Transform: %f"), transform[0])
-	
-	// for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
-	// {
-	// 	AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
-	// 	if (EarthLandscapeClip != nullptr)
-	// 	{
-	// 		EarthLandscapeClip->DownloadTile([](const FEarthTileDownloadStatus Status)
-	// 		{
-	// 			if (Status.IsError)
-	// 			{
-	// 				UE_LOG(LogTemp, Error, TEXT("Tile Download Error: %s"), *Status.ErrorMessage);
-	// 				
-	// 				FNotificationInfo Info(LOCTEXT("SpawnNotification_Notification", "Tile Download Error"));
-	// 				Info.ExpireDuration = 10.0f;
-	// 				Info.WidthOverride = 300.0f;
-	// 				Info.Hyperlink = FSimpleDelegate();
-	// 				Info.Hyperlink.BindLambda([]() {});
-	// 				Info.HyperlinkText = FText::FromString("Check Output Log for details");
-	// 				FSlateNotificationManager::Get().AddNotification(Info);
-	// 			}
-	// 		});
-	// 	}
-	// }
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
+		if (EarthLandscapeClip != nullptr)
+		{
+			EarthLandscapeClip->DownloadTile([](const FEarthTileDownloadStatus Status)
+			{
+				if (Status.IsError)
+				{
+					UE_LOG(LogTemp, Error, TEXT("Tile Download Error: %s"), *Status.ErrorMessage);
+					
+					FNotificationInfo Info(LOCTEXT("SpawnNotification_Notification", "Tile Download Error"));
+					Info.ExpireDuration = 10.0f;
+					Info.WidthOverride = 300.0f;
+					Info.Hyperlink = FSimpleDelegate();
+					Info.Hyperlink.BindLambda([]() {});
+					Info.HyperlinkText = FText::FromString("Check Output Log for details");
+					FSlateNotificationManager::Get().AddNotification(Info);
+				}
+			});
+		}
+	}
 	
 	return FReply::Handled();
 }
@@ -241,6 +263,12 @@ FReply FLandscapeClipDetails::OnClickDownloadTile()
 FReply FLandscapeClipDetails::OnOpenMap()
 {
 	FPlatformProcess::LaunchURL(TEXT("https://www.gdi4k.com/terrainmagic/map"), NULL, NULL);
+	return FReply::Handled();
+}
+
+FReply FLandscapeClipDetails::OnImportGeoTiff()
+{
+	UE_LOG(LogTemp, Warning, TEXT("GeoTiff file imported!"))
 	return FReply::Handled();
 }
 
@@ -279,6 +307,26 @@ bool FLandscapeClipDetails::IsEarthLandscapeClip()
 	{
 		const AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
 		if (EarthLandscapeClip == nullptr)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool FLandscapeClipDetails::IsGeoTiffLandscapeClip()
+{
+	const TArray<ALandscapeClip*> SelectedClips = GetSelectedLandscapeClips();
+	if (SelectedClips.Num() == 0)
+	{
+		return false;
+	}
+
+	for (ALandscapeClip* Clip: SelectedClips)
+	{
+		const AGeoTiffLandscapeClip* GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip == nullptr)
 		{
 			return false;
 		}

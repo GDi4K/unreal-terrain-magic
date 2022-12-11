@@ -8,12 +8,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/GeoTiffLandscapeClip.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/GeoTiffLandscapeClip.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Binaries/Win64/gdal304.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Binaries/Win64/geos_c.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_2.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicEditorModule.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicEditorModule.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +103,8 @@
       <workItem from="1670026457171" duration="1119000" />
       <workItem from="1670544116657" duration="3530000" />
       <workItem from="1670596706532" duration="299000" />
-      <workItem from="1670597048138" duration="1391000" />
+      <workItem from="1670597048138" duration="2719000" />
+      <workItem from="1670778500502" duration="1237000" />
     </task>
     <task id="LOCAL-00001" summary="Update the devapp.">
       <created>1669265451183</created>
@@ -125,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670547673786</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Load DLLs properly.">
+      <created>1670599188812</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670599188812</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +158,7 @@
     <MESSAGE value="Update the devapp." />
     <MESSAGE value="Add built-in noise layer for the earth landscape clip." />
     <MESSAGE value="Load Gdal." />
-    <option name="LAST_COMMIT_MESSAGE" value="Load Gdal." />
+    <MESSAGE value="Load DLLs properly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Load DLLs properly." />
   </component>
 </project>

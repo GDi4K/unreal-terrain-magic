@@ -2,6 +2,7 @@
 
 #include "GeoTiffLandscapeClip.h"
 #include "Materials/Material.h"
+#include "Utils/TerrainMagicThreading.h"
 
 
 // Sets default values
@@ -83,4 +84,35 @@ UTexture* AGeoTiffLandscapeClip::GetHeightMap() const
 TArray<FLandscapeClipPaintLayerSettings> AGeoTiffLandscapeClip::GetPaintLayerSettings() const
 {
 	return PaintLayerSettings;
+}
+
+void AGeoTiffLandscapeClip::ApplyRawHeightData(uint32 TextureWidth, TArray<float> HeightData)
+{
+	if (!IsValid(G16Texture) || G16Texture->GetTextureWidth() != TextureWidth)
+	{
+		G16Texture = UG16Texture::Create(this, TextureWidth, "/Game/TerrainMagic/HeightMaps/GeoTiff/", GetName());
+	}
+
+	const float MinValue = FMath::Min(HeightData);
+	const float MaxValue = FMath::Max(HeightData);
+	const float Range = MaxValue - MinValue;
+	const int32 Max16BitValue = FMath::Pow(2.0, 16.0) - 1;
+	const float HeightRangeRatio = Max16BitValue / Range;
+
+	TArray<uint16> G16HeightData;
+	G16HeightData.SetNumUninitialized(TextureWidth * TextureWidth);
+
+	for (size_t Index = 0; Index < HeightData.Num(); Index++)
+	{
+		G16HeightData[Index] = (HeightData[Index] - MinValue) * HeightRangeRatio;
+	}
+
+	G16Texture->UpdateOnly(G16HeightData.GetData(), [this](UTexture2D* Texture)
+	{
+		FTerrainMagicThreading::RunOnGameThread([this, Texture]()
+		{
+			HeightMap = Texture;
+			_Invalidate();
+		});
+	});
 }

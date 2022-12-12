@@ -305,15 +305,24 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 
 	// Load the Data
 	GDALRasterBand  *elevationBand = dataset->GetRasterBand(1);
-	uint32 ReadResolution = 1024; // or this can be Width as well to get the full data
-	std::vector<float> data(ReadResolution * ReadResolution, 0.0f);
-   
-	// Read the entire file into the array (you can change the options to read only a portion
-	// of the file, or even scale it down if you want)
-     
+	const uint32 ReadResolution = Width; // or this can be Width as well to get the full data
+
+	TArray<float> RawHeightData;
+	RawHeightData.SetNumUninitialized(ReadResolution * ReadResolution);
+	
 	UE_LOG(LogTemp, Warning, TEXT(" Loading Image..."))
-	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, &data[0], ReadResolution, ReadResolution, GDT_Float32, 0, 0);
+	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, RawHeightData.GetData(), ReadResolution, ReadResolution, GDT_Float32, 0, 0);
 	UE_LOG(LogTemp, Warning, TEXT(" Image Loaded!"))
+
+	// Pass The Texture to Render
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		AGeoTiffLandscapeClip* GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip != nullptr)
+		{
+			GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
+		}
+	}
 	
 	return FReply::Handled();
 }

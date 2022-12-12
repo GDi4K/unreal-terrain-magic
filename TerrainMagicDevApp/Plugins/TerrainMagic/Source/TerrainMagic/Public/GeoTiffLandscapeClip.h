@@ -4,13 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "LandscapeClip.h"
-#include "GameFramework/Actor.h"
+#include "Utils/G16Texture.h"
 #include "GeoTiffLandscapeClip.generated.h"
 
 UCLASS()
 class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 {
 	GENERATED_BODY()
+
+	UPROPERTY()
+	UG16Texture* G16Texture = nullptr;
 
 public:
 	// Sets default values for this actor's properties
@@ -31,6 +34,7 @@ public:
 	virtual int GetZIndex() const override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
+	void ApplyRawHeightData(uint32 TextureWidth, TArray<float> HeightData);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;

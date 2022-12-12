@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "LandscapeClip.h"
+#include "Utils/G16Texture.h"
 #include "Utils/MapUtils.h"
 #include "EarthLandscapeClip.generated.h"
 
@@ -49,8 +50,8 @@ class TERRAINMAGIC_API AEarthLandscapeClip : public ALandscapeClip
 {
 	GENERATED_BODY()
 
-	// UPROPERTY()
-	// TArray<uint16> CurrentHeightData;
+	UPROPERTY()
+	UG16Texture* G16Texture = nullptr;
 	
 	TSharedPtr<FMapTileResponse> CurrentTileResponse = nullptr;
 	bool HasTextureReloaded = false;

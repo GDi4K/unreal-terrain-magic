@@ -62,6 +62,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	TEnumAsByte<EGeoTiffTargetTextureResolution> TargetResolution = GTRES_SOURCE;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	FLandscapeClipTileRepositioning TileRepositioning;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
 	UTexture* HeightMap = nullptr;

@@ -44,6 +44,21 @@ enum ELandscapeClipSoloAction
 	LCSA_UNSOLO = 2,
 };
 
+USTRUCT(BlueprintType)
+struct FLandscapeClipTileRepositioning
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	float Scale = 1.0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	FVector2D Panning = {0.0, 0.0};
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic", meta=(ToolTip="In Degrees", ClampMax=360, ClampMin=0))
+	float Rotation = 0.0f;
+};
+
 UCLASS(Abstract)
 class TERRAINMAGIC_API ALandscapeClip : public AActor
 {

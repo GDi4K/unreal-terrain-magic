@@ -51,6 +51,10 @@ TArray<FTerrainMagicMaterialParam> AGeoTiffLandscapeClip::GetMaterialParams()
 	MaterialParams.Push({"FadeSaturation", FadeSaturation});
 	MaterialParams.Push({"FadeMaskSpan", FadeMaskSpan});
 	MaterialParams.Push({"FadeUseRemapMin", static_cast<float>(FadeMinimum)});
+
+	MaterialParams.Push({"TileRepositionZoomScale", TileRepositioning.Scale});
+	MaterialParams.Push({"TileRepositionPanning", FVector(TileRepositioning.Panning, 0.0)});
+	MaterialParams.Push({"TileRepositionRotation", TileRepositioning.Rotation});
 	
 	return MaterialParams;
 }

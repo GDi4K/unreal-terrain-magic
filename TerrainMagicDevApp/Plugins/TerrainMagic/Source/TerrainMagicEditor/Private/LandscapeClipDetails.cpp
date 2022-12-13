@@ -271,6 +271,17 @@ FReply FLandscapeClipDetails::OnOpenMap()
 FReply FLandscapeClipDetails::OnImportGeoTiff()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Importing the GeoTiff file..."))
+
+	// Load the GeoTiffClip
+	AGeoTiffLandscapeClip* GeoTiffLandscapeClip = nullptr;
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip != nullptr)
+		{
+			break;
+		}
+	}
 		
 	GDALAllRegister();
 	GDALDataset  *dataset = (GDALDataset *) GDALOpen("C:\\Data\\Tmp\\terrain-files\\sample.tif", GA_ReadOnly);
@@ -305,7 +316,8 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 
 	// Load the Data
 	GDALRasterBand  *elevationBand = dataset->GetRasterBand(1);
-	const uint32 ReadResolution = Width; // or this can be Width as well to get the full data
+	const int32 TargetResolution = GeoTiffLandscapeClip->GetTargetResolution();
+	const uint32 ReadResolution = TargetResolution == -1? Width : TargetResolution;
 
 	TArray<float> RawHeightData;
 	RawHeightData.SetNumUninitialized(ReadResolution * ReadResolution);
@@ -314,15 +326,7 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, RawHeightData.GetData(), ReadResolution, ReadResolution, GDT_Float32, 0, 0);
 	UE_LOG(LogTemp, Warning, TEXT(" Image Loaded!"))
 
-	// Pass The Texture to Render
-	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
-	{
-		AGeoTiffLandscapeClip* GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
-		if (GeoTiffLandscapeClip != nullptr)
-		{
-			GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
-		}
-	}
+	GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
 	
 	return FReply::Handled();
 }

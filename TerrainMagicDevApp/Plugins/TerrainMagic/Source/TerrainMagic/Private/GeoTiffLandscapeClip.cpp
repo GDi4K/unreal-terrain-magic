@@ -5,6 +5,20 @@
 #include "Utils/TerrainMagicThreading.h"
 
 
+void AGeoTiffLandscapeClip::ReloadTextureIfNeeded()
+{
+	if (HasTextureReloaded)
+	{
+		return;
+	}
+	HasTextureReloaded = true;
+
+	if (IsValid(G16Texture))
+	{
+		HeightMap = G16Texture->LoadCachedTexture();
+	}
+}
+
 // Sets default values
 AGeoTiffLandscapeClip::AGeoTiffLandscapeClip()
 {
@@ -107,7 +121,7 @@ void AGeoTiffLandscapeClip::ApplyRawHeightData(uint32 TextureWidth, TArray<float
 		G16HeightData[Index] = (HeightData[Index] - MinValue) * HeightRangeRatio;
 	}
 
-	G16Texture->UpdateOnly(G16HeightData.GetData(), [this](UTexture2D* Texture)
+	G16Texture->UpdateAndCache(G16HeightData.GetData(), [this](UTexture2D* Texture)
 	{
 		FTerrainMagicThreading::RunOnGameThread([this, Texture]()
 		{
@@ -115,4 +129,40 @@ void AGeoTiffLandscapeClip::ApplyRawHeightData(uint32 TextureWidth, TArray<float
 			_Invalidate();
 		});
 	});
+}
+
+void AGeoTiffLandscapeClip::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	
+	if (GetWorld()->WorldType != EWorldType::Editor)
+	{
+		return;
+	}
+
+	ReloadTextureIfNeeded();
+}
+
+int32 AGeoTiffLandscapeClip::GetTargetResolution() const
+{
+	switch (TargetResolution)
+	{
+	case GTRES_SOURCE:
+		return -1;
+
+	case GTRES_1024:
+		return 1024;
+
+	case GTRES_2048:
+		return 2048;
+
+	case GTRES_4096:
+		return 4096;
+		
+	case GTRES_8192:
+		return 8192;
+		
+	default:
+		return -1;
+	}
 }

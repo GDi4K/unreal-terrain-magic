@@ -7,6 +7,16 @@
 #include "Utils/G16Texture.h"
 #include "GeoTiffLandscapeClip.generated.h"
 
+UENUM()
+enum EGeoTiffTargetTextureResolution
+{
+	GTRES_SOURCE = 0 UMETA(DisplayName="Source Resolution"),
+	GTRES_1024 = 1 UMETA(DisplayName="1024"),
+	GTRES_2048 = 2 UMETA(DisplayName="2048"),
+	GTRES_4096 = 3 UMETA(DisplayName="4096"),
+	GTRES_8192 = 4 UMETA(DisplayName="8192"),
+};
+
 UCLASS()
 class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 {
@@ -14,6 +24,9 @@ class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 
 	UPROPERTY()
 	UG16Texture* G16Texture = nullptr;
+
+	bool HasTextureReloaded = false;
+	void ReloadTextureIfNeeded();
 
 public:
 	// Sets default values for this actor's properties
@@ -35,6 +48,8 @@ public:
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
 	void ApplyRawHeightData(uint32 TextureWidth, TArray<float> HeightData);
+	virtual void Tick(float DeltaSeconds) override;
+	int32 GetTargetResolution() const;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;
@@ -46,6 +61,9 @@ public:
 	TEnumAsByte<ELandscapeClipBlendMode> BlendMode = LCB_COPY;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
+	TEnumAsByte<EGeoTiffTargetTextureResolution> TargetResolution = GTRES_SOURCE;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="01-General")
 	UTexture* HeightMap = nullptr;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Modify Height")

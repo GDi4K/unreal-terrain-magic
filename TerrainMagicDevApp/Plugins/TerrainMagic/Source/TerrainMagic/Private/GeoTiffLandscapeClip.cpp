@@ -55,6 +55,18 @@ TArray<FTerrainMagicMaterialParam> AGeoTiffLandscapeClip::GetMaterialParams()
 	MaterialParams.Push({"TileRepositionZoomScale", TileRepositioning.Scale});
 	MaterialParams.Push({"TileRepositionPanning", FVector(TileRepositioning.Panning, 0.0)});
 	MaterialParams.Push({"TileRepositionRotation", TileRepositioning.Rotation});
+
+	MaterialParams.Push({"BlurDistance", static_cast<float>(BlurDistance)});
+	MaterialParams.Push({"BlurDistanceSteps", static_cast<float>(BlurDistanceSteps)});
+	MaterialParams.Push({"BlurRadialSteps", static_cast<float>(BlurRadialSteps)});
+
+	MaterialParams.Push({"NoiseInfluence", NoiseInfluence});
+	MaterialParams.Push({"MountainNoiseScale", MountainNoiseScale});
+	MaterialParams.Push({"MountainNoiseDetails", MountainNoiseDetails});
+	MaterialParams.Push({"MountainNoiseContrast", MountainNoiseContrast});
+	MaterialParams.Push({"MountainNoiseSharpness", MountainNoiseSharpness});
+	MaterialParams.Push({"MountainNoiseSeed", MountainNoiseSeed});
+	MaterialParams.Push({"MountainNoisePosition", FVector(MountainNoisePosition.X, MountainNoisePosition.Y, 0)});
 	
 	return MaterialParams;
 }

@@ -2,6 +2,7 @@
 
 #include "LandscapeClipDetails.h"
 #include "BaseLandscapeClip.h"
+#include "DesktopPlatformModule.h"
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
@@ -16,6 +17,7 @@
 #include "Widgets/Notifications/SNotificationList.h"
 #include "gdal/gdal_priv.h"
 #include "gdal/cpl_conv.h"
+#include "IDesktopPlatform.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -149,7 +151,7 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 			+SGridPanel::Slot(0, 3).Padding(5, 2)
 			[
 				SNew(SButton)
-				.Text(LOCTEXT("Import", "Import"))
+				.Text(LOCTEXT("Import", "Import GeoTiff"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnImportGeoTiff)
 			];
 	}
@@ -272,6 +274,18 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Importing the GeoTiff file..."))
 
+	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+	constexpr uint32 SelectionFlag = 0; //A value of 0 represents single file selection while a value of 1 represents multiple file selection
+	TArray<FString> SelectedFiles;
+	DesktopPlatform->OpenFileDialog(nullptr, "Select the GeoTiff File", "", "", "", SelectionFlag, SelectedFiles);
+
+	if (SelectedFiles.Num() == 0)
+	{
+		return FReply::Handled();
+	}
+	
+	const char* SelectedFileName = StringCast<ANSICHAR>(ToCStr(SelectedFiles[0])).Get();
+	
 	// Load the GeoTiffClip
 	AGeoTiffLandscapeClip* GeoTiffLandscapeClip = nullptr;
 	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
@@ -284,19 +298,19 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 	}
 		
 	GDALAllRegister();
-	GDALDataset  *dataset = (GDALDataset *) GDALOpen("C:\\Data\\Tmp\\terrain-files\\sample.tif", GA_ReadOnly);
-
+	GDALDataset  *dataset = (GDALDataset *) GDALOpen(SelectedFileName, GA_ReadOnly);
+	
 	if( dataset == NULL ) {
-		UE_LOG(LogTemp, Warning, TEXT(" Failed to open the geotiff file"))
+		FNotificationInfo Info(LOCTEXT("Failed_To_Open_GeoTiff_File", "Failed to open the GeoTiff file."));
+		Info.ExpireDuration = 10.0f;
+		FSlateNotificationManager::Get().AddNotification(Info);
 		return FReply::Handled();
 	}
-
+	
 	// Get image metadata
-	uint32 Width = dataset->GetRasterXSize();
-	uint32 Height = dataset->GetRasterYSize();
-
-	UE_LOG(LogTemp, Warning, TEXT(" Width: %d, Height: %d"), Width, Height)
-
+	const uint32 Width = dataset->GetRasterXSize();
+	const uint32 Height = dataset->GetRasterYSize();
+	
 	// Get image resolution data
 	FVector2D Origin;
 	FVector2D PixelSize;
@@ -308,24 +322,22 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 		PixelSize.X = geoTransform[1];
 		PixelSize.Y = geoTransform[5];
 	} else {
-		UE_LOG(LogTemp, Warning, TEXT(" Failed to read geotransform info"))
-		exit(1);
+		FNotificationInfo Info(LOCTEXT("Unsupported GeoTiff File", "Unsupported GeoTiff file found!"));
+		Info.ExpireDuration = 10.0f;
+		FSlateNotificationManager::Get().AddNotification(Info);
+		return FReply::Handled();
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT(" Origin: %s, PixelSize: %s"), *Origin.ToString(), *PixelSize.ToString())
-
+	
 	// Load the Data
 	GDALRasterBand  *elevationBand = dataset->GetRasterBand(1);
 	const int32 TargetResolution = GeoTiffLandscapeClip->GetTargetResolution();
 	const uint32 ReadResolution = TargetResolution == -1? Width : TargetResolution;
-
+	
 	TArray<float> RawHeightData;
 	RawHeightData.SetNumUninitialized(ReadResolution * ReadResolution);
-	
-	UE_LOG(LogTemp, Warning, TEXT(" Loading Image..."))
 	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, RawHeightData.GetData(), ReadResolution, ReadResolution, GDT_Float32, 0, 0);
-	UE_LOG(LogTemp, Warning, TEXT(" Image Loaded!"))
 
+	// Pass the Data to the Clip
 	GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
 	
 	return FReply::Handled();

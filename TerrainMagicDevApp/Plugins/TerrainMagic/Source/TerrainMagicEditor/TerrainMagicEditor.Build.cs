@@ -25,7 +25,7 @@ public class TerrainMagicEditor : ModuleRules
 		{
 			"Core", "CoreUObject", "Engine",
 			"UnrealEd", "DetailCustomizations",
-			"PropertyEditor", "EditorStyle"
+			"PropertyEditor", "EditorStyle", "DesktopPlatform"
 		});
 		
 		PrivateDependencyModuleNames.AddRange(new []

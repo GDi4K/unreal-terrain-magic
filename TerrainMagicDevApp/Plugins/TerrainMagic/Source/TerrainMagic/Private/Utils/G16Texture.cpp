@@ -15,7 +15,9 @@ void UG16Texture::Init()
 	RuntimeTexture->SRGB = 0;
 	RuntimeTexture->AddToRoot();
 	RuntimeTexture->Filter = TF_Bilinear;
+#if WITH_EDITORONLY_DATA
 	RuntimeTexture->MipGenSettings = TMGS_NoMipmaps;
+#endif
 	
 	RuntimeTexture->UpdateResource();
 }

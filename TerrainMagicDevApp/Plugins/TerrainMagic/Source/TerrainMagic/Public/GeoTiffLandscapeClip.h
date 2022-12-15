@@ -91,7 +91,7 @@ public:
 	float FadeSaturation = 1.0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Fading")
-	TEnumAsByte<ELandscapeClipFadeMinimum> FadeMinimum = LCFM_ZERO;
+	TEnumAsByte<ELandscapeClipFadeMinimum> FadeMinimum = LCFM_REMAP_MIN;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General|Radial Blur")
 	int32 BlurDistance = 0;

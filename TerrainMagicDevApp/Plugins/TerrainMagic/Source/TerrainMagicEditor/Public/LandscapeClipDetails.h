@@ -24,9 +24,11 @@ public:
 	FReply OnClickTogglePreview();
 	FReply OnClickDownloadTile();
 	FReply OnOpenMap();
+	FReply OnImportGeoTiff();
 
 	// Helpers
 	TArray<ALandscapeClip*> GetSelectedLandscapeClips();
 	bool IsEarthLandscapeClip();
+	bool IsGeoTiffLandscapeClip();
 	bool IsBaseLandscapeClip();
 };

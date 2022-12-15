@@ -7,8 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="Add built-in noise layer for the earth landscape clip.">
+    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="Improve the workflow setup.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +17,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/G16Texture.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Public/GeoTiffLandscapeClip.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d532141a9e4a466493d8ab7d63b86b72176be0/2a/194519d3/ModuleRules.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,7 +96,20 @@
       <option name="presentableId" value="Default" />
       <updated>1669264677517</updated>
       <workItem from="1669264720120" duration="2168000" />
-      <workItem from="1669389580747" duration="2828000" />
+      <workItem from="1669389580747" duration="3686000" />
+      <workItem from="1670021870375" duration="3583000" />
+      <workItem from="1670026457171" duration="1119000" />
+      <workItem from="1670544116657" duration="3530000" />
+      <workItem from="1670596706532" duration="299000" />
+      <workItem from="1670597048138" duration="2719000" />
+      <workItem from="1670778500502" duration="1882000" />
+      <workItem from="1670780452059" duration="2201000" />
+      <workItem from="1670856584855" duration="4380000" />
+      <workItem from="1670918004237" duration="3638000" />
+      <workItem from="1671003432889" duration="917000" />
+      <workItem from="1671004388407" duration="3663000" />
+      <workItem from="1671010275541" duration="3717000" />
+      <workItem from="1671076704410" duration="2646000" />
     </task>
     <task id="LOCAL-00001" summary="Update the devapp.">
       <created>1669265451183</created>
@@ -108,7 +125,77 @@
       <option name="project" value="LOCAL" />
       <updated>1669392293686</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Load Gdal.">
+      <created>1670547673786</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670547673786</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Load DLLs properly.">
+      <created>1670599188812</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670599188812</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Load Image Data.">
+      <created>1670784559302</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670784559302</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Introduce the new G16Texture class.">
+      <created>1670857693486</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670857693486</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Implement basic texture import workflow.">
+      <created>1670860973897</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670860973897</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add support to set the target resolution for the texture.">
+      <created>1670919851765</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670919851765</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Implement Tile Repositioning support.">
+      <created>1670921091630</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1670921091630</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Allow to select the GeoTiff file via a file picker.">
+      <created>1671007101054</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671007101054</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Make sure BaseLandscapeClip always comes at first.">
+      <created>1671011588624</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671011588624</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Improve the workflow setup.">
+      <created>1671078526254</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671078526254</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,6 +218,16 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Update the devapp." />
     <MESSAGE value="Add built-in noise layer for the earth landscape clip." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add built-in noise layer for the earth landscape clip." />
+    <MESSAGE value="Load Gdal." />
+    <MESSAGE value="Load DLLs properly." />
+    <MESSAGE value="Load Image Data." />
+    <MESSAGE value="Introduce the new G16Texture class." />
+    <MESSAGE value="Implement basic texture import workflow." />
+    <MESSAGE value="Add support to set the target resolution for the texture." />
+    <MESSAGE value="Implement Tile Repositioning support." />
+    <MESSAGE value="Allow to select the GeoTiff file via a file picker." />
+    <MESSAGE value="Make sure BaseLandscapeClip always comes at first." />
+    <MESSAGE value="Improve the workflow setup." />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve the workflow setup." />
   </component>
 </project>

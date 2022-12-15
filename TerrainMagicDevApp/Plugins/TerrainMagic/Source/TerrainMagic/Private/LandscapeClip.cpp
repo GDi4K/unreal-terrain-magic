@@ -58,6 +58,14 @@ void ALandscapeClip::Tick(float DeltaTime)
 	{
 		SetZIndex(ATerrainMagicManager::EnsureManager(GetWorld())->GetNextLandscapeClipZIndex());
 	}
+
+	// This happens when we add the Landscape Clip to the actor the very first time
+	// In this case, make sure trigger for invalidate
+	// Then we will get those data eventually.
+	if (LandscapeScale.X == 0 && LandscapeScale.Y == 0)
+	{
+		_Invalidate();
+	}
 	
 	// We only support Z axis based rotation only
 	FVector CurrentRotation = GetActorRotation().Euler();

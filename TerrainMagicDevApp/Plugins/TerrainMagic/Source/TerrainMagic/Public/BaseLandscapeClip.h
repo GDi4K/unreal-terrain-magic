@@ -50,8 +50,8 @@ public:
 	int ZIndex = -1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	TEnumAsByte<EBaseLandscapeClipBaseValue> BaseValuePreset = BLCBV_ZERO;
+	TEnumAsByte<EBaseLandscapeClipBaseValue> BaseValuePreset = BLCBV_ABSOLUTE_MINIMUM;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
-	float BaseValue = 0.0;
+	float BaseValue = -32768.0;
 };

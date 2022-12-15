@@ -1,12 +1,13 @@
 ﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
 #include "LandscapeClipDetails.h"
-
 #include "BaseLandscapeClip.h"
+#include "DesktopPlatformModule.h"
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
 #include "EarthLandscapeClip.h"
+#include "GeoTiffLandscapeClip.h"
 #include "IDetailGroup.h"
 #include "LandscapeClip.h"
 #include "TerrainMagicManager.h"
@@ -14,6 +15,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/Layout/SGridPanel.h"
 #include "Widgets/Notifications/SNotificationList.h"
+#include "gdal/gdal_priv.h"
+#include "gdal/cpl_conv.h"
+#include "IDesktopPlatform.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -107,6 +111,48 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 				.Text(LOCTEXT("DownloadButton", "Download Tile"))
 				.ToolTipText(LOCTEXT("DownloadButtonTooltip", "Use ALT+D"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickDownloadTile)
+			];
+	}
+
+	if (IsGeoTiffLandscapeClip())
+	{
+		WidgetRow = SNew(SGridPanel)
+			+SGridPanel::Slot(0, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ToggleOutlineButton", "Toggle Outline"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleOutline)
+			]
+			+SGridPanel::Slot(1, 0).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("MatchLandscapeSizeButton", "Match Landscape Size"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickMatchLandscapeSize)
+			]
+			+SGridPanel::Slot(0, 1).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("TogglePreviewButton", "Toggle Preview"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickTogglePreview)
+			]
+			+SGridPanel::Slot(1, 1).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ToggleSoloButton", "ToggleSolo"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickToggleSolo)
+			]
+			+SGridPanel::Slot(0, 2).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("InvalidateButton", "Invalidate"))
+				.ToolTipText(LOCTEXT("InvalidateButtonToolTip", "Use ALT+Q or Editor Toolbar"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnClickInvalidate)
+			]
+			+SGridPanel::Slot(0, 3).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("Import", "Import GeoTiff"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnImportGeoTiff)
 			];
 	}
 
@@ -224,6 +270,79 @@ FReply FLandscapeClipDetails::OnOpenMap()
 	return FReply::Handled();
 }
 
+FReply FLandscapeClipDetails::OnImportGeoTiff()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Importing the GeoTiff file..."))
+
+	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+	constexpr uint32 SelectionFlag = 0; //A value of 0 represents single file selection while a value of 1 represents multiple file selection
+	TArray<FString> SelectedFiles;
+	DesktopPlatform->OpenFileDialog(nullptr, "Select the GeoTiff File", "", "", "", SelectionFlag, SelectedFiles);
+
+	if (SelectedFiles.Num() == 0)
+	{
+		return FReply::Handled();
+	}
+	
+	const char* SelectedFileName = StringCast<ANSICHAR>(ToCStr(SelectedFiles[0])).Get();
+	
+	// Load the GeoTiffClip
+	AGeoTiffLandscapeClip* GeoTiffLandscapeClip = nullptr;
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip != nullptr)
+		{
+			break;
+		}
+	}
+		
+	GDALAllRegister();
+	GDALDataset  *dataset = (GDALDataset *) GDALOpen(SelectedFileName, GA_ReadOnly);
+	
+	if( dataset == NULL ) {
+		FNotificationInfo Info(LOCTEXT("Failed_To_Open_GeoTiff_File", "Failed to open the GeoTiff file."));
+		Info.ExpireDuration = 10.0f;
+		FSlateNotificationManager::Get().AddNotification(Info);
+		return FReply::Handled();
+	}
+	
+	// Get image metadata
+	const uint32 Width = dataset->GetRasterXSize();
+	const uint32 Height = dataset->GetRasterYSize();
+	
+	// Get image resolution data
+	FVector2D Origin;
+	FVector2D PixelSize;
+    
+	double geoTransform[6];
+	if (dataset->GetGeoTransform(geoTransform) == CE_None ) {
+		Origin.X = geoTransform[0];
+		Origin.Y = geoTransform[3];
+		PixelSize.X = geoTransform[1];
+		PixelSize.Y = geoTransform[5];
+	} else {
+		FNotificationInfo Info(LOCTEXT("Unsupported GeoTiff File", "Unsupported GeoTiff file found!"));
+		Info.ExpireDuration = 10.0f;
+		FSlateNotificationManager::Get().AddNotification(Info);
+		return FReply::Handled();
+	}
+	
+	// Load the Data
+	GDALRasterBand  *elevationBand = dataset->GetRasterBand(1);
+	const int32 TargetResolution = GeoTiffLandscapeClip->GetTargetResolution();
+	const uint32 ReadResolution = TargetResolution == -1? Width : TargetResolution;
+	
+	TArray<float> RawHeightData;
+	RawHeightData.SetNumUninitialized(ReadResolution * ReadResolution);
+	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, RawHeightData.GetData(), ReadResolution, ReadResolution, GDT_Float32, 0, 0);
+
+	// Pass the Data to the Clip
+	GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
+	
+	return FReply::Handled();
+}
+
 TArray<ALandscapeClip*> FLandscapeClipDetails::GetSelectedLandscapeClips()
 {
 	TArray<ALandscapeClip*> SelectedLandscapeClips;
@@ -259,6 +378,26 @@ bool FLandscapeClipDetails::IsEarthLandscapeClip()
 	{
 		const AEarthLandscapeClip* EarthLandscapeClip = Cast<AEarthLandscapeClip>(Clip);
 		if (EarthLandscapeClip == nullptr)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool FLandscapeClipDetails::IsGeoTiffLandscapeClip()
+{
+	const TArray<ALandscapeClip*> SelectedClips = GetSelectedLandscapeClips();
+	if (SelectedClips.Num() == 0)
+	{
+		return false;
+	}
+
+	for (ALandscapeClip* Clip: SelectedClips)
+	{
+		const AGeoTiffLandscapeClip* GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip == nullptr)
 		{
 			return false;
 		}

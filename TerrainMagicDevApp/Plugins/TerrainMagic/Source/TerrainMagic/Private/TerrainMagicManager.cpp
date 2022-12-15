@@ -2,6 +2,7 @@
 
 #include "TerrainMagicManager.h"
 
+#include "BaseLandscapeClip.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine.h"
@@ -508,16 +509,30 @@ TArray<ALandscapeClip*> ATerrainMagicManager::GetAllLandscapeClips() const
 	TArray<ALandscapeClip*> LandscapeClips;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALandscapeClip::StaticClass(), Actors);
 
+	ALandscapeClip* BaseLandscapeClip = nullptr;
+
 	for (AActor* ClipActor: Actors)
 	{
 		ALandscapeClip* LandscapeClip = Cast<ALandscapeClip>(ClipActor);
 		check(LandscapeClip)
-		LandscapeClips.Add(LandscapeClip);
+		ABaseLandscapeClip* LandscapeClipAsBaseClip = Cast<ABaseLandscapeClip>(LandscapeClip);
+		if (IsValid(LandscapeClipAsBaseClip))
+		{
+			BaseLandscapeClip = LandscapeClipAsBaseClip;
+		} else
+		{
+			LandscapeClips.Add(LandscapeClip);
+		}
 	}
 
 	LandscapeClips.Sort([](const ALandscapeClip& ip1, const ALandscapeClip& ip2) {
 		return  ip1.GetZIndex() < ip2.GetZIndex();
 	});
+
+	if(IsValid(BaseLandscapeClip))
+	{
+		LandscapeClips.Insert(BaseLandscapeClip, 0);
+	}
 
 	return LandscapeClips;
 }

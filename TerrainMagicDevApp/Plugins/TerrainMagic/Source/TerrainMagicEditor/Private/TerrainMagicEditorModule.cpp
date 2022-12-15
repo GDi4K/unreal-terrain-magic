@@ -10,9 +10,23 @@
 #include "LevelEditor.h"
 #include "TerrainMagicCommands.h"
 #include "TerrainMagicStyles.h"
+#include "Interfaces/IPluginManager.h"
+
+void LoadDLLs()
+{
+	FString BaseDir = IPluginManager::Get().FindPlugin("TerrainMagic")->GetBaseDir();
+
+	auto dllPath = FPaths::Combine(*BaseDir, TEXT("Source\\TerrainMagicEditor\\ThirdParty\\geos_c.dll"));
+	FPlatformProcess::GetDllHandle(*dllPath);
+
+	dllPath = FPaths::Combine(*BaseDir, TEXT("Source\\TerrainMagicEditor\\ThirdParty\\gdal304.dll"));
+	FPlatformProcess::GetDllHandle(*dllPath);
+}
 
 void FTerrainMagicEditorModule::StartupModule()
 {
+	LoadDLLs();
+	
 	FPropertyEditorModule& PropertyModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
 
 	// Initialize Styles & Commands

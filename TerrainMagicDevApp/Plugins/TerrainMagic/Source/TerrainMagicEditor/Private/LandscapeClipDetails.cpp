@@ -18,6 +18,8 @@
 #include "gdal/gdal_priv.h"
 #include "gdal/cpl_conv.h"
 #include "IDesktopPlatform.h"
+#include "Landscape.h"
+#include "Utils/TerrainMagicThreading.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -153,6 +155,13 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 				SNew(SButton)
 				.Text(LOCTEXT("Import", "Import GeoTiff"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnImportGeoTiff)
+			]
+			+SGridPanel::Slot(1, 3).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("UpdateLandscapeSize", "Update Landscape Size"))
+				.ToolTipText(LOCTEXT("UpdateLandscapeSizeToolTip", "Update the landscape scale to match the real size of the terrain"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnUpdateLandscapeSize)
 			];
 	}
 
@@ -339,6 +348,29 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 
 	// Pass the Data to the Clip
 	GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
+	
+	return FReply::Handled();
+}
+
+FReply FLandscapeClipDetails::OnUpdateLandscapeSize()
+{
+	// Load the GeoTiffClip
+	AGeoTiffLandscapeClip* GeoTiffLandscapeClip = nullptr;
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip != nullptr)
+		{
+			break;
+		}
+	}
+
+	const FVector RealSize = GeoTiffLandscapeClip->GetUpdatedLandscapeSize();
+	ALandscape* Landscape = Cast<ALandscape>(UGameplayStatics::GetActorOfClass(GeoTiffLandscapeClip->GetWorld(), ALandscape::StaticClass()));
+	Landscape->SetActorScale3D(RealSize);
+
+	GeoTiffLandscapeClip->_Invalidate();
+	GeoTiffLandscapeClip->_MatchLandscapeSizeDefferred(2);
 	
 	return FReply::Handled();
 }

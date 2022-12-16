@@ -69,6 +69,9 @@ class TERRAINMAGIC_API ALandscapeClip : public AActor
 	UPROPERTY()
 	float InitialZPosition = -12424.0;
 
+	bool RunMatchLandscapeSizeActive = false;
+	FDateTime RunMatchLandscapeSizeAt = 0;
+
 public:
 	// Sets default values for this actor's properties
 	ALandscapeClip();
@@ -104,6 +107,7 @@ public:
 	void _ToggleSolo();
 	void _TogglePreview();
 	void _MatchLandscapeSize();
+	void _MatchLandscapeSizeDefferred(float Secs);
 
 	UPROPERTY()
 	bool bShowOutline = true;

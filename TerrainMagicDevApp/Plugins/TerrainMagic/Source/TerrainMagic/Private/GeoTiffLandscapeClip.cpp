@@ -137,10 +137,11 @@ void AGeoTiffLandscapeClip::ApplyRawHeightData(uint32 TextureWidth, TArray<float
 		G16HeightData[Index] = (HeightData[Index] - MinValue) * HeightRangeRatio;
 	}
 
-	G16Texture->UpdateAndCache(G16HeightData.GetData(), [this](UTexture2D* Texture)
+	G16Texture->UpdateAndCache(G16HeightData.GetData(), [this, Range](UTexture2D* Texture)
 	{
-		FTerrainMagicThreading::RunOnGameThread([this, Texture]()
+		FTerrainMagicThreading::RunOnGameThread([this, Range, Texture]()
 		{
+			RealHeightRange = Range;
 			HeightMap = Texture;
 			_Invalidate();
 		});
@@ -181,4 +182,11 @@ int32 AGeoTiffLandscapeClip::GetTargetResolution() const
 	default:
 		return -1;
 	}
+}
+
+FVector AGeoTiffLandscapeClip::GetUpdatedLandscapeSize() const
+{
+	float WidthScale = G16Texture->GetTextureWidth() / LandscapeSize.X * 100;
+	float HeightScale = RealHeightRange / 512 * 100;
+	return {WidthScale, WidthScale, HeightScale};
 }

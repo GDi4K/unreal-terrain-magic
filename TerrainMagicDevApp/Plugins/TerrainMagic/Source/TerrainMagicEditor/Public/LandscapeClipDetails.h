@@ -25,6 +25,7 @@ public:
 	FReply OnClickDownloadTile();
 	FReply OnOpenMap();
 	FReply OnImportGeoTiff();
+	FReply OnUpdateLandscapeSize();
 
 	// Helpers
 	TArray<ALandscapeClip*> GetSelectedLandscapeClips();

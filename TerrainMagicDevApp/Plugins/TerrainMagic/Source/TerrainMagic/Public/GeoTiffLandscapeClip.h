@@ -25,6 +25,10 @@ class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 	UPROPERTY()
 	UG16Texture* G16Texture = nullptr;
 
+	// This keeps, the real height range in meters
+	UPROPERTY()
+	float RealHeightRange = 0.0f;
+
 	bool HasTextureReloaded = false;
 	void ReloadTextureIfNeeded();
 
@@ -50,6 +54,7 @@ public:
 	void ApplyRawHeightData(uint32 TextureWidth, TArray<float> HeightData);
 	virtual void Tick(float DeltaSeconds) override;
 	int32 GetTargetResolution() const;
+	FVector GetUpdatedLandscapeSize() const;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;

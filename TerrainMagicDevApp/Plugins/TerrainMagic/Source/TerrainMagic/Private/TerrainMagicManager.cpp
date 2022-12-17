@@ -213,8 +213,8 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 		const FVector2D LandscapeMid = Landscape2DLocation + LandscapeSizeInCm/2.0;
 		
 		PreviewMeshComponent->SetRelativeScale3D(FVector(
-			LandscapeSize.X,
-			LandscapeSize.Y,
+			LandscapeSizeInCm.X / 100.0f,
+			LandscapeSizeInCm.Y / 100.0f,
 			0.1
 		));
 		PreviewMeshComponent->SetRelativeLocation({

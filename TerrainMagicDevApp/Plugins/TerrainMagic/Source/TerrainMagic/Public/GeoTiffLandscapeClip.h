@@ -17,14 +17,21 @@ enum EGeoTiffTargetTextureResolution
 	GTRES_8192 = 4 UMETA(DisplayName="8192"),
 };
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FGeoTiffInfo
 {
 	GENERATED_BODY()
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
 	FIntPoint TextureResolution;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
 	FVector2D Origin;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
 	FVector2D PixelToMetersRatio;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
 	float Range;
 };
 
@@ -35,8 +42,7 @@ class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 
 	UPROPERTY()
 	UG16Texture* G16Texture = nullptr;
-
-	// This keeps, the real height range in meters
+	
 	UPROPERTY()
 	FGeoTiffInfo GeoTiffInfo;
 

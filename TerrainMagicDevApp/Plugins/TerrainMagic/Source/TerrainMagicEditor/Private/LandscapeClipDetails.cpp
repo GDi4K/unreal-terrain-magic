@@ -162,6 +162,13 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 				.Text(LOCTEXT("UpdateLandscapeSize", "Update Landscape Size"))
 				.ToolTipText(LOCTEXT("UpdateLandscapeSizeToolTip", "Update the landscape scale to match the real size of the terrain"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnUpdateLandscapeSize)
+			]
+			+SGridPanel::Slot(2, 3).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ResetLandscapeSize", "Reset"))
+				.ToolTipText(LOCTEXT("ResetLandscapeSizeTooltip", "Reset the landscape scale back to default settings"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnResetLandscapeSize)
 			];
 	}
 
@@ -369,6 +376,27 @@ FReply FLandscapeClipDetails::OnUpdateLandscapeSize()
 	const FVector RealSize = GeoTiffLandscapeClip->GetUpdatedLandscapeSize();
 	ALandscape* Landscape = Cast<ALandscape>(UGameplayStatics::GetActorOfClass(GeoTiffLandscapeClip->GetWorld(), ALandscape::StaticClass()));
 	Landscape->SetActorScale3D(RealSize);
+
+	GeoTiffLandscapeClip->_Invalidate();
+	GeoTiffLandscapeClip->_MatchLandscapeSizeDefferred(2);
+	
+	return FReply::Handled();
+}
+
+FReply FLandscapeClipDetails::OnResetLandscapeSize()
+{
+	AGeoTiffLandscapeClip* GeoTiffLandscapeClip = nullptr;
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip != nullptr)
+		{
+			break;
+		}
+	}
+	
+	ALandscape* Landscape = Cast<ALandscape>(UGameplayStatics::GetActorOfClass(GeoTiffLandscapeClip->GetWorld(), ALandscape::StaticClass()));
+	Landscape->SetActorScale3D({100.0f, 100.0f, 100.f});
 
 	GeoTiffLandscapeClip->_Invalidate();
 	GeoTiffLandscapeClip->_MatchLandscapeSizeDefferred(2);

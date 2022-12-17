@@ -32,7 +32,7 @@ public class TerrainMagicEditor : ModuleRules
 		{
 			"Slate", "SlateCore", "TerrainMagic",
 			"InputCore", "RenderCore",
-			"ToolMenus", "Projects", "EditorStyle", "Landscape"
+			"ToolMenus", "Projects", "EditorStyle", "Landscape",
 #if UE_5_0_OR_LATER
                 "EditorFramework",
 #endif

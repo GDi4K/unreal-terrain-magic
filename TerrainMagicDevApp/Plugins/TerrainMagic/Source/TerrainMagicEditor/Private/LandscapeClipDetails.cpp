@@ -319,17 +319,17 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 	// Get image metadata
 	const uint32 Width = dataset->GetRasterXSize();
 	const uint32 Height = dataset->GetRasterYSize();
+
+	FGeoTiffInfo GeoTiffInfo = {};
+	GeoTiffInfo.TextureResolution.X = Width;
+	GeoTiffInfo.TextureResolution.Y = Height;
 	
-	// Get image resolution data
-	FVector2D Origin;
-	FVector2D PixelSize;
-    
 	double geoTransform[6];
 	if (dataset->GetGeoTransform(geoTransform) == CE_None ) {
-		Origin.X = geoTransform[0];
-		Origin.Y = geoTransform[3];
-		PixelSize.X = geoTransform[1];
-		PixelSize.Y = geoTransform[5];
+		GeoTiffInfo.Origin.X = geoTransform[0];
+		GeoTiffInfo.Origin.Y = geoTransform[3];
+		GeoTiffInfo.PixelToMetersRatio.X = geoTransform[1];
+		GeoTiffInfo.PixelToMetersRatio.Y = geoTransform[5];
 	} else {
 		FNotificationInfo Info(LOCTEXT("Unsupported GeoTiff File", "Unsupported GeoTiff file found!"));
 		Info.ExpireDuration = 10.0f;
@@ -347,7 +347,8 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, RawHeightData.GetData(), ReadResolution, ReadResolution, GDT_Float32, 0, 0);
 
 	// Pass the Data to the Clip
-	GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
+	
+	GeoTiffLandscapeClip->ApplyRawHeightData(GeoTiffInfo, ReadResolution, RawHeightData);
 	
 	return FReply::Handled();
 }

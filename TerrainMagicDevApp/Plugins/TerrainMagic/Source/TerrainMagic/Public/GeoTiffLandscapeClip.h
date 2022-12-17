@@ -17,6 +17,17 @@ enum EGeoTiffTargetTextureResolution
 	GTRES_8192 = 4 UMETA(DisplayName="8192"),
 };
 
+USTRUCT()
+struct FGeoTiffInfo
+{
+	GENERATED_BODY()
+
+	FIntPoint TextureResolution;
+	FVector2D Origin;
+	FVector2D PixelToMetersRatio;
+	float Range;
+};
+
 UCLASS()
 class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 {
@@ -27,7 +38,7 @@ class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 
 	// This keeps, the real height range in meters
 	UPROPERTY()
-	float RealHeightRange = 0.0f;
+	FGeoTiffInfo GeoTiffInfo;
 
 	bool HasTextureReloaded = false;
 	void ReloadTextureIfNeeded();
@@ -51,7 +62,7 @@ public:
 	virtual int GetZIndex() const override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
-	void ApplyRawHeightData(uint32 TextureWidth, TArray<float> HeightData);
+	void ApplyRawHeightData(FGeoTiffInfo GeoTiffInfo, uint32 TextureWidth, TArray<float> HeightData);
 	virtual void Tick(float DeltaSeconds) override;
 	int32 GetTargetResolution() const;
 	FVector GetUpdatedLandscapeSize() const;

@@ -116,7 +116,7 @@ TArray<FLandscapeClipPaintLayerSettings> AGeoTiffLandscapeClip::GetPaintLayerSet
 	return PaintLayerSettings;
 }
 
-void AGeoTiffLandscapeClip::ApplyRawHeightData(uint32 TextureWidth, TArray<float> HeightData)
+void AGeoTiffLandscapeClip::ApplyRawHeightData(FGeoTiffInfo SourceGeoTiffInfo, uint32 TextureWidth, TArray<float> HeightData)
 {
 	if (!IsValid(G16Texture) || G16Texture->GetTextureWidth() != TextureWidth)
 	{
@@ -129,6 +129,8 @@ void AGeoTiffLandscapeClip::ApplyRawHeightData(uint32 TextureWidth, TArray<float
 	const int32 Max16BitValue = FMath::Pow(2.0, 16.0) - 1;
 	const float HeightRangeRatio = Max16BitValue / Range;
 
+	SourceGeoTiffInfo.Range = Range;
+
 	TArray<uint16> G16HeightData;
 	G16HeightData.SetNumUninitialized(TextureWidth * TextureWidth);
 
@@ -137,11 +139,11 @@ void AGeoTiffLandscapeClip::ApplyRawHeightData(uint32 TextureWidth, TArray<float
 		G16HeightData[Index] = (HeightData[Index] - MinValue) * HeightRangeRatio;
 	}
 
-	G16Texture->UpdateAndCache(G16HeightData.GetData(), [this, Range](UTexture2D* Texture)
+	G16Texture->UpdateAndCache(G16HeightData.GetData(), [this, SourceGeoTiffInfo](UTexture2D* Texture)
 	{
-		FTerrainMagicThreading::RunOnGameThread([this, Range, Texture]()
+		FTerrainMagicThreading::RunOnGameThread([this, SourceGeoTiffInfo, Texture]()
 		{
-			RealHeightRange = Range;
+			GeoTiffInfo = SourceGeoTiffInfo;
 			HeightMap = Texture;
 			_Invalidate();
 		});
@@ -186,7 +188,8 @@ int32 AGeoTiffLandscapeClip::GetTargetResolution() const
 
 FVector AGeoTiffLandscapeClip::GetUpdatedLandscapeSize() const
 {
-	float WidthScale = G16Texture->GetTextureWidth() / LandscapeSize.X * 100;
-	float HeightScale = RealHeightRange / 512 * 100;
+	const float GeoTiffWidth = GeoTiffInfo.TextureResolution.X * GeoTiffInfo.PixelToMetersRatio.X;
+	float WidthScale = GeoTiffWidth / LandscapeSize.X * 100;
+	float HeightScale = GeoTiffInfo.Range / 512 * 100;
 	return {WidthScale, WidthScale, HeightScale};
 }

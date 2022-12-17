@@ -17,6 +17,24 @@ enum EGeoTiffTargetTextureResolution
 	GTRES_8192 = 4 UMETA(DisplayName="8192"),
 };
 
+USTRUCT(BlueprintType)
+struct FGeoTiffInfo
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	FIntPoint TextureResolution;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	FVector2D Origin;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	FVector2D PixelToMetersRatio;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TerrainMagic")
+	float Range;
+};
+
 UCLASS()
 class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 {
@@ -24,6 +42,9 @@ class TERRAINMAGIC_API AGeoTiffLandscapeClip : public ALandscapeClip
 
 	UPROPERTY()
 	UG16Texture* G16Texture = nullptr;
+	
+	UPROPERTY()
+	FGeoTiffInfo GeoTiffInfo;
 
 	bool HasTextureReloaded = false;
 	void ReloadTextureIfNeeded();
@@ -47,9 +68,10 @@ public:
 	virtual int GetZIndex() const override;
 	virtual UTexture* GetHeightMap() const override;
 	virtual TArray<FLandscapeClipPaintLayerSettings> GetPaintLayerSettings() const override;
-	void ApplyRawHeightData(uint32 TextureWidth, TArray<float> HeightData);
+	void ApplyRawHeightData(FGeoTiffInfo GeoTiffInfo, uint32 TextureWidth, TArray<float> HeightData);
 	virtual void Tick(float DeltaSeconds) override;
 	int32 GetTargetResolution() const;
+	FVector GetUpdatedLandscapeSize() const;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="01-General")
 	bool bEnabled = true;

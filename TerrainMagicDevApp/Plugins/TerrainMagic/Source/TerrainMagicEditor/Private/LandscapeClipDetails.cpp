@@ -18,6 +18,8 @@
 #include "gdal/gdal_priv.h"
 #include "gdal/cpl_conv.h"
 #include "IDesktopPlatform.h"
+#include "Landscape.h"
+#include "Utils/TerrainMagicThreading.h"
 
 #define LOCTEXT_NAMESPACE "LandscapeClipDetails"
 
@@ -153,6 +155,20 @@ void FLandscapeClipDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder
 				SNew(SButton)
 				.Text(LOCTEXT("Import", "Import GeoTiff"))
 				.OnClicked_Raw(this, &FLandscapeClipDetails::OnImportGeoTiff)
+			]
+			+SGridPanel::Slot(1, 3).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("UpdateLandscapeSize", "Update Landscape Size"))
+				.ToolTipText(LOCTEXT("UpdateLandscapeSizeToolTip", "Update the landscape scale to match the real size of the terrain"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnUpdateLandscapeSize)
+			]
+			+SGridPanel::Slot(2, 3).Padding(5, 2)
+			[
+				SNew(SButton)
+				.Text(LOCTEXT("ResetLandscapeSize", "Reset"))
+				.ToolTipText(LOCTEXT("ResetLandscapeSizeTooltip", "Reset the landscape scale back to default settings"))
+				.OnClicked_Raw(this, &FLandscapeClipDetails::OnResetLandscapeSize)
 			];
 	}
 
@@ -310,17 +326,17 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 	// Get image metadata
 	const uint32 Width = dataset->GetRasterXSize();
 	const uint32 Height = dataset->GetRasterYSize();
+
+	FGeoTiffInfo GeoTiffInfo = {};
+	GeoTiffInfo.TextureResolution.X = Width;
+	GeoTiffInfo.TextureResolution.Y = Height;
 	
-	// Get image resolution data
-	FVector2D Origin;
-	FVector2D PixelSize;
-    
 	double geoTransform[6];
 	if (dataset->GetGeoTransform(geoTransform) == CE_None ) {
-		Origin.X = geoTransform[0];
-		Origin.Y = geoTransform[3];
-		PixelSize.X = geoTransform[1];
-		PixelSize.Y = geoTransform[5];
+		GeoTiffInfo.Origin.X = geoTransform[0];
+		GeoTiffInfo.Origin.Y = geoTransform[3];
+		GeoTiffInfo.PixelToMetersRatio.X = geoTransform[1];
+		GeoTiffInfo.PixelToMetersRatio.Y = geoTransform[5];
 	} else {
 		FNotificationInfo Info(LOCTEXT("Unsupported GeoTiff File", "Unsupported GeoTiff file found!"));
 		Info.ExpireDuration = 10.0f;
@@ -338,7 +354,52 @@ FReply FLandscapeClipDetails::OnImportGeoTiff()
 	elevationBand->RasterIO(GF_Read, 0, 0, Width, Height, RawHeightData.GetData(), ReadResolution, ReadResolution, GDT_Float32, 0, 0);
 
 	// Pass the Data to the Clip
-	GeoTiffLandscapeClip->ApplyRawHeightData(ReadResolution, RawHeightData);
+	
+	GeoTiffLandscapeClip->ApplyRawHeightData(GeoTiffInfo, ReadResolution, RawHeightData);
+	
+	return FReply::Handled();
+}
+
+FReply FLandscapeClipDetails::OnUpdateLandscapeSize()
+{
+	// Load the GeoTiffClip
+	AGeoTiffLandscapeClip* GeoTiffLandscapeClip = nullptr;
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip != nullptr)
+		{
+			break;
+		}
+	}
+
+	const FVector RealSize = GeoTiffLandscapeClip->GetUpdatedLandscapeSize();
+	ALandscape* Landscape = Cast<ALandscape>(UGameplayStatics::GetActorOfClass(GeoTiffLandscapeClip->GetWorld(), ALandscape::StaticClass()));
+	Landscape->SetActorScale3D(RealSize);
+
+	GeoTiffLandscapeClip->_Invalidate();
+	GeoTiffLandscapeClip->_MatchLandscapeSizeDefferred(2);
+	
+	return FReply::Handled();
+}
+
+FReply FLandscapeClipDetails::OnResetLandscapeSize()
+{
+	AGeoTiffLandscapeClip* GeoTiffLandscapeClip = nullptr;
+	for (ALandscapeClip* Clip: GetSelectedLandscapeClips())
+	{
+		GeoTiffLandscapeClip = Cast<AGeoTiffLandscapeClip>(Clip);
+		if (GeoTiffLandscapeClip != nullptr)
+		{
+			break;
+		}
+	}
+	
+	ALandscape* Landscape = Cast<ALandscape>(UGameplayStatics::GetActorOfClass(GeoTiffLandscapeClip->GetWorld(), ALandscape::StaticClass()));
+	Landscape->SetActorScale3D({100.0f, 100.0f, 100.f});
+
+	GeoTiffLandscapeClip->_Invalidate();
+	GeoTiffLandscapeClip->_MatchLandscapeSizeDefferred(2);
 	
 	return FReply::Handled();
 }

@@ -53,6 +53,12 @@ void ALandscapeClip::Tick(float DeltaTime)
 		return;
 	}
 
+	if (RunMatchLandscapeSizeActive && RunMatchLandscapeSizeAt < FDateTime::Now())
+	{
+		_MatchLandscapeSize();
+		RunMatchLandscapeSizeActive = false;
+	}
+
 	// Initialize the Z-Index
 	if (GetZIndex() < 0)
 	{
@@ -174,6 +180,12 @@ void ALandscapeClip::_MatchLandscapeSize()
 	SetActorRotation(FRotator::MakeFromEuler(FVector(0, 0 , 0)));
 	SetClipBaseSize(FVector2D(LandscapeSize.X, LandscapeSize.Y));
 	_Invalidate();
+}
+
+void ALandscapeClip::_MatchLandscapeSizeDefferred(float Secs)
+{
+	RunMatchLandscapeSizeActive = true;
+	RunMatchLandscapeSizeAt = FDateTime::Now() + FTimespan::FromSeconds(Secs);
 }
 
 void ALandscapeClip::ApplyMaterialParamsForHeight(TArray<FTerrainMagicMaterialParam> Params)

@@ -7,13 +7,202 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="">
+    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="Fix TerrainMagic preview mode with GeoTiff UpdateLandscapeSize too.">
+      <change afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Content/Core/Meshes/SM_TM_PreviewMesh_1000.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/GeoTiff/GeoTiffLandscapeClip_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/GeoTiff/GeoTiffLandscapeClip_2.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/projectSettingsUpdater.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.idea/.idea.TerrainMagicDevAppUE5/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/.vsconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/DefaultEditor.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/DefaultEditorPerProjectUserSettings.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/DefaultEngine.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/DefaultGame.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/DefaultInput.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Config/HoloLens/HoloLensEngine.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Geometry/Meshes/1M_Cube.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Geometry/Meshes/1M_Cube_Chamfer.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Geometry/Meshes/CubeMaterial.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Geometry/Meshes/TemplateFloor.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Main.umap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPersonIdle.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPersonJump_End.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPersonJump_Loop.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPersonJump_Start.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPersonRun.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPersonWalk.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPerson_AnimBP.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPerson_IdleRun_2D.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Animations/ThirdPerson_Jump.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MI_Female_Body.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/M_Male_Body.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/M_UE4Man_ChestLogo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/ML_GlossyBlack_Latex_UE4.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/ML_Plastic_Shiny_Beige.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/ML_Plastic_Shiny_Beige_LOGO.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/ML_SoftMetal_UE4.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/T_ML_Aluminum01.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/T_ML_Aluminum01_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/T_ML_Rubber_Blue_01_D.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Materials/MaterialLayers/T_ML_Rubber_Blue_01_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Mesh/SK_Mannequin.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Mesh/SK_Mannequin_Female.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Mesh/SK_Mannequin_Female_PhysicsAsset.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Mesh/SK_Mannequin_PhysicsAsset.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Textures/T_Female_Mask.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Textures/T_Female_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Textures/T_Male_Mask.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Textures/T_Male_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Textures/T_UE4Logo_Mask.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/Mannequin/Character/Textures/T_UE4Logo_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip2_3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip6.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip7.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip8.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_4.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/EarthLandscapeClip_5.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/TerrainMagic/HeightMaps/HeightChangeLandscapeClip3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPerson/Meshes/Bump_StaticMesh.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPerson/Meshes/LeftArm_StaticMesh.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPerson/Meshes/Linear_Stair_StaticMesh.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPerson/Meshes/RampMaterial.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPerson/Meshes/Ramp_StaticMesh.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPerson/Meshes/RightArm_StaticMesh.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap.umap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/_GENERATED/aruno/Rectangle_CFB69142.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Content/terrain1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Config/DefaultTerrainMagic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Config/FilterPlugin.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Blueprints/SunSky.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicClipBrush.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicHeightBrush.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicInfoBrush.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Blueprints/TerrainMagicWeightBrush.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_DecodeHeight.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_EncodeHeight.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_Landmass_UV_Pos.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_Input.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_OutputHeight.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_LandscapeClip_OutputWeight.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_Noise.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/Functions/MF_TM_Rotate2D.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_Copy_RT.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_LandscapeClip_Preview.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_Noise.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Base.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Generic.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightChange.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_HeightPassthrough.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Noise.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TM_LandscapeClip_Weight.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicHeightBrush.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicPreview.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicTexture.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Materials/M_TerrainMagicWeightBrush.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Meshes/SM_TM_PreviewMesh.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Core/Textures/RT_Placeholder.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/Examples/TerrainMagicPlayground.umap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/HeightMaps/T_TM_height1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/HeightMaps/T_TM_height2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/HeightMaps/T_TM_height2_debris.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Functions/Layers/MF_Layer_Cliff.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Functions/Layers/MF_Layer_Ground.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Functions/Layers/MF_Layer_Sand.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Functions/Layers/MF_Layer_Snow.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Functions/Layers/MF_Layer_Soil.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Functions/MF_Detect_Depth.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Functions/MF_TextureLayer.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Grass/GT_TinyLand_Ground.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/LayerInfos/Auto_LayerInfo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/LayerInfos/CliffAlpha_LayerInfo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/LayerInfos/Cliff_LayerInfo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/LayerInfos/Ground_LayerInfo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/LayerInfos/RemoveGrass_LayerInfo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/LayerInfos/SandAlpha_LayerInfo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/LayerInfos/Sand_LayerInfo.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/MI_TinyLand.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/M_TinyLand.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Cliff/T_OL_cliff_basecolor.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Cliff/T_OL_cliff_normal.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Cliff/T_OL_cliff_roughness.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Grass/T_OL_grass_basecolor.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Grass/T_OL_grass_normal.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Grass/T_OL_grass_roughness.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Sand/T_OL_sand_basecolor.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Sand/T_OL_sand_normal.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Content/TinyLand/Textures/Sand/T_OL_sand_roughness.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Resources/Icon128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Resources/Icon_Invalidate_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Resources/Icon_Invalidate_40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Resources/Icon_TogglePreview_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Resources/Icon_TogglePreview_40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Shaders/noises.ush" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Shaders/terrain_noise.ush" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/BaseLandscapeClip.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/EarthLandscapeClip.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/HeightMapLandscapeClip.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/LandscapeClip.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/NoiseLandscapeClip.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicBrushComponent.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicLiveHook.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicModule.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/Types/OutlineComponent.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/MapBoxUtils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/Utils/TerrainMagicThreading.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Private/WeightMapLandscapeClip.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/BaseLandscapeClip.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/EarthLandscapeClip.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/HeightMapLandscapeClip.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/NoiseLandscapeClip.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicBrushComponent.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicLiveHook.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/TerrainMagicModule.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/FTerrainMagicRemap.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/LandscapeClipPaintLayerSettings.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/OutlineComponent.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/Types/TerrainMagicMaterialParam.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/MapBoxUtils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/Utils/TerrainMagicThreading.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/WeightMapLandscapeClip.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/TerrainMagic.Build.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicCommands.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicEditorModule.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/TerrainMagicStyles.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicCommands.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicEditorModule.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/TerrainMagicStyles.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/TerrainMagicEditor.Build.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/TerrainMagic.uplugin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp.Target.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicDevApp.Build.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicDevApp.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicDevApp.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicDevAppCharacter.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicDevAppCharacter.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicDevAppGameMode.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicDevAppGameMode.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicLiveHookUse.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevApp/TerrainMagicLiveHookUse.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/Source/TerrainMagicDevAppEditor.Target.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TerrainMagicDevAppUE5/TerrainMagicDevAppUE5.uproject" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +210,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/gdal/armadillo_headers.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d532141a9e4a466493d8ab7d63b86b72176be0/2a/194519d3/ModuleRules.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -115,7 +302,7 @@
       <workItem from="1671076704410" duration="2646000" />
       <workItem from="1671182567656" duration="3313000" />
       <workItem from="1671296312067" duration="2672000" />
-      <workItem from="1671443499335" duration="916000" />
+      <workItem from="1671443499335" duration="1536000" />
     </task>
     <task id="LOCAL-00001" summary="Update the devapp.">
       <created>1669265451183</created>
@@ -215,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671297946161</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fix TerrainMagic preview mode with GeoTiff UpdateLandscapeSize too.">
+      <created>1671445210226</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1671445210226</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +444,7 @@
     <MESSAGE value="Improve the workflow setup." />
     <MESSAGE value="Use proper sizes to scale the Landscape." />
     <MESSAGE value="Fix live preview to support new geotiff landscape update settings." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix live preview to support new geotiff landscape update settings." />
+    <MESSAGE value="Fix TerrainMagic preview mode with GeoTiff UpdateLandscapeSize too." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix TerrainMagic preview mode with GeoTiff UpdateLandscapeSize too." />
   </component>
 </project>

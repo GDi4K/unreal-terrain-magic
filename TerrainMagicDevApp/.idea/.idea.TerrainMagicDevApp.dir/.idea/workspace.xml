@@ -7,13 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="Fix live preview to support new geotiff landscape update settings.">
+    <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/GeoTiff/GeoTiffLandscapeClip_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/TerrainMagic/HeightMaps/GeoTiff/GeoTiffLandscapeClip_2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/GeoTiffLandscapeClip.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Public/GeoTiffLandscapeClip.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Private/LandscapeClipDetails.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/LandscapeClipDetails.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/TerrainMagic/Source/TerrainMagic/Private/TerrainMagicManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TerrainMagicDevApp.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +21,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Data/Repos/GDi4K/terrain-magic/TerrainMagicDevApp/Plugins/TerrainMagic/Source/TerrainMagic/Private/GeoTiffLandscapeClip.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagic/Public/LandscapeClip.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../TerrainMagicDevAppUE5/Plugins/TerrainMagic/Source/TerrainMagicEditor/Public/gdal/armadillo_headers.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d532141a9e4a466493d8ab7d63b86b72176be0/2a/194519d3/ModuleRules.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -114,6 +115,7 @@
       <workItem from="1671076704410" duration="2646000" />
       <workItem from="1671182567656" duration="3313000" />
       <workItem from="1671296312067" duration="2672000" />
+      <workItem from="1671443499335" duration="916000" />
     </task>
     <task id="LOCAL-00001" summary="Update the devapp.">
       <created>1669265451183</created>

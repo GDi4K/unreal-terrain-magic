@@ -152,7 +152,7 @@ ATerrainMagicManager::ATerrainMagicManager()
 	PreviewMeshComponent->AttachToComponent(SceneComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	// Assign the PreviewMaterial
-	const FName PlaneMeshLocation = "/TerrainMagic/Core/Meshes/SM_TM_PreviewMesh.SM_TM_PreviewMesh";
+	const FName PlaneMeshLocation = "/TerrainMagic/Core/Meshes/SM_TM_PreviewMesh_1000.SM_TM_PreviewMesh_1000";
 	UStaticMesh* PlaneMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PlaneMeshLocation.ToString()));
 	PreviewMeshComponent->SetStaticMesh(PlaneMesh);
 
@@ -213,8 +213,8 @@ void ATerrainMagicManager::Tick(float DeltaTime)
 		const FVector2D LandscapeMid = Landscape2DLocation + LandscapeSizeInCm/2.0;
 		
 		PreviewMeshComponent->SetRelativeScale3D(FVector(
-			LandscapeSizeInCm.X / 100.0f,
-			LandscapeSizeInCm.Y / 100.0f,
+			LandscapeSizeInCm.X / 1000.0f,
+			LandscapeSizeInCm.Y / 1000.0f,
 			0.1
 		));
 		PreviewMeshComponent->SetRelativeLocation({

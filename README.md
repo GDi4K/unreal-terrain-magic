@@ -21,7 +21,7 @@ For non-commerical projects, you can also get it from here:
 * Start your project, you will get a prompt asking to compile & proceed
 * In order to do that, you need to setup following things:
   * Visual Studio for Unreal Engine: https://bit.ly/3EJqAFS
-  * DotNet SDK 3.1: https://dotnet.microsoft.com/en-us/download/dotnet/3.1
+  * Download & install [DotNet SDK 6.x](https://aka.ms/dotnet-core-applaunch?framework=Microsoft.NETCore.App&framework_version=6.0.0&arch=x64&rid=win10-x64)
 
 ## Documentation
 

@@ -2,7 +2,7 @@
 
 #include "TerrainMagicManager.h"
 
-#include "BaseLandscapeClip.h"
+#include "Clips/BaseLandscapeClip.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Engine.h"

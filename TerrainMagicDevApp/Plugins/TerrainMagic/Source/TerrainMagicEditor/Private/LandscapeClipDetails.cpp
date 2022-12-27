@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
 #include "LandscapeClipDetails.h"
-#include "BaseLandscapeClip.h"
+#include "Clips/BaseLandscapeClip.h"
 #include "DesktopPlatformModule.h"
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
-#include "EarthLandscapeClip.h"
-#include "GeoTiffLandscapeClip.h"
+#include "Clips/EarthLandscapeClip.h"
+#include "Clips/GeoTiffLandscapeClip.h"
 #include "IDetailGroup.h"
 #include "LandscapeClip.h"
 #include "TerrainMagicManager.h"

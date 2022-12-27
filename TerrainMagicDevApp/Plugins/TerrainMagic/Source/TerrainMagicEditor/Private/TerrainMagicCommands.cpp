@@ -4,7 +4,7 @@
 
 #include "TerrainMagicCommands.h"
 
-#include "EarthLandscapeClip.h"
+#include "Clips/EarthLandscapeClip.h"
 #include "InputCoreTypes.h"
 #include "LandscapeClip.h"
 #include "TerrainMagicManager.h"

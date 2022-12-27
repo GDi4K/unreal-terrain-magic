@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "EarthLandscapeClip.h"
+#include "Clips/EarthLandscapeClip.h"
 #include "LandscapeClip.h"
 #include "Editor/PropertyEditor/Public/IDetailCustomization.h"
 #include "Input/Reply.h"

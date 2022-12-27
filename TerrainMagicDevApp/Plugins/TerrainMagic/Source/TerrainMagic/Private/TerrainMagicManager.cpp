@@ -84,7 +84,7 @@ FTerrainMagicPaintLayerResult ATerrainMagicManager::FindPaintLayer(FVector Locat
 		(int32)FMath::FloorToInt(RelativeLocationAfterScaleDown.Y),
 	};
 
-	const int PixelIndex = RelativeLocationToPixels.Y * RenderTargetSize.X + RelativeLocationToPixels.X;
+	const size_t PixelIndex = RelativeLocationToPixels.Y * RenderTargetSize.X + RelativeLocationToPixels.X;
 
 	if (PixelIndex >= PaintLayerData.Num())
 	{

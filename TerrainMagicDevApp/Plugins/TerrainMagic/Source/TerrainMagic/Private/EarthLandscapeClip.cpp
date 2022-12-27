@@ -35,7 +35,7 @@ AEarthLandscapeClip::AEarthLandscapeClip()
 
 UMaterial* AEarthLandscapeClip::GetSourceMaterialForHeight() const
 {
-	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_HeightChange.M_TM_LandscapeClip_HeightChange";
+	const FName MaterialPath = "Material'/TerrainMagic/Core/Materials/LandscapeClips/M_TM_LandscapeClip_Earth.M_TM_LandscapeClip_Earth'";
 	return Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 }
 

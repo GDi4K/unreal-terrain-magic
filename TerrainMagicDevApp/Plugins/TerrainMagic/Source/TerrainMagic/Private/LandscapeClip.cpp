@@ -230,7 +230,7 @@ void ALandscapeClip::ApplyMaterialParamsForWeight(TArray<FTerrainMagicMaterialPa
 {
 	if (MaterialForWeight == nullptr)
 	{
-		const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Weight.M_TM_LandscapeClip_Weight";
+		const FName MaterialPath = "/TerrainMagic/Core/Materials/LandscapeClips/M_TM_LandscapeClip_Weight.M_TM_LandscapeClip_Weight";
 		UMaterial* SourceMaterial =  Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 		MaterialForWeight = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), SourceMaterial);
 	}

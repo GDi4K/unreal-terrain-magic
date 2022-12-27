@@ -11,7 +11,7 @@ AWeightMapLandscapeClip::AWeightMapLandscapeClip()
 
 UMaterial* AWeightMapLandscapeClip::GetSourceMaterialForHeight() const
 {
-	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_HeightPassthrough.M_TM_LandscapeClip_HeightPassthrough";
+	const FName MaterialPath = "/TerrainMagic/Core/Materials/LandscapeClips/M_TM_LandscapeClip_HeightPassthrough.M_TM_LandscapeClip_HeightPassthrough";
 	return Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 }
 

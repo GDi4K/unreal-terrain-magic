@@ -11,7 +11,7 @@ ABaseLandscapeClip::ABaseLandscapeClip()
 
 UMaterial* ABaseLandscapeClip::GetSourceMaterialForHeight() const
 {
-	const FName MaterialPath = "/TerrainMagic/Core/Materials/M_TM_LandscapeClip_Base.M_TM_LandscapeClip_Base";
+	const FName MaterialPath = "/TerrainMagic/Core/Materials/LandscapeClips/M_TM_LandscapeClip_Base.M_TM_LandscapeClip_Base";
 	return Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *MaterialPath.ToString()));
 }
 

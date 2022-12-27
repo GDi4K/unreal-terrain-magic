@@ -18,7 +18,7 @@ UTerrainMagicBrushComponent::UTerrainMagicBrushComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 	
-	const FName CopyRTMaterialPath = "/TerrainMagic/Core/Materials/M_Copy_RT.M_Copy_RT";
+	const FName CopyRTMaterialPath = "/TerrainMagic/Core/Materials/Utils/M_Copy_RT.M_Copy_RT";
 	UMaterial* MaterialSource = Cast<UMaterial>(StaticLoadObject(UMaterial::StaticClass(), nullptr, *CopyRTMaterialPath.ToString()));
 	CopyRTMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(GetWorld(), MaterialSource);
 }

@@ -6,7 +6,7 @@
 UENUM(BlueprintType)
 enum EMapSource
 {
-	MS_MAPBOX = 0 UMETA(DisplayName="Maxbox")
+	MS_MAPBOX = 0 UMETA(DisplayName="Mapbox")
 };
 
 

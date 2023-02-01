@@ -9,8 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="238d42ae-4bab-4ce6-8486-228786f64707" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TerrainMagicDevApp.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonBP/Blueprints/ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonBP/Blueprints/ThirdPersonCharacter.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +114,7 @@
       <workItem from="1671443499335" duration="2301000" />
       <workItem from="1672112846887" duration="3463000" />
       <workItem from="1675247569561" duration="1345000" />
+      <workItem from="1675250124664" duration="1065000" />
     </task>
     <task id="LOCAL-00001" summary="Update the devapp.">
       <created>1669265451183</created>
@@ -229,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672116094626</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Change Maxbox to MapBox.">
+      <created>1675250190281</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1675250190281</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +272,7 @@
     <MESSAGE value="Fix live preview to support new geotiff landscape update settings." />
     <MESSAGE value="Fix TerrainMagic preview mode with GeoTiff UpdateLandscapeSize too." />
     <MESSAGE value="Refactor Material locations." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor Material locations." />
+    <MESSAGE value="Change Maxbox to MapBox." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change Maxbox to MapBox." />
   </component>
 </project>

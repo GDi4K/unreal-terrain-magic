@@ -10,6 +10,7 @@
 #include "Types/OutlineComponent.h"
 #include "Types/TerrainMagicMaterialParam.h"
 #include "Types/LandscapeClipPaintLayerSettings.h"
+#include "Materials/Material.h"
 #include "LandscapeClip.generated.h"
 
 UENUM(BlueprintType)

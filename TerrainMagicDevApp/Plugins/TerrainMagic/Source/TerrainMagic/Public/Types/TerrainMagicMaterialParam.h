@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2022 GDi4K. All Rights Reserved.
 
 #pragma once
+#include "Engine/Texture.h"
 #include "TerrainMagicMaterialParam.generated.h"
 
 UENUM(BlueprintType)

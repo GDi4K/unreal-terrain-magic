@@ -6,6 +6,7 @@
 #include "LandscapeClip.h"
 #include "Utils/G16Texture.h"
 #include "Utils/MapUtils.h"
+#include "Engine/Texture2D.h"
 #include "EarthLandscapeClip.generated.h"
 
 UENUM()

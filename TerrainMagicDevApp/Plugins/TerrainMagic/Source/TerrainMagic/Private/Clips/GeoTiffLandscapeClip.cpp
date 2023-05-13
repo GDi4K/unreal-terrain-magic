@@ -3,7 +3,7 @@
 #include "Clips/GeoTiffLandscapeClip.h"
 #include "Materials/Material.h"
 #include "Utils/TerrainMagicThreading.h"
-
+#include "Engine/World.h"
 
 void AGeoTiffLandscapeClip::ReloadTextureIfNeeded()
 {

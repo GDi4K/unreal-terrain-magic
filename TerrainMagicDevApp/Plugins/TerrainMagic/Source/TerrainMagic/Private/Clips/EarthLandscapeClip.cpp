@@ -12,6 +12,7 @@
 #include "Kismet/KismetRenderingLibrary.h"
 #include "Utils/MapUtils.h"
 #include "Utils/TerrainMagicThreading.h"
+#include "Engine/World.h"
 
 
 float smoothstep (float edge0, float edge1, float x)

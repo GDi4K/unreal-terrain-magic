@@ -8,7 +8,7 @@ public class TerrainMagicDevAppTarget : TargetRules
 	public TerrainMagicDevAppTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
+		DefaultBuildSettings = BuildSettingsVersion.V5;
 		ExtraModuleNames.Add("TerrainMagicDevApp");
 	}
 }
